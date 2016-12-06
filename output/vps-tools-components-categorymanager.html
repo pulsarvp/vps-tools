@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="language" content="en" />
+        <link href="./assets/628bd001/css/bootstrap.css" rel="stylesheet">
+<link href="./assets/17f54147/solarized_light.css" rel="stylesheet">
+<link href="./assets/71d1b196/style.css" rel="stylesheet">
+<script src="./assets/7551a0d4/jquery.js"></script>
+<script src="./assets/628bd001/js/bootstrap.js"></script>
+<script src="./assets/390660d6/jssearch.js"></script>    <title>CategoryManager, vps\tools\components\CategoryManager - Yii Framework 2.0 API Documentation</title>
+</head>
+<body>
+
+<div class="wrap">
+    <nav id="w18" class="navbar-inverse navbar-fixed-top navbar" role="navigation"><div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#w18-collapse"><span class="sr-only">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span></button><a class="navbar-brand" href="./index.html">Yii Framework 2.0 API Documentation</a></div><div id="w18-collapse" class="collapse navbar-collapse"><ul id="w19" class="navbar-nav nav"><li><a href="./index.html">Class reference</a></li></ul><div class="navbar-form navbar-left" role="search">
+  <div class="form-group">
+    <input id="searchbox" type="text" class="form-control" placeholder="Search">
+  </div>
+</div>
+</div></nav>
+    <div id="search-resultbox" style="display: none;" class="modal-content">
+        <ul id="search-results">
+        </ul>
+    </div>
+
+    
+<div class="row">
+    <div class="col-md-3">
+                <div id="navigation" class="list-group"><a class="list-group-item" href="#navigation-10" data-toggle="collapse" data-parent="#navigation">Not namespaced classes <b class="caret"></b></a><div id="navigation-10" class="submenu panel-collapse collapse"><a class="list-group-item" href="./yii.html">Yii</a></div>
+<a class="list-group-item" href="#navigation-11" data-toggle="collapse" data-parent="#navigation">vps\tools\auth <b class="caret"></b></a><div id="navigation-11" class="submenu panel-collapse collapse"><a class="list-group-item" href="./vps-tools-auth-syncrocityclient.html">SyncrocityClient</a></div>
+<a class="list-group-item active" href="#navigation-12" data-toggle="collapse" data-parent="#navigation">vps\tools\components <b class="caret"></b></a><div id="navigation-12" class="submenu panel-collapse collapse in"><a class="list-group-item active" href="./vps-tools-components-categorymanager.html">CategoryManager</a>
+<a class="list-group-item" href="./vps-tools-components-notification.html">Notification</a>
+<a class="list-group-item" href="./vps-tools-components-notificationmanager.html">NotificationManager</a>
+<a class="list-group-item" href="./vps-tools-components-settingmanager.html">SettingManager</a></div>
+<a class="list-group-item" href="#navigation-13" data-toggle="collapse" data-parent="#navigation">vps\tools\controllers <b class="caret"></b></a><div id="navigation-13" class="submenu panel-collapse collapse"><a class="list-group-item" href="./vps-tools-controllers-settingscontroller.html">SettingsController</a>
+<a class="list-group-item" href="./vps-tools-controllers-webcontroller.html">WebController</a></div>
+<a class="list-group-item" href="#navigation-14" data-toggle="collapse" data-parent="#navigation">vps\tools\db <b class="caret"></b></a><div id="navigation-14" class="submenu panel-collapse collapse"><a class="list-group-item" href="./vps-tools-db-migration.html">Migration</a></div>
+<a class="list-group-item" href="#navigation-15" data-toggle="collapse" data-parent="#navigation">vps\tools\helpers <b class="caret"></b></a><div id="navigation-15" class="submenu panel-collapse collapse"><a class="list-group-item" href="./vps-tools-helpers-arrayhelper.html">ArrayHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-console.html">Console</a>
+<a class="list-group-item" href="./vps-tools-helpers-ffmpeghelper.html">FFmpegHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-filehelper.html">FileHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-html.html">Html</a>
+<a class="list-group-item" href="./vps-tools-helpers-humanhelper.html">HumanHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-nethelper.html">NetHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-remotefilehelper.html">RemoteFileHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-stringhelper.html">StringHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-timehelper.html">TimeHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-url.html">Url</a></div>
+<a class="list-group-item" href="#navigation-16" data-toggle="collapse" data-parent="#navigation">vps\tools\html <b class="caret"></b></a><div id="navigation-16" class="submenu panel-collapse collapse"><a class="list-group-item" href="./vps-tools-html-field.html">Field</a>
+<a class="list-group-item" href="./vps-tools-html-form.html">Form</a></div>
+<a class="list-group-item" href="#navigation-17" data-toggle="collapse" data-parent="#navigation">vps\tools\net <b class="caret"></b></a><div id="navigation-17" class="submenu panel-collapse collapse"><a class="list-group-item" href="./vps-tools-net-curl.html">Curl</a>
+<a class="list-group-item" href="./vps-tools-net-curlresponse.html">CurlResponse</a>
+<a class="list-group-item" href="./vps-tools-net-flow.html">Flow</a></div></div>    </div>
+    <div class="col-md-9 api-content" role="main">
+        <h1>Class vps\tools\components\CategoryManager</h1>
+<div class="top-nav">
+    <a href="index.html">All Classes</a>
+            | <a href="#properties">Properties</a>
+                | <a href="#methods">Methods</a>
+            </div>
+
+<table class="summaryTable docClass table table-bordered">
+    <colgroup>
+        <col class="col-name" />
+        <col class="col-value" />
+    </colgroup>
+            <tr><th>Inheritance</th><td><a href="vps-tools-components-categorymanager.html">vps\tools\components\CategoryManager</a> &raquo;
+yii\base\Object</td></tr>
+                                        </table>
+
+<div class="class-description">
+    <p><strong>This class is intended to manage category tree which is in turn based on
+nested sets behavior.</strong></p>
+    <p>[[<a href="https://github.com/creocoder/yii2-nested-sets]]">https://github.com/creocoder/yii2-nested-sets]]</a></p>
+
+    </div>
+
+<a id="properties"></a>
+
+<div class="summary doc-property">
+<h2>Protected Properties</h2>
+
+<p><a href="#" class="toggle">Hide inherited properties</a></p>
+
+<table class="summary-table table table-striped table-bordered table-hover">
+<colgroup>
+    <col class="col-property" />
+    <col class="col-type" />
+    <col class="col-description" />
+    <col class="col-defined" />
+</colgroup>
+<tr>
+  <th>Property</th><th>Type</th><th>Description</th><th>Defined By</th>
+</tr>
+        <tr id="$_data">
+        <td><a href="vps-tools-components-categorymanager.html#$_data-detail">$_data</a></td>
+        <td>\vps\tools\components\Category[]</td>
+        <td>Category tree.</td>
+        <td><a href="vps-tools-components-categorymanager.html">vps\tools\components\CategoryManager</a></td>
+    </tr>
+            <tr id="$_guidPathDelimiter">
+        <td><a href="vps-tools-components-categorymanager.html#$_guidPathDelimiter-detail">$_guidPathDelimiter</a></td>
+        <td><a href="http://www.php.net/language.types.string">string</a></td>
+        <td>This is for imploding GUIDs in guid paths.</td>
+        <td><a href="vps-tools-components-categorymanager.html">vps\tools\components\CategoryManager</a></td>
+    </tr>
+            <tr id="$_modelClass">
+        <td><a href="vps-tools-components-categorymanager.html#$_modelClass-detail">$_modelClass</a></td>
+        <td><a href="http://www.php.net/language.types.string">string</a></td>
+        <td></td>
+        <td><a href="vps-tools-components-categorymanager.html">vps\tools\components\CategoryManager</a></td>
+    </tr>
+            <tr id="$_root">
+        <td><a href="vps-tools-components-categorymanager.html#$_root-detail">$_root</a></td>
+        <td>\vps\tools\components\[[Category]]</td>
+        <td>Root category.</td>
+        <td><a href="vps-tools-components-categorymanager.html">vps\tools\components\CategoryManager</a></td>
+    </tr>
+            <tr id="$_titlePathDelimiter">
+        <td><a href="vps-tools-components-categorymanager.html#$_titlePathDelimiter-detail">$_titlePathDelimiter</a></td>
+        <td><a href="http://www.php.net/language.types.string">string</a></td>
+        <td>This is for imploding titles in title paths.</td>
+        <td><a href="vps-tools-components-categorymanager.html">vps\tools\components\CategoryManager</a></td>
+    </tr>
+    </table>
+</div>
+
+<a id="methods"></a>
+
+<div class="summary doc-method">
+<h2>Public Methods</h2>
+
+<p><a href="#" class="toggle">Hide inherited methods</a></p>
+
+<table class="summary-table table table-striped table-bordered table-hover">
+<colgroup>
+    <col class="col-method" />
+    <col class="col-description" />
+    <col class="col-defined" />
+</colgroup>
+<tr>
+  <th>Method</th><th>Description</th><th>Defined By</th>
+</tr>
+            <tr id="exists()">
+        <td><a href="vps-tools-components-categorymanager.html#exists()-detail">exists()</a></td>
+        <td>Checks if category exists.</td>
+        <td><a href="vps-tools-components-categorymanager.html">vps\tools\components\CategoryManager</a></td>
+    </tr>
+            <tr id="get()">
+        <td><a href="vps-tools-components-categorymanager.html#get()-detail">get()</a></td>
+        <td>Gets single category by its ID.</td>
+        <td><a href="vps-tools-components-categorymanager.html">vps\tools\components\CategoryManager</a></td>
+    </tr>
+            <tr id="getAll()">
+        <td><a href="vps-tools-components-categorymanager.html#getAll()-detail">getAll()</a></td>
+        <td></td>
+        <td><a href="vps-tools-components-categorymanager.html">vps\tools\components\CategoryManager</a></td>
+    </tr>
+            <tr id="getByGuidPath()">
+        <td><a href="vps-tools-components-categorymanager.html#getByGuidPath()-detail">getByGuidPath()</a></td>
+        <td>Gets single category by its GUID path.</td>
+        <td><a href="vps-tools-components-categorymanager.html">vps\tools\components\CategoryManager</a></td>
+    </tr>
+            <tr id="getChildren()">
+        <td><a href="vps-tools-components-categorymanager.html#getChildren()-detail">getChildren()</a></td>
+        <td>Gets children of current category.</td>
+        <td><a href="vps-tools-components-categorymanager.html">vps\tools\components\CategoryManager</a></td>
+    </tr>
+            <tr id="getParent()">
+        <td><a href="vps-tools-components-categorymanager.html#getParent()-detail">getParent()</a></td>
+        <td>Finds category parent with given depth.</td>
+        <td><a href="vps-tools-components-categorymanager.html">vps\tools\components\CategoryManager</a></td>
+    </tr>
+            <tr id="getParents()">
+        <td><a href="vps-tools-components-categorymanager.html#getParents()-detail">getParents()</a></td>
+        <td>Finds all parents from top one to nearest.</td>
+        <td><a href="vps-tools-components-categorymanager.html">vps\tools\components\CategoryManager</a></td>
+    </tr>
+            <tr id="getRoot()">
+        <td><a href="vps-tools-components-categorymanager.html#getRoot()-detail">getRoot()</a></td>
+        <td></td>
+        <td><a href="vps-tools-components-categorymanager.html">vps\tools\components\CategoryManager</a></td>
+    </tr>
+            <tr id="guidPath()">
+        <td><a href="vps-tools-components-categorymanager.html#guidPath()-detail">guidPath()</a></td>
+        <td>Finds category GUID path by given ID.</td>
+        <td><a href="vps-tools-components-categorymanager.html">vps\tools\components\CategoryManager</a></td>
+    </tr>
+            <tr id="init()">
+        <td><a href="vps-tools-components-categorymanager.html#init()-detail">init()</a></td>
+        <td>Populates category tree with data loaded from database.</td>
+        <td><a href="vps-tools-components-categorymanager.html">vps\tools\components\CategoryManager</a></td>
+    </tr>
+            <tr id="reload()">
+        <td><a href="vps-tools-components-categorymanager.html#reload()-detail">reload()</a></td>
+        <td>Reloads data from database.</td>
+        <td><a href="vps-tools-components-categorymanager.html">vps\tools\components\CategoryManager</a></td>
+    </tr>
+            <tr id="setModelClass()">
+        <td><a href="vps-tools-components-categorymanager.html#setModelClass()-detail">setModelClass()</a></td>
+        <td>Setting for model class.</td>
+        <td><a href="vps-tools-components-categorymanager.html">vps\tools\components\CategoryManager</a></td>
+    </tr>
+            <tr id="titlePath()">
+        <td><a href="vps-tools-components-categorymanager.html#titlePath()-detail">titlePath()</a></td>
+        <td>Finds category title path by given ID.</td>
+        <td><a href="vps-tools-components-categorymanager.html">vps\tools\components\CategoryManager</a></td>
+    </tr>
+    </table>
+</div>
+
+<div class="summary doc-method">
+<h2>Protected Methods</h2>
+
+<p><a href="#" class="toggle">Hide inherited methods</a></p>
+
+<table class="summary-table table table-striped table-bordered table-hover">
+<colgroup>
+    <col class="col-method" />
+    <col class="col-description" />
+    <col class="col-defined" />
+</colgroup>
+<tr>
+  <th>Method</th><th>Description</th><th>Defined By</th>
+</tr>
+        <tr id="buildPaths()">
+        <td><a href="vps-tools-components-categorymanager.html#buildPaths()-detail">buildPaths()</a></td>
+        <td>Builds full title and GUID paths for all categories.</td>
+        <td><a href="vps-tools-components-categorymanager.html">vps\tools\components\CategoryManager</a></td>
+    </tr>
+                                                        </table>
+</div>
+
+<a id="events"></a>
+
+<a id="constants"></a>
+
+<h2>Property Details</h2>
+
+<div class="property-doc">
+
+    <div class="detail-header h3" id="$_data-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-components-categorymanager.html#$_data-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        $_data        <span class="detail-header-tag small">
+            protected                                                property
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p>Category tree.</p>
+
+            </div>
+
+    <div class="signature"><span class="signature-defs">protected</span> <span class="signature-type">\vps\tools\components\Category[]</span> <a href="vps-tools-components-categorymanager.html#$_data-detail">$_data</a> <span style="color: #0000BB"></span><span style="color: #007700">=&nbsp;[]</span></div>
+
+
+    <div class="detail-header h3" id="$_guidPathDelimiter-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-components-categorymanager.html#$_guidPathDelimiter-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        $_guidPathDelimiter        <span class="detail-header-tag small">
+            protected                                                property
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p>This is for imploding GUIDs in guid paths.</p>
+
+            </div>
+
+    <div class="signature"><span class="signature-defs">protected</span> <span class="signature-type"><a href="http://www.php.net/language.types.string">string</a></span> <a href="vps-tools-components-categorymanager.html#$_guidPathDelimiter-detail">$_guidPathDelimiter</a> <span style="color: #0000BB"></span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">':'</span></div>
+
+
+    <div class="detail-header h3" id="$_modelClass-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-components-categorymanager.html#$_modelClass-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        $_modelClass        <span class="detail-header-tag small">
+            protected                                                property
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        
+            </div>
+
+    <div class="signature"><span class="signature-defs">protected</span> <span class="signature-type"><a href="http://www.php.net/language.types.string">string</a></span> <a href="vps-tools-components-categorymanager.html#$_modelClass-detail">$_modelClass</a> <span style="color: #0000BB"></span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'\common\models\Category'</span></div>
+
+
+    <div class="detail-header h3" id="$_root-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-components-categorymanager.html#$_root-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        $_root        <span class="detail-header-tag small">
+            protected                                                property
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p>Root category.</p>
+
+            </div>
+
+    <div class="signature"><span class="signature-defs">protected</span> <span class="signature-type">\vps\tools\components\[[Category]]</span> <a href="vps-tools-components-categorymanager.html#$_root-detail">$_root</a> <span style="color: #0000BB"></span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">null</span></div>
+
+
+    <div class="detail-header h3" id="$_titlePathDelimiter-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-components-categorymanager.html#$_titlePathDelimiter-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        $_titlePathDelimiter        <span class="detail-header-tag small">
+            protected                                                property
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p>This is for imploding titles in title paths.</p>
+
+            </div>
+
+    <div class="signature"><span class="signature-defs">protected</span> <span class="signature-type"><a href="http://www.php.net/language.types.string">string</a></span> <a href="vps-tools-components-categorymanager.html#$_titlePathDelimiter-detail">$_titlePathDelimiter</a> <span style="color: #0000BB"></span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'&nbsp;:&nbsp;'</span></div>
+
+</div>
+<h2>Method Details</h2>
+
+<div class="method-doc">
+
+    <div class="detail-header h3" id="buildPaths()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-components-categorymanager.html#buildPaths()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        buildPaths()
+        <span class="detail-header-tag small">
+            protected                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Builds full title and GUID paths for all categories.</strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">protected</span> <span class="signature-type">void</span> <strong><a href="vps-tools-components-categorymanager.html#buildPaths()-detail">buildPaths</a></strong> ( )</td></tr>
+            </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="exists()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-components-categorymanager.html#exists()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        exists()
+        <span class="detail-header-tag small">
+            public                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Checks if category exists.</strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public</span> <span class="signature-type"><a href="http://www.php.net/language.types.boolean">boolean</a></span> <strong><a href="vps-tools-components-categorymanager.html#exists()-detail">exists</a></strong> ( <span style="color: #0000BB">$id</span> )</td></tr>
+                                    <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$id</span></td>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.integer">integer</a></td>
+                  <td class="param-desc-col"><p>Category ID.</p>
+</td>
+                </tr>
+                                                </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="get()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-components-categorymanager.html#get()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        get()
+        <span class="detail-header-tag small">
+            public                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Gets single category by its ID.</strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public</span> <span class="signature-type">\vps\tools\components\[[Category]]|<a href="http://www.php.net/language.types.null">null</a></span> <strong><a href="vps-tools-components-categorymanager.html#get()-detail">get</a></strong> ( <span style="color: #0000BB">$id</span> )</td></tr>
+                                    <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$id</span></td>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.integer">integer</a></td>
+                  <td class="param-desc-col"></td>
+                </tr>
+                                                </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="getAll()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-components-categorymanager.html#getAll()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        getAll()
+        <span class="detail-header-tag small">
+            public                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong></strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public</span> <span class="signature-type">\vps\tools\components\Category[]</span> <strong><a href="vps-tools-components-categorymanager.html#getAll()-detail">getAll</a></strong> ( )</td></tr>
+            </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="getByGuidPath()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-components-categorymanager.html#getByGuidPath()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        getByGuidPath()
+        <span class="detail-header-tag small">
+            public                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Gets single category by its GUID path.</strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public</span> <span class="signature-type">\vps\tools\components\[[Category]]|<a href="http://www.php.net/language.types.null">null</a></span> <strong><a href="vps-tools-components-categorymanager.html#getByGuidPath()-detail">getByGuidPath</a></strong> ( <span style="color: #0000BB">$guidPath</span> )</td></tr>
+                                    <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$guidPath</span></td>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.string">string</a></td>
+                  <td class="param-desc-col"></td>
+                </tr>
+                                                </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="getChildren()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-components-categorymanager.html#getChildren()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        getChildren()
+        <span class="detail-header-tag small">
+            public                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Gets children of current category.</strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public</span> <span class="signature-type"><a href="http://www.php.net/language.types.array">array</a></span> <strong><a href="vps-tools-components-categorymanager.html#getChildren()-detail">getChildren</a></strong> ( <span style="color: #0000BB">$category</span> )</td></tr>
+                                    <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$category</span></td>
+                  <td class="param-type-col">\vps\tools\components\[[Category]]</td>
+                  <td class="param-desc-col"></td>
+                </tr>
+                                                </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="getParent()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-components-categorymanager.html#getParent()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        getParent()
+        <span class="detail-header-tag small">
+            public                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Finds category parent with given depth.</strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public</span> <span class="signature-type">\vps\tools\components\[[Category]]|<a href="http://www.php.net/language.types.null">null</a></span> <strong><a href="vps-tools-components-categorymanager.html#getParent()-detail">getParent</a></strong> ( <span style="color: #0000BB">$category</span>, <span style="color: #0000BB">$depth&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">1</span> )</td></tr>
+                                    <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$category</span></td>
+                  <td class="param-type-col">\vps\tools\components\[[Category]]</td>
+                  <td class="param-desc-col"></td>
+                </tr>
+                            <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$depth</span></td>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.integer">integer</a></td>
+                  <td class="param-desc-col"></td>
+                </tr>
+                                                </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="getParents()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-components-categorymanager.html#getParents()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        getParents()
+        <span class="detail-header-tag small">
+            public                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Finds all parents from top one to nearest.</strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public</span> <span class="signature-type">\vps\tools\components\[[Category]][]|<a href="http://www.php.net/language.types.null">null</a></span> <strong><a href="vps-tools-components-categorymanager.html#getParents()-detail">getParents</a></strong> ( <span style="color: #0000BB">$category</span> )</td></tr>
+                                    <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$category</span></td>
+                  <td class="param-type-col">\vps\tools\components\[[Category]]</td>
+                  <td class="param-desc-col"></td>
+                </tr>
+                                                </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="getRoot()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-components-categorymanager.html#getRoot()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        getRoot()
+        <span class="detail-header-tag small">
+            public                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong></strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public</span> <span class="signature-type">\vps\tools\components\Category</span> <strong><a href="vps-tools-components-categorymanager.html#getRoot()-detail">getRoot</a></strong> ( )</td></tr>
+            </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="guidPath()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-components-categorymanager.html#guidPath()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        guidPath()
+        <span class="detail-header-tag small">
+            public                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Finds category GUID path by given ID.</strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public</span> <span class="signature-type"><a href="http://www.php.net/language.types.null">null</a>|<a href="http://www.php.net/language.types.string">string</a></span> <strong><a href="vps-tools-components-categorymanager.html#guidPath()-detail">guidPath</a></strong> ( <span style="color: #0000BB">$id</span> )</td></tr>
+                                    <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$id</span></td>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.integer">integer</a></td>
+                  <td class="param-desc-col"></td>
+                </tr>
+                                                </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="init()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-components-categorymanager.html#init()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        init()
+        <span class="detail-header-tag small">
+            public                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Populates category tree with data loaded from database.</strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public</span> <span class="signature-type">void</span> <strong><a href="vps-tools-components-categorymanager.html#init()-detail">init</a></strong> ( )</td></tr>
+            </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="reload()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-components-categorymanager.html#reload()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        reload()
+        <span class="detail-header-tag small">
+            public                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Reloads data from database.</strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public</span> <span class="signature-type">void</span> <strong><a href="vps-tools-components-categorymanager.html#reload()-detail">reload</a></strong> ( )</td></tr>
+            </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="setModelClass()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-components-categorymanager.html#setModelClass()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        setModelClass()
+        <span class="detail-header-tag small">
+            public                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Setting for model class.</strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public</span> <span class="signature-type">void</span> <strong><a href="vps-tools-components-categorymanager.html#setModelClass()-detail">setModelClass</a></strong> ( <span style="color: #0000BB">$class</span> )</td></tr>
+                                    <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$class</span></td>
+                  <td class="param-type-col"></td>
+                  <td class="param-desc-col"></td>
+                </tr>
+                                                    <tr>
+                  <th class="param-name-col">throws</th>
+                  <td class="param-type-col">\yii\base\InvalidConfigException</td>
+                  <td class="param-desc-col"></td>
+                </tr>
+                        </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="titlePath()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-components-categorymanager.html#titlePath()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        titlePath()
+        <span class="detail-header-tag small">
+            public                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Finds category title path by given ID.</strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public</span> <span class="signature-type"><a href="http://www.php.net/language.types.null">null</a>|<a href="http://www.php.net/language.types.string">string</a></span> <strong><a href="vps-tools-components-categorymanager.html#titlePath()-detail">titlePath</a></strong> ( <span style="color: #0000BB">$id</span> )</td></tr>
+                                    <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$id</span></td>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.integer">integer</a></td>
+                  <td class="param-desc-col"></td>
+                </tr>
+                                                </table>
+
+<!--	-->
+</div>
+        </div>
+</div>
+
+<script type="text/javascript">
+    /*<![CDATA[*/
+    $("a.toggle").on('click', function () {
+        var $this = $(this);
+        if ($this.hasClass('properties-hidden')) {
+            $this.text($this.text().replace(/Show/,'Hide'));
+            $this.parents(".summary").find(".inherited").show();
+            $this.removeClass('properties-hidden');
+        } else {
+            $this.text($this.text().replace(/Hide/,'Show'));
+            $this.parents(".summary").find(".inherited").hide();
+            $this.addClass('properties-hidden');
+        }
+
+        return false;
+    });
+    /*
+     $(".sourceCode a.show").toggle(function () {
+     $(this).text($(this).text().replace(/show/,'hide'));
+     $(this).parents(".sourceCode").find("div.code").show();
+     },function () {
+     $(this).text($(this).text().replace(/hide/,'show'));
+     $(this).parents(".sourceCode").find("div.code").hide();
+     });
+     $("a.sourceLink").click(function () {
+     $(this).attr('target','_blank');
+     });
+     */
+    /*]]>*/
+</script>
+
+
+</div>
+
+<footer class="footer">
+        <p class="pull-right"><small>Page generated on Tue, 06 Dec 2016 13:54:52 +0000</small></p>
+    Powered by <a href="http://www.yiiframework.com/" rel="external">Yii Framework</a></footer>
+
+<script type="text/javascript">jQuery(document).ready(function () {
+    var shiftWindow = function () { scrollBy(0, -50) };
+    if (location.hash) setTimeout(shiftWindow, 1);
+    window.addEventListener("hashchange", shiftWindow);
+var element = document.createElement("script");
+element.src = "./jssearch.index.js";
+document.body.appendChild(element);
+
+var searchBox = $('#searchbox');
+
+// search when typing in search field
+searchBox.on("keyup", function(event) {
+    var query = $(this).val();
+
+    if (query == '' || event.which == 27) {
+        $('#search-resultbox').hide();
+        return;
+    } else if (event.which == 13) {
+        var selectedLink = $('#search-resultbox a.selected');
+        if (selectedLink.length != 0) {
+            document.location = selectedLink.attr('href');
+            return;
+        }
+    } else if (event.which == 38 || event.which == 40) {
+        $('#search-resultbox').show();
+
+        var selected = $('#search-resultbox a.selected');
+        if (selected.length == 0) {
+            $('#search-results').find('a').first().addClass('selected');
+        } else {
+            var next;
+            if (event.which == 40) {
+                next = selected.parent().next().find('a').first();
+            } else {
+                next = selected.parent().prev().find('a').first();
+            }
+            if (next.length != 0) {
+                var resultbox = $('#search-results');
+                var position = next.position();
+
+//              TODO scrolling is buggy and jumps around
+//                resultbox.scrollTop(Math.floor(position.top));
+//                console.log(position.top);
+
+                selected.removeClass('selected');
+                next.addClass('selected');
+            }
+        }
+
+        return;
+    }
+    $('#search-resultbox').show();
+    $('#search-results').html('<li><span class="no-results">No results</span></li>');
+
+    var result = jssearch.search(query);
+
+    if (result.length > 0) {
+        var i = 0;
+        var resHtml = '';
+
+        for (var key in result) {
+            if (i++ > 20) {
+                break;
+            }
+            resHtml = resHtml +
+            '<li><a href="' + result[key].file.u.substr(3) +'"><span class="title">' + result[key].file.t + '</span>' +
+            '<span class="description">' + result[key].file.d + '</span></a></li>';
+        }
+        $('#search-results').html(resHtml);
+    }
+});
+
+// hide the search results on ESC
+$(document).on("keyup", function(event) { if (event.which == 27) { $('#search-resultbox').hide(); } });
+// hide search results on click to document
+$(document).bind('click', function (e) { $('#search-resultbox').hide(); });
+// except the following:
+searchBox.bind('click', function(e) { e.stopPropagation(); });
+$('#search-resultbox').bind('click', function(e) { e.stopPropagation(); });
+
+});</script></body>
+</html>

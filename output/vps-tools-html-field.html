@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="language" content="en" />
+        <link href="./assets/628bd001/css/bootstrap.css" rel="stylesheet">
+<link href="./assets/17f54147/solarized_light.css" rel="stylesheet">
+<link href="./assets/71d1b196/style.css" rel="stylesheet">
+<script src="./assets/7551a0d4/jquery.js"></script>
+<script src="./assets/628bd001/js/bootstrap.js"></script>
+<script src="./assets/390660d6/jssearch.js"></script>    <title>Field, vps\tools\html\Field - Yii Framework 2.0 API Documentation</title>
+</head>
+<body>
+
+<div class="wrap">
+    <nav id="w201" class="navbar-inverse navbar-fixed-top navbar" role="navigation"><div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#w201-collapse"><span class="sr-only">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span></button><a class="navbar-brand" href="./index.html">Yii Framework 2.0 API Documentation</a></div><div id="w201-collapse" class="collapse navbar-collapse"><ul id="w202" class="navbar-nav nav"><li><a href="./index.html">Class reference</a></li></ul><div class="navbar-form navbar-left" role="search">
+  <div class="form-group">
+    <input id="searchbox" type="text" class="form-control" placeholder="Search">
+  </div>
+</div>
+</div></nav>
+    <div id="search-resultbox" style="display: none;" class="modal-content">
+        <ul id="search-results">
+        </ul>
+    </div>
+
+    
+<div class="row">
+    <div class="col-md-3">
+                <div id="navigation" class="list-group"><a class="list-group-item" href="#navigation-193" data-toggle="collapse" data-parent="#navigation">Not namespaced classes <b class="caret"></b></a><div id="navigation-193" class="submenu panel-collapse collapse"><a class="list-group-item" href="./yii.html">Yii</a></div>
+<a class="list-group-item" href="#navigation-194" data-toggle="collapse" data-parent="#navigation">vps\tools\auth <b class="caret"></b></a><div id="navigation-194" class="submenu panel-collapse collapse"><a class="list-group-item" href="./vps-tools-auth-syncrocityclient.html">SyncrocityClient</a></div>
+<a class="list-group-item" href="#navigation-195" data-toggle="collapse" data-parent="#navigation">vps\tools\components <b class="caret"></b></a><div id="navigation-195" class="submenu panel-collapse collapse"><a class="list-group-item" href="./vps-tools-components-categorymanager.html">CategoryManager</a>
+<a class="list-group-item" href="./vps-tools-components-notification.html">Notification</a>
+<a class="list-group-item" href="./vps-tools-components-notificationmanager.html">NotificationManager</a>
+<a class="list-group-item" href="./vps-tools-components-settingmanager.html">SettingManager</a></div>
+<a class="list-group-item" href="#navigation-196" data-toggle="collapse" data-parent="#navigation">vps\tools\controllers <b class="caret"></b></a><div id="navigation-196" class="submenu panel-collapse collapse"><a class="list-group-item" href="./vps-tools-controllers-settingscontroller.html">SettingsController</a>
+<a class="list-group-item" href="./vps-tools-controllers-webcontroller.html">WebController</a></div>
+<a class="list-group-item" href="#navigation-197" data-toggle="collapse" data-parent="#navigation">vps\tools\db <b class="caret"></b></a><div id="navigation-197" class="submenu panel-collapse collapse"><a class="list-group-item" href="./vps-tools-db-migration.html">Migration</a></div>
+<a class="list-group-item" href="#navigation-198" data-toggle="collapse" data-parent="#navigation">vps\tools\helpers <b class="caret"></b></a><div id="navigation-198" class="submenu panel-collapse collapse"><a class="list-group-item" href="./vps-tools-helpers-arrayhelper.html">ArrayHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-console.html">Console</a>
+<a class="list-group-item" href="./vps-tools-helpers-ffmpeghelper.html">FFmpegHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-filehelper.html">FileHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-html.html">Html</a>
+<a class="list-group-item" href="./vps-tools-helpers-humanhelper.html">HumanHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-nethelper.html">NetHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-remotefilehelper.html">RemoteFileHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-stringhelper.html">StringHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-timehelper.html">TimeHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-url.html">Url</a></div>
+<a class="list-group-item active" href="#navigation-199" data-toggle="collapse" data-parent="#navigation">vps\tools\html <b class="caret"></b></a><div id="navigation-199" class="submenu panel-collapse collapse in"><a class="list-group-item active" href="./vps-tools-html-field.html">Field</a>
+<a class="list-group-item" href="./vps-tools-html-form.html">Form</a></div>
+<a class="list-group-item" href="#navigation-200" data-toggle="collapse" data-parent="#navigation">vps\tools\net <b class="caret"></b></a><div id="navigation-200" class="submenu panel-collapse collapse"><a class="list-group-item" href="./vps-tools-net-curl.html">Curl</a>
+<a class="list-group-item" href="./vps-tools-net-curlresponse.html">CurlResponse</a>
+<a class="list-group-item" href="./vps-tools-net-flow.html">Flow</a></div></div>    </div>
+    <div class="col-md-9 api-content" role="main">
+        <h1>Class vps\tools\html\Field</h1>
+<div class="top-nav">
+    <a href="index.html">All Classes</a>
+                | <a href="#methods">Methods</a>
+            </div>
+
+<table class="summaryTable docClass table table-bordered">
+    <colgroup>
+        <col class="col-name" />
+        <col class="col-value" />
+    </colgroup>
+            <tr><th>Inheritance</th><td><a href="vps-tools-html-field.html">vps\tools\html\Field</a> &raquo;
+yii\bootstrap\ActiveField</td></tr>
+                                        </table>
+
+<div class="class-description">
+    <p><strong></strong></p>
+    
+    </div>
+
+<a id="properties"></a>
+
+<a id="methods"></a>
+
+<div class="summary doc-method">
+<h2>Public Methods</h2>
+
+<p><a href="#" class="toggle">Hide inherited methods</a></p>
+
+<table class="summary-table table table-striped table-bordered table-hover">
+<colgroup>
+    <col class="col-method" />
+    <col class="col-description" />
+    <col class="col-defined" />
+</colgroup>
+<tr>
+  <th>Method</th><th>Description</th><th>Defined By</th>
+</tr>
+        <tr id="datetimepicker()">
+        <td><a href="vps-tools-html-field.html#datetimepicker()-detail">datetimepicker()</a></td>
+        <td>Renders <a href="https://github.com/Eonasdan/bootstrap-datetimepicker">datetimepicker</a> input.</td>
+        <td><a href="vps-tools-html-field.html">vps\tools\html\Field</a></td>
+    </tr>
+            <tr id="hidden()">
+        <td><a href="vps-tools-html-field.html#hidden()-detail">hidden()</a></td>
+        <td>Generates hidden input inside hidden form-group.</td>
+        <td><a href="vps-tools-html-field.html">vps\tools\html\Field</a></td>
+    </tr>
+            <tr id="image()">
+        <td><a href="vps-tools-html-field.html#image()-detail">image()</a></td>
+        <td>Prepares data for <a href="http://www.jasny.net/bootstrap/javascript/#fileinput">Jasny file input plugin</a>.</td>
+        <td><a href="vps-tools-html-field.html">vps\tools\html\Field</a></td>
+    </tr>
+            <tr id="render()">
+        <td><a href="vps-tools-html-field.html#render()-detail">render()</a></td>
+        <td>This function overrides error output. All errors are displayed.</td>
+        <td><a href="vps-tools-html-field.html">vps\tools\html\Field</a></td>
+    </tr>
+                <tr id="select()">
+        <td><a href="vps-tools-html-field.html#select()-detail">select()</a></td>
+        <td>Prepares data to be shown as <a href="https://github.com/silviomoreto/bootstrap-select">bootstrap select plugin</a>.</td>
+        <td><a href="vps-tools-html-field.html">vps\tools\html\Field</a></td>
+    </tr>
+            <tr id="sortable()">
+        <td><a href="vps-tools-html-field.html#sortable()-detail">sortable()</a></td>
+        <td>Renders <a href="https://github.com/rubaxa/Sortable">sortable lists</a> for selecting multiple data with order. It
+contains left and right blocks with draggable items between them.</td>
+        <td><a href="vps-tools-html-field.html">vps\tools\html\Field</a></td>
+    </tr>
+            <tr id="submit()">
+        <td><a href="vps-tools-html-field.html#submit()-detail">submit()</a></td>
+        <td>Renders submit button.</td>
+        <td><a href="vps-tools-html-field.html">vps\tools\html\Field</a></td>
+    </tr>
+            <tr id="tags()">
+        <td><a href="vps-tools-html-field.html#tags()-detail">tags()</a></td>
+        <td>Renders <a href="https://github.com/bootstrap-tagsinput/bootstrap-tagsinput">tagsinput</a>.</td>
+        <td><a href="vps-tools-html-field.html">vps\tools\html\Field</a></td>
+    </tr>
+    </table>
+</div>
+
+<div class="summary doc-method">
+<h2>Protected Methods</h2>
+
+<p><a href="#" class="toggle">Hide inherited methods</a></p>
+
+<table class="summary-table table table-striped table-bordered table-hover">
+<colgroup>
+    <col class="col-method" />
+    <col class="col-description" />
+    <col class="col-defined" />
+</colgroup>
+<tr>
+  <th>Method</th><th>Description</th><th>Defined By</th>
+</tr>
+                        <tr id="renderLabelParts()">
+        <td><a href="vps-tools-html-field.html#renderLabelParts()-detail">renderLabelParts()</a></td>
+        <td>Added translation for label title.</td>
+        <td><a href="vps-tools-html-field.html">vps\tools\html\Field</a></td>
+    </tr>
+                    </table>
+</div>
+
+<a id="events"></a>
+
+<a id="constants"></a>
+
+<h2>Method Details</h2>
+
+<div class="method-doc">
+
+    <div class="detail-header h3" id="datetimepicker()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-html-field.html#datetimepicker()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        datetimepicker()
+        <span class="detail-header-tag small">
+            public                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Renders <a href="https://github.com/Eonasdan/bootstrap-datetimepicker">datetimepicker</a> input.</strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public</span> <span class="signature-type"><a href="vps-tools-html-field.html">$this</a></span> <strong><a href="vps-tools-html-field.html#datetimepicker()-detail">datetimepicker</a></strong> ( <span style="color: #0000BB">$dateOnly&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">false</span>, <span style="color: #0000BB">$options&nbsp;</span><span style="color: #007700">=&nbsp;[]</span> )</td></tr>
+                                    <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$dateOnly</span></td>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.boolean">boolean</a></td>
+                  <td class="param-desc-col"><p>Whether to show onlu datepicker without time.</p>
+</td>
+                </tr>
+                            <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$options</span></td>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.array">array</a></td>
+                  <td class="param-desc-col"></td>
+                </tr>
+                                                </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="hidden()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-html-field.html#hidden()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        hidden()
+        <span class="detail-header-tag small">
+            public                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Generates hidden input inside hidden form-group.</strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public</span> <span class="signature-type"><a href="vps-tools-html-field.html">$this</a></span> <strong><a href="vps-tools-html-field.html#hidden()-detail">hidden</a></strong> ( <span style="color: #0000BB">$options&nbsp;</span><span style="color: #007700">=&nbsp;[]</span> )</td></tr>
+                                    <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$options</span></td>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.array">array</a></td>
+                  <td class="param-desc-col"></td>
+                </tr>
+                                                </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="image()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-html-field.html#image()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        image()
+        <span class="detail-header-tag small">
+            public                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Prepares data for <a href="http://www.jasny.net/bootstrap/javascript/#fileinput">Jasny file input plugin</a>.</strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public</span> <span class="signature-type"><a href="vps-tools-html-field.html">$this</a></span> <strong><a href="vps-tools-html-field.html#image()-detail">image</a></strong> ( <span style="color: #0000BB">$path&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">null</span>, <span style="color: #0000BB">$options&nbsp;</span><span style="color: #007700">=&nbsp;[]</span> )</td></tr>
+                                    <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$path</span></td>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.null">null</a></td>
+                  <td class="param-desc-col"><p>Path to the image.</p>
+</td>
+                </tr>
+                            <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$options</span></td>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.array">array</a></td>
+                  <td class="param-desc-col"></td>
+                </tr>
+                                                </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="render()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-html-field.html#render()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        render()
+        <span class="detail-header-tag small">
+            public                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>This function overrides error output. All errors are displayed.</strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public</span> <span class="signature-type">void</span> <strong><a href="vps-tools-html-field.html#render()-detail">render</a></strong> ( <span style="color: #0000BB">$content&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">null</span> )</td></tr>
+                                    <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$content</span></td>
+                  <td class="param-type-col"></td>
+                  <td class="param-desc-col"></td>
+                </tr>
+                                                </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="renderLabelParts()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-html-field.html#renderLabelParts()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        renderLabelParts()
+        <span class="detail-header-tag small">
+            protected                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Added translation for label title.</strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">protected</span> <span class="signature-type">void</span> <strong><a href="vps-tools-html-field.html#renderLabelParts()-detail">renderLabelParts</a></strong> ( <span style="color: #0000BB">$label&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">null</span>, <span style="color: #0000BB">$options&nbsp;</span><span style="color: #007700">=&nbsp;[]</span> )</td></tr>
+                                    <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$label</span></td>
+                  <td class="param-type-col"></td>
+                  <td class="param-desc-col"></td>
+                </tr>
+                            <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$options</span></td>
+                  <td class="param-type-col"></td>
+                  <td class="param-desc-col"></td>
+                </tr>
+                                                </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="select()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-html-field.html#select()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        select()
+        <span class="detail-header-tag small">
+            public                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Prepares data to be shown as <a href="https://github.com/silviomoreto/bootstrap-select">bootstrap select plugin</a>.</strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public</span> <span class="signature-type"><a href="vps-tools-html-field.html">$this</a></span> <strong><a href="vps-tools-html-field.html#select()-detail">select</a></strong> ( <span style="color: #0000BB">$models</span>, <span style="color: #0000BB">$listOptions</span>, <span style="color: #0000BB">$options&nbsp;</span><span style="color: #007700">=&nbsp;[]</span> )</td></tr>
+                                    <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$models</span></td>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.array">array</a></td>
+                  <td class="param-desc-col"><p>Array of models to be inserted in option tag.</p>
+</td>
+                </tr>
+                            <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$listOptions</span></td>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.array">array</a></td>
+                  <td class="param-desc-col"><p>Options for 'option' tag. The following options are</p>
+<pre><code class="hljs bash">                      * value: string, attribute name to use <span class="hljs-keyword">for</span> &lt;option&gt; value, default is <span class="hljs-string">'id'</span>;
+                      * label: string, attribute name to put <span class="hljs-keyword">for</span> &lt;option&gt; text;
+                      * data-content: string, attribute name to put <span class="hljs-keyword">in</span> <span class="hljs-string">'data-content'</span> attribute <span class="hljs-keyword">for</span>
+                      &lt;option&gt;, will overwrite label <span class="hljs-keyword">if</span> <span class="hljs-built_in">set</span>;
+                      * title: string, attribute name to put <span class="hljs-keyword">for</span> title attribute <span class="hljs-keyword">for</span> &lt;option&gt;.
+</code></pre>
+</td>
+                </tr>
+                            <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$options</span></td>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.array">array</a></td>
+                  <td class="param-desc-col"></td>
+                </tr>
+                                                </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="sortable()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-html-field.html#sortable()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        sortable()
+        <span class="detail-header-tag small">
+            public                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Renders <a href="https://github.com/rubaxa/Sortable">sortable lists</a> for selecting multiple data with order. It
+contains left and right blocks with draggable items between them.</strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public</span> <span class="signature-type"><a href="vps-tools-html-field.html">$this</a></span> <strong><a href="vps-tools-html-field.html#sortable()-detail">sortable</a></strong> ( <span style="color: #0000BB">$left</span>, <span style="color: #0000BB">$right</span>, <span style="color: #0000BB">$options&nbsp;</span><span style="color: #007700">=&nbsp;[]</span> )</td></tr>
+                                    <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$left</span></td>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.array">array</a></td>
+                  <td class="param-desc-col"><p>Items for left block (selected items).</p>
+</td>
+                </tr>
+                            <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$right</span></td>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.array">array</a></td>
+                  <td class="param-desc-col"><p>Items for right block.</p>
+</td>
+                </tr>
+                            <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$options</span></td>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.array">array</a></td>
+                  <td class="param-desc-col"></td>
+                </tr>
+                                                    <tr>
+                  <th class="param-name-col">throws</th>
+                  <td class="param-type-col">\yii\base\InvalidConfigException</td>
+                  <td class="param-desc-col"></td>
+                </tr>
+                        </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="submit()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-html-field.html#submit()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        submit()
+        <span class="detail-header-tag small">
+            public                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Renders submit button.</strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public</span> <span class="signature-type"><a href="vps-tools-html-field.html">$this</a></span> <strong><a href="vps-tools-html-field.html#submit()-detail">submit</a></strong> ( <span style="color: #0000BB">$text</span>, <span style="color: #0000BB">$options&nbsp;</span><span style="color: #007700">=&nbsp;[]</span> )</td></tr>
+                                    <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$text</span></td>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.string">string</a></td>
+                  <td class="param-desc-col"></td>
+                </tr>
+                            <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$options</span></td>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.array">array</a></td>
+                  <td class="param-desc-col"></td>
+                </tr>
+                                                </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="tags()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-html-field.html#tags()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        tags()
+        <span class="detail-header-tag small">
+            public                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Renders <a href="https://github.com/bootstrap-tagsinput/bootstrap-tagsinput">tagsinput</a>.</strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public</span> <span class="signature-type"><a href="vps-tools-html-field.html">$this</a></span> <strong><a href="vps-tools-html-field.html#tags()-detail">tags</a></strong> ( <span style="color: #0000BB">$options&nbsp;</span><span style="color: #007700">=&nbsp;[]</span> )</td></tr>
+                                    <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$options</span></td>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.array">array</a></td>
+                  <td class="param-desc-col"></td>
+                </tr>
+                                                </table>
+
+<!--	-->
+</div>
+        </div>
+</div>
+
+<script type="text/javascript">
+    /*<![CDATA[*/
+    $("a.toggle").on('click', function () {
+        var $this = $(this);
+        if ($this.hasClass('properties-hidden')) {
+            $this.text($this.text().replace(/Show/,'Hide'));
+            $this.parents(".summary").find(".inherited").show();
+            $this.removeClass('properties-hidden');
+        } else {
+            $this.text($this.text().replace(/Hide/,'Show'));
+            $this.parents(".summary").find(".inherited").hide();
+            $this.addClass('properties-hidden');
+        }
+
+        return false;
+    });
+    /*
+     $(".sourceCode a.show").toggle(function () {
+     $(this).text($(this).text().replace(/show/,'hide'));
+     $(this).parents(".sourceCode").find("div.code").show();
+     },function () {
+     $(this).text($(this).text().replace(/hide/,'show'));
+     $(this).parents(".sourceCode").find("div.code").hide();
+     });
+     $("a.sourceLink").click(function () {
+     $(this).attr('target','_blank');
+     });
+     */
+    /*]]>*/
+</script>
+
+
+</div>
+
+<footer class="footer">
+        <p class="pull-right"><small>Page generated on Tue, 06 Dec 2016 13:54:52 +0000</small></p>
+    Powered by <a href="http://www.yiiframework.com/" rel="external">Yii Framework</a></footer>
+
+<script type="text/javascript">jQuery(document).ready(function () {
+    var shiftWindow = function () { scrollBy(0, -50) };
+    if (location.hash) setTimeout(shiftWindow, 1);
+    window.addEventListener("hashchange", shiftWindow);
+var element = document.createElement("script");
+element.src = "./jssearch.index.js";
+document.body.appendChild(element);
+
+var searchBox = $('#searchbox');
+
+// search when typing in search field
+searchBox.on("keyup", function(event) {
+    var query = $(this).val();
+
+    if (query == '' || event.which == 27) {
+        $('#search-resultbox').hide();
+        return;
+    } else if (event.which == 13) {
+        var selectedLink = $('#search-resultbox a.selected');
+        if (selectedLink.length != 0) {
+            document.location = selectedLink.attr('href');
+            return;
+        }
+    } else if (event.which == 38 || event.which == 40) {
+        $('#search-resultbox').show();
+
+        var selected = $('#search-resultbox a.selected');
+        if (selected.length == 0) {
+            $('#search-results').find('a').first().addClass('selected');
+        } else {
+            var next;
+            if (event.which == 40) {
+                next = selected.parent().next().find('a').first();
+            } else {
+                next = selected.parent().prev().find('a').first();
+            }
+            if (next.length != 0) {
+                var resultbox = $('#search-results');
+                var position = next.position();
+
+//              TODO scrolling is buggy and jumps around
+//                resultbox.scrollTop(Math.floor(position.top));
+//                console.log(position.top);
+
+                selected.removeClass('selected');
+                next.addClass('selected');
+            }
+        }
+
+        return;
+    }
+    $('#search-resultbox').show();
+    $('#search-results').html('<li><span class="no-results">No results</span></li>');
+
+    var result = jssearch.search(query);
+
+    if (result.length > 0) {
+        var i = 0;
+        var resHtml = '';
+
+        for (var key in result) {
+            if (i++ > 20) {
+                break;
+            }
+            resHtml = resHtml +
+            '<li><a href="' + result[key].file.u.substr(3) +'"><span class="title">' + result[key].file.t + '</span>' +
+            '<span class="description">' + result[key].file.d + '</span></a></li>';
+        }
+        $('#search-results').html(resHtml);
+    }
+});
+
+// hide the search results on ESC
+$(document).on("keyup", function(event) { if (event.which == 27) { $('#search-resultbox').hide(); } });
+// hide search results on click to document
+$(document).bind('click', function (e) { $('#search-resultbox').hide(); });
+// except the following:
+searchBox.bind('click', function(e) { e.stopPropagation(); });
+$('#search-resultbox').bind('click', function(e) { e.stopPropagation(); });
+
+});</script></body>
+</html>

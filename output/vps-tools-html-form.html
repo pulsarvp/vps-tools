@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="language" content="en" />
+        <link href="./assets/628bd001/css/bootstrap.css" rel="stylesheet">
+<link href="./assets/17f54147/solarized_light.css" rel="stylesheet">
+<link href="./assets/71d1b196/style.css" rel="stylesheet">
+<script src="./assets/7551a0d4/jquery.js"></script>
+<script src="./assets/628bd001/js/bootstrap.js"></script>
+<script src="./assets/390660d6/jssearch.js"></script>    <title>Form, vps\tools\html\Form - Yii Framework 2.0 API Documentation</title>
+</head>
+<body>
+
+<div class="wrap">
+    <nav id="w211" class="navbar-inverse navbar-fixed-top navbar" role="navigation"><div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#w211-collapse"><span class="sr-only">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span></button><a class="navbar-brand" href="./index.html">Yii Framework 2.0 API Documentation</a></div><div id="w211-collapse" class="collapse navbar-collapse"><ul id="w212" class="navbar-nav nav"><li><a href="./index.html">Class reference</a></li></ul><div class="navbar-form navbar-left" role="search">
+  <div class="form-group">
+    <input id="searchbox" type="text" class="form-control" placeholder="Search">
+  </div>
+</div>
+</div></nav>
+    <div id="search-resultbox" style="display: none;" class="modal-content">
+        <ul id="search-results">
+        </ul>
+    </div>
+
+    
+<div class="row">
+    <div class="col-md-3">
+                <div id="navigation" class="list-group"><a class="list-group-item" href="#navigation-203" data-toggle="collapse" data-parent="#navigation">Not namespaced classes <b class="caret"></b></a><div id="navigation-203" class="submenu panel-collapse collapse"><a class="list-group-item" href="./yii.html">Yii</a></div>
+<a class="list-group-item" href="#navigation-204" data-toggle="collapse" data-parent="#navigation">vps\tools\auth <b class="caret"></b></a><div id="navigation-204" class="submenu panel-collapse collapse"><a class="list-group-item" href="./vps-tools-auth-syncrocityclient.html">SyncrocityClient</a></div>
+<a class="list-group-item" href="#navigation-205" data-toggle="collapse" data-parent="#navigation">vps\tools\components <b class="caret"></b></a><div id="navigation-205" class="submenu panel-collapse collapse"><a class="list-group-item" href="./vps-tools-components-categorymanager.html">CategoryManager</a>
+<a class="list-group-item" href="./vps-tools-components-notification.html">Notification</a>
+<a class="list-group-item" href="./vps-tools-components-notificationmanager.html">NotificationManager</a>
+<a class="list-group-item" href="./vps-tools-components-settingmanager.html">SettingManager</a></div>
+<a class="list-group-item" href="#navigation-206" data-toggle="collapse" data-parent="#navigation">vps\tools\controllers <b class="caret"></b></a><div id="navigation-206" class="submenu panel-collapse collapse"><a class="list-group-item" href="./vps-tools-controllers-settingscontroller.html">SettingsController</a>
+<a class="list-group-item" href="./vps-tools-controllers-webcontroller.html">WebController</a></div>
+<a class="list-group-item" href="#navigation-207" data-toggle="collapse" data-parent="#navigation">vps\tools\db <b class="caret"></b></a><div id="navigation-207" class="submenu panel-collapse collapse"><a class="list-group-item" href="./vps-tools-db-migration.html">Migration</a></div>
+<a class="list-group-item" href="#navigation-208" data-toggle="collapse" data-parent="#navigation">vps\tools\helpers <b class="caret"></b></a><div id="navigation-208" class="submenu panel-collapse collapse"><a class="list-group-item" href="./vps-tools-helpers-arrayhelper.html">ArrayHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-console.html">Console</a>
+<a class="list-group-item" href="./vps-tools-helpers-ffmpeghelper.html">FFmpegHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-filehelper.html">FileHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-html.html">Html</a>
+<a class="list-group-item" href="./vps-tools-helpers-humanhelper.html">HumanHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-nethelper.html">NetHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-remotefilehelper.html">RemoteFileHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-stringhelper.html">StringHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-timehelper.html">TimeHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-url.html">Url</a></div>
+<a class="list-group-item active" href="#navigation-209" data-toggle="collapse" data-parent="#navigation">vps\tools\html <b class="caret"></b></a><div id="navigation-209" class="submenu panel-collapse collapse in"><a class="list-group-item" href="./vps-tools-html-field.html">Field</a>
+<a class="list-group-item active" href="./vps-tools-html-form.html">Form</a></div>
+<a class="list-group-item" href="#navigation-210" data-toggle="collapse" data-parent="#navigation">vps\tools\net <b class="caret"></b></a><div id="navigation-210" class="submenu panel-collapse collapse"><a class="list-group-item" href="./vps-tools-net-curl.html">Curl</a>
+<a class="list-group-item" href="./vps-tools-net-curlresponse.html">CurlResponse</a>
+<a class="list-group-item" href="./vps-tools-net-flow.html">Flow</a></div></div>    </div>
+    <div class="col-md-9 api-content" role="main">
+        <h1>Class vps\tools\html\Form</h1>
+<div class="top-nav">
+    <a href="index.html">All Classes</a>
+            | <a href="#properties">Properties</a>
+                | <a href="#methods">Methods</a>
+            </div>
+
+<table class="summaryTable docClass table table-bordered">
+    <colgroup>
+        <col class="col-name" />
+        <col class="col-value" />
+    </colgroup>
+            <tr><th>Inheritance</th><td><a href="vps-tools-html-form.html">vps\tools\html\Form</a> &raquo;
+yii\bootstrap\ActiveForm</td></tr>
+                                        </table>
+
+<div class="class-description">
+    <p><strong></strong></p>
+    
+    </div>
+
+<a id="properties"></a>
+
+<div class="summary doc-property">
+<h2>Public Properties</h2>
+
+<p><a href="#" class="toggle">Hide inherited properties</a></p>
+
+<table class="summary-table table table-striped table-bordered table-hover">
+<colgroup>
+    <col class="col-property" />
+    <col class="col-type" />
+    <col class="col-description" />
+    <col class="col-defined" />
+</colgroup>
+<tr>
+  <th>Property</th><th>Type</th><th>Description</th><th>Defined By</th>
+</tr>
+        <tr id="$enableClientScript">
+        <td><a href="vps-tools-html-form.html#$enableClientScript-detail">$enableClientScript</a></td>
+        <td></td>
+        <td></td>
+        <td><a href="vps-tools-html-form.html">vps\tools\html\Form</a></td>
+    </tr>
+            <tr id="$fieldClass">
+        <td><a href="vps-tools-html-form.html#$fieldClass-detail">$fieldClass</a></td>
+        <td></td>
+        <td></td>
+        <td><a href="vps-tools-html-form.html">vps\tools\html\Form</a></td>
+    </tr>
+            <tr id="$fieldConfig">
+        <td><a href="vps-tools-html-form.html#$fieldConfig-detail">$fieldConfig</a></td>
+        <td></td>
+        <td>Default layout for single form group.</td>
+        <td><a href="vps-tools-html-form.html">vps\tools\html\Form</a></td>
+    </tr>
+            <tr id="$layout">
+        <td><a href="vps-tools-html-form.html#$layout-detail">$layout</a></td>
+        <td></td>
+        <td>Default layout is set to horizontal.</td>
+        <td><a href="vps-tools-html-form.html">vps\tools\html\Form</a></td>
+    </tr>
+            <tr id="$method">
+        <td><a href="vps-tools-html-form.html#$method-detail">$method</a></td>
+        <td></td>
+        <td></td>
+        <td><a href="vps-tools-html-form.html">vps\tools\html\Form</a></td>
+    </tr>
+            <tr id="$name">
+        <td><a href="vps-tools-html-form.html#$name-detail">$name</a></td>
+        <td><a href="http://www.php.net/language.types.string">string</a></td>
+        <td>Form name.</td>
+        <td><a href="vps-tools-html-form.html">vps\tools\html\Form</a></td>
+    </tr>
+            <tr id="$options">
+        <td><a href="vps-tools-html-form.html#$options-detail">$options</a></td>
+        <td></td>
+        <td>Adds 'role' attribute.</td>
+        <td><a href="vps-tools-html-form.html">vps\tools\html\Form</a></td>
+    </tr>
+    </table>
+</div>
+
+<a id="methods"></a>
+
+<div class="summary doc-method">
+<h2>Public Methods</h2>
+
+<p><a href="#" class="toggle">Hide inherited methods</a></p>
+
+<table class="summary-table table table-striped table-bordered table-hover">
+<colgroup>
+    <col class="col-method" />
+    <col class="col-description" />
+    <col class="col-defined" />
+</colgroup>
+<tr>
+  <th>Method</th><th>Description</th><th>Defined By</th>
+</tr>
+        <tr id="init()">
+        <td><a href="vps-tools-html-form.html#init()-detail">init()</a></td>
+        <td>Adds some default configuration. I.e. form name and layout class.</td>
+        <td><a href="vps-tools-html-form.html">vps\tools\html\Form</a></td>
+    </tr>
+            <tr id="setUpload()">
+        <td><a href="vps-tools-html-form.html#setUpload()-detail">setUpload()</a></td>
+        <td>Whether the form should perform file upload.</td>
+        <td><a href="vps-tools-html-form.html">vps\tools\html\Form</a></td>
+    </tr>
+    </table>
+</div>
+
+<a id="events"></a>
+
+<a id="constants"></a>
+
+<h2>Property Details</h2>
+
+<div class="property-doc">
+
+    <div class="detail-header h3" id="$enableClientScript-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-html-form.html#$enableClientScript-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        $enableClientScript        <span class="detail-header-tag small">
+            public                                                property
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        
+            </div>
+
+    <div class="signature"><span class="signature-defs">public</span> <span class="signature-type"></span> <a href="vps-tools-html-form.html#$enableClientScript-detail">$enableClientScript</a> <span style="color: #0000BB"></span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">false</span></div>
+
+
+    <div class="detail-header h3" id="$fieldClass-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-html-form.html#$fieldClass-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        $fieldClass        <span class="detail-header-tag small">
+            public                                                property
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        
+            </div>
+
+    <div class="signature"><span class="signature-defs">public</span> <span class="signature-type"></span> <a href="vps-tools-html-form.html#$fieldClass-detail">$fieldClass</a> <span style="color: #0000BB"></span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'\vps\tools\html\Field'</span></div>
+
+
+    <div class="detail-header h3" id="$fieldConfig-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-html-form.html#$fieldConfig-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        $fieldConfig        <span class="detail-header-tag small">
+            public                                                property
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        
+            </div>
+
+    <div class="signature"><span class="signature-defs">public</span> <span class="signature-type"></span> <a href="vps-tools-html-form.html#$fieldConfig-detail">$fieldConfig</a> <span style="color: #0000BB"></span><span style="color: #007700">=&nbsp;[</span><span style="color: #DD0000">'template'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'{beginLabel}{labelTitle}{endLabel}{beginWrapper}{input}{hint}{error}{endWrapper}'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'horizontalCssClasses'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;[</span><span style="color: #DD0000">'label'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'col-md-3'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'wrapper'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'col-md-9'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'hint'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'error'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'error-block'</span><span style="color: #007700">],&nbsp;</span><span style="color: #DD0000">'errorOptions'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;[</span><span style="color: #DD0000">'encode'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">]]</span></div>
+
+
+    <div class="detail-header h3" id="$layout-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-html-form.html#$layout-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        $layout        <span class="detail-header-tag small">
+            public                                                property
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        
+            </div>
+
+    <div class="signature"><span class="signature-defs">public</span> <span class="signature-type"></span> <a href="vps-tools-html-form.html#$layout-detail">$layout</a> <span style="color: #0000BB"></span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'horizontal'</span></div>
+
+
+    <div class="detail-header h3" id="$method-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-html-form.html#$method-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        $method        <span class="detail-header-tag small">
+            public                                                property
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        
+            </div>
+
+    <div class="signature"><span class="signature-defs">public</span> <span class="signature-type"></span> <a href="vps-tools-html-form.html#$method-detail">$method</a> <span style="color: #0000BB"></span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'post'</span></div>
+
+
+    <div class="detail-header h3" id="$name-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-html-form.html#$name-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        $name        <span class="detail-header-tag small">
+            public                                                property
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p>Form name.</p>
+
+            </div>
+
+    <div class="signature"><span class="signature-defs">public</span> <span class="signature-type"><a href="http://www.php.net/language.types.string">string</a></span> <a href="vps-tools-html-form.html#$name-detail">$name</a> <span style="color: #0000BB"></span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">null</span></div>
+
+
+    <div class="detail-header h3" id="$options-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-html-form.html#$options-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        $options        <span class="detail-header-tag small">
+            public                                                property
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        
+            </div>
+
+    <div class="signature"><span class="signature-defs">public</span> <span class="signature-type"></span> <a href="vps-tools-html-form.html#$options-detail">$options</a> <span style="color: #0000BB"></span><span style="color: #007700">=&nbsp;[</span><span style="color: #DD0000">'role'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'form'</span><span style="color: #007700">]</span></div>
+
+</div>
+<h2>Method Details</h2>
+
+<div class="method-doc">
+
+    <div class="detail-header h3" id="init()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-html-form.html#init()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        init()
+        <span class="detail-header-tag small">
+            public                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Adds some default configuration. I.e. form name and layout class.</strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public</span> <span class="signature-type">void</span> <strong><a href="vps-tools-html-form.html#init()-detail">init</a></strong> ( )</td></tr>
+            </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="setUpload()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-html-form.html#setUpload()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        setUpload()
+        <span class="detail-header-tag small">
+            public                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Whether the form should perform file upload.</strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public</span> <span class="signature-type">void</span> <strong><a href="vps-tools-html-form.html#setUpload()-detail">setUpload</a></strong> ( <span style="color: #0000BB">$upload</span> )</td></tr>
+                                    <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$upload</span></td>
+                  <td class="param-type-col"></td>
+                  <td class="param-desc-col"></td>
+                </tr>
+                                                </table>
+
+<!--	-->
+</div>
+        </div>
+</div>
+
+<script type="text/javascript">
+    /*<![CDATA[*/
+    $("a.toggle").on('click', function () {
+        var $this = $(this);
+        if ($this.hasClass('properties-hidden')) {
+            $this.text($this.text().replace(/Show/,'Hide'));
+            $this.parents(".summary").find(".inherited").show();
+            $this.removeClass('properties-hidden');
+        } else {
+            $this.text($this.text().replace(/Hide/,'Show'));
+            $this.parents(".summary").find(".inherited").hide();
+            $this.addClass('properties-hidden');
+        }
+
+        return false;
+    });
+    /*
+     $(".sourceCode a.show").toggle(function () {
+     $(this).text($(this).text().replace(/show/,'hide'));
+     $(this).parents(".sourceCode").find("div.code").show();
+     },function () {
+     $(this).text($(this).text().replace(/hide/,'show'));
+     $(this).parents(".sourceCode").find("div.code").hide();
+     });
+     $("a.sourceLink").click(function () {
+     $(this).attr('target','_blank');
+     });
+     */
+    /*]]>*/
+</script>
+
+
+</div>
+
+<footer class="footer">
+        <p class="pull-right"><small>Page generated on Tue, 06 Dec 2016 13:54:52 +0000</small></p>
+    Powered by <a href="http://www.yiiframework.com/" rel="external">Yii Framework</a></footer>
+
+<script type="text/javascript">jQuery(document).ready(function () {
+    var shiftWindow = function () { scrollBy(0, -50) };
+    if (location.hash) setTimeout(shiftWindow, 1);
+    window.addEventListener("hashchange", shiftWindow);
+var element = document.createElement("script");
+element.src = "./jssearch.index.js";
+document.body.appendChild(element);
+
+var searchBox = $('#searchbox');
+
+// search when typing in search field
+searchBox.on("keyup", function(event) {
+    var query = $(this).val();
+
+    if (query == '' || event.which == 27) {
+        $('#search-resultbox').hide();
+        return;
+    } else if (event.which == 13) {
+        var selectedLink = $('#search-resultbox a.selected');
+        if (selectedLink.length != 0) {
+            document.location = selectedLink.attr('href');
+            return;
+        }
+    } else if (event.which == 38 || event.which == 40) {
+        $('#search-resultbox').show();
+
+        var selected = $('#search-resultbox a.selected');
+        if (selected.length == 0) {
+            $('#search-results').find('a').first().addClass('selected');
+        } else {
+            var next;
+            if (event.which == 40) {
+                next = selected.parent().next().find('a').first();
+            } else {
+                next = selected.parent().prev().find('a').first();
+            }
+            if (next.length != 0) {
+                var resultbox = $('#search-results');
+                var position = next.position();
+
+//              TODO scrolling is buggy and jumps around
+//                resultbox.scrollTop(Math.floor(position.top));
+//                console.log(position.top);
+
+                selected.removeClass('selected');
+                next.addClass('selected');
+            }
+        }
+
+        return;
+    }
+    $('#search-resultbox').show();
+    $('#search-results').html('<li><span class="no-results">No results</span></li>');
+
+    var result = jssearch.search(query);
+
+    if (result.length > 0) {
+        var i = 0;
+        var resHtml = '';
+
+        for (var key in result) {
+            if (i++ > 20) {
+                break;
+            }
+            resHtml = resHtml +
+            '<li><a href="' + result[key].file.u.substr(3) +'"><span class="title">' + result[key].file.t + '</span>' +
+            '<span class="description">' + result[key].file.d + '</span></a></li>';
+        }
+        $('#search-results').html(resHtml);
+    }
+});
+
+// hide the search results on ESC
+$(document).on("keyup", function(event) { if (event.which == 27) { $('#search-resultbox').hide(); } });
+// hide search results on click to document
+$(document).bind('click', function (e) { $('#search-resultbox').hide(); });
+// except the following:
+searchBox.bind('click', function(e) { e.stopPropagation(); });
+$('#search-resultbox').bind('click', function(e) { e.stopPropagation(); });
+
+});</script></body>
+</html>

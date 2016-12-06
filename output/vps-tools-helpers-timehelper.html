@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="language" content="en" />
+        <link href="./assets/628bd001/css/bootstrap.css" rel="stylesheet">
+<link href="./assets/17f54147/solarized_light.css" rel="stylesheet">
+<link href="./assets/71d1b196/style.css" rel="stylesheet">
+<script src="./assets/7551a0d4/jquery.js"></script>
+<script src="./assets/628bd001/js/bootstrap.js"></script>
+<script src="./assets/390660d6/jssearch.js"></script>    <title>TimeHelper, vps\tools\helpers\TimeHelper - Yii Framework 2.0 API Documentation</title>
+</head>
+<body>
+
+<div class="wrap">
+    <nav id="w181" class="navbar-inverse navbar-fixed-top navbar" role="navigation"><div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#w181-collapse"><span class="sr-only">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span></button><a class="navbar-brand" href="./index.html">Yii Framework 2.0 API Documentation</a></div><div id="w181-collapse" class="collapse navbar-collapse"><ul id="w182" class="navbar-nav nav"><li><a href="./index.html">Class reference</a></li></ul><div class="navbar-form navbar-left" role="search">
+  <div class="form-group">
+    <input id="searchbox" type="text" class="form-control" placeholder="Search">
+  </div>
+</div>
+</div></nav>
+    <div id="search-resultbox" style="display: none;" class="modal-content">
+        <ul id="search-results">
+        </ul>
+    </div>
+
+    
+<div class="row">
+    <div class="col-md-3">
+                <div id="navigation" class="list-group"><a class="list-group-item" href="#navigation-173" data-toggle="collapse" data-parent="#navigation">Not namespaced classes <b class="caret"></b></a><div id="navigation-173" class="submenu panel-collapse collapse"><a class="list-group-item" href="./yii.html">Yii</a></div>
+<a class="list-group-item" href="#navigation-174" data-toggle="collapse" data-parent="#navigation">vps\tools\auth <b class="caret"></b></a><div id="navigation-174" class="submenu panel-collapse collapse"><a class="list-group-item" href="./vps-tools-auth-syncrocityclient.html">SyncrocityClient</a></div>
+<a class="list-group-item" href="#navigation-175" data-toggle="collapse" data-parent="#navigation">vps\tools\components <b class="caret"></b></a><div id="navigation-175" class="submenu panel-collapse collapse"><a class="list-group-item" href="./vps-tools-components-categorymanager.html">CategoryManager</a>
+<a class="list-group-item" href="./vps-tools-components-notification.html">Notification</a>
+<a class="list-group-item" href="./vps-tools-components-notificationmanager.html">NotificationManager</a>
+<a class="list-group-item" href="./vps-tools-components-settingmanager.html">SettingManager</a></div>
+<a class="list-group-item" href="#navigation-176" data-toggle="collapse" data-parent="#navigation">vps\tools\controllers <b class="caret"></b></a><div id="navigation-176" class="submenu panel-collapse collapse"><a class="list-group-item" href="./vps-tools-controllers-settingscontroller.html">SettingsController</a>
+<a class="list-group-item" href="./vps-tools-controllers-webcontroller.html">WebController</a></div>
+<a class="list-group-item" href="#navigation-177" data-toggle="collapse" data-parent="#navigation">vps\tools\db <b class="caret"></b></a><div id="navigation-177" class="submenu panel-collapse collapse"><a class="list-group-item" href="./vps-tools-db-migration.html">Migration</a></div>
+<a class="list-group-item active" href="#navigation-178" data-toggle="collapse" data-parent="#navigation">vps\tools\helpers <b class="caret"></b></a><div id="navigation-178" class="submenu panel-collapse collapse in"><a class="list-group-item" href="./vps-tools-helpers-arrayhelper.html">ArrayHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-console.html">Console</a>
+<a class="list-group-item" href="./vps-tools-helpers-ffmpeghelper.html">FFmpegHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-filehelper.html">FileHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-html.html">Html</a>
+<a class="list-group-item" href="./vps-tools-helpers-humanhelper.html">HumanHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-nethelper.html">NetHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-remotefilehelper.html">RemoteFileHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-stringhelper.html">StringHelper</a>
+<a class="list-group-item active" href="./vps-tools-helpers-timehelper.html">TimeHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-url.html">Url</a></div>
+<a class="list-group-item" href="#navigation-179" data-toggle="collapse" data-parent="#navigation">vps\tools\html <b class="caret"></b></a><div id="navigation-179" class="submenu panel-collapse collapse"><a class="list-group-item" href="./vps-tools-html-field.html">Field</a>
+<a class="list-group-item" href="./vps-tools-html-form.html">Form</a></div>
+<a class="list-group-item" href="#navigation-180" data-toggle="collapse" data-parent="#navigation">vps\tools\net <b class="caret"></b></a><div id="navigation-180" class="submenu panel-collapse collapse"><a class="list-group-item" href="./vps-tools-net-curl.html">Curl</a>
+<a class="list-group-item" href="./vps-tools-net-curlresponse.html">CurlResponse</a>
+<a class="list-group-item" href="./vps-tools-net-flow.html">Flow</a></div></div>    </div>
+    <div class="col-md-9 api-content" role="main">
+        <h1>Class vps\tools\helpers\TimeHelper</h1>
+<div class="top-nav">
+    <a href="index.html">All Classes</a>
+            | <a href="#properties">Properties</a>
+                | <a href="#methods">Methods</a>
+            </div>
+
+<table class="summaryTable docClass table table-bordered">
+    <colgroup>
+        <col class="col-name" />
+        <col class="col-value" />
+    </colgroup>
+            <tr><th>Inheritance</th><td><a href="vps-tools-helpers-timehelper.html">vps\tools\helpers\TimeHelper</a></td></tr>
+                                        </table>
+
+<div class="class-description">
+    <p><strong></strong></p>
+    
+    </div>
+
+<a id="properties"></a>
+
+<div class="summary doc-property">
+<h2>Public Properties</h2>
+
+<p><a href="#" class="toggle">Hide inherited properties</a></p>
+
+<table class="summary-table table table-striped table-bordered table-hover">
+<colgroup>
+    <col class="col-property" />
+    <col class="col-type" />
+    <col class="col-description" />
+    <col class="col-defined" />
+</colgroup>
+<tr>
+  <th>Property</th><th>Type</th><th>Description</th><th>Defined By</th>
+</tr>
+        <tr id="$dtFormat">
+        <td><a href="vps-tools-helpers-timehelper.html#$dtFormat-detail">$dtFormat</a></td>
+        <td><a href="http://www.php.net/language.types.string">string</a></td>
+        <td>Default datetime format.</td>
+        <td><a href="vps-tools-helpers-timehelper.html">vps\tools\helpers\TimeHelper</a></td>
+    </tr>
+            <tr id="$fps">
+        <td><a href="vps-tools-helpers-timehelper.html#$fps-detail">$fps</a></td>
+        <td><a href="http://www.php.net/language.types.integer">integer</a></td>
+        <td>Default 'frames per second' value.</td>
+        <td><a href="vps-tools-helpers-timehelper.html">vps\tools\helpers\TimeHelper</a></td>
+    </tr>
+    </table>
+</div>
+
+<a id="methods"></a>
+
+<div class="summary doc-method">
+<h2>Public Methods</h2>
+
+<p><a href="#" class="toggle">Hide inherited methods</a></p>
+
+<table class="summary-table table table-striped table-bordered table-hover">
+<colgroup>
+    <col class="col-method" />
+    <col class="col-description" />
+    <col class="col-defined" />
+</colgroup>
+<tr>
+  <th>Method</th><th>Description</th><th>Defined By</th>
+</tr>
+        <tr id="cdate()">
+        <td><a href="vps-tools-helpers-timehelper.html#cdate()-detail">cdate()</a></td>
+        <td>Formats given date in ISO 8601. Expected result is as follow:
+2010-03-01T13:10:25+03:00.</td>
+        <td><a href="vps-tools-helpers-timehelper.html">vps\tools\helpers\TimeHelper</a></td>
+    </tr>
+            <tr id="fromFrames()">
+        <td><a href="vps-tools-helpers-timehelper.html#fromFrames()-detail">fromFrames()</a></td>
+        <td>Converts frames to time.</td>
+        <td><a href="vps-tools-helpers-timehelper.html">vps\tools\helpers\TimeHelper</a></td>
+    </tr>
+            <tr id="fromFramesToHuman()">
+        <td><a href="vps-tools-helpers-timehelper.html#fromFramesToHuman()-detail">fromFramesToHuman()</a></td>
+        <td>Converts frames to human readable time.</td>
+        <td><a href="vps-tools-helpers-timehelper.html">vps\tools\helpers\TimeHelper</a></td>
+    </tr>
+            <tr id="fromFramesToMs()">
+        <td><a href="vps-tools-helpers-timehelper.html#fromFramesToMs()-detail">fromFramesToMs()</a></td>
+        <td>Converts frames to milliseconds.</td>
+        <td><a href="vps-tools-helpers-timehelper.html">vps\tools\helpers\TimeHelper</a></td>
+    </tr>
+            <tr id="fromSecondsToHuman()">
+        <td><a href="vps-tools-helpers-timehelper.html#fromSecondsToHuman()-detail">fromSecondsToHuman()</a></td>
+        <td>Converts seconds to human readable time.</td>
+        <td><a href="vps-tools-helpers-timehelper.html">vps\tools\helpers\TimeHelper</a></td>
+    </tr>
+            <tr id="now()">
+        <td><a href="vps-tools-helpers-timehelper.html#now()-detail">now()</a></td>
+        <td>Return current date and time formatted via <a href="vps-tools-helpers-timehelper.html#$dtFormat-detail">$dtFormat</a>.</td>
+        <td><a href="vps-tools-helpers-timehelper.html">vps\tools\helpers\TimeHelper</a></td>
+    </tr>
+            <tr id="toFrames()">
+        <td><a href="vps-tools-helpers-timehelper.html#toFrames()-detail">toFrames()</a></td>
+        <td>Converts time to frames.</td>
+        <td><a href="vps-tools-helpers-timehelper.html">vps\tools\helpers\TimeHelper</a></td>
+    </tr>
+            <tr id="toMs()">
+        <td><a href="vps-tools-helpers-timehelper.html#toMs()-detail">toMs()</a></td>
+        <td>Converts time to milliseconds.</td>
+        <td><a href="vps-tools-helpers-timehelper.html">vps\tools\helpers\TimeHelper</a></td>
+    </tr>
+            <tr id="toSeconds()">
+        <td><a href="vps-tools-helpers-timehelper.html#toSeconds()-detail">toSeconds()</a></td>
+        <td>Converts time to seconds.</td>
+        <td><a href="vps-tools-helpers-timehelper.html">vps\tools\helpers\TimeHelper</a></td>
+    </tr>
+    </table>
+</div>
+
+<a id="events"></a>
+
+<a id="constants"></a>
+
+<h2>Property Details</h2>
+
+<div class="property-doc">
+
+    <div class="detail-header h3" id="$dtFormat-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-helpers-timehelper.html#$dtFormat-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        $dtFormat        <span class="detail-header-tag small">
+            public            static                                    property
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p>Default datetime format.</p>
+
+            </div>
+
+    <div class="signature"><span class="signature-defs">public static</span> <span class="signature-type"><a href="http://www.php.net/language.types.string">string</a></span> <a href="vps-tools-helpers-timehelper.html#$dtFormat-detail">$dtFormat</a> <span style="color: #0000BB"></span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'Y-m-d&nbsp;H:i:s'</span></div>
+
+
+    <div class="detail-header h3" id="$fps-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-helpers-timehelper.html#$fps-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        $fps        <span class="detail-header-tag small">
+            public            static                                    property
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p>Default 'frames per second' value.</p>
+
+            </div>
+
+    <div class="signature"><span class="signature-defs">public static</span> <span class="signature-type"><a href="http://www.php.net/language.types.integer">integer</a></span> <a href="vps-tools-helpers-timehelper.html#$fps-detail">$fps</a> <span style="color: #0000BB"></span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">25</span></div>
+
+</div>
+<h2>Method Details</h2>
+
+<div class="method-doc">
+
+    <div class="detail-header h3" id="cdate()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-helpers-timehelper.html#cdate()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        cdate()
+        <span class="detail-header-tag small">
+            public                        static            method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Formats given date in ISO 8601. Expected result is as follow:
+2010-03-01T13:10:25+03:00.</strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public static</span> <span class="signature-type"><a href="http://www.php.net/language.types.string">string</a></span> <strong><a href="vps-tools-helpers-timehelper.html#cdate()-detail">cdate</a></strong> ( <span style="color: #0000BB">$date</span> )</td></tr>
+                                    <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$date</span></td>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.integer">integer</a>|<a href="http://www.php.net/language.types.string">string</a>|<a href="http://www.php.net/class.datetime">DateTime</a></td>
+                  <td class="param-desc-col"><p>The value to be formatted.</p>
+<pre><code class="hljs sql">                                    The following types of value
+                                    are supported:
+                                    - an integer representing a
+                                    UNIX timestamp
+                                    - a string that can be
+                                    [parsed to <span class="hljs-operator"><span class="hljs-keyword">create</span> a DateTime
+                                    <span class="hljs-keyword">object</span>](<span class="hljs-keyword">http</span>://php.net/<span class="hljs-keyword">manual</span>/en/datetime.formats.php).
+                                    The <span class="hljs-keyword">timestamp</span> <span class="hljs-keyword">is</span> assumed <span class="hljs-keyword">to</span>
+                                    be <span class="hljs-keyword">in</span> [[defaultTimeZone]]
+                                    unless a <span class="hljs-keyword">time</span> zone <span class="hljs-keyword">is</span>
+                                    explicitly given.
+                                    - a PHP
+                                    [DateTime](<span class="hljs-keyword">http</span>://php.net/<span class="hljs-keyword">manual</span>/en/<span class="hljs-keyword">class</span>.datetime.php)
+                                    <span class="hljs-keyword">object</span>
+</span></code></pre>
+</td>
+                </tr>
+                                        <tr>
+                  <th class="param-name-col">return</th>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.string">string</a></td>
+                  <td class="param-desc-col"><p>The formatted result.</p>
+</td>
+                </tr>
+                                        <tr>
+                  <th class="param-name-col">throws</th>
+                  <td class="param-type-col">\yii\base\InvalidParamException</td>
+                  <td class="param-desc-col"><p>If the input value can not</p>
+<pre><code class="hljs nginx">                                    <span class="hljs-title">be</span> evaluated as a date
+                                    value.
+</code></pre>
+</td>
+                </tr>
+                        </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="fromFrames()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-helpers-timehelper.html#fromFrames()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        fromFrames()
+        <span class="detail-header-tag small">
+            public                        static            method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Converts frames to time.</strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public static</span> <span class="signature-type"><a href="http://www.php.net/language.types.string">string</a></span> <strong><a href="vps-tools-helpers-timehelper.html#fromFrames()-detail">fromFrames</a></strong> ( <span style="color: #0000BB">$frames</span>, <span style="color: #0000BB">$format&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'HH:MM:SS.MSS'</span> )</td></tr>
+                                    <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$frames</span></td>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.integer">integer</a>|<a href="http://www.php.net/language.types.string">string</a></td>
+                  <td class="param-desc-col"><p>Number of frames.</p>
+</td>
+                </tr>
+                            <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$format</span></td>
+                  <td class="param-type-col"></td>
+                  <td class="param-desc-col"></td>
+                </tr>
+                                        <tr>
+                  <th class="param-name-col">return</th>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.string">string</a></td>
+                  <td class="param-desc-col"><p>Time in format HH:MM:SS.MSS.</p>
+</td>
+                </tr>
+                                    </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="fromFramesToHuman()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-helpers-timehelper.html#fromFramesToHuman()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        fromFramesToHuman()
+        <span class="detail-header-tag small">
+            public                        static            method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Converts frames to human readable time.</strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public static</span> <span class="signature-type"><a href="http://www.php.net/language.types.string">string</a></span> <strong><a href="vps-tools-helpers-timehelper.html#fromFramesToHuman()-detail">fromFramesToHuman</a></strong> ( <span style="color: #0000BB">$frames</span> )</td></tr>
+                                    <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$frames</span></td>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.integer">integer</a>|<a href="http://www.php.net/language.types.string">string</a></td>
+                  <td class="param-desc-col"><p>Number of frames.</p>
+</td>
+                </tr>
+                                        <tr>
+                  <th class="param-name-col">return</th>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.string">string</a></td>
+                  <td class="param-desc-col"><p>Time in format (HH:)MM:SS.</p>
+</td>
+                </tr>
+                                    </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="fromFramesToMs()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-helpers-timehelper.html#fromFramesToMs()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        fromFramesToMs()
+        <span class="detail-header-tag small">
+            public                        static            method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Converts frames to milliseconds.</strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public static</span> <span class="signature-type"><a href="http://www.php.net/language.types.integer">integer</a></span> <strong><a href="vps-tools-helpers-timehelper.html#fromFramesToMs()-detail">fromFramesToMs</a></strong> ( <span style="color: #0000BB">$frames</span> )</td></tr>
+                                    <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$frames</span></td>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.integer">integer</a></td>
+                  <td class="param-desc-col"><p>Number of frames</p>
+</td>
+                </tr>
+                                        <tr>
+                  <th class="param-name-col">return</th>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.integer">integer</a></td>
+                  <td class="param-desc-col"><p>Number of milliseconds.</p>
+</td>
+                </tr>
+                                    </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="fromSecondsToHuman()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-helpers-timehelper.html#fromSecondsToHuman()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        fromSecondsToHuman()
+        <span class="detail-header-tag small">
+            public                        static            method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Converts seconds to human readable time.</strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public static</span> <span class="signature-type"><a href="http://www.php.net/language.types.string">string</a></span> <strong><a href="vps-tools-helpers-timehelper.html#fromSecondsToHuman()-detail">fromSecondsToHuman</a></strong> ( <span style="color: #0000BB">$seconds</span> )</td></tr>
+                                    <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$seconds</span></td>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.integer">integer</a>|<a href="http://www.php.net/language.types.string">string</a></td>
+                  <td class="param-desc-col"></td>
+                </tr>
+                                        <tr>
+                  <th class="param-name-col">return</th>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.string">string</a></td>
+                  <td class="param-desc-col"><p>Time in format (HH:)MM:SS.</p>
+</td>
+                </tr>
+                                    </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="now()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-helpers-timehelper.html#now()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        now()
+        <span class="detail-header-tag small">
+            public                        static            method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Return current date and time formatted via <a href="vps-tools-helpers-timehelper.html#$dtFormat-detail">$dtFormat</a>.</strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public static</span> <span class="signature-type"><a href="http://www.php.net/language.types.string">string</a></span> <strong><a href="vps-tools-helpers-timehelper.html#now()-detail">now</a></strong> ( )</td></tr>
+                                                <tr>
+                  <th class="param-name-col">return</th>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.string">string</a></td>
+                  <td class="param-desc-col"><p>The formatted current date and time.</p>
+</td>
+                </tr>
+                                    </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="toFrames()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-helpers-timehelper.html#toFrames()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        toFrames()
+        <span class="detail-header-tag small">
+            public                        static            method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Converts time to frames.</strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public static</span> <span class="signature-type"><a href="http://www.php.net/language.types.null">null</a>|<a href="http://www.php.net/language.types.integer">integer</a></span> <strong><a href="vps-tools-helpers-timehelper.html#toFrames()-detail">toFrames</a></strong> ( <span style="color: #0000BB">$time</span> )</td></tr>
+                                    <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$time</span></td>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.string">string</a></td>
+                  <td class="param-desc-col"><p>Input time in format HH:MM:SS, HH:MM:SS.FF or</p>
+<pre><code class="hljs css">                 <span class="hljs-tag">HH</span><span class="hljs-pseudo">:MM</span><span class="hljs-pseudo">:SS</span><span class="hljs-class">.MSS</span>.
+</code></pre>
+</td>
+                </tr>
+                                        <tr>
+                  <th class="param-name-col">return</th>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.null">null</a>|<a href="http://www.php.net/language.types.integer">integer</a></td>
+                  <td class="param-desc-col"><p>NUll in case of wrong format input or frames</p>
+<pre><code class="hljs ">                 otherwise.
+</code></pre>
+</td>
+                </tr>
+                                    </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="toMs()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-helpers-timehelper.html#toMs()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        toMs()
+        <span class="detail-header-tag small">
+            public                        static            method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Converts time to milliseconds.</strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public static</span> <span class="signature-type"><a href="http://www.php.net/language.types.null">null</a>|<a href="http://www.php.net/language.types.integer">integer</a></span> <strong><a href="vps-tools-helpers-timehelper.html#toMs()-detail">toMs</a></strong> ( <span style="color: #0000BB">$time</span> )</td></tr>
+                                    <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$time</span></td>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.string">string</a></td>
+                  <td class="param-desc-col"><p>Input time in format HH:MM:SS, HH:MM:SS.FF or</p>
+<pre><code class="hljs css">                 <span class="hljs-tag">HH</span><span class="hljs-pseudo">:MM</span><span class="hljs-pseudo">:SS</span><span class="hljs-class">.MSS</span>.
+</code></pre>
+</td>
+                </tr>
+                                        <tr>
+                  <th class="param-name-col">return</th>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.null">null</a>|<a href="http://www.php.net/language.types.integer">integer</a></td>
+                  <td class="param-desc-col"><p>NUll in case of wrong format input or</p>
+<pre><code class="hljs nginx">                 <span class="hljs-title">milliseconds</span> otherwise.
+</code></pre>
+</td>
+                </tr>
+                                    </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="toSeconds()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-helpers-timehelper.html#toSeconds()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        toSeconds()
+        <span class="detail-header-tag small">
+            public                        static            method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Converts time to seconds.</strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public static</span> <span class="signature-type"><a href="http://www.php.net/language.types.null">null</a>|<a href="http://www.php.net/language.types.integer">integer</a></span> <strong><a href="vps-tools-helpers-timehelper.html#toSeconds()-detail">toSeconds</a></strong> ( <span style="color: #0000BB">$time</span> )</td></tr>
+                                    <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$time</span></td>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.string">string</a></td>
+                  <td class="param-desc-col"><p>Input time in format HH:MM:SS, HH:MM:SS.FF or</p>
+<pre><code class="hljs css">                 <span class="hljs-tag">HH</span><span class="hljs-pseudo">:MM</span><span class="hljs-pseudo">:SS</span><span class="hljs-class">.MSS</span>.
+</code></pre>
+</td>
+                </tr>
+                                        <tr>
+                  <th class="param-name-col">return</th>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.null">null</a>|<a href="http://www.php.net/language.types.integer">integer</a></td>
+                  <td class="param-desc-col"><p>NUll in case of wrong format input or seconds</p>
+<pre><code class="hljs ">                 otherwise.
+</code></pre>
+</td>
+                </tr>
+                                    </table>
+
+<!--	-->
+</div>
+        </div>
+</div>
+
+<script type="text/javascript">
+    /*<![CDATA[*/
+    $("a.toggle").on('click', function () {
+        var $this = $(this);
+        if ($this.hasClass('properties-hidden')) {
+            $this.text($this.text().replace(/Show/,'Hide'));
+            $this.parents(".summary").find(".inherited").show();
+            $this.removeClass('properties-hidden');
+        } else {
+            $this.text($this.text().replace(/Hide/,'Show'));
+            $this.parents(".summary").find(".inherited").hide();
+            $this.addClass('properties-hidden');
+        }
+
+        return false;
+    });
+    /*
+     $(".sourceCode a.show").toggle(function () {
+     $(this).text($(this).text().replace(/show/,'hide'));
+     $(this).parents(".sourceCode").find("div.code").show();
+     },function () {
+     $(this).text($(this).text().replace(/hide/,'show'));
+     $(this).parents(".sourceCode").find("div.code").hide();
+     });
+     $("a.sourceLink").click(function () {
+     $(this).attr('target','_blank');
+     });
+     */
+    /*]]>*/
+</script>
+
+
+</div>
+
+<footer class="footer">
+        <p class="pull-right"><small>Page generated on Tue, 06 Dec 2016 13:54:52 +0000</small></p>
+    Powered by <a href="http://www.yiiframework.com/" rel="external">Yii Framework</a></footer>
+
+<script type="text/javascript">jQuery(document).ready(function () {
+    var shiftWindow = function () { scrollBy(0, -50) };
+    if (location.hash) setTimeout(shiftWindow, 1);
+    window.addEventListener("hashchange", shiftWindow);
+var element = document.createElement("script");
+element.src = "./jssearch.index.js";
+document.body.appendChild(element);
+
+var searchBox = $('#searchbox');
+
+// search when typing in search field
+searchBox.on("keyup", function(event) {
+    var query = $(this).val();
+
+    if (query == '' || event.which == 27) {
+        $('#search-resultbox').hide();
+        return;
+    } else if (event.which == 13) {
+        var selectedLink = $('#search-resultbox a.selected');
+        if (selectedLink.length != 0) {
+            document.location = selectedLink.attr('href');
+            return;
+        }
+    } else if (event.which == 38 || event.which == 40) {
+        $('#search-resultbox').show();
+
+        var selected = $('#search-resultbox a.selected');
+        if (selected.length == 0) {
+            $('#search-results').find('a').first().addClass('selected');
+        } else {
+            var next;
+            if (event.which == 40) {
+                next = selected.parent().next().find('a').first();
+            } else {
+                next = selected.parent().prev().find('a').first();
+            }
+            if (next.length != 0) {
+                var resultbox = $('#search-results');
+                var position = next.position();
+
+//              TODO scrolling is buggy and jumps around
+//                resultbox.scrollTop(Math.floor(position.top));
+//                console.log(position.top);
+
+                selected.removeClass('selected');
+                next.addClass('selected');
+            }
+        }
+
+        return;
+    }
+    $('#search-resultbox').show();
+    $('#search-results').html('<li><span class="no-results">No results</span></li>');
+
+    var result = jssearch.search(query);
+
+    if (result.length > 0) {
+        var i = 0;
+        var resHtml = '';
+
+        for (var key in result) {
+            if (i++ > 20) {
+                break;
+            }
+            resHtml = resHtml +
+            '<li><a href="' + result[key].file.u.substr(3) +'"><span class="title">' + result[key].file.t + '</span>' +
+            '<span class="description">' + result[key].file.d + '</span></a></li>';
+        }
+        $('#search-results').html(resHtml);
+    }
+});
+
+// hide the search results on ESC
+$(document).on("keyup", function(event) { if (event.which == 27) { $('#search-resultbox').hide(); } });
+// hide search results on click to document
+$(document).bind('click', function (e) { $('#search-resultbox').hide(); });
+// except the following:
+searchBox.bind('click', function(e) { e.stopPropagation(); });
+$('#search-resultbox').bind('click', function(e) { e.stopPropagation(); });
+
+});</script></body>
+</html>

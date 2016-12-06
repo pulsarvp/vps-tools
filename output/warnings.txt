@@ -1,0 +1,164 @@
+Array
+(
+    [0] => Array
+        (
+            [line] => 7
+            [file] => src\auth\SyncrocityClient.php
+            [message] => No docblock for element 'vps\tools\auth\SyncrocityClient'
+        )
+
+    [1] => Array
+        (
+            [line] => 30
+            [file] => src\components\CategoryManager.php
+            [message] => No short description for element '$_modelClass'
+        )
+
+    [2] => Array
+        (
+            [line] => 36
+            [file] => src\components\Notification.php
+            [message] => No docblock for element 'getMessage'
+        )
+
+    [3] => Array
+        (
+            [line] => 38
+            [file] => src\components\Notification.php
+            [message] => No docblock for element 'getType'
+        )
+
+    [4] => Array
+        (
+            [line] => 40
+            [file] => src\components\Notification.php
+            [message] => No docblock for element 'setCategory'
+        )
+
+    [5] => Array
+        (
+            [line] => 12
+            [file] => src\controllers\SettingsController.php
+            [message] => No docblock for element '$defaultAction'
+        )
+
+    [6] => Array
+        (
+            [line] => 12
+            [file] => src\controllers\SettingsController.php
+            [message] => No short description for element '$defaultAction'
+        )
+
+    [7] => Array
+        (
+            [line] => 6
+            [file] => src\controllers\WebController.php
+            [message] => No docblock for element 'vps\tools\controllers\WebController'
+        )
+
+    [8] => Array
+        (
+            [line] => 17
+            [file] => src\controllers\WebController.php
+            [message] => No short description for element '$_assetBundle'
+        )
+
+    [9] => Array
+        (
+            [line] => 6
+            [file] => src\db\Migration.php
+            [message] => No docblock for element 'vps\tools\db\Migration'
+        )
+
+    [10] => Array
+        (
+            [line] => 3
+            [file] => src\framework\Yii.php
+            [message] => No docblock for element 'Yii'
+        )
+
+    [11] => Array
+        (
+            [line] => 4
+            [file] => src\helpers\ArrayHelper.php
+            [message] => No docblock for element 'vps\tools\helpers\ArrayHelper'
+        )
+
+    [12] => Array
+        (
+            [line] => 4
+            [file] => src\helpers\Console.php
+            [message] => No docblock for element 'vps\tools\helpers\Console'
+        )
+
+    [13] => Array
+        (
+            [line] => 6
+            [file] => src\helpers\FFmpegHelper.php
+            [message] => No docblock for element 'vps\tools\helpers\FFmpegHelper'
+        )
+
+    [14] => Array
+        (
+            [line] => 4
+            [file] => src\helpers\FileHelper.php
+            [message] => No docblock for element 'vps\tools\helpers\FileHelper'
+        )
+
+    [15] => Array
+        (
+            [line] => 6
+            [file] => src\helpers\Html.php
+            [message] => No docblock for element 'vps\tools\helpers\Html'
+        )
+
+    [16] => Array
+        (
+            [line] => 6
+            [file] => src\helpers\HumanHelper.php
+            [message] => No docblock for element 'vps\tools\helpers\HumanHelper'
+        )
+
+    [17] => Array
+        (
+            [line] => 4
+            [file] => src\helpers\NetHelper.php
+            [message] => No docblock for element 'vps\tools\helpers\NetHelper'
+        )
+
+    [18] => Array
+        (
+            [line] => 6
+            [file] => src\helpers\RemoteFileHelper.php
+            [message] => No docblock for element 'vps\tools\helpers\RemoteFileHelper'
+        )
+
+    [19] => Array
+        (
+            [line] => 4
+            [file] => src\helpers\StringHelper.php
+            [message] => No docblock for element 'vps\tools\helpers\StringHelper'
+        )
+
+    [20] => Array
+        (
+            [line] => 6
+            [file] => src\helpers\TimeHelper.php
+            [message] => No docblock for element 'vps\tools\helpers\TimeHelper'
+        )
+
+    [21] => Array
+        (
+            [line] => 4
+            [file] => src\helpers\Url.php
+            [message] => No docblock for element 'vps\tools\helpers\Url'
+        )
+
+    [22] => Array
+        (
+            [line] => 4
+            [file] => src\net\CurlResponse.php
+            [message] => No docblock for element 'vps\tools\net\CurlResponse'
+        )
+
+)
