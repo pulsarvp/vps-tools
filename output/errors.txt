@@ -1,0 +1,232 @@
+Array
+(
+    [0] => Array
+        (
+            [line] => 54
+            [file] => src\auth\SyncrocityClient.php
+            [message] => Method defaultNormalizeUserAttributeMap has no parent to inherit from in vps\tools\auth\SyncrocityClient.
+        )
+
+    [1] => Array
+        (
+            [line] => 72
+            [file] => src\auth\SyncrocityClient.php
+            [message] => Method defaultName has no parent to inherit from in vps\tools\auth\SyncrocityClient.
+        )
+
+    [2] => Array
+        (
+            [line] => 80
+            [file] => src\auth\SyncrocityClient.php
+            [message] => Method defaultTitle has no parent to inherit from in vps\tools\auth\SyncrocityClient.
+        )
+
+    [3] => Array
+        (
+            [line] => 88
+            [file] => src\auth\SyncrocityClient.php
+            [message] => Method defaultViewOptopns has no parent to inherit from in vps\tools\auth\SyncrocityClient.
+        )
+
+    [4] => Array
+        (
+            [line] => 99
+            [file] => src\auth\SyncrocityClient.php
+            [message] => Method initUserAttributes has no parent to inherit from in vps\tools\auth\SyncrocityClient.
+        )
+
+    [5] => Array
+        (
+            [line] => 46
+            [file] => src\components\CategoryManager.php
+            [message] => Method init has no parent to inherit from in vps\tools\components\CategoryManager.
+        )
+
+    [6] => Array
+        (
+            [file] => src\components\NotificationManager.php
+            [message] => broken link to \vps\tools\components\add() in vps\tools\components\NotificationManager
+        )
+
+    [7] => Array
+        (
+            [file] => src\components\NotificationManager.php
+            [message] => broken link to \vps\tools\components\toSession() in vps\tools\components\NotificationManager
+        )
+
+    [8] => Array
+        (
+            [file] => src\components\NotificationManager.php
+            [message] => broken link to \vps\tools\components\add() in vps\tools\components\NotificationManager
+        )
+
+    [9] => Array
+        (
+            [file] => src\components\NotificationManager.php
+            [message] => broken link to \vps\tools\components\toSession() in vps\tools\components\NotificationManager
+        )
+
+    [10] => Array
+        (
+            [file] => src\components\NotificationManager.php
+            [message] => broken link to \vps\tools\components\add() in vps\tools\components\NotificationManager
+        )
+
+    [11] => Array
+        (
+            [file] => src\components\NotificationManager.php
+            [message] => broken link to \vps\tools\components\toSession() in vps\tools\components\NotificationManager
+        )
+
+    [12] => Array
+        (
+            [line] => 26
+            [file] => src\components\SettingManager.php
+            [message] => Method init has no parent to inherit from in vps\tools\components\SettingManager.
+        )
+
+    [13] => Array
+        (
+            [line] => 52
+            [file] => src\controllers\WebController.php
+            [message] => Method afterAction has no parent to inherit from in vps\tools\controllers\WebController.
+        )
+
+    [14] => Array
+        (
+            [line] => 74
+            [file] => src\controllers\WebController.php
+            [message] => Method beforeAction has no parent to inherit from in vps\tools\controllers\WebController.
+        )
+
+    [15] => Array
+        (
+            [line] => 125
+            [file] => src\controllers\WebController.php
+            [message] => Method redirect has no parent to inherit from in vps\tools\controllers\WebController.
+        )
+
+    [16] => Array
+        (
+            [file] => src\framework\Yii.php
+            [message] => broken link to \BaseYii::t() in Yii
+        )
+
+    [17] => Array
+        (
+            [file] => src\framework\Yii.php
+            [message] => broken link to \BaseYii::t() in Yii
+        )
+
+    [18] => Array
+        (
+            [file] => src\framework\Yii.php
+            [message] => broken link to \t in Yii
+        )
+
+    [19] => Array
+        (
+            [line] => 181
+            [file] => src\helpers\ArrayHelper.php
+            [message] => Undefined parameter documented: $column1 in mergeColumns().
+        )
+
+    [20] => Array
+        (
+            [line] => 181
+            [file] => src\helpers\ArrayHelper.php
+            [message] => Undefined parameter documented: $column2 in mergeColumns().
+        )
+
+    [21] => Array
+        (
+            [line] => 181
+            [file] => src\helpers\ArrayHelper.php
+            [message] => Undefined parameter documented: $column3 in mergeColumns().
+        )
+
+    [22] => Array
+        (
+            [line] => 12
+            [file] => src\helpers\Html.php
+            [message] => Method a has no parent to inherit from in vps\tools\helpers\Html.
+        )
+
+    [23] => Array
+        (
+            [line] => 20
+            [file] => src\helpers\StringHelper.php
+            [message] => Method explode has no parent to inherit from in vps\tools\helpers\StringHelper.
+        )
+
+    [24] => Array
+        (
+            [line] => 84
+            [file] => src\html\Field.php
+            [message] => Method render has no parent to inherit from in vps\tools\html\Field.
+        )
+
+    [25] => Array
+        (
+            [line] => 251
+            [file] => src\html\Field.php
+            [message] => Method renderLabelParts has no parent to inherit from in vps\tools\html\Field.
+        )
+
+    [26] => Array
+        (
+            [line] => 17
+            [file] => src\html\Form.php
+            [message] => Method $fieldClass has no parent to inherit from in vps\tools\html\Form.
+        )
+
+    [27] => Array
+        (
+            [line] => 23
+            [file] => src\html\Form.php
+            [message] => Method $options has no parent to inherit from in vps\tools\html\Form.
+        )
+
+    [28] => Array
+        (
+            [line] => 29
+            [file] => src\html\Form.php
+            [message] => Method $layout has no parent to inherit from in vps\tools\html\Form.
+        )
+
+    [29] => Array
+        (
+            [line] => 35
+            [file] => src\html\Form.php
+            [message] => Method $fieldConfig has no parent to inherit from in vps\tools\html\Form.
+        )
+
+    [30] => Array
+        (
+            [line] => 44
+            [file] => src\html\Form.php
+            [message] => Method $enableClientScript has no parent to inherit from in vps\tools\html\Form.
+        )
+
+    [31] => Array
+        (
+            [line] => 49
+            [file] => src\html\Form.php
+            [message] => Method $method has no parent to inherit from in vps\tools\html\Form.
+        )
+
+    [32] => Array
+        (
+            [line] => 60
+            [file] => src\html\Form.php
+            [message] => Method init has no parent to inherit from in vps\tools\html\Form.
+        )
+
+    [33] => Array
+        (
+            [line] => 68
+            [file] => src\net\Flow.php
+            [message] => Method init has no parent to inherit from in vps\tools\net\Flow.
+        )
+
+)

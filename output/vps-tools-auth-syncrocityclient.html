@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="language" content="en" />
+        <link href="./assets/628bd001/css/bootstrap.css" rel="stylesheet">
+<link href="./assets/17f54147/solarized_light.css" rel="stylesheet">
+<link href="./assets/71d1b196/style.css" rel="stylesheet">
+<script src="./assets/7551a0d4/jquery.js"></script>
+<script src="./assets/628bd001/js/bootstrap.js"></script>
+<script src="./assets/390660d6/jssearch.js"></script>    <title>SyncrocityClient, vps\tools\auth\SyncrocityClient - Yii Framework 2.0 API Documentation</title>
+</head>
+<body>
+
+<div class="wrap">
+    <nav id="w8" class="navbar-inverse navbar-fixed-top navbar" role="navigation"><div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#w8-collapse"><span class="sr-only">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span></button><a class="navbar-brand" href="./index.html">Yii Framework 2.0 API Documentation</a></div><div id="w8-collapse" class="collapse navbar-collapse"><ul id="w9" class="navbar-nav nav"><li><a href="./index.html">Class reference</a></li></ul><div class="navbar-form navbar-left" role="search">
+  <div class="form-group">
+    <input id="searchbox" type="text" class="form-control" placeholder="Search">
+  </div>
+</div>
+</div></nav>
+    <div id="search-resultbox" style="display: none;" class="modal-content">
+        <ul id="search-results">
+        </ul>
+    </div>
+
+    
+<div class="row">
+    <div class="col-md-3">
+                <div id="navigation" class="list-group"><a class="list-group-item" href="#navigation-0" data-toggle="collapse" data-parent="#navigation">Not namespaced classes <b class="caret"></b></a><div id="navigation-0" class="submenu panel-collapse collapse"><a class="list-group-item" href="./yii.html">Yii</a></div>
+<a class="list-group-item active" href="#navigation-1" data-toggle="collapse" data-parent="#navigation">vps\tools\auth <b class="caret"></b></a><div id="navigation-1" class="submenu panel-collapse collapse in"><a class="list-group-item active" href="./vps-tools-auth-syncrocityclient.html">SyncrocityClient</a></div>
+<a class="list-group-item" href="#navigation-2" data-toggle="collapse" data-parent="#navigation">vps\tools\components <b class="caret"></b></a><div id="navigation-2" class="submenu panel-collapse collapse"><a class="list-group-item" href="./vps-tools-components-categorymanager.html">CategoryManager</a>
+<a class="list-group-item" href="./vps-tools-components-notification.html">Notification</a>
+<a class="list-group-item" href="./vps-tools-components-notificationmanager.html">NotificationManager</a>
+<a class="list-group-item" href="./vps-tools-components-settingmanager.html">SettingManager</a></div>
+<a class="list-group-item" href="#navigation-3" data-toggle="collapse" data-parent="#navigation">vps\tools\controllers <b class="caret"></b></a><div id="navigation-3" class="submenu panel-collapse collapse"><a class="list-group-item" href="./vps-tools-controllers-settingscontroller.html">SettingsController</a>
+<a class="list-group-item" href="./vps-tools-controllers-webcontroller.html">WebController</a></div>
+<a class="list-group-item" href="#navigation-4" data-toggle="collapse" data-parent="#navigation">vps\tools\db <b class="caret"></b></a><div id="navigation-4" class="submenu panel-collapse collapse"><a class="list-group-item" href="./vps-tools-db-migration.html">Migration</a></div>
+<a class="list-group-item" href="#navigation-5" data-toggle="collapse" data-parent="#navigation">vps\tools\helpers <b class="caret"></b></a><div id="navigation-5" class="submenu panel-collapse collapse"><a class="list-group-item" href="./vps-tools-helpers-arrayhelper.html">ArrayHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-console.html">Console</a>
+<a class="list-group-item" href="./vps-tools-helpers-ffmpeghelper.html">FFmpegHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-filehelper.html">FileHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-html.html">Html</a>
+<a class="list-group-item" href="./vps-tools-helpers-humanhelper.html">HumanHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-nethelper.html">NetHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-remotefilehelper.html">RemoteFileHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-stringhelper.html">StringHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-timehelper.html">TimeHelper</a>
+<a class="list-group-item" href="./vps-tools-helpers-url.html">Url</a></div>
+<a class="list-group-item" href="#navigation-6" data-toggle="collapse" data-parent="#navigation">vps\tools\html <b class="caret"></b></a><div id="navigation-6" class="submenu panel-collapse collapse"><a class="list-group-item" href="./vps-tools-html-field.html">Field</a>
+<a class="list-group-item" href="./vps-tools-html-form.html">Form</a></div>
+<a class="list-group-item" href="#navigation-7" data-toggle="collapse" data-parent="#navigation">vps\tools\net <b class="caret"></b></a><div id="navigation-7" class="submenu panel-collapse collapse"><a class="list-group-item" href="./vps-tools-net-curl.html">Curl</a>
+<a class="list-group-item" href="./vps-tools-net-curlresponse.html">CurlResponse</a>
+<a class="list-group-item" href="./vps-tools-net-flow.html">Flow</a></div></div>    </div>
+    <div class="col-md-9 api-content" role="main">
+        <h1>Class vps\tools\auth\SyncrocityClient</h1>
+<div class="top-nav">
+    <a href="index.html">All Classes</a>
+                | <a href="#methods">Methods</a>
+            </div>
+
+<table class="summaryTable docClass table table-bordered">
+    <colgroup>
+        <col class="col-name" />
+        <col class="col-value" />
+    </colgroup>
+            <tr><th>Inheritance</th><td><a href="vps-tools-auth-syncrocityclient.html">vps\tools\auth\SyncrocityClient</a> &raquo;
+yii\authclient\OAuth2</td></tr>
+                                        </table>
+
+<div class="class-description">
+    <p><strong></strong></p>
+    
+    </div>
+
+<a id="properties"></a>
+
+<a id="methods"></a>
+
+<div class="summary doc-method">
+<h2>Public Methods</h2>
+
+<p><a href="#" class="toggle">Hide inherited methods</a></p>
+
+<table class="summary-table table table-striped table-bordered table-hover">
+<colgroup>
+    <col class="col-method" />
+    <col class="col-description" />
+    <col class="col-defined" />
+</colgroup>
+<tr>
+  <th>Method</th><th>Description</th><th>Defined By</th>
+</tr>
+            <tr id="defaultNormalizeUserAttributeMap()">
+        <td><a href="vps-tools-auth-syncrocityclient.html#defaultNormalizeUserAttributeMap()-detail">defaultNormalizeUserAttributeMap()</a></td>
+        <td></td>
+        <td><a href="vps-tools-auth-syncrocityclient.html">vps\tools\auth\SyncrocityClient</a></td>
+    </tr>
+                        <tr id="setClientIdDb()">
+        <td><a href="vps-tools-auth-syncrocityclient.html#setClientIdDb()-detail">setClientIdDb()</a></td>
+        <td>Set client ID from DB settings.</td>
+        <td><a href="vps-tools-auth-syncrocityclient.html">vps\tools\auth\SyncrocityClient</a></td>
+    </tr>
+            <tr id="setClientSecretDb()">
+        <td><a href="vps-tools-auth-syncrocityclient.html#setClientSecretDb()-detail">setClientSecretDb()</a></td>
+        <td>Set client secret from DB settings.</td>
+        <td><a href="vps-tools-auth-syncrocityclient.html">vps\tools\auth\SyncrocityClient</a></td>
+    </tr>
+            <tr id="setClientUrlDb()">
+        <td><a href="vps-tools-auth-syncrocityclient.html#setClientUrlDb()-detail">setClientUrlDb()</a></td>
+        <td>Set client URL from DB settings.</td>
+        <td><a href="vps-tools-auth-syncrocityclient.html">vps\tools\auth\SyncrocityClient</a></td>
+    </tr>
+            <tr id="setUrl()">
+        <td><a href="vps-tools-auth-syncrocityclient.html#setUrl()-detail">setUrl()</a></td>
+        <td>Set all necessary URLs by using given one as base.</td>
+        <td><a href="vps-tools-auth-syncrocityclient.html">vps\tools\auth\SyncrocityClient</a></td>
+    </tr>
+    </table>
+</div>
+
+<div class="summary doc-method">
+<h2>Protected Methods</h2>
+
+<p><a href="#" class="toggle">Hide inherited methods</a></p>
+
+<table class="summary-table table table-striped table-bordered table-hover">
+<colgroup>
+    <col class="col-method" />
+    <col class="col-description" />
+    <col class="col-defined" />
+</colgroup>
+<tr>
+  <th>Method</th><th>Description</th><th>Defined By</th>
+</tr>
+        <tr id="defaultName()">
+        <td><a href="vps-tools-auth-syncrocityclient.html#defaultName()-detail">defaultName()</a></td>
+        <td></td>
+        <td><a href="vps-tools-auth-syncrocityclient.html">vps\tools\auth\SyncrocityClient</a></td>
+    </tr>
+                <tr id="defaultTitle()">
+        <td><a href="vps-tools-auth-syncrocityclient.html#defaultTitle()-detail">defaultTitle()</a></td>
+        <td></td>
+        <td><a href="vps-tools-auth-syncrocityclient.html">vps\tools\auth\SyncrocityClient</a></td>
+    </tr>
+            <tr id="defaultViewOptopns()">
+        <td><a href="vps-tools-auth-syncrocityclient.html#defaultViewOptopns()-detail">defaultViewOptopns()</a></td>
+        <td></td>
+        <td><a href="vps-tools-auth-syncrocityclient.html">vps\tools\auth\SyncrocityClient</a></td>
+    </tr>
+            <tr id="initUserAttributes()">
+        <td><a href="vps-tools-auth-syncrocityclient.html#initUserAttributes()-detail">initUserAttributes()</a></td>
+        <td></td>
+        <td><a href="vps-tools-auth-syncrocityclient.html">vps\tools\auth\SyncrocityClient</a></td>
+    </tr>
+                    </table>
+</div>
+
+<a id="events"></a>
+
+<a id="constants"></a>
+
+<h2>Method Details</h2>
+
+<div class="method-doc">
+
+    <div class="detail-header h3" id="defaultName()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-auth-syncrocityclient.html#defaultName()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        defaultName()
+        <span class="detail-header-tag small">
+            protected                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong></strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">protected</span> <span class="signature-type">void</span> <strong><a href="vps-tools-auth-syncrocityclient.html#defaultName()-detail">defaultName</a></strong> ( )</td></tr>
+            </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="defaultNormalizeUserAttributeMap()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-auth-syncrocityclient.html#defaultNormalizeUserAttributeMap()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        defaultNormalizeUserAttributeMap()
+        <span class="detail-header-tag small">
+            public                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong></strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public</span> <span class="signature-type">void</span> <strong><a href="vps-tools-auth-syncrocityclient.html#defaultNormalizeUserAttributeMap()-detail">defaultNormalizeUserAttributeMap</a></strong> ( )</td></tr>
+            </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="defaultTitle()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-auth-syncrocityclient.html#defaultTitle()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        defaultTitle()
+        <span class="detail-header-tag small">
+            protected                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong></strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">protected</span> <span class="signature-type">void</span> <strong><a href="vps-tools-auth-syncrocityclient.html#defaultTitle()-detail">defaultTitle</a></strong> ( )</td></tr>
+            </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="defaultViewOptopns()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-auth-syncrocityclient.html#defaultViewOptopns()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        defaultViewOptopns()
+        <span class="detail-header-tag small">
+            protected                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong></strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">protected</span> <span class="signature-type">void</span> <strong><a href="vps-tools-auth-syncrocityclient.html#defaultViewOptopns()-detail">defaultViewOptopns</a></strong> ( )</td></tr>
+            </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="initUserAttributes()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-auth-syncrocityclient.html#initUserAttributes()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        initUserAttributes()
+        <span class="detail-header-tag small">
+            protected                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong></strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">protected</span> <span class="signature-type">void</span> <strong><a href="vps-tools-auth-syncrocityclient.html#initUserAttributes()-detail">initUserAttributes</a></strong> ( )</td></tr>
+            </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="setClientIdDb()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-auth-syncrocityclient.html#setClientIdDb()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        setClientIdDb()
+        <span class="detail-header-tag small">
+            public                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Set client ID from DB settings.</strong></p>
+
+        
+        <p>See also [[<a href="vps-tools-components-settingmanager.html">vps\tools\components\SettingManager</a>]].</p>    </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public</span> <span class="signature-type">void</span> <strong><a href="vps-tools-auth-syncrocityclient.html#setClientIdDb()-detail">setClientIdDb</a></strong> ( <span style="color: #0000BB">$name</span> )</td></tr>
+                                    <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$name</span></td>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.string">string</a></td>
+                  <td class="param-desc-col"></td>
+                </tr>
+                                                </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="setClientSecretDb()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-auth-syncrocityclient.html#setClientSecretDb()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        setClientSecretDb()
+        <span class="detail-header-tag small">
+            public                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Set client secret from DB settings.</strong></p>
+
+        
+        <p>See also [[<a href="vps-tools-components-settingmanager.html">vps\tools\components\SettingManager</a>]].</p>    </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public</span> <span class="signature-type">void</span> <strong><a href="vps-tools-auth-syncrocityclient.html#setClientSecretDb()-detail">setClientSecretDb</a></strong> ( <span style="color: #0000BB">$name</span> )</td></tr>
+                                    <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$name</span></td>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.string">string</a></td>
+                  <td class="param-desc-col"></td>
+                </tr>
+                                                </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="setClientUrlDb()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-auth-syncrocityclient.html#setClientUrlDb()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        setClientUrlDb()
+        <span class="detail-header-tag small">
+            public                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Set client URL from DB settings.</strong></p>
+
+        
+        <p>See also [[<a href="vps-tools-components-settingmanager.html">vps\tools\components\SettingManager</a>]].</p>    </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public</span> <span class="signature-type">void</span> <strong><a href="vps-tools-auth-syncrocityclient.html#setClientUrlDb()-detail">setClientUrlDb</a></strong> ( <span style="color: #0000BB">$name</span> )</td></tr>
+                                    <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$name</span></td>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.string">string</a></td>
+                  <td class="param-desc-col"></td>
+                </tr>
+                                                </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="setUrl()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="vps-tools-auth-syncrocityclient.html#setUrl()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        setUrl()
+        <span class="detail-header-tag small">
+            public                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Set all necessary URLs by using given one as base.</strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public</span> <span class="signature-type">void</span> <strong><a href="vps-tools-auth-syncrocityclient.html#setUrl()-detail">setUrl</a></strong> ( <span style="color: #0000BB">$url</span> )</td></tr>
+                                    <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$url</span></td>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.string">string</a></td>
+                  <td class="param-desc-col"></td>
+                </tr>
+                                                </table>
+
+<!--	-->
+</div>
+        </div>
+</div>
+
+<script type="text/javascript">
+    /*<![CDATA[*/
+    $("a.toggle").on('click', function () {
+        var $this = $(this);
+        if ($this.hasClass('properties-hidden')) {
+            $this.text($this.text().replace(/Show/,'Hide'));
+            $this.parents(".summary").find(".inherited").show();
+            $this.removeClass('properties-hidden');
+        } else {
+            $this.text($this.text().replace(/Hide/,'Show'));
+            $this.parents(".summary").find(".inherited").hide();
+            $this.addClass('properties-hidden');
+        }
+
+        return false;
+    });
+    /*
+     $(".sourceCode a.show").toggle(function () {
+     $(this).text($(this).text().replace(/show/,'hide'));
+     $(this).parents(".sourceCode").find("div.code").show();
+     },function () {
+     $(this).text($(this).text().replace(/hide/,'show'));
+     $(this).parents(".sourceCode").find("div.code").hide();
+     });
+     $("a.sourceLink").click(function () {
+     $(this).attr('target','_blank');
+     });
+     */
+    /*]]>*/
+</script>
+
+
+</div>
+
+<footer class="footer">
+        <p class="pull-right"><small>Page generated on Tue, 06 Dec 2016 13:54:52 +0000</small></p>
+    Powered by <a href="http://www.yiiframework.com/" rel="external">Yii Framework</a></footer>
+
+<script type="text/javascript">jQuery(document).ready(function () {
+    var shiftWindow = function () { scrollBy(0, -50) };
+    if (location.hash) setTimeout(shiftWindow, 1);
+    window.addEventListener("hashchange", shiftWindow);
+var element = document.createElement("script");
+element.src = "./jssearch.index.js";
+document.body.appendChild(element);
+
+var searchBox = $('#searchbox');
+
+// search when typing in search field
+searchBox.on("keyup", function(event) {
+    var query = $(this).val();
+
+    if (query == '' || event.which == 27) {
+        $('#search-resultbox').hide();
+        return;
+    } else if (event.which == 13) {
+        var selectedLink = $('#search-resultbox a.selected');
+        if (selectedLink.length != 0) {
+            document.location = selectedLink.attr('href');
+            return;
+        }
+    } else if (event.which == 38 || event.which == 40) {
+        $('#search-resultbox').show();
+
+        var selected = $('#search-resultbox a.selected');
+        if (selected.length == 0) {
+            $('#search-results').find('a').first().addClass('selected');
+        } else {
+            var next;
+            if (event.which == 40) {
+                next = selected.parent().next().find('a').first();
+            } else {
+                next = selected.parent().prev().find('a').first();
+            }
+            if (next.length != 0) {
+                var resultbox = $('#search-results');
+                var position = next.position();
+
+//              TODO scrolling is buggy and jumps around
+//                resultbox.scrollTop(Math.floor(position.top));
+//                console.log(position.top);
+
+                selected.removeClass('selected');
+                next.addClass('selected');
+            }
+        }
+
+        return;
+    }
+    $('#search-resultbox').show();
+    $('#search-results').html('<li><span class="no-results">No results</span></li>');
+
+    var result = jssearch.search(query);
+
+    if (result.length > 0) {
+        var i = 0;
+        var resHtml = '';
+
+        for (var key in result) {
+            if (i++ > 20) {
+                break;
+            }
+            resHtml = resHtml +
+            '<li><a href="' + result[key].file.u.substr(3) +'"><span class="title">' + result[key].file.t + '</span>' +
+            '<span class="description">' + result[key].file.d + '</span></a></li>';
+        }
+        $('#search-results').html(resHtml);
+    }
+});
+
+// hide the search results on ESC
+$(document).on("keyup", function(event) { if (event.which == 27) { $('#search-resultbox').hide(); } });
+// hide search results on click to document
+$(document).bind('click', function (e) { $('#search-resultbox').hide(); });
+// except the following:
+searchBox.bind('click', function(e) { e.stopPropagation(); });
+$('#search-resultbox').bind('click', function(e) { e.stopPropagation(); });
+
+});</script></body>
+</html>
