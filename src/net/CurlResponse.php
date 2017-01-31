@@ -3,11 +3,12 @@
 
 	class CurlResponse extends \yii\base\Object
 	{
-		const S_UNKNOWN    = 0;
-		const S_OK         = 200;
-		const S_FORBIDDEN  = 403;
-		const S_NOTFOUND   = 404;
-		const S_DATAFAILED = 422;
+		const S_UNKNOWN     = 0;
+		const S_OK          = 200;
+		const S_FORBIDDEN   = 403;
+		const S_NOTFOUND    = 404;
+		const S_DATAFAILED  = 422;
+		const S_SERVERERROR = 500;
 
 		/**
 		 * @var array Response headers.
@@ -24,8 +25,18 @@
 		 */
 		private $_status = self::S_UNKNOWN;
 
+		public function __construct (array $config = [])
+		{
+			if (isset($config[ 'status' ]))
+				$this->_status = (int) $config[ 'status' ];
+
+			if (isset($config[ 'body' ]))
+				$this->_body = (int) $config[ 'body' ];
+		}
+
 		/**
 		 * Return response body.
+		 *
 		 * @return mixed
 		 */
 		public function getBody ()
@@ -35,6 +46,7 @@
 
 		/**
 		 * Return response as array. Useful when body is html or xml.
+		 *
 		 * @return mixed
 		 */
 		public function getBodyArray ()
@@ -46,6 +58,7 @@
 
 		/**
 		 * Returns response status.
+		 *
 		 * @return int
 		 */
 		public function getStatus ()
@@ -57,9 +70,9 @@
 				foreach ($this->_headers as $header)
 				{
 					preg_match("/HTTP\/1.1 (\d{3})/", $header, $match);
-					if (isset( $match[ 1 ] ))
+					if (isset($match[ 1 ]))
 					{
-						$this->_status = (int)$match[ 1 ];
+						$this->_status = (int) $match[ 1 ];
 						break;
 					}
 				}
@@ -70,8 +83,11 @@
 
 		/**
 		 * Parse response from cURL response. Sets body and headers.
+		 *
 		 * @param $response
 		 * @param $curl
+		 *
+		 * @return CurlResponse
 		 */
 		public function fromCurl ($response, $curl)
 		{
@@ -83,16 +99,19 @@
 			$headers = str_replace("\n\n", "\n", $headers);
 			$headers = trim($headers, "\n");
 			$this->_headers = explode("\n", $headers);
+
+			return $this;
 		}
 
 		/**
 		 * Check if status is OK - 2xx.
+		 *
 		 * @return bool
 		 */
 		public function isStatusOk ()
 		{
 			$status = $this->getStatus();
 
-			return ( (int)( $status / 100 ) == 2 );
+			return ( (int) ( $status / 100 ) == 2 );
 		}
 	}
