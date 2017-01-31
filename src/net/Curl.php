@@ -3,19 +3,21 @@
 
 	/**
 	 * Class Curl
+	 *
 	 * @package       vps\tools\net
 	 * @property-read [[CurlResponse]] $response
 	 * @property-write string $returnTransfer
 	 */
 	class Curl extends \yii\base\Object
 	{
-		private $_options = [ ];
-		private $_params  = [ ];
+		private $_options = [];
+		private $_params  = [];
 		private $_response;
-		private $_headers = [ ];
+		private $_headers = [];
 
 		/**
 		 * Curl constructor. Sets default options.
+		 *
 		 * @param string $url URL to be requested.
 		 */
 		public function __construct ($url)
@@ -28,6 +30,7 @@
 
 		/**
 		 * Return request response.
+		 *
 		 * @return [[CurlResponse]]
 		 */
 		public function getResponse ()
@@ -37,15 +40,17 @@
 
 		/**
 		 * Sets option whether to return response transfer or not.
+		 *
 		 * @param bool $return
 		 */
 		public function setReturnTransfer ($return)
 		{
-			$this->_options[ CURLOPT_RETURNTRANSFER ] = (bool)$return;
+			$this->_options[ CURLOPT_RETURNTRANSFER ] = (bool) $return;
 		}
 
 		/**
 		 * Adds header.
+		 *
 		 * @param string $header
 		 * @return Curl
 		 */
@@ -58,6 +63,7 @@
 
 		/**
 		 * Adds option.
+		 *
 		 * @param string $name
 		 * @param string $value
 		 * @return Curl
@@ -71,6 +77,7 @@
 
 		/**
 		 * Adds param. All params will be appended to request URL.
+		 *
 		 * @param string $name
 		 * @param string $value
 		 * @return Curl
@@ -84,6 +91,7 @@
 
 		/**
 		 * Sends DELETE request.
+		 *
 		 * @param null|array $data Additional data to append to request.
 		 * @return string|CurlResponse
 		 */
@@ -98,6 +106,7 @@
 
 		/**
 		 * Sends GET request.
+		 *
 		 * @return string|CurlResponse
 		 */
 		public function get ()
@@ -107,6 +116,7 @@
 
 		/**
 		 * Sends POST request.
+		 *
 		 * @param null|array $data Additional data to append to request.
 		 * @return string|CurlResponse
 		 */
@@ -120,6 +130,7 @@
 
 		/**
 		 * Sends PUT request.
+		 *
 		 * @param null|array $data Additional data to append to request.
 		 * @return string|CurlResponse
 		 */
@@ -133,6 +144,7 @@
 
 		/**
 		 * This is general send method to use in particular request send method.
+		 *
 		 * @return string|CurlResponse
 		 */
 		private function send ()
@@ -149,7 +161,10 @@
 
 			if ($resp === false)
 			{
-				$this->_response = 'Error #' . curl_errno($curl) . ': ' . curl_error($curl);
+				$this->_response = new CurlResponse([
+					'status' => CurlResponse::S_SERVERERROR,
+					'body'   => 'Error #' . curl_errno($curl) . ': ' . curl_error($curl)
+				]);
 			}
 			else
 			{
