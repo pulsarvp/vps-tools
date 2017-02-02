@@ -67,7 +67,7 @@
 			{
 				$this->_status = self::S_UNKNOWN;
 
-				$headers = array_flip($this->_headers);
+				$headers = array_reverse($this->_headers);
 				foreach ($headers as $header)
 				{
 					preg_match("/HTTP\/1.1 (\d{3})/", $header, $match);
