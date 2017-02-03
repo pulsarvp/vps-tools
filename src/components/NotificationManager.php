@@ -5,6 +5,7 @@
 
 	/**
 	 * The class for managing notification messages that are displayed to user.
+	 *
 	 * @property-read Notification[] $data
 	 * @property-read Notification[] $errors
 	 * @property-read Notification[] $messages
@@ -14,12 +15,14 @@
 	{
 		/**
 		 * The array of notifications.
+		 *
 		 * @var array
 		 */
 		private $_data = [];
 
 		/**
 		 * Copies all data from other notification manager.
+		 *
 		 * @param NotificationManager $manager
 		 */
 		public function copyData ($manager)
@@ -29,6 +32,7 @@
 
 		/**
 		 * Copies all errors from other notification manager.
+		 *
 		 * @param NotificationManager $manager
 		 */
 		public function copyErrors ($manager)
@@ -38,6 +42,7 @@
 
 		/**
 		 * Copies all messages from other notification manager.
+		 *
 		 * @param NotificationManager $manager
 		 */
 		public function copyMessages ($manager)
@@ -47,6 +52,7 @@
 
 		/**
 		 * Copies all warnings from other notification manager.
+		 *
 		 * @param NotificationManager $manager
 		 */
 		public function copyWarnings ($manager)
@@ -58,10 +64,14 @@
 		 * Initialization method for checking if there are some notification
 		 * stored in session. If so the list of notifications is populated and
 		 * the list of notifications stored in session is cleared.
+		 *
 		 * @return void
 		 */
 		public function init ()
 		{
+			if (session_status() == PHP_SESSION_NONE)
+				session_start();
+			
 			if (isset($_SESSION[ 'notification' ]))
 			{
 				$notification = $_SESSION[ 'notification' ];
@@ -75,6 +85,7 @@
 
 		/**
 		 * Getter for a list of notifications.
+		 *
 		 * @return array List of notifications.
 		 */
 		public function getData ()
@@ -84,6 +95,7 @@
 
 		/**
 		 * Gets all errors.
+		 *
 		 * @return array
 		 */
 		public function getErrors ()
@@ -93,6 +105,7 @@
 
 		/**
 		 * Gets all messages.
+		 *
 		 * @return array
 		 */
 		public function getMessages ()
@@ -102,6 +115,7 @@
 
 		/**
 		 * Gets all warnings.
+		 *
 		 * @return array
 		 */
 		public function getWarnings ()
@@ -111,8 +125,9 @@
 
 		/**
 		 * Adds notification of type 'error' to list.
+		 *
 		 * @param    string  $message Message.
-		 * @param    boolean $isRaw   Whether given message is raw text or should be translated.
+		 * @param    boolean $isRaw Whether given message is raw text or should be translated.
 		 * @return    void
 		 */
 		public function error ($message, $isRaw = false)
@@ -122,8 +137,9 @@
 
 		/**
 		 * Saves notification of type 'error' type to session.
+		 *
 		 * @param    string  $message Message.
-		 * @param    boolean $isRaw   Whether given message is raw text or should be translated.
+		 * @param    boolean $isRaw Whether given message is raw text or should be translated.
 		 * @return  void
 		 */
 		public function errorToSession ($message, $isRaw = false)
@@ -133,8 +149,9 @@
 
 		/**
 		 * Adds notification of type 'message' to list.
+		 *
 		 * @param    string  $message Message.
-		 * @param    boolean $isRaw   Whether given message is raw text or should be translated.
+		 * @param    boolean $isRaw Whether given message is raw text or should be translated.
 		 * @return    void
 		 */
 		public function message ($message, $isRaw = false)
@@ -144,8 +161,9 @@
 
 		/**
 		 * Saves notification of type 'message' type to session.
+		 *
 		 * @param    string  $message Message.
-		 * @param    boolean $isRaw   Whether given message is raw text or should be translated.
+		 * @param    boolean $isRaw Whether given message is raw text or should be translated.
 		 * @return    void
 		 */
 		public function messageToSession ($message, $isRaw = false)
@@ -155,8 +173,9 @@
 
 		/**
 		 * Adds notification of type 'warning' to list.
+		 *
 		 * @param    string  $message Message.
-		 * @param    boolean $isRaw   Whether given message is raw text or should be translated.
+		 * @param    boolean $isRaw Whether given message is raw text or should be translated.
 		 * @return   void
 		 */
 		public function warning ($message, $isRaw = false)
@@ -166,8 +185,9 @@
 
 		/**
 		 * Saves notification of type 'warning' type to session.
+		 *
 		 * @param  string  $message Message.
-		 * @param  boolean $isRaw   Whether given message is raw text or should be translated.
+		 * @param  boolean $isRaw Whether given message is raw text or should be translated.
 		 * @return void
 		 */
 		public function warningToSession ($message, $isRaw = false)
@@ -177,9 +197,10 @@
 
 		/**
 		 * Adds notification to list.
+		 *
 		 * @param    string  $message Message.
-		 * @param    integer $type    Message type.
-		 * @param    boolean $isRaw   Whether given message is raw text or should be translated.
+		 * @param    integer $type Message type.
+		 * @param    boolean $isRaw Whether given message is raw text or should be translated.
 		 * @return    void
 		 */
 		private function add ($message, $type = Notification::ERROR, $isRaw = false)
@@ -189,6 +210,7 @@
 
 		/**
 		 * Finds all notifications of given type.
+		 *
 		 * @param int $type
 		 * @return array
 		 */
@@ -207,9 +229,10 @@
 
 		/**
 		 * Saves notification to session.
+		 *
 		 * @param    string  $message Message.
-		 * @param    integer $type    Message type.
-		 * @param    boolean $isRaw   Whether given message is raw text or should be translated.
+		 * @param    integer $type Message type.
+		 * @param    boolean $isRaw Whether given message is raw text or should be translated.
 		 * @return void
 		 */
 		private function toSession ($message, $type = Notification::ERROR, $isRaw = false)
