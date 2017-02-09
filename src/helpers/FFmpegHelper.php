@@ -7,6 +7,10 @@
 	{
 		/**
 		 * Gets video file info. Filters parameters with $names keys if necessary.
+		 * ```php
+		 * $result = FFmpegHelper::info('/path/to/the/file.mp4', [ 'duration', 'bitrate' ]);
+		 * ```
+		 *
 		 * @param string     $path
 		 * @param null|array $names
 		 * @return array
@@ -30,8 +34,7 @@
 			{
 				foreach ($names as $name)
 				{
-					if (isset($info[ $name ]))
-						$data[ $name ] = $info[ $name ];
+					$data[ $name ] = $info[ $name ] ?? null;
 				}
 			}
 			else
@@ -42,6 +45,7 @@
 
 		/**
 		 * Finds path to binary executable file.
+		 *
 		 * @param string $name
 		 * @return null|string
 		 */
