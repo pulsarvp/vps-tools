@@ -283,15 +283,13 @@
 		 * Get extension of the given file.
 		 *
 		 * @param  string $file Path to the file.
-		 * @return string|null
+		 * @return string
 		 */
 		public static function extension ($file)
 		{
 			$extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
-			if ($extension != '')
-				return $extension;
 
-			return null;
+			return $extension;
 		}
 
 	}
