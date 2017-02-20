@@ -12,7 +12,8 @@
 		 */
 		public static function a ($text, $url = null, $options = [])
 		{
-			if (!isset( $options[ 'title' ] )) $options[ 'title' ] = $text;
+			if (!isset( $options[ 'title' ] ))
+				$options[ 'title' ] = $text;
 			if (isset( $options[ 'raw' ] ) and $options[ 'raw' ] == true)
 			{
 				unset( $options[ 'raw' ] );
@@ -33,7 +34,8 @@
 		 */
 		public static function afa ($name, $url = null, $options = [])
 		{
-			if (!isset( $options[ 'title' ] )) $options[ 'title' ] = $name;
+			if (!isset( $options[ 'title' ] ))
+				$options[ 'title' ] = $name;
 
 			return parent::a(self::fa($name, $options), $url, $options);
 		}
@@ -74,7 +76,8 @@
 		public static function buttonFa ($text, $fa, $options = [])
 		{
 			$icon = self::tag('i', '', [ 'class' => 'fa fa-' . $fa . ' margin' ]);
-			if (!isset( $options[ 'title' ] )) $options[ 'title' ] = $text;
+			if (!isset( $options[ 'title' ] ))
+				$options[ 'title' ] = $text;
 			if (isset( $options[ 'raw' ] ) and $options[ 'raw' ] == true)
 			{
 				unset( $options[ 'raw' ] );
