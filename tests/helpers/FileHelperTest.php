@@ -223,8 +223,8 @@
 		{
 			self::init();
 
-			$this->assertNull(FileHelper::extension($this->datapath));
 			$this->assertEquals('', FileHelper::extension($this->datapath));
+			$this->assertEquals('php', FileHelper::extension($this->datapath . '/dir_1/dir_1_1/file11.php'));
 			$this->assertEquals('txt', FileHelper::extension($this->datapath . '/dir_1/dir_1_1/file1.txt'));
 			$this->assertEquals('xml', FileHelper::extension($this->datapath . '/../../phpunit.xml'));
 			$this->assertEquals('php', FileHelper::extension($this->datapath . '/../../bootstrap.php'));
