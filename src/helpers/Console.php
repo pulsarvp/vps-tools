@@ -1,10 +1,17 @@
 <?php
 	namespace vps\tools\helpers;
 
+	/**
+	 * Class Console
+	 * @package vps\tools\helpers
+	 */
 	class Console extends \yii\helpers\BaseConsole
 	{
 		/**
 		 * Outputs colored string to STDOUT.
+		 * ```php
+		 * Console::printColor('Error', 'red');
+		 * ```
 		 * @param string $string
 		 * @param string $color
 		 */
@@ -41,6 +48,9 @@
 
 		/**
 		 * Prints given data as table to STDOUT.
+		 * ```php
+		 * Console::printTable('ffprobe');
+		 * ```
 		 * @param array $data
 		 * @param array $headers
 		 */

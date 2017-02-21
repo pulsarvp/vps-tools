@@ -1,6 +1,10 @@
 <?php
 	namespace vps\tools\helpers;
 
+	/**
+	 * Class FileHelper
+	 * @package vps\tools\helpers
+	 */
 	class FileHelper extends \yii\helpers\BaseFileHelper
 	{
 		const MIME_DIR = 'directory';
@@ -10,6 +14,9 @@
 
 		/**
 		 * Clears given directory without deleting it itself.
+		 * ```php
+		 * FileHelper::clearDir('/var/www/dir_1/dir_1_3');
+		 * ```
 		 *
 		 * @param  string $path
 		 * @return boolean
@@ -41,6 +48,9 @@
 
 		/**
 		 * Recursively count files and directories in given directory.
+		 * ```php
+		 * $result = FileHelper::countItems('/var/www/dir_1/dir_1_3');
+		 * ```
 		 *
 		 * @param string $path
 		 * @return int|null
@@ -65,6 +75,9 @@
 
 		/**
 		 * Counts files and directories in given directory. Not recursive.
+		 * ```php
+		 * $result = FileHelper::countItemsInDir('/var/www/dir_1/dir_1_3');
+		 * ```
 		 *
 		 * @param  string $path The directory under which the items should be counted.
 		 * @return integer|null
@@ -83,6 +96,9 @@
 
 		/**
 		 * Deletes given file without rising an exception.
+		 * ```php
+		 * FileHelper::deleteFile('/var/www/dir_1/dir_1_3/file.txt');
+		 * ```
 		 *
 		 * @param string $path
 		 * @return bool
@@ -102,8 +118,11 @@
 
 		/**
 		 * Gets directories list in given directory.
+		 * ```php
+		 * $result = FileHelper::listDirs('/var/www/dir_1');
+		 * ```
 		 *
-		 * @param  string  $path The directory under which the items will be looked for.
+		 * @param  string  $path     The directory under which the items will be looked for.
 		 * @param  boolean $absolute Whether return path to items should be absolute.
 		 * @return array|null List of paths to the found items.
 		 */
@@ -127,8 +146,11 @@
 
 		/**
 		 * Gets files list in given directory.
+		 * ```php
+		 * $result = FileHelper::listFiles('/var/www/dir_1/dir_1_3');
+		 * ```
 		 *
-		 * @param  string  $path The directory under which the items will be looked for.
+		 * @param  string  $path     The directory under which the items will be looked for.
 		 * @param  boolean $absolute Whether return path to items should be absolute.
 		 * @return array|null List of paths to the found items.
 		 */
@@ -152,8 +174,11 @@
 
 		/**
 		 * Gets files and directories list in given directory.
+		 * ```php
+		 * $result = FileHelper::listItems('/var/www/dir_1/dir_1_3');
+		 * ```
 		 *
-		 * @param  string  $path The directory under which the items will be looked for.
+		 * @param  string  $path     The directory under which the items will be looked for.
 		 * @param  boolean $absolute Whether return path to items should be absolute.
 		 * @return array|null List of paths to the found items.
 		 */
@@ -176,8 +201,11 @@
 		/**
 		 * Gets files and directories list in given directory and order it by
 		 * modification time. Not recursive.
+		 * ```php
+		 * $result = FileHelper::listItemsByDate('/var/www/dir_1/dir_1_3');
+		 * ```
 		 *
-		 * @param  string  $path The directory under which the files will be looked for.
+		 * @param  string  $path  The directory under which the files will be looked for.
 		 * @param  integer $order Order direction. Default is descending.
 		 * @return array|null Array of pairs 'modification time - full path to the file'.
 		 */
@@ -205,9 +233,12 @@
 
 		/**
 		 * Gets files list in given directory that match pattern.
+		 * ```php
+		 * $result = FileHelper::listPatternItems('/var/www/dir_1', '*.php');
+		 * ```
 		 *
 		 * @param  string  $pattern
-		 * @param  string  $path The directory under which the items will be looked for.
+		 * @param  string  $path     The directory under which the items will be looked for.
 		 * @param  boolean $absolute Whether return path to items should be absolute.
 		 * @return array List of paths to the found items.
 		 */
@@ -234,6 +265,9 @@
 
 		/**
 		 * Finds recursively files in given path and return list of paths relative to second parameter.
+		 * ```php
+		 * $result = FileHelper::listRelativeFiles('/var/www/dir_1/dir_1_3',/var/www/dir_1);
+		 * ```
 		 *
 		 * @param  string $path
 		 * @param  string $relativepath
@@ -261,6 +295,9 @@
 
 		/**
 		 * Get mimetype of the given file.
+		 * ```php
+		 * $result = FileHelper::mimetypeFile('/var/www/phpunit.xml');
+		 * ```
 		 *
 		 * @param  string $path Path to the file.
 		 * @return string|null

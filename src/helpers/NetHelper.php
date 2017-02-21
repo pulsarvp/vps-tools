@@ -1,10 +1,17 @@
 <?php
 	namespace vps\tools\helpers;
 
+	/**
+	 * Class NetHelper
+	 * @package vps\tools\helpers
+	 */
 	class NetHelper
 	{
 		/**
 		 * Trying to detect apache user. If not found prompt for one.
+		 * ```php
+		 * $result = NetHelper::apacheUser();
+		 * ```
 		 * @return string|null
 		 */
 		public static function apacheUser ()

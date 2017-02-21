@@ -3,6 +3,10 @@
 
 	use Yii;
 
+	/**
+	 * Class FFmpegHelper
+	 * @package vps\tools\helpers
+	 */
 	class FFmpegHelper
 	{
 		/**
@@ -45,6 +49,9 @@
 
 		/**
 		 * Finds path to binary executable file.
+		 * ```php
+		 * $path = FFmpegHelper::binpath('ffprobe');
+		 * ```
 		 *
 		 * @param string $name
 		 * @return null|string

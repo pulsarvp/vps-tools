@@ -3,11 +3,17 @@
 
 	use Yii;
 
+	/**
+	 * Class Html
+	 * @package vps\tools\helpers
+	 */
 	class Html extends \yii\helpers\BaseHtml
 	{
 		/**
 		 * Overwritten method. By default i18n is used.
-		 *
+		 * ```php
+		 * Html::a('Google', 'http://google.com', [ 'raw' => true);
+		 * ```
 		 * @inheritdoc
 		 */
 		public static function a ($text, $url = null, $options = [])
@@ -28,6 +34,9 @@
 
 		/**
 		 * Generates link with font-awesome icon as text.
+		 * ```php
+		 * Html::afa('google', 'http://google.com');
+		 * ```
 		 * @inheritdoc
 		 */
 		public static function afa ($name, $url = null, $options = [])
@@ -37,7 +46,9 @@
 
 		/**
 		 * Creates button checkbox or radio group.
-		 *
+		 *```php
+		 * Html::buttonGroup('Group', null, ['1'=>'first','2'=>'Second'], 'radio' );
+		 * ```
 		 * @link http://getbootstrap.com/javascript/#buttons-checkbox-radio
 		 * @param string            $name Name for the inputs.
 		 * @param string|array|null $selected Selected values.
@@ -62,6 +73,9 @@
 		/**
 		 * Creates button with FontAwesome icon.
 		 *
+		 * ```php
+		 * Html::buttonFa('Save', 'save', [ 'raw' => true ]);
+		 * ```
 		 * @param string $text Button text.
 		 * @param string $fa Icon name.
 		 * @param array  $options Additional options.
@@ -87,6 +101,9 @@
 
 		/**
 		 * Compresses HTML, removes all new lines, tabs and spaces.
+		 * ```php
+		 * Html::compress($input);
+		 * ```
 		 *
 		 * @param string $input
 		 * @param array  $preserve
@@ -143,6 +160,9 @@
 
 		/**
 		 * Generates Font-Awesome icon.
+		 * ```php
+		 * Html::fa('icon');
+		 * ```
 		 *
 		 * @param string $name Font-Awesome icon name. Will be appended after 'fa-' prefix.
 		 * @param array  $options
@@ -159,6 +179,9 @@
 
 		/**
 		 * Generates bootstrap list group with order displayed.
+		 * ```php
+		 * Html::listGroupOrder([['title'=> 'Title', 'order' => '1']]);
+		 * ```
 		 *
 		 * @param array $items Array of elements with following structure:
 		 * * title - item title.
@@ -185,6 +208,9 @@
 
 		/**
 		 * Generates table.
+		 * ```php
+		 * Html::table([ 1, 2, 3 ], [ [ 2, 3, 4 ], [ 3, 4, 5 ] ], [ 'class' => 'table' ]);
+		 * ```
 		 *
 		 * @param array $head
 		 * @param array $body

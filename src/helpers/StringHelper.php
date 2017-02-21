@@ -1,11 +1,17 @@
 <?php
 	namespace vps\tools\helpers;
 
+	/**
+	 * Class StringHelper
+	 * @package vps\tools\helpers
+	 */
 	class StringHelper extends \yii\helpers\BaseStringHelper
 	{
 		/**
 		 * Removes all characters from string except letters, digits, underscore, hyphen and whitespace characters.
-		 *
+		 * ```php
+		 * $result = StringHelper::clear("{}test  (* asd");
+		 * ```
 		 * @param string $str string
 		 * @return string converted string
 		 */
@@ -16,7 +22,9 @@
 
 		/**
 		 * Overrides parent method with $skipEmpty default value set to true.
-		 *
+		 * ```php
+		 * $result = StringHelper::explode("It+ is+ a second+ test", '+');
+		 * ```
 		 * @inheritdoc
 		 */
 		public static function explode ($string, $delimiter = ',', $trim = true, $skipEmpty = true)
@@ -26,7 +34,9 @@
 
 		/**
 		 * Explodes string with multiple delimiters.
-		 *
+		 * ```php
+		 * $result = StringHelper::mexplode('sd:ds*da:adsad adsad;cs', [ ':', ';', ' ', 'a', '*' ]);
+		 * ```
 		 * @param string   $string
 		 * @param string[] $delimiters
 		 * @return array|null
@@ -44,10 +54,13 @@
 
 		/**
 		 * Gets the position of nth occurrence of character.
-		 *
+		 * ```php
+		 * $result = StringHelper::pos('lakanahbahakjlapaosa', 'a', 5);
+		 * ```
 		 * @param  string  $string String to be searched for character.
 		 * @param  string  $char
-		 * @param  integer $n Which occurrence to search for. If negative then character will be searched from the end of string.
+		 * @param  integer $n      Which occurrence to search for. If negative then character will be searched from the
+		 *                         end of string.
 		 * @return integer|null Nth occurrence (if existed), null otherwise.
 		 * @see rpos
 		 */
@@ -69,9 +82,11 @@
 
 		/**
 		 * Generates random string from latin letters and numbers.
-		 *
+		 * ```php
+		 * $result = StringHelper::random(15, true);
+		 * ```
 		 * @param int     $length Desired string length.
-		 * @param boolean $upper Whether use also upper letters.
+		 * @param boolean $upper  Whether use also upper letters.
 		 * @return string|null Generated string.
 		 */
 		public static function random ($length = 10, $upper = false)
@@ -90,10 +105,13 @@
 
 		/**
 		 * Gets the position of nth occurrence of character from the end of string.
-		 *
+		 * ```php
+		 * $result = StringHelper::rpos('lakanahbahakjlapaosa', 'a', -5);
+		 * ```
 		 * @param  string  $string String to be searched for character.
 		 * @param  string  $char
-		 * @param  integer $n Which occurrence to search for. If negative then character will be searched from the begin of string.
+		 * @param  integer $n      Which occurrence to search for. If negative then character will be searched from the
+		 *                         begin of string.
 		 * @return integer|null Nth occurrence (if existed), null otherwise.
 		 * @see pos
 		 */

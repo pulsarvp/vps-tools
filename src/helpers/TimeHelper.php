@@ -3,6 +3,10 @@
 
 	use Yii;
 
+	/**
+	 * Class TimeHelper
+	 * @package vps\tools\helpers
+	 */
 	class TimeHelper
 	{
 		/**
@@ -19,9 +23,16 @@
 		 * Formats given date in ISO 8601. Expected result is as follow: 2010-03-01T13:10:25+03:00.
 		 *
 		 * @param integer|string|\DateTime $date The value to be formatted. The following types of value are supported:
-		 * - an integer representing a UNIX timestamp,
-		 * - a string that can be [parsed to create a DateTime object](http://php.net/manual/en/datetime.formats.php). The timestamp is assumed to be in default time zone unless a time zone is explicitly given.
-		 * - a PHP [DateTime](http://php.net/manual/en/class.datetime.php) object.
+		 *                                       - an integer representing a UNIX timestamp,
+		 *                                       - a string that can be [parsed to create a DateTime
+		 *                                       object](http://php.net/manual/en/datetime.formats.php). The timestamp
+		 *                                       is assumed to be in default time zone unless a time zone is explicitly
+		 *                                       given.
+		 *                                       - a PHP [DateTime](http://php.net/manual/en/class.datetime.php)
+		 *                                       object.
+		 *                                       * ```php
+		 *                                       TimeHelper::cdate('2010-03-01 13:00:00');
+		 *                                       ```
 		 * @return string The formatted result.
 		 * @throws \yii\base\InvalidParamException If the input value can not be evaluated as a date value.
 		 */
@@ -32,7 +43,9 @@
 
 		/**
 		 * Converts frames to time.
-		 *
+		 * ```php
+		 * $result = TimeHelper::fromFrames(214835, 'HH:MM:SS');
+		 * ```
 		 * @param  integer|string $frames Number of frames.
 		 * @return string Time in format HH:MM:SS.MSS.
 		 */
@@ -59,8 +72,10 @@
 
 		/**
 		 * Converts frames to human readable time.
-		 *
-		 * @param  integer|string $frames Number of frames.
+		 * ```php
+		 * $result = TimeHelper::fromFramesToHuman(0, true);
+		 * ```
+		 * @param  integer|string $frames               Number of frames.
 		 * @param boolean         $withLeadingZeroHours If hours are zero should one include them in output or not.
 		 * @return string Time in format (HH:)MM:SS.
 		 */
@@ -83,7 +98,9 @@
 
 		/**
 		 * Converts frames to milliseconds.
-		 *
+		 * ```php
+		 * $result = TimeHelper::fromFramesToMs(45);
+		 * ```
 		 * @param  int $frames Number of frames
 		 * @return int Number of milliseconds.
 		 */
@@ -97,7 +114,9 @@
 
 		/**
 		 * Converts seconds to human readable time.
-		 *
+		 * ```php
+		 * $result = TimeHelper::fromSecondsToHuman(8593.4, true);
+		 * ```
 		 * @param integer|string $seconds
 		 * @param boolean        $withLeadingZeroHours If hours are zero should one include them in output or not.
 		 * @return string Time in format (HH:)MM:SS.
@@ -121,7 +140,9 @@
 
 		/**
 		 * Return current date and time formatted via [[$dtFormat]].
-		 *
+		 * ```php
+		 * $result = TimeHelper::now();
+		 * ```
 		 * @return string The formatted current date and time.
 		 */
 		public static function now ()
@@ -131,7 +152,9 @@
 
 		/**
 		 * Converts time to milliseconds.
-		 *
+		 * ```php
+		 * $result = TimeHelper::toMs('00:00:01.12');
+		 * ```
 		 * @param string $time Input time in format HH:MM:SS, HH:MM:SS.FF or HH:MM:SS.MSS.
 		 * @return null|integer NUll in case of wrong format input or milliseconds otherwise.
 		 */
@@ -157,7 +180,9 @@
 
 		/**
 		 * Converts time to seconds.
-		 *
+		 * ```php
+		 * $result = TimeHelper::toSeconds('00:07:02.360');
+		 * ```
 		 * @param string $time Input time in format HH:MM:SS, HH:MM:SS.FF or HH:MM:SS.MSS.
 		 * @return null|integer NUll in case of wrong format input or seconds otherwise.
 		 */
@@ -193,7 +218,9 @@
 
 		/**
 		 * Converts time to frames.
-		 *
+		 * ```php
+		 * $result = TimeHelper::toFrames('00:07:02.360');
+		 * ```
 		 * @param string $time Input time in format HH:MM:SS, HH:MM:SS.FF or HH:MM:SS.MSS.
 		 * @return null|integer NUll in case of wrong format input or frames otherwise.
 		 */

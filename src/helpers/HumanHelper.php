@@ -1,12 +1,17 @@
 <?php
 	namespace vps\tools\helpers;
 
-	use Yii;
-
+	/**
+	 * Class HumanHelper
+	 * @package vps\tools\helpers
+	 */
 	class HumanHelper
 	{
 		/**
 		 * Converts bitrate in b/s to readable format.
+		 * ```php
+		 * $result = HumanHelper::bitrate(5000);
+		 * ```
 		 * @param int    $bitrate
 		 * @param string $unit One of: b/s, kb/s, mb/s.
 		 * @return string
@@ -28,6 +33,9 @@
 
 		/**
 		 * Convert duration in seconds (with ms) to readable format.
+		 * ```php
+		 * $result = HumanHelper::duration(100.123);
+		 * ```
 		 * @param string $duration
 		 * @return string
 		 */
@@ -55,6 +63,9 @@
 
 		/**
 		 * Finds maximum upload size based on PHP settings.
+		 * ```php
+		 * $result = HumanHelper::maxBytesUpload();
+		 * ```
 		 * @return null|int Size in bytes.
 		 * @see size
 		 */
@@ -82,6 +93,9 @@
 
 		/**
 		 * Finds maximum upload size based on PHP settings.
+		 * ```php
+		 * $result = HumanHelper::maxUpload();
+		 * ```
 		 * @param mixed $default Value to be returned in case upload size is unlimited.
 		 * @return string|null
 		 * @see size
@@ -95,6 +109,9 @@
 
 		/**
 		 * Converts size to human readable.
+		 * ```php
+		 * $result = HumanHelper::size(2050, 'MB');
+		 * ```
 		 * @param int    $size Size in bytes.
 		 * @param string $unit One of: KB, MB, GB, B.
 		 * @return string
@@ -118,6 +135,9 @@
 
 		/**
 		 * Converts readable string with size to integer in bytes.
+		 * ```php
+		 * $result = HumanHelper::toBytes('1212111KB');
+		 * ```
 		 * @param string $string
 		 * @return int|null
 		 */

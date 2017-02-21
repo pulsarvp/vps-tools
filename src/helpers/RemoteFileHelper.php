@@ -1,12 +1,19 @@
 <?php
 	namespace vps\tools\helpers;
 
-	use Yii;
-
+	/**
+	 * Class RemoteFileHelper
+	 * @package vps\tools\helpers
+	 */
 	class RemoteFileHelper extends \yii\helpers\BaseFileHelper
 	{
 		/**
 		 * Checks if file is local.
+		 * ```php
+		 * if(!RemoteFileHelper::isLocal('https://google.com'))
+		 * {
+		 * }
+		 * ```
 		 * @param  $path
 		 * @return boolean
 		 */
@@ -17,6 +24,11 @@
 
 		/**
 		 * Checks whether file exists.
+		 * ```php
+		 * if(RemoteFileHelper::exists('https://google.com'))
+		 * {
+		 * }
+		 * ```
 		 * @param  string $path Path to file
 		 * @return boolean Whether file exists.
 		 */
@@ -37,6 +49,11 @@
 
 		/**
 		 * Saves remote file by chunks.
+		 * ```php
+		 * if(RemoteFileHelper::save('https://google.com',  'google.html'))
+		 * {
+		 * }
+		 * ```
 		 * @param  string  $sourcepath
 		 * @param  string  $targetpath
 		 * @param  integer $chunksize Chunk size in bytes. Default is 1MB.
