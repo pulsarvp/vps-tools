@@ -7,24 +7,25 @@
 	{
 		public function testA ()
 		{
-			$this->assertEquals('<a href="http://google.com">test</a>', Html::a('test', 'http://google.com'));
-			$this->assertEquals('<a href="http://google.com">текст для ссылки</a>', Html::a('link text', 'http://google.com'));
-			$this->assertEquals('<a href="http://google.com">текст для ссылки</a>', Html::a('link text', 'http://google.com'), [ 'raw' => false ]);
-			$this->assertEquals('<a href="http://google.com">link text</a>', Html::a('link text', 'http://google.com', [ 'raw' => true ]));
+			$this->assertEquals('<a href="http://google.com" title="test">test</a>', Html::a('test', 'http://google.com'));
+			$this->assertEquals('<a href="http://google.com" title="link text">текст для ссылки</a>', Html::a('link text', 'http://google.com'));
+			$this->assertEquals('<a href="http://google.com" title="link text">текст для ссылки</a>', Html::a('link text', 'http://google.com'), [ 'raw' => false ]);
+			$this->assertEquals('<a href="http://google.com" title="link text">link text</a>', Html::a('link text', 'http://google.com', [ 'raw' => true ]));
+			$this->assertEquals('<a href="http://google.com" title="Title">link text</a>', Html::a('link text', 'http://google.com', [ 'raw' => true, 'title' => 'Title' ]));
 		}
 
 		public function testAfa ()
 		{
-			$this->assertEquals('<a href="http://google.com"><i class="fa fa-test"></i></a>', Html::afa('test', 'http://google.com'));
+			$this->assertEquals('<a href="http://google.com" title="test"><i class="fa fa-test" title="test"></i></a>', Html::afa('test', 'http://google.com'));
 			$this->assertEquals('<a href="http://google.com" title="test"><i class="fa fa-icon" title="test"></i></a>', Html::afa('icon', 'http://google.com', [ 'title' => "test" ]));
 		}
 
 		public function testButtonFa ()
 		{
-			$this->assertEquals('<button type="button"><i class="fa fa-tick margin"></i>test</button>', Html::buttonFa('test', 'tick'));
-			$this->assertEquals('<button type="button"><i class="fa fa-clock margin"></i>ещё текст</button>', Html::buttonFa('more text', 'clock'));
-			$this->assertEquals('<button type="button"><i class="fa fa-clock margin"></i>ещё текст</button>', Html::buttonFa('more text', 'clock', [ 'raw' => false ]));
-			$this->assertEquals('<button type="button"><i class="fa fa-clock margin"></i>more text</button>', Html::buttonFa('more text', 'clock', [ 'raw' => true ]));
+			$this->assertEquals('<button type="button" title="test"><i class="fa fa-tick margin"></i>test</button>', Html::buttonFa('test', 'tick'));
+			$this->assertEquals('<button type="button" title="more text"><i class="fa fa-clock margin"></i>ещё текст</button>', Html::buttonFa('more text', 'clock'));
+			$this->assertEquals('<button type="button" title="more text"><i class="fa fa-clock margin"></i>ещё текст</button>', Html::buttonFa('more text', 'clock', [ 'raw' => false ]));
+			$this->assertEquals('<button type="button" title="more text"><i class="fa fa-clock margin"></i>more text</button>', Html::buttonFa('more text', 'clock', [ 'raw' => true ]));
 		}
 
 		public function testCompress ()

@@ -103,7 +103,7 @@
 		/**
 		 * Gets directories list in given directory.
 		 *
-		 * @param  string  $path The directory under which the items will be looked for.
+		 * @param  string  $path     The directory under which the items will be looked for.
 		 * @param  boolean $absolute Whether return path to items should be absolute.
 		 * @return array|null List of paths to the found items.
 		 */
@@ -128,7 +128,7 @@
 		/**
 		 * Gets files list in given directory.
 		 *
-		 * @param  string  $path The directory under which the items will be looked for.
+		 * @param  string  $path     The directory under which the items will be looked for.
 		 * @param  boolean $absolute Whether return path to items should be absolute.
 		 * @return array|null List of paths to the found items.
 		 */
@@ -153,7 +153,7 @@
 		/**
 		 * Gets files and directories list in given directory.
 		 *
-		 * @param  string  $path The directory under which the items will be looked for.
+		 * @param  string  $path     The directory under which the items will be looked for.
 		 * @param  boolean $absolute Whether return path to items should be absolute.
 		 * @return array|null List of paths to the found items.
 		 */
@@ -177,7 +177,7 @@
 		 * Gets files and directories list in given directory and order it by
 		 * modification time. Not recursive.
 		 *
-		 * @param  string  $path The directory under which the files will be looked for.
+		 * @param  string  $path  The directory under which the files will be looked for.
 		 * @param  integer $order Order direction. Default is descending.
 		 * @return array|null Array of pairs 'modification time - full path to the file'.
 		 */
@@ -207,7 +207,7 @@
 		 * Gets files list in given directory that match pattern.
 		 *
 		 * @param  string  $pattern
-		 * @param  string  $path The directory under which the items will be looked for.
+		 * @param  string  $path     The directory under which the items will be looked for.
 		 * @param  boolean $absolute Whether return path to items should be absolute.
 		 * @return array List of paths to the found items.
 		 */
@@ -275,6 +275,21 @@
 
 				return $info;
 			}
+
+			return null;
+		}
+
+		/**
+		 * Get extension of the given file.
+		 *
+		 * @param  string $file Path to the file.
+		 * @return string|null
+		 */
+		public static function extension ($file)
+		{
+			$extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+			if ($extension != '')
+				return $extension;
 
 			return null;
 		}
