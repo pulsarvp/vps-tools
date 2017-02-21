@@ -4,6 +4,7 @@
 	use vps\tools\controllers\WebController;
 	use vps\tools\modules\setting\models\Setting;
 	use Yii;
+	use yii\helpers\Json;
 
 	class SettingController extends WebController
 	{
@@ -13,7 +14,8 @@
 			$this->data('settings', $settings);
 
 			$this->title = Yii::tr('Manage settings');
-			$this->_tpl = '../../vendor/miptliot/vps-tools/src/modules/setting/views/setting/index';
+
+			$this->_tpl = '@settingViews/setting/index';
 		}
 
 		/**
@@ -28,13 +30,12 @@
 				{
 					$setting->setAttributes([ 'value' => Yii::$app->request->post('value'), 'description' => Yii::$app->request->post('description') ]);
 					if (!$setting->save())
+						echo Json::encode(current($setting->firstErrors));
+					else
 						echo 0;
-
-					echo 1;
 				}
 			}
 			Yii::$app->end();
 		}
 	}
 
-	?>

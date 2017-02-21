@@ -14,6 +14,14 @@
 		/**
 		 * @inheritdoc
 		 */
+		public static function primaryKey ()
+		{
+			return [ 'name' ];
+		}
+
+		/**
+		 * @inheritdoc
+		 */
 		public static function tableName ()
 		{
 			return 'setting';

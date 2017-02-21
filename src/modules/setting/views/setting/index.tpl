@@ -23,7 +23,6 @@
 <script>
 	var value, description;
 	function closeEdit (tr, value, description) {
-		console.log(tr);
 		tr.find('td.description').html(description);
 		tr.find('td.value').html(value);
 		tr.find('td.nowrap').html('{Html::fa('pencil',['class' => 'btn btn-xs btn-success setting-edit', 'title' => Yii::tr('Edit') ])}');
@@ -43,20 +42,20 @@
 		var name           = tr.find('td.name').html();
 		var newValue       = tr.find('textarea[name="value"]').val();
 		var newDescription = tr.find('textarea[name="description"]').val();
-		console.log(newValue);
 		jQuery.ajax({
-			url      : 'edit',
+			url      : '{Url::toRoute('setting/edit')}',
 			type     : 'POST',
-			data     : { _csrf : '{Yii::$app->request->getCsrfToken()}', name : name, value : newValue, description : newDescription },
+			data     : { '{Yii::$app->request->csrfParam}' : '{Yii::$app->request->getCsrfToken()}', name : name, value : newValue, description : newDescription },
 			dataType : "json",
 			success  : function (data) {
-				if (data == 1) {
-					tr.addClass('success')
-					closeEdit(tr, newValue, newDescription);
+
+				if (data != 0) {
+					tr.addClass('danger');
+					tr.find('td.value').append(data);
 				}
 				else {
-					tr.addClass('danger')
-					closeEdit(tr, value, description);
+					tr.addClass('success');
+					closeEdit(tr, newValue, newDescription);
 				}
 			}
 		});
