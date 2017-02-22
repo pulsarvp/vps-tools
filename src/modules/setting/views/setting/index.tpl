@@ -29,6 +29,7 @@
 		tr.find('td.nowrap').html('{Html::buttonFa('','pencil',['class' => 'btn btn-xs btn-primary setting-edit', 'title' => Yii::tr('Edit') ])}');
 	}
 	$(document).on('click', '.setting-edit', function () {
+		$('tr').removeClass('success');
 		value = $(this).parent().parent().find('td.value').html();
 		$(this).parent().parent().find('td.value').html('<input name="value" value="' + value + '" class="form-control"/>');
 		description = $(this).parent().parent().find('td.description').html();
@@ -41,8 +42,15 @@
 		$('.setting-edit').attr('disabled', false);
 	});
 	$(document).keyup(function (e) {
-		if (e.keyCode === 27) closeEdit($(document).find('input[name="value"]').parent().parent(), value, description);
-		$('.setting-edit').attr('disabled', false);
+		switch (e.keyCode) {
+			case 27:
+				$('.setting-close').click();
+				break;
+			case  13:
+				$('.setting-save').click();
+				break;
+		}
+
 	});
 	$(document).on('click', '.setting-save', function () {
 		var tr             = $(this).parent().parent();
