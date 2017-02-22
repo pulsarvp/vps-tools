@@ -7,7 +7,7 @@
 	 * The class for holding notification objects that are displayed to user.
 	 * @property-read string $message
 	 * @property-read string $type
-	 * @property-read string $
+	 * @property-read string $class
 	 */
 	class Notification extends \yii\base\Object
 	{
@@ -48,6 +48,8 @@
 					return 'warning';
 				case self::MESSAGE:
 					return 'info';
+				default:
+					return 'default';
 			}
 		}
 
