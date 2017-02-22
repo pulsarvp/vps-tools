@@ -12,7 +12,11 @@
 		/**
 		 * Overwritten method. By default i18n is used.
 		 * ```php
-		 * Html::a('Google', 'http://google.com', [ 'raw' => true);
+		 * Html::a('Google', 'http://google.com', [ 'raw' => true]);
+		 * // <a href="http://google.com">Google</a>
+		 *
+		 * Html::a('Home', Url::toRoute(['site/index']), [ 'raw' => true]);
+		 * // <a href="site/index">Home</a>
 		 * ```
 		 * @inheritdoc
 		 */
@@ -36,6 +40,10 @@
 		 * Generates link with font-awesome icon as text.
 		 * ```php
 		 * Html::afa('google', 'http://google.com');
+		 * // <a href="http://google.com"><i class="fa fa-google"></i></a>
+		 *
+		 * Html::afa('edit', Url::toRoute(['user/edit', 'id'=>'2']));
+		 * // <a href="user/edit/2"><i class="fa fa-edit"></i></a>
 		 * ```
 		 * @inheritdoc
 		 */
@@ -75,6 +83,7 @@
 		 *
 		 * ```php
 		 * Html::buttonFa('Save', 'save', [ 'raw' => true ]);
+		 * // <button type="button"><i class="fa fa-save margin"></i>Save</button>
 		 * ```
 		 * @param string $text Button text.
 		 * @param string $fa Icon name.
@@ -102,7 +111,9 @@
 		/**
 		 * Compresses HTML, removes all new lines, tabs and spaces.
 		 * ```php
+		 * $input =  '<a href="#test" >adsda</a> <div> </div>dcl sskd';
 		 * Html::compress($input);
+		 * // return '<a href="#test">adsda</a><div></div>dcl sskd'
 		 * ```
 		 *
 		 * @param string $input
@@ -162,6 +173,7 @@
 		 * Generates Font-Awesome icon.
 		 * ```php
 		 * Html::fa('icon');
+		 * // <i class="fa fa-icon"></i>
 		 * ```
 		 *
 		 * @param string $name Font-Awesome icon name. Will be appended after 'fa-' prefix.
@@ -210,6 +222,27 @@
 		 * Generates table.
 		 * ```php
 		 * Html::table([ 1, 2, 3 ], [ [ 2, 3, 4 ], [ 3, 4, 5 ] ], [ 'class' => 'table' ]);
+		 * // <table class="table">
+		 * //   <thead>
+		 * //       <tr>
+		 * //           <td>1</td>
+		 * //           <td>2</td>
+		 * //           <td>3</td>
+		 * //       </tr>
+		 * //   </thead>
+		 * // <tbody>
+		 * //       <tr>
+		 * //           <td>2</td>
+		 * //           <td>3</td>
+		 * //           <td>4</td>
+		 * //       </tr>
+		 * //       <tr>
+		 * //           <td>3</td>
+		 * //           <td>4</td>
+		 * //           <td>5</td>
+		 * //       </tr>
+		 * // </tbody>
+		 * // </table>
 		 * ```
 		 *
 		 * @param array $head

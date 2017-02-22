@@ -10,9 +10,8 @@
 		/**
 		 * Checks if file is local.
 		 * ```php
-		 * if(!RemoteFileHelper::isLocal('https://google.com'))
-		 * {
-		 * }
+		 * RemoteFileHelper::isLocal('https://google.com');
+		 * // return false
 		 * ```
 		 * @param  $path
 		 * @return boolean
@@ -25,9 +24,8 @@
 		/**
 		 * Checks whether file exists.
 		 * ```php
-		 * if(RemoteFileHelper::exists('https://google.com'))
-		 * {
-		 * }
+		 * RemoteFileHelper::exists('https://google.com');
+		 * // return true
 		 * ```
 		 * @param  string $path Path to file
 		 * @return boolean Whether file exists.
@@ -50,9 +48,8 @@
 		/**
 		 * Saves remote file by chunks.
 		 * ```php
-		 * if(RemoteFileHelper::save('https://google.com',  'google.html'))
-		 * {
-		 * }
+		 * RemoteFileHelper::save('https://google.com',  'google.html');
+		 * // return true
 		 * ```
 		 * @param  string  $sourcepath
 		 * @param  string  $targetpath

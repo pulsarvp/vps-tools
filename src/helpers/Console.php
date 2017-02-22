@@ -49,15 +49,25 @@
 		/**
 		 * Prints given data as table to STDOUT.
 		 * ```php
-		 * Console::printTable('ffprobe');
+		 * $list = [
+		 *          ['name1', 'value1'],
+		 *          ['name2', 'value2'],
+		 *          ['name3', 'value3'],
+		 *      ]
+		 * Console::printTable($list, [ 'Name', 'Value' ]);
+		 * //  Name   |   Value  |
+		 * //  ------------------_
+		 * //  name1  |  value1  |
+		 * //  name2  |  value2  |
+		 * //  name3  |  value3  |
 		 * ```
 		 * @param array $data
 		 * @param array $headers
 		 */
-		public static function printTable ($data, $headers = [ ])
+		public static function printTable ($data, $headers = [])
 		{
 			// Count max length for every column.
-			$lengths = [ ];
+			$lengths = [];
 
 			if (count($headers) > 0)
 			{

@@ -11,6 +11,7 @@
 		 * Trying to detect apache user. If not found prompt for one.
 		 * ```php
 		 * $result = NetHelper::apacheUser();
+		 * // $result will be: 'www-data'
 		 * ```
 		 * @return string|null
 		 */
