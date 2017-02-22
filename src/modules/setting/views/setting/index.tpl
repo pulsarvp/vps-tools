@@ -1,3 +1,4 @@
+<div class="title"><h1>{$title}</h1></div>
 <table class="table table-hover table-striped" id="setting-list">
 	<thead>
 		<tr>
@@ -14,7 +15,7 @@
 				<td class="value">{$setting->value}</td>
 				<td class="description">{$setting->description}</td>
 				<td class="nowrap">
-					{Html::fa('pencil',['class' => 'btn btn-xs btn-success setting-edit', 'title' => Yii::tr('Edit') ])}
+					{Html::buttonFa('','pencil',['class' => 'btn btn-xs btn-primary setting-edit', 'title' => Yii::tr('Edit') ])}
 				</td>
 			</tr>
 		{/foreach}
@@ -25,23 +26,29 @@
 	function closeEdit (tr, value, description) {
 		tr.find('td.description').html(description);
 		tr.find('td.value').html(value);
-		tr.find('td.nowrap').html('{Html::fa('pencil',['class' => 'btn btn-xs btn-success setting-edit', 'title' => Yii::tr('Edit') ])}');
+		tr.find('td.nowrap').html('{Html::buttonFa('','pencil',['class' => 'btn btn-xs btn-primary setting-edit', 'title' => Yii::tr('Edit') ])}');
 	}
 	$(document).on('click', '.setting-edit', function () {
 		value = $(this).parent().parent().find('td.value').html();
-		$(this).parent().parent().find('td.value').html('<textarea name="value">' + value + '</textarea>');
+		$(this).parent().parent().find('td.value').html('<input name="value" value="' + value + '" class="form-control"/>');
 		description = $(this).parent().parent().find('td.description').html();
-		$(this).parent().parent().find('td.description').html('<textarea name="description">' + description + '</textarea>');
-		$(this).parent().parent().find('td.nowrap').html('{Html::fa('check', [ 'class' => 'btn btn-xs btn-success setting-save', 'title' => Yii::tr('Save') ])}' + '{Html::fa('remove', [ 'class' => 'btn btn-xs btn-danger setting-close', 'title' => Yii::tr('Close') ])}');
+		$(this).parent().parent().find('td.description').html('<input name="description" value="' + description + '" class="form-control"/>');
+		$(this).parent().parent().find('td.nowrap').html('{Html::buttonFa('','check', [ 'class' => 'btn btn-xs btn-success setting-save', 'title' => Yii::tr('Save') ])}' + '{Html::buttonFa('','remove', [ 'class' => 'btn btn-xs btn-danger setting-close', 'title' => Yii::tr('Close') ])}');
+		$('.setting-edit').attr('disabled', true);
 	});
 	$(document).on('click', '.setting-close', function () {
 		closeEdit($(this).parent().parent(), value, description);
+		$('.setting-edit').attr('disabled', false);
+	});
+	$(document).keyup(function (e) {
+		if (e.keyCode === 27) closeEdit($(document).find('input[name="value"]').parent().parent(), value, description);
+		$('.setting-edit').attr('disabled', false);
 	});
 	$(document).on('click', '.setting-save', function () {
 		var tr             = $(this).parent().parent();
 		var name           = tr.find('td.name').html();
-		var newValue       = tr.find('textarea[name="value"]').val();
-		var newDescription = tr.find('textarea[name="description"]').val();
+		var newValue       = tr.find('input[name="value"]').val();
+		var newDescription = tr.find('input[name="description"]').val();
 		jQuery.ajax({
 			url      : '{Url::toRoute('setting/edit')}',
 			type     : 'POST',
@@ -56,6 +63,7 @@
 				else {
 					tr.addClass('success');
 					closeEdit(tr, newValue, newDescription);
+					$('.setting-edit').attr('disabled', false);
 				}
 			}
 		});
