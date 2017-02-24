@@ -7,6 +7,7 @@
 	 * The class for holding notification objects that are displayed to user.
 	 * @property-read string $message
 	 * @property-read string $type
+	 * @property-read string $class
 	 */
 	class Notification extends \yii\base\Object
 	{
@@ -36,6 +37,21 @@
 		public function getMessage () { return $this->_message; }
 
 		public function getType () { return $this->_type; }
+
+		public function getClass ()
+		{
+			switch ($this->_type)
+			{
+				case self::ERROR:
+					return 'danger';
+				case self::WARNING:
+					return 'warning';
+				case self::MESSAGE:
+					return 'info';
+				default:
+					return 'default';
+			}
+		}
 
 		public function setCategory ($category) { $this->_category = $category; }
 		// end Getters and setters.
