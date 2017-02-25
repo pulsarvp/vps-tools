@@ -1,7 +1,5 @@
 <?php
 
-	namespace vps\tools\modules\setting\migrations;
-
 	use yii\db\Migration;
 
 	/**
