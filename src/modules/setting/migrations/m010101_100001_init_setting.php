@@ -1,33 +1,38 @@
 <?php
 
-use yii\db\Migration;
-/**
- * Class m010101_100001_init_setting
- */
-class m010101_100001_init_setting extends Migration
-{
+	namespace vps\tools\modules\setting\migrations;
+
+	use yii\db\Migration;
+
 	/**
-	 * Create table `Setting`
+	 * Class m010101_100001_init_setting
 	 */
-	public function up()
+	class m010101_100001_init_setting extends Migration
 	{
-		$tableOptions = null;
-		if ($this->db->driverName === 'mysql') {
-			$tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
+		/**
+		 * Create table `Setting`
+		 */
+		public function up ()
+		{
+			$tableOptions = null;
+			if ($this->db->driverName === 'mysql')
+			{
+				$tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
+			}
+			$this->createTable('setting', [
+				'name'        => $this->string(45)->notNull()->unique(),
+				'value'       => $this->text()->null(),
+				'description' => $this->text()->null(),
+			], $tableOptions);
+			$this->addPrimaryKey('name', 'setting', 'name');
 		}
-		$this->createTable('setting', [
-			'name' => $this->string(45)->notNull()->unique(),
-			'value' => $this->text()->null(),
-			'description' => $this->text()->null(),
-		], $tableOptions);
-		$this->addPrimaryKey('name','setting','name');
+
+		/**
+		 * Drop table `Comment`
+		 */
+		public function down ()
+		{
+			$this->dropPrimaryKey('name', 'setting');
+			$this->dropTable('setting');
+		}
 	}
-	/**
-	 * Drop table `Comment`
-	 */
-	public function down()
-	{
-		$this->dropPrimaryKey('name','setting');
-		$this->dropTable('setting');
-	}
-}
