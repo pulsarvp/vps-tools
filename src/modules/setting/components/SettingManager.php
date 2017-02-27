@@ -5,6 +5,7 @@
 
 	/**
 	 * Class SettingManager
+	 *
 	 * @package vps\tools\modules\setting\components
 	 * @property-read Setting[] $all
 	 * @property-write string   $modelClass
@@ -14,7 +15,7 @@
 		/**
 		 * @var string
 		 */
-		private $_modelClass = '\vps\tools\modules\setting\models';
+		private $_modelClass = '\vps\tools\modules\setting\models\Setting';
 
 		/**
 		 * @var Setting[] Category tree.
@@ -33,6 +34,7 @@
 
 		/**
 		 * Gets specific setting by its name. Return default value if not found.
+		 *
 		 * @param string $name
 		 * @param mixed  $default
 		 * @return null
@@ -50,6 +52,7 @@
 
 		/**
 		 * Returns all data.
+		 *
 		 * @return Setting[]
 		 */
 		public function getAll ()
@@ -59,6 +62,7 @@
 
 		/**
 		 * Setting for model class.
+		 *
 		 * @param $class
 		 * @throws \yii\base\InvalidConfigException
 		 */
