@@ -12,15 +12,33 @@
 	 */
 	class PulsarSsoClient extends OAuth2
 	{
+		/**
+		 * @var string
+		 */
+		private $_logoutUrl;
 
 		/**
 		 * @var string Url for accessing oAuth2 API.
 		 */
 		private $_url;
 
+		/**
+		 * Creates logout URL.
+		 * @param string $redirectTo
+		 * @return string
+		 */
+		public function getLogoutUrl ($redirectTo = null)
+		{
+			if (empty( $redirectTo ))
+				return $this->_logoutUrl;
+			else
+				return $this->_logoutUrl . '?next=' . urlencode($redirectTo);
+		}
+
 		public function setUrl ($url)
 		{
 			$this->_url = $url;
+			$this->_logoutUrl = $url . '/user/logout/';
 			$this->authUrl = $url . '/oauth2/authorize';
 			$this->tokenUrl = $url . '/oauth/token';
 			$this->apiBaseUrl = $url . '/oauth';
