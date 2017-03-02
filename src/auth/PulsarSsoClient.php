@@ -24,7 +24,9 @@
 
 		/**
 		 * Creates logout URL.
+		 *
 		 * @param string $redirectTo
+		 *
 		 * @return string
 		 */
 		public function getLogoutUrl ($redirectTo = null)
@@ -42,6 +44,7 @@
 			$this->authUrl = $url . '/oauth2/authorize';
 			$this->tokenUrl = $url . '/oauth/token';
 			$this->apiBaseUrl = $url . '/oauth';
+			$this->returnUrl = Yii::$app->request->hostInfo . '/' . Yii::$app->request->pathInfo;
 		}
 
 		public function setClientIdDb ($name)
