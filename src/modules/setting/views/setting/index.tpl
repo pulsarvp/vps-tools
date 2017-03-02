@@ -1,3 +1,5 @@
+{use class="vps\tools\helpers\Html"}
+{use class="vps\tools\helpers\Url"}
 <h1>{$title}</h1>
 <table class="table table-hover table-striped table-bordered" id="setting-list">
 	<thead>
@@ -51,7 +53,7 @@
 			var tr = $('tr.active');
 			if (tr.length == 0)
 				return;
-			
+
 			var name           = tr.data('name');
 			var newValue       = tr.find('input[name="value"]').val();
 			var newDescription = tr.find('input[name="description"]').val();
