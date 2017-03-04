@@ -20,7 +20,7 @@
 		 * @var array
 		 * Array to store view data.
 		 */
-		protected $_data = [ 'error' => [ ] ];
+		protected $_data = [ 'error' => [] ];
 
 		/**
 		 * @var $string
@@ -30,6 +30,7 @@
 
 		/**
 		 * Override current template.
+		 *
 		 * @param string $tpl
 		 */
 		public function setTemplate ($tpl)
@@ -39,11 +40,13 @@
 
 		/**
 		 * Set page title.
+		 *
 		 * @param string $title
 		 */
 		public function setTitle ($title)
 		{
 			$this->data('title', $title);
+			$this->view->title = $title;
 		}
 
 		/**
@@ -90,6 +93,7 @@
 
 		/**
 		 * Add data to be used in view.
+		 *
 		 * @param  string $key
 		 * @param  string $value
 		 */
@@ -100,8 +104,9 @@
 
 		/**
 		 * Add user error message.
+		 *
 		 * @param  string  $message Message text.
-		 * @param  boolean $isRaw   Whether given text is raw. If not it will be processed with [[Yii::tr()]].
+		 * @param  boolean $isRaw Whether given text is raw. If not it will be processed with [[Yii::tr()]].
 		 */
 		public function error ($message, $isRaw = false)
 		{
@@ -110,8 +115,9 @@
 
 		/**
 		 * Add user message.
+		 *
 		 * @param  string  $message Message text.
-		 * @param  boolean $isRaw   Whether given text is raw. If not it will be processed with [[Yii::tr()]].
+		 * @param  boolean $isRaw Whether given text is raw. If not it will be processed with [[Yii::tr()]].
 		 */
 		public function message ($message, $isRaw = false)
 		{
@@ -120,6 +126,7 @@
 
 		/**
 		 * Redirects and ends app. That prevents from sending additional headers.
+		 *
 		 * @inheritdoc
 		 */
 		public function redirect ($url, $statusCode = 302)
@@ -130,8 +137,9 @@
 
 		/**
 		 * Add user warning.
+		 *
 		 * @param  string  $message Message text.
-		 * @param  boolean $isRaw   Whether given text is raw. If not it will be processed with [[Yii::tr()]].
+		 * @param  boolean $isRaw Whether given text is raw. If not it will be processed with [[Yii::tr()]].
 		 */
 		public function warning ($message, $isRaw = false)
 		{
@@ -143,7 +151,7 @@
 		 */
 		private function forceSetTitle ()
 		{
-			if (isset( $this->_data[ 'title' ] ))
+			if (isset($this->_data[ 'title' ]))
 				return;
 
 			$path = Yii::$app->controller->id . '/' . Yii::$app->controller->action->id;
@@ -153,13 +161,13 @@
 				{
 					if ($menu->path === $path)
 					{
-						$this->data('title', $menu->name);
+						$this->setTitle($menu->name);
 
 						return;
 					}
 				}
 			}
 
-			$this->data('title', ucfirst(strtolower(Yii::$app->controller->id . ' ' . Yii::$app->controller->action->id)));
+			$this->setTitle(ucfirst(strtolower(Yii::$app->controller->id . ' ' . Yii::$app->controller->action->id)));
 		}
 	}
