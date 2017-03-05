@@ -8,16 +8,6 @@
 
 	class SettingController extends WebController
 	{
-		public function actionIndex ()
-		{
-			$settings = Setting::find()->orderBy('name')->all();
-			$this->data('settings', $settings);
-
-			$this->title = Yii::tr('Manage settings');
-
-			$this->_tpl = '@settingViews/setting/index';
-		}
-
 		/**
 		 * This action is for AJAX request. It is update role to user
 		 */

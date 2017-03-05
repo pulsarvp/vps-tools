@@ -23,8 +23,8 @@
 			$app->setAliases([ '@settingViews' => __DIR__ . '/views' ]);
 			$app->getUrlManager()->addRules([
 				[ 'class'   => 'yii\web\UrlRule',
-				  'pattern' => 'setting/<controller:[\w\-]+>/<action:[\w\-]+>',
-				  'route'   => 'setting/<controller>/<action>'
+				  'pattern' => 'setting/<action:[\w\-]+>',
+				  'route'   => $this->id . '/setting/<action>'
 				],
 			], false);
 		}
