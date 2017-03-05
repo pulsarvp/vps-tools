@@ -17,7 +17,11 @@
 			$this->view = new View([
 				'renderers' => [
 					'tpl' => [
-						'class' => 'yii\smarty\ViewRenderer'
+						'class'   => 'yii\smarty\ViewRenderer',
+						'imports' => [
+							'Html' => '\vps\tools\helpers\Html',
+							'Url'  => '\vps\tools\helpers\Url'
+						]
 					]
 				]
 			]);
@@ -30,7 +34,7 @@
 		{
 			$settings = Setting::find()->orderBy('name')->all();
 
-			return $this->renderFile('@settingViews/setting/index.tpl', [
+			return $this->renderFile('@settingViews/index.tpl', [
 				'title'    => Yii::tr('Manage settings'),
 				'settings' => $settings
 			]);
