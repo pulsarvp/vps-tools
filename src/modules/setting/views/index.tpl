@@ -12,9 +12,7 @@
 		{foreach $settings as $setting}
 			<tr id="{$setting->name}" data-name="{$setting->name}">
 				<td class="name">{$setting->name}</td>
-				<td class="value">
-					<pre>{$setting->value}</pre>
-				</td>
+				<td class="value">{$setting->value}</td>
 				<td class="description">{$setting->description}</td>
 				<td class="control nowrap">
 					<div class="edit">
