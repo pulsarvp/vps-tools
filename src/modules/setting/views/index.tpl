@@ -12,7 +12,9 @@
 		{foreach $settings as $setting}
 			<tr id="{$setting->name}" data-name="{$setting->name}">
 				<td class="name">{$setting->name}</td>
-				<td class="value">{$setting->value}</td>
+				<td class="value">
+					<pre>{$setting->value}</pre>
+				</td>
 				<td class="description">{$setting->description}</td>
 				<td class="control nowrap">
 					<div class="edit">
@@ -51,7 +53,7 @@
 			var tr = $('tr.active');
 			if (tr.length == 0)
 				return;
-			
+
 			var name           = tr.data('name');
 			var newValue       = tr.find('input[name="value"]').val();
 			var newDescription = tr.find('input[name="description"]').val();
