@@ -1,10 +1,11 @@
 <?php
-	namespace vps\tools\components;
+	namespace vps\tools\modules\notification\components;
 
 	use Yii;
 
 	/**
 	 * The class for holding notification objects that are displayed to user.
+	 *
 	 * @property-read string $message
 	 * @property-read string $type
 	 * @property-read string $class
@@ -17,18 +18,21 @@
 
 		/**
 		 * Category for translation.
+		 *
 		 * @var string
 		 */
 		private $_category = 'app';
 
 		/**
 		 * Message text.
+		 *
 		 * @var string
 		 */
 		private $_message = '';
 
 		/**
 		 * Type of the message.
+		 *
 		 * @var integer
 		 */
 		private $_type = self::ERROR;
@@ -58,9 +62,10 @@
 
 		/**
 		 * Creating new notification.
+		 *
 		 * @param string  $message Message.
-		 * @param integer $type    Message type.
-		 * @param boolean $isRaw   Whether given message is raw text or should
+		 * @param integer $type Message type.
+		 * @param boolean $isRaw Whether given message is raw text or should
 		 *                         be translated.
 		 */
 		public function __construct ($message, $type = self::ERROR, $isRaw = false)

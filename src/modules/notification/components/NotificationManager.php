@@ -1,5 +1,5 @@
 <?php
-	namespace vps\tools\components;
+	namespace vps\tools\modules\notification\components;
 
 	use Yii;
 
@@ -71,7 +71,7 @@
 		{
 			if (session_status() == PHP_SESSION_NONE)
 				session_start();
-			
+
 			if (isset($_SESSION[ 'notification' ]))
 			{
 				$notification = $_SESSION[ 'notification' ];
