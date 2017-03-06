@@ -1,13 +1,11 @@
 <h1>{$title}</h1>
-{if in_array('create',$module->permission)}
-	{Form layout="inline" assign='f' id="f-apiapp-create"}
-	{$f->field($appnew, 'name')->textInput(['placeholder'=>{Yii::tr('Name')}])}
-	{$f->field($appnew, 'token')->textInput(['placeholder'=>{Yii::tr('Token')}])}
-		<input type="hidden" name="method" value="apiapp-add">
-	{Html::buttonFa('Create','plus', [ 'class' => 'btn btn-primary apiapp-create'])}
-	{/Form}
-{/if}
-<table class="table table-hover table-striped table-bordered" id="apiapp-list">
+{Form assign='f' id="f-apiapp-create"}
+{$f->field($appnew, 'name')->textInput(['placeholder'=>{Yii::tr('Name')}])}
+{if isset($error)}$error{/if}
+	<input type="hidden" name="method" value="apiapp-add">
+{Html::buttonFa('Create','plus', [ 'class' => 'btn btn-primary apiapp-create'])}
+{/Form}
+<table class="table table-striped table-bordered" id="apiapp-list">
 	<thead>
 		<tr>
 			<th>{Yii::tr('ID')}</th>
@@ -24,11 +22,8 @@
 				<td class="token">{$apiapp->token}</td>
 				<td class="control nowrap">
 					<div class="edit">
-						{if in_array('edit',$module->permission)}
-							{Html::buttonFa('', 'pencil', [ 'class' => 'btn btn-xs btn-primary apiapp-edit', 'title' => Yii::tr('Edit') ])}{/if}
-						{if in_array('delete',$module->permission)}
-							{Html::buttonFa('', 'remove', [ 'class' => 'btn btn-xs btn-danger apiapp-delete', 'title' => Yii::tr('Remove'), 'data-toggle'=>'confirmation', 'data-title'=>{Yii::tr('Remove?')}  ])}
-						{/if}
+						{Html::buttonFa('', 'pencil', [ 'class' => 'btn btn-xs btn-primary apiapp-edit', 'title' => Yii::tr('Edit') ])}
+						{Html::buttonFa('', 'remove', [ 'class' => 'btn btn-xs btn-danger apiapp-delete', 'title' => Yii::tr('Remove'), 'data-toggle'=>'confirmation', 'data-title'=>{Yii::tr('Remove?')}  ])}
 					</div>
 
 					<div class="save" style="display: none">
@@ -46,11 +41,11 @@
 			if (tr.length == 0)
 				return;
 
-			var name  = tr.find("input[name='name']").val();
-			var token = tr.find("input[name='token']").val();
+			var name  = tr.find("td.name").text();
+			var token = tr.find("td.token").text();
 
-			tr.find('td.name').html(name);
-			tr.find('td.token').html(token);
+			tr.find('td.name').html(name).removeClass('info').attr('contenteditable', false);
+			tr.find('td.token').html(token).removeClass('info').attr('contenteditable', false);
 
 			tr.find('.control .save').hide();
 			tr.find('.control .edit').show();
@@ -66,8 +61,8 @@
 				return;
 
 			var id       = tr.data('id');
-			var newName  = tr.find('input[name="name"]').val();
-			var newToken = tr.find('input[name="token"]').val();
+			var newName  = tr.find('td.name').text();
+			var newToken = tr.find('td.token').text();
 
 			jQuery.ajax({
 				url      : '{Url::toRoute('app/edit')}',
@@ -83,7 +78,7 @@
 					if (data != 0) {
 						tr.addClass('danger');
 						closeApiapp(tr);
-						tr.find('td.value').append(data);
+						tr.find('td.control').append(data);
 					}
 					else {
 						tr.addClass('success');
@@ -96,6 +91,29 @@
 		function deleteApiapp (tr) {
 
 			var id = tr.data('id');
+
+			jQuery.ajax({
+				url      : '{Url::toRoute('app/delete')}',
+				type     : 'POST',
+				data     : {
+					'{Yii::$app->request->csrfParam}' : '{Yii::$app->request->getCsrfToken()}',
+					'id'                              : id
+				},
+				dataType : "json",
+				success  : function (data) {
+					if (data != 0) {
+						tr.addClass('danger');
+						closeApiapp(tr);
+					}
+					else {
+						closeApiapp(tr);
+						tr.remove();
+					}
+				}
+			});
+		}
+
+		function createApiapp () {
 
 			jQuery.ajax({
 				url      : '{Url::toRoute('app/delete')}',
@@ -134,15 +152,8 @@
 			var name    = tdName.html();
 			var token   = tdToken.html();
 
-			tdName.html($("<input>", {
-				"name"  : "name",
-				"class" : "form-control input-sm"
-			}).val(name));
-
-			tdToken.html($("<input>", {
-				"name"  : "token",
-				"class" : "form-control input-sm"
-			}).val(token));
+			tdName.attr('contenteditable', true).addClass('info');
+			tdToken.attr('contenteditable', true).addClass('info');
 
 			tr.find('.control .edit').hide();
 			tr.find('.control .save').show();
@@ -172,9 +183,7 @@
 		});
 		if (window.location.hash != '') {
 			var hash = window.location.hash;
-			console.log(hash);
 			$(hash).addClass('success');
-
 		}
 	});
 </script>

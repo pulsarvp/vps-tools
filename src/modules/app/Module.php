@@ -10,10 +10,7 @@
 	 */
 	class Module extends \yii\base\Module implements BootstrapInterface
 	{
-		/**
-		 * @var array the permission in the module
-		 */
-		public $permission = [ 'view', 'edit', 'create', 'delete' ];
+
 		/**
 		 * @var string the namespace that controller classes are in
 		 */
@@ -27,8 +24,8 @@
 			$app->setAliases([ '@appViews' => __DIR__ . '/views' ]);
 			$app->getUrlManager()->addRules([
 				[ 'class'   => 'yii\web\UrlRule',
-				  'pattern' => 'app/<controller:[\w\-]+>/<action:[\w\-]+>',
-				  'route'   => 'app/<controller>/<action>'
+				  'pattern' => 'app/<action:[\w\-]+>',
+				  'route'   => $this->id . '/app/<action>'
 				],
 			], false);
 		}

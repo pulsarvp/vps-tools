@@ -34,7 +34,7 @@
 		/**
 		 * Finds App token by its name.
 		 *
-		 * @param string $name     App name.
+		 * @param string $name App name.
 		 * @param bool   $generate Whether to generate token if no App is found
 		 *                         with given name.
 		 *
@@ -73,6 +73,7 @@
 		public function rules ()
 		{
 			return [
+				[ [ 'name', 'token' ], 'required' ],
 				[ [ 'name' ], 'string', 'max' => 45 ],
 				[ [ 'token' ], 'string', 'max' => 32 ]
 			];
