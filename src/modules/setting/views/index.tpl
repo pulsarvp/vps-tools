@@ -1,5 +1,5 @@
 <h1>{$title}</h1>
-<table class="table table-hover table-striped table-bordered" id="setting-list">
+<table class="table table-striped table-bordered" id="setting-list">
 	<thead>
 		<tr>
 			<th>{Yii::tr('Name')}</th>
@@ -34,11 +34,11 @@
 			if (tr.length == 0)
 				return;
 
-			var value       = tr.find("input[name='value']").val();
-			var description = tr.find("input[name='description']").val();
+			var value       = tr.find('td.value').text();
+			var description = tr.find("td.description").html();
 
-			tr.find('td.value').html(value);
-			tr.find('td.description').html(description);
+			tr.find('td.value').html(value).removeClass('info').attr('contenteditable', false);
+			tr.find('td.description').html(description).removeClass('info').attr('contenteditable', false);
 
 			tr.find('.control .save').hide();
 			tr.find('.control .edit').show();
@@ -53,8 +53,8 @@
 				return;
 
 			var name           = tr.data('name');
-			var newValue       = tr.find('input[name="value"]').val();
-			var newDescription = tr.find('input[name="description"]').val();
+			var newValue       = tr.find('td.value').text();
+			var newDescription = tr.find('td.description').html();
 
 			jQuery.ajax({
 				url      : '{Url::toRoute('setting/edit')}',
@@ -89,15 +89,9 @@
 			var value         = tdValue.html();
 			var description   = tdDescription.html();
 
-			tdValue.html($("<input>", {
-				"name"  : "value",
-				"class" : "form-control input-sm"
-			}).val(value));
-
-			tdDescription.html($("<input>", {
-				"name"  : "description",
-				"class" : "form-control input-sm"
-			}).val(description));
+			tdValue.attr('contenteditable', true).addClass('info');
+			tdDescription.attr('contenteditable', true).addClass('info');
+			tdValue.text(value);
 
 			tr.find('.control .edit').hide();
 			tr.find('.control .save').show();
@@ -126,3 +120,4 @@
 		});
 	});
 </script>
+
