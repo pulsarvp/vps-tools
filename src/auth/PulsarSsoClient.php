@@ -2,18 +2,21 @@
 	namespace vps\tools\auth;
 
 	use Yii;
-	use yii\authclient\OAuth2;
 
 	/**
-	 * @property-read string  $logoutUrl
-	 * @property-write string clientIdDb
-	 * @property-write string clientSecretDb
-	 * @property-write string clientUrlDb
+	 * This class performs oAuth provider functionality with Pulsar SSO client.
+	 *
+	 * @property string $clientIdDb oAuth app id from database setting name.
+	 * @property string $clientSecretDb oAuth secret key from database setting name.
+	 * @property string $clientUrlDb oAuth URL from database setting name.
+	 * @property string $url Base URL to perform request.
+	 *
+	 * @package vps\tools\auth
 	 */
-	class PulsarSsoClient extends OAuth2
+	class PulsarSsoClient extends BaseClient
 	{
 		/**
-		 * @var string
+		 * @var string Logout url.
 		 */
 		private $_logoutUrl;
 
@@ -37,6 +40,11 @@
 				return $this->_logoutUrl . '?next=' . urlencode($redirectTo);
 		}
 
+		/**
+		 * Set all necessary URLs by using given one as base.
+		 *
+		 * @param string $url
+		 */
 		public function setUrl ($url)
 		{
 			$this->_url = $url;
@@ -45,21 +53,6 @@
 			$this->tokenUrl = $url . '/oauth/token';
 			$this->apiBaseUrl = $url . '/oauth';
 			$this->returnUrl = Yii::$app->request->hostInfo . '/' . Yii::$app->request->pathInfo;
-		}
-
-		public function setClientIdDb ($name)
-		{
-			$this->clientId = Yii::$app->settings->get($name);
-		}
-
-		public function setClientSecretDb ($name)
-		{
-			$this->clientSecret = Yii::$app->settings->get($name);
-		}
-
-		public function setClientUrlDb ($name)
-		{
-			$this->url = Yii::$app->settings->get($name);
 		}
 
 		/**
@@ -78,24 +71,25 @@
 			];
 		}
 
+		/**
+		 * @inheritdoc
+		 */
 		protected function defaultName ()
 		{
 			return 'psso';
 		}
 
+		/**
+		 * @inheritdoc
+		 */
 		protected function defaultTitle ()
 		{
 			return 'PSSO';
 		}
 
-		protected function defaultViewOptopns ()
-		{
-			return [
-				'popupHeight' => 400,
-				'popupWidth'  => 600,
-			];
-		}
-
+		/**
+		 * @inheritdoc
+		 */
 		protected function initUserAttributes ()
 		{
 			$token = $this->getAccessToken();
