@@ -25,7 +25,7 @@
 					]
 				]
 			]);
-			Yii::$app->view->registerCss('#setting-list .value {font-family: monospace; white-space: pre-line}');
+			Yii::$app->view->registerCss('#setting-list .value {font-family: monospace; white-space: pre-wrap}');
 		}
 
 		/**
