@@ -1,5 +1,5 @@
 <?php
-	namespace vps\tools\modules\app\models;
+	namespace vps\tools\modules\apiapp\models;
 
 	use vps\tools\helpers\StringHelper;
 	use Yii;
@@ -11,7 +11,7 @@
 	 * @property string  $name
 	 * @property string  $token
 	 */
-	class App extends ActiveRecord implements IdentityInterface
+	class Apiapp extends ActiveRecord implements IdentityInterface
 	{
 		private $_authKey;
 
@@ -34,7 +34,7 @@
 		/**
 		 * Finds App token by its name.
 		 *
-		 * @param string $name App name.
+		 * @param string $name     App name.
 		 * @param bool   $generate Whether to generate token if no App is found
 		 *                         with given name.
 		 *
@@ -74,8 +74,10 @@
 		{
 			return [
 				[ [ 'name', 'token' ], 'required' ],
+				[ [ 'name', 'token' ], 'unique' ],
 				[ [ 'name' ], 'string', 'max' => 45 ],
-				[ [ 'token' ], 'string', 'max' => 32 ]
+				[ [ 'token' ], 'string', 'min' => 6, 'max' => 32 ],
+				[ [ 'token' ], 'match', 'pattern' => '/^[\w\d]+$/', 'message' => Yii::tr('Token should contain only latin letters, numbers.') ],
 			];
 		}
 

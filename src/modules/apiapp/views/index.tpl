@@ -113,29 +113,6 @@
 			});
 		}
 
-		function createApiapp () {
-
-			jQuery.ajax({
-				url      : '{Url::toRoute('app/delete')}',
-				type     : 'POST',
-				data     : {
-					'{Yii::$app->request->csrfParam}' : '{Yii::$app->request->getCsrfToken()}',
-					'id'                              : id
-				},
-				dataType : "json",
-				success  : function (data) {
-					if (data != 0) {
-						tr.addClass('danger');
-						closeApiapp(tr);
-					}
-					else {
-						closeApiapp(tr);
-						tr.remove();
-					}
-				}
-			});
-		}
-
 		$('.apiapp-delete').click(function () {
 			var tr = $(this).parents('tr');
 			deleteApiapp(tr);
