@@ -1,6 +1,7 @@
 <?php
 	namespace vps\tools\modules\apiapp;
 
+	use Yii;
 	use yii\base\BootstrapInterface;
 
 	/**
@@ -28,5 +29,18 @@
 				  'route'   => $this->id . '/apiapp/<action>'
 				],
 			], false);
+
+			// Add module I18N category.
+			if (!isset( $app->i18n->translations[ 'apiapp.*' ] ))
+			{
+				Yii::$app->i18n->translations[ 'apiapp*' ] = [
+					'class'            => 'yii\i18n\PhpMessageSource',
+					'basePath'         => __DIR__ . '/messages',
+					'forceTranslation' => true,
+					'fileMap'          => [
+						'apiapp' => 'apiapp.php',
+					]
+				];
+			}
 		}
 	}

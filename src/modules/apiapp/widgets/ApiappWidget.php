@@ -46,7 +46,7 @@
 			$apiapps = Apiapp::find()->orderBy('name')->all();
 
 			return $this->renderFile('@appViews/index.tpl', [
-				'title'   => Yii::tr('Manage api application'),
+				'title'   => Yii::tr('Manage api application', [], 'apiapp'),
 				'apiapps' => $apiapps,
 				'appnew'  => $this->addApp()
 			]);
@@ -65,8 +65,8 @@
 				if ($appNew->validate())
 				{
 					$appNew->save();
-					Yii::$app->response->redirect(Yii::$app->request->referrer . '#' . $appNew->name);
 					$appNew->setAttributes([ 'name' => '', 'token' => '' ]);
+					Yii::$app->response->redirect(Yii::$app->request->referrer . '#' . $appNew->name);
 				}
 			}
 

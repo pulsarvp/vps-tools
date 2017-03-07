@@ -37,7 +37,7 @@
 			{
 				$apiapp->setAttributes([ 'name' => Yii::$app->request->post('name'), 'token' => Yii::$app->request->post('token') ]);
 				if (!$apiapp->save())
-					echo Json::encode(current($apiapp->firstErrors));
+					echo Json::encode($apiapp->errors);
 				else
 					echo 0;
 			}

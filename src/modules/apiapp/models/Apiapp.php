@@ -77,7 +77,7 @@
 				[ [ 'name', 'token' ], 'unique' ],
 				[ [ 'name' ], 'string', 'max' => 45 ],
 				[ [ 'token' ], 'string', 'min' => 6, 'max' => 32 ],
-				[ [ 'token' ], 'match', 'pattern' => '/^[\w\d]+$/', 'message' => Yii::tr('Token should contain only latin letters, numbers.') ],
+				[ [ 'token' ], 'match', 'pattern' => '/^[\w\d]+$/', 'message' => Yii::tr('Token should contain only latin letters, numbers.',[],'apiapp') ],
 			];
 		}
 

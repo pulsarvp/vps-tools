@@ -1,16 +1,16 @@
-<h1>{$title}</h1>
+<h2>{$title}</h2>
 {Form assign='f' id="f-apiapp-create"}
-{$f->field($appnew, 'name')->textInput(['placeholder'=>{Yii::tr('Name')}])}
+{$f->field($appnew, 'name')->textInput(['placeholder'=>{Yii::tr('Name',[],'apiapp')}])}
 {if isset($error)}$error{/if}
 	<input type="hidden" name="method" value="apiapp-add">
-{Html::buttonFa('Create','plus', [ 'class' => 'btn btn-primary apiapp-create'])}
+{Html::buttonFa({Yii::tr('Create',[],'apiapp')},'plus', [ 'class' => 'btn btn-primary apiapp-create'])}
 {/Form}
 <table class="table table-striped table-bordered" id="apiapp-list">
 	<thead>
 		<tr>
-			<th>{Yii::tr('ID')}</th>
-			<th>{Yii::tr('Name')}</th>
-			<th>{Yii::tr('Token')}</th>
+			<th>{Yii::tr('ID',[],'apiapp')}</th>
+			<th>{Yii::tr('Name',[],'apiapp')}</th>
+			<th>{Yii::tr('Token',[],'apiapp')}</th>
 			<th></th>
 		</tr>
 	</thead>
@@ -22,13 +22,13 @@
 				<td class="token">{$apiapp->token}</td>
 				<td class="control nowrap">
 					<div class="edit">
-						{Html::buttonFa('', 'pencil', [ 'class' => 'btn btn-xs btn-primary apiapp-edit', 'title' => Yii::tr('Edit') ])}
-						{Html::buttonFa('', 'remove', [ 'class' => 'btn btn-xs btn-danger apiapp-delete', 'title' => Yii::tr('Remove'), 'data-toggle'=>'confirmation', 'data-title'=>{Yii::tr('Remove?')}  ])}
+						{Html::buttonFa('', 'pencil', [ 'class' => 'btn btn-xs btn-primary apiapp-edit', 'title' => Yii::tr('Edit',[],'apiapp') ])}
+						{Html::buttonFa('', 'remove', [ 'class' => 'btn btn-xs btn-danger apiapp-delete', 'title' => Yii::tr('Remove',[],'apiapp'), 'data-toggle'=>'confirmation', 'data-title'=>{Yii::tr('Remove?',[],'apiapp')}  ])}
 					</div>
 
 					<div class="save" style="display: none">
-						{Html::buttonFa('', 'check', [ 'class' => 'btn btn-xs btn-success apiapp-save', 'title' => Yii::tr('Save') ])}
-						{Html::buttonFa('', 'remove', [ 'class' => 'btn btn-xs btn-danger apiapp-close', 'title' => Yii::tr('Close') ])}
+						{Html::buttonFa('', 'check', [ 'class' => 'btn btn-xs btn-success apiapp-save', 'title' => Yii::tr('Save',[],'apiapp') ])}
+						{Html::buttonFa('', 'remove', [ 'class' => 'btn btn-xs btn-danger apiapp-close', 'title' => Yii::tr('Close',[],'apiapp') ])}
 					</div>
 				</td>
 			</tr>
@@ -37,12 +37,17 @@
 </table>
 <script>
 	$(document).ready(function () {
-		function closeApiapp (tr) {
+		var oldName  = null;
+		var oldToken = null;
+
+		function closeApiapp (tr, name = null, token = null) {
 			if (tr.length == 0)
 				return;
 
-			var name  = tr.find("td.name").text();
-			var token = tr.find("td.token").text();
+			if (name == null)
+				name = tr.find("td.name").text();
+			if (token == null)
+				token = tr.find("td.token").text();
 
 			tr.find('td.name').html(name).removeClass('info').attr('contenteditable', false);
 			tr.find('td.token').html(token).removeClass('info').attr('contenteditable', false);
@@ -77,8 +82,11 @@
 				success  : function (data) {
 					if (data != 0) {
 						tr.addClass('danger');
-						closeApiapp(tr);
-						tr.find('td.control').append(data);
+						closeApiapp(tr, oldName, oldToken);
+						if (data.token)
+							tr.find('td.token').append('<p class="error">' + data.token + '</p>');
+						if (data.name)
+							tr.find('td.name').append('<p class="error">' + data.name + '</p>');
 					}
 					else {
 						tr.addClass('success');
@@ -121,13 +129,14 @@
 			$('#f-apiapp-create').submit();
 		});
 		$('.apiapp-edit').click(function () {
-			$('tr').removeClass('success');
+			$('tr').removeClass('success').removeClass('danger');
+			$('tr p.error').remove();
 
 			var tr      = $(this).parents('tr');
 			var tdName  = tr.find('td.name');
 			var tdToken = tr.find('td.token');
-			var name    = tdName.html();
-			var token   = tdToken.html();
+			oldName     = tdName.html();
+			oldToken    = tdToken.html();
 
 			tdName.attr('contenteditable', true).addClass('info');
 			tdToken.attr('contenteditable', true).addClass('info');
@@ -141,7 +150,7 @@
 		});
 
 		$('.apiapp-close').click(function () {
-			closeApiapp($(this).parents('tr'));
+			closeApiapp($(this).parents('tr'), oldName, oldToken);
 		});
 
 		$('.apiapp-save').click(function () {
