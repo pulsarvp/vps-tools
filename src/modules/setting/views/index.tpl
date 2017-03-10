@@ -92,7 +92,7 @@
 			tdValue.attr('contenteditable', true).addClass('info');
 			tdDescription.attr('contenteditable', true).addClass('info');
 			tdValue.text(value);
-
+			focusEnd(tdValue.get(0));
 			tr.find('.control .edit').hide();
 			tr.find('.control .save').show();
 
@@ -108,16 +108,27 @@
 			saveSetting();
 		});
 
-		$(document).keyup(function (e) {
+		$(document).keydown(function (e) {
 			switch (e.keyCode) {
 				case 27:
 					closeSetting();
-					break;
+					return false;
 				case  13:
-					saveSetting();
-					break;
+					if (e.shiftKey !== true) {
+						saveSetting();
+						return false;
+					}
 			}
 		});
+		function focusEnd (el) {
+			el.focus();
+			var range = document.createRange();
+			range.selectNodeContents(el);
+			range.collapse(false);
+			var sel = window.getSelection();
+			sel.removeAllRanges();
+			sel.addRange(range);
+		}
 	});
 </script>
 
