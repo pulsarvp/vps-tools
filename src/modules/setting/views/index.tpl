@@ -1,10 +1,9 @@
-<h1>{$title}</h1>
 <table class="table table-striped table-bordered" id="setting-list">
 	<thead>
 		<tr>
-			<th>{Yii::tr('Name')}</th>
-			<th>{Yii::tr('Value')}</th>
-			<th>{Yii::tr('Description')}</th>
+			<th>{Yii::tr('Name', [], 'setting')}</th>
+			<th>{Yii::tr('Value', [], 'setting')}</th>
+			<th>{Yii::tr('Description', [], 'setting')}</th>
 			<th></th>
 		</tr>
 	</thead>
@@ -16,11 +15,11 @@
 				<td class="description">{$setting->description}</td>
 				<td class="control nowrap">
 					<div class="edit">
-						{Html::buttonFa('', 'pencil', [ 'class' => 'btn btn-xs btn-primary setting-edit', 'title' => Yii::tr('Edit') ])}
+						{Html::buttonFa('', 'pencil', [ 'class' => 'btn btn-xs btn-primary setting-edit', 'title' => Yii::tr('Edit', [], 'setting') ])}
 					</div>
 					<div class="save" style="display: none">
-						{Html::buttonFa('', 'check', [ 'class' => 'btn btn-xs btn-success setting-save', 'title' => Yii::tr('Save') ])}
-						{Html::buttonFa('', 'remove', [ 'class' => 'btn btn-xs btn-danger setting-close', 'title' => Yii::tr('Close') ])}
+						{Html::buttonFa('', 'check', [ 'class' => 'btn btn-xs btn-success setting-save', 'title' => Yii::tr('Save', [], 'setting') ])}
+						{Html::buttonFa('', 'remove', [ 'class' => 'btn btn-xs btn-danger setting-close', 'title' => Yii::tr('Close', [], 'setting') ])}
 					</div>
 				</td>
 			</tr>
