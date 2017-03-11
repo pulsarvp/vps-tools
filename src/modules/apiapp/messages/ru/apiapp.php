@@ -1,14 +1,14 @@
 <?php
 	/**
 	 * Message translations.
-	 *
 	 */
 	return [
+		'Add new application'                               => 'Добавить новое приложение',
 		'Close'                                             => 'Закрыть',
 		'Create'                                            => 'Создать',
 		'Edit'                                              => 'Редактировать',
-		'Manage api application'                            => 'Управление Api приложений',
-		'Name'                                              => 'Имя',
+		'Manage API applications'                           => 'Управление API доступом',
+		'Name'                                              => 'Название',
 		'Remove?'                                           => 'Удалить?',
 		'Remove'                                            => 'Удалить',
 		'Save'                                              => 'Сохранить',

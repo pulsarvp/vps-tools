@@ -11,11 +11,12 @@
 	 */
 	class Module extends \yii\base\Module implements BootstrapInterface
 	{
-
 		/**
 		 * @var string the namespace that controller classes are in
 		 */
 		public $controllerNamespace = 'vps\tools\modules\apiapp\controllers';
+
+		public $title = "Manage API applications";
 
 		/**
 		 * @inheritdoc
@@ -31,7 +32,7 @@
 			], false);
 
 			// Add module I18N category.
-			if (!isset( $app->i18n->translations[ 'apiapp.*' ] ))
+			if (!isset($app->i18n->translations[ 'apiapp.*' ]))
 			{
 				Yii::$app->i18n->translations[ 'apiapp*' ] = [
 					'class'            => 'yii\i18n\PhpMessageSource',
@@ -42,5 +43,7 @@
 					]
 				];
 			}
+
+			$this->title = Yii::tr($this->title, [], 'apiapp');
 		}
 	}

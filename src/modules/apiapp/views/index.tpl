@@ -1,9 +1,8 @@
-<h2>{$title}</h2>
-{Form assign='f' id="f-apiapp-create"}
-{$f->field($appnew, 'name')->textInput(['placeholder'=>{Yii::tr('Name',[],'apiapp')}])}
+{Form assign='f' id="f-apiapp-create" layout="inline" options=[ 'class' => 'pull-right', 'style' => 'margin-bottom: 15px' ]}
+{$f->field($appnew, 'name', [ 'enableError' => true ])->textInput(['placeholder'=>{Yii::tr('Name',[],'apiapp')}])}
 {if isset($error)}$error{/if}
 	<input type="hidden" name="method" value="apiapp-add">
-{Html::buttonFa({Yii::tr('Create',[],'apiapp')},'plus', [ 'class' => 'btn btn-primary apiapp-create'])}
+{Html::buttonFa({Yii::tr('Add new application',[],'apiapp')},'plus', [ 'class' => 'btn btn-success apiapp-create'])}
 {/Form}
 <table class="table table-striped table-bordered" id="apiapp-list">
 	<thead>
@@ -11,7 +10,7 @@
 			<th>{Yii::tr('ID',[],'apiapp')}</th>
 			<th>{Yii::tr('Name',[],'apiapp')}</th>
 			<th>{Yii::tr('Token',[],'apiapp')}</th>
-			<th></th>
+			<th style="width: 1px"></th>
 		</tr>
 	</thead>
 	<tbody>

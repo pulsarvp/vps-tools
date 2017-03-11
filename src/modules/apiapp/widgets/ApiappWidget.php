@@ -65,8 +65,9 @@
 				if ($appNew->validate())
 				{
 					$appNew->save();
+					$url = Yii::$app->request->referrer . '#' . $appNew->name;
 					$appNew->setAttributes([ 'name' => '', 'token' => '' ]);
-					Yii::$app->response->redirect(Yii::$app->request->referrer . '#' . $appNew->name);
+					Yii::$app->response->redirect($url);
 				}
 			}
 
