@@ -33,9 +33,9 @@
 		public function attributeLabels ()
 		{
 			return [
-				'name'        => Yii::tr('Name'),
-				'value'       => Yii::tr('Value'),
-				'description' => Yii::tr('Description'),
+				'name'        => Yii::tr('Name', [], 'setting'),
+				'value'       => Yii::tr('Value', [], 'setting'),
+				'description' => Yii::tr('Description', [], 'setting'),
 			];
 		}
 
