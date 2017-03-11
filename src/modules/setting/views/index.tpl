@@ -1,4 +1,4 @@
-<table class="tabыle table-striped table-bordered" id="setting-list">
+<table class="table table-striped table-bordered" id="setting-list">
 	<thead>
 		<tr>
 			<th>{Yii::tr('Name', [], 'setting')}</th>
