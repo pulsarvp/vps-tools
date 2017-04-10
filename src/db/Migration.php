@@ -3,6 +3,11 @@
 
 	use yii\db\Query;
 
+	/**
+	 * @inheritdoc
+	 *
+	 * @property-read string|null $dbName
+	 */
 	class Migration extends \yii\db\Migration
 	{
 		/**
@@ -41,6 +46,28 @@
 		}
 
 		/**
+		 * Find all foreign keys names for specific table and column.
+		 *
+		 * @param string      $table
+		 * @param string|null $column
+		 * @return string[]
+		 */
+		public function findForeignKeys ($table, $column = null)
+		{
+			$query = ( new  Query )
+				->select('CONSTRAINT_NAME')
+				->from('INFORMATION_SCHEMA.KEY_COLUMN_USAGE')
+				->where([
+					'TABLE_SCHEMA' => $this->getDbName(),
+					'TABLE_NAME'   => $table
+				]);
+			if (!is_null($column))
+				$query->andWhere([ 'COLUMN_NAME' => $column ]);
+
+			return $query->column();
+		}
+
+		/**
 		 * Loads queries from file and executes them. Each query should be on
 		 * new line just in case.
 		 *
@@ -74,5 +101,22 @@
 		{
 			$check = intval(boolval($check));
 			$this->db->createCommand("SET FOREIGN_KEY_CHECKS=$check")->execute();
+		}
+
+		/**
+		 * Gets database name via dbname parameter from dsn.
+		 *
+		 * @return string|null
+		 */
+		public function getDbName ()
+		{
+			if ($this->db->getDriverName() == 'mysql')
+			{
+				preg_match("/dbname=([^;]*)/", $this->db->dsn, $match);
+				if (isset($match[ 1 ]))
+					return $match[ 1 ];
+			}
+
+			return null;
 		}
 	}
