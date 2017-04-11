@@ -19,8 +19,8 @@
 			}
 			$this->createTable('apiapp', [
 				'id'    => $this->primaryKey(),
-				'name'  => $this->string(45)->notNull(),
-				'token' => $this->string(32)->notNull()->unique(),
+				'name'  => $this->string(45)->unique()->notNull(),
+				'token' => $this->string(32)->unique()->notNull(),
 			], $tableOptions);
 		}
 
