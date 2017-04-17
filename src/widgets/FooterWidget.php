@@ -39,6 +39,13 @@
 		public $links = [];
 
 		/**
+		 * Class "container-fluid" or "container"
+		 *
+		 * @var bool
+		 */
+		public $fluid = false;
+
+		/**
 		 * @inheritdoc
 		 */
 		public function init ()
@@ -67,6 +74,7 @@
 				'copyrightFrom' => $this->copyrightFrom,
 				'company'       => $this->company,
 				'links'         => $this->links,
+				'fluid'         => $this->fluid,
 			]);
 		}
 	}
