@@ -28,16 +28,16 @@
 </table>
 <script>
 	$(document).ready(function () {
+		var valueOld       = '';
+		var descriptionOld = '';
+
 		function closeSetting () {
 			var tr = $('tr.active');
 			if (tr.length == 0)
 				return;
 
-			var value       = tr.find('td.value').text();
-			var description = tr.find("td.description").html();
-
-			tr.find('td.value').html(value).removeClass('info').attr('contenteditable', false);
-			tr.find('td.description').html(description).removeClass('info').attr('contenteditable', false);
+			tr.find('td.value').html(valueOld).removeClass('info').attr('contenteditable', false);
+			tr.find('td.description').html(descriptionOld).removeClass('info').attr('contenteditable', false);
 
 			tr.find('.control .save').hide();
 			tr.find('.control .edit').show();
@@ -73,6 +73,8 @@
 					}
 					else {
 						tr.addClass('success');
+						valueOld       = newValue;
+						descriptionOld = newDescription;
 						closeSetting(tr);
 					}
 				}
@@ -85,12 +87,12 @@
 			var tr            = $(this).parents('tr');
 			var tdValue       = tr.find('td.value');
 			var tdDescription = tr.find('td.description');
-			var value         = tdValue.html();
-			var description   = tdDescription.html();
+			valueOld          = tdValue.html();
+			descriptionOld    = tdDescription.html();
 
 			tdValue.attr('contenteditable', true).addClass('info');
 			tdDescription.attr('contenteditable', true).addClass('info');
-			tdValue.text(value);
+			tdValue.text(valueOld);
 			focusEnd(tdValue.get(0));
 			tr.find('.control .edit').hide();
 			tr.find('.control .save').show();
