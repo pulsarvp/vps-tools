@@ -10,11 +10,13 @@
 	{
 		public $defaultAction = 'list';
 
-		private $_modelClass = 'common\models\Setting';
+		private $_modelClass = 'vps\tools\modules\setting\models\Setting';
 
 		/**
 		 * Setting for model class.
+		 *
 		 * @param $class
+		 *
 		 * @throws \yii\base\InvalidConfigException
 		 */
 		public function setModelClass ($class)
@@ -30,12 +32,31 @@
 		public function actionList ()
 		{
 			$class = $this->_modelClass;
-			$list = $class::find()->select('name,value')->orderBy([ 'name' => SORT_ASC ])->asArray()->all();
-			Console::printTable($list, [ 'Name', 'Value' ]);
+			$list = $class::find()->select('name,value,description')->orderBy([ 'name' => SORT_ASC ])->asArray()->all();
+			Console::printTable($list, [ 'Name', 'Value', 'Description' ]);
+		}
+
+		/**
+		 * Get setting with given name.
+		 *
+		 * @param $name
+		 * @param $value
+		 */
+		public function actionGet ($name)
+		{
+			$class = $this->_modelClass;
+			$object = $class::find()->select('name,value,description')->where([ 'name' => $name ])->asArray()->one();
+			if ($object == null)
+			{
+				Console::printColor('Setting not found', Console::FG_RED);
+				die;
+			}
+			Console::printTable([ $object ], [ 'Name', 'Value', 'Description' ]);
 		}
 
 		/**
 		 * Updates or creates setting with given name and value.
+		 *
 		 * @param $name
 		 * @param $value
 		 */
@@ -45,10 +66,8 @@
 			$object = $class::find()->where([ 'name' => $name ])->one();
 			if ($object == null)
 			{
-				$object = new $class([
-					'name'  => $name,
-					'value' => $value
-				]);
+				Console::printColor('Setting not found', Console::FG_RED);
+				die;
 			}
 			else
 			{
@@ -56,5 +75,29 @@
 			}
 			$object->save();
 			$this->actionList();
+		}
+
+		/**
+		 * Get setting with given name.
+		 *
+		 * @param $name
+		 * @param $value
+		 */
+		public function actionDelete ($name)
+		{
+			$class = $this->_modelClass;
+			$object = $class::find()->where([ 'name' => $name ])->one();
+			if ($object == null)
+			{
+				Console::printColor('Setting not found', Console::FG_RED);
+			}
+
+			if ($this->confirm("Remove setting '" . $name . "'?"))
+			{
+				if ($object->delete())
+					Console::printColor('Setting deleted', Console::FG_GREEN);
+				else
+					Console::printColor('Setting not deleted', Console::FG_GREEN);
+			}
 		}
 	}
