@@ -38,10 +38,9 @@
 		}
 
 		/**
-		 * Get setting with given name.
+		 * Gets setting with given name.
 		 *
 		 * @param $name
-		 * @param $value
 		 */
 		public function actionGet ($name)
 		{
@@ -60,8 +59,9 @@
 		 *
 		 * @param $name
 		 * @param $value
+		 * @param $description
 		 */
-		public function actionSet ($name, $value)
+		public function actionSet ($name, $value, $description = null)
 		{
 			$class = $this->_modelClass;
 			$object = $class::find()->where([ 'name' => $name ])->one();
@@ -73,16 +73,17 @@
 			else
 			{
 				$object->value = $value;
+				if (!is_null($description))
+					$object->description = $description;
 			}
 			$object->save();
 			$this->actionList();
 		}
 
 		/**
-		 * Get setting with given name.
+		 * Deletes setting with given name.
 		 *
 		 * @param $name
-		 * @param $value
 		 */
 		public function actionDelete ($name)
 		{
