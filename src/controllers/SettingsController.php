@@ -2,6 +2,7 @@
 	namespace vps\tools\controllers;
 
 	use vps\tools\helpers\Console;
+	use Yii;
 
 	/**
 	 * Allows to manage settings via console.
@@ -48,8 +49,8 @@
 			$object = $class::find()->select('name,value,description')->where([ 'name' => $name ])->asArray()->one();
 			if ($object == null)
 			{
-				Console::printColor('Setting not found', Console::FG_RED);
-				die;
+				Console::printColor('Setting not found.', 'red');
+				Yii::$app->end();
 			}
 			Console::printTable([ $object ], [ 'Name', 'Value', 'Description' ]);
 		}
@@ -66,8 +67,8 @@
 			$object = $class::find()->where([ 'name' => $name ])->one();
 			if ($object == null)
 			{
-				Console::printColor('Setting not found', Console::FG_RED);
-				die;
+				Console::printColor('Setting not found.', 'red');
+				Yii::$app->end();
 			}
 			else
 			{
@@ -89,15 +90,16 @@
 			$object = $class::find()->where([ 'name' => $name ])->one();
 			if ($object == null)
 			{
-				Console::printColor('Setting not found', Console::FG_RED);
+				Console::printColor('Setting not found.', 'red');
+				Yii::$app->end();
 			}
 
 			if ($this->confirm("Remove setting '" . $name . "'?"))
 			{
 				if ($object->delete())
-					Console::printColor('Setting deleted', Console::FG_GREEN);
+					Console::printColor('Setting deleted.', 'green');
 				else
-					Console::printColor('Setting not deleted', Console::FG_GREEN);
+					Console::printColor(current($object->getFirstErrors()), 'red');
 			}
 		}
 	}
