@@ -80,12 +80,13 @@
 			if (Yii::$app->request->getIsPost())
 			{
 				$roleForm->setAttributes(Yii::$app->request->post('RoleForm'));
+				if ($roleForm->method == 'rbac-add')
+					$roleForm->setScenario(RoleForm::SCENARIO_ADD);
 
 				if ($roleForm->validate())
 				{
 					$this->saveRole($roleForm);
 					$url = Yii::$app->request->referrer . '#roles';
-					$roleForm = new RoleForm();
 					Yii::$app->response->redirect($url);
 				}
 			}
@@ -117,15 +118,15 @@
 				$auth->update($roleForm->name, $role);
 				$auth->removeChildren($role);
 			}
-
-			if (count($roleForm->childRoles) > 0)
+			
+			if (is_array($roleForm->childRoles) and count($roleForm->childRoles) > 0)
 				foreach ($roleForm->childRoles as $childRole)
 				{
 					$child = $auth->getRole($childRole);
 					$auth->addChild($role, $child);
 				}
 
-			if (count($roleForm->childPermissions) > 0)
+			if (is_array($roleForm->childPermissions) and count($roleForm->childPermissions) > 0)
 				foreach ($roleForm->childPermissions as $childPermission)
 				{
 					$child = $auth->getPermission($childPermission);

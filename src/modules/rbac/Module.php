@@ -6,6 +6,12 @@
 
 	/**
 	 * Class Module
+	 * These plugins must be installed:
+	 * - jquery
+	 * - bootstrap
+	 * - bootstrap-confirmation
+	 * - bootstrap-select
+	 * - datatables
 	 *
 	 * @package vps\tools\modules\rbac
 	 */
@@ -30,19 +36,23 @@
 		{
 			$app->setAliases([ '@rbacViews' => __DIR__ . '/views' ]);
 			$app->getUrlManager()->addRules([
-				[ 'class'   => 'yii\web\UrlRule',
+				[ 'class'   => 'vps\tools\web\UrlRule',
 				  'pattern' => 'rbac/edit',
 				  'route'   => $this->id . '/rbac/edit'
 				],
-				[ 'class'   => 'yii\web\UrlRule',
+				[ 'class'   => 'vps\tools\web\UrlRule',
 				  'pattern' => 'rbac/user-role',
+				  'verb'    => 'POST',
+				  'ajax'    => true,
 				  'route'   => $this->id . '/rbac/user-role'
 				],
-				[ 'class'   => 'yii\web\UrlRule',
+				[ 'class'   => 'vps\tools\web\UrlRule',
 				  'pattern' => 'rbac/user-state',
+				  'verb'    => 'POST',
+				  'ajax'    => true,
 				  'route'   => $this->id . '/rbac/user-state'
 				],
-				[ 'class'   => 'yii\web\UrlRule',
+				[ 'class'   => 'vps\tools\web\UrlRule',
 				  'pattern' => 'rbac/delete-role',
 				  'route'   => $this->id . '/rbac/delete-role'
 				],
@@ -61,6 +71,6 @@
 				];
 			}
 
-			$this->title = Yii::tr('Manage user', [], 'rbac');
+			$this->title = Yii::tr('User management', [], 'rbac');
 		}
 	}
