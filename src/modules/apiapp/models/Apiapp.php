@@ -35,12 +35,10 @@
 		 * Finds App token by its name.
 		 *
 		 * @param string $name     App name.
-		 * @param bool   $generate Whether to generate token if no App is found
-		 *                         with given name.
 		 *
 		 * @return string
 		 */
-		public static function getTokenForName ($name, $generate = true)
+		public static function getTokenForName ($name)
 		{
 			$object = self::findOne([ 'name' => $name ]);
 			if ($object == null)
@@ -73,10 +71,10 @@
 		public function rules ()
 		{
 			return [
-				[ [ 'name', 'token' ], 'required' ],
+				[ [ 'name' ], 'required' ],
 				[ [ 'name', 'token' ], 'unique' ],
 				[ [ 'name' ], 'string', 'max' => 45 ],
-				[ [ 'token' ], 'string', 'min' => 6, 'max' => 32 ],
+				[ [ 'token' ], 'string', 'max' => 32 ],
 				[ [ 'token' ], 'match', 'pattern' => '/^[\w\d]+$/', 'message' => Yii::tr('Token should contain only latin letters, numbers.',[],'apiapp') ],
 			];
 		}
