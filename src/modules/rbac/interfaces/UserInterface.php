@@ -16,7 +16,7 @@
 
 		/**
 		 * Returns an name user.
-		 * @return string .
+		 * @return string
 		 */
 		public function getName ();
 

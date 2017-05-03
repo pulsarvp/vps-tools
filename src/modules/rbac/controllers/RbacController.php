@@ -13,11 +13,10 @@
 		 */
 		public function actionUserRole ()
 		{
-			if (Yii::$app->request->isAjax)
+			$post = Yii::$app->request->post();
+			$user = User::findOne($post[ 'id' ]);
+			if (!is_null($user))
 			{
-
-				$post = Yii::$app->request->post();
-				$user = User::findOne($post[ 'id' ]);
 				$user->revokeAllRoles();
 				foreach ($post[ 'roles' ] as $item)
 				{
@@ -32,17 +31,16 @@
 		 */
 		public function actionUserState ()
 		{
-			if (Yii::$app->request->isAjax)
-			{
 
-				$user = User::findOne(Yii::$app->request->post('id'));
-				if ($user)
-				{
-					$user->active = Yii::$app->request->post('state');
-					$user->save();
-				}
-				echo Yii::$app->request->post('state');
+			$post = Yii::$app->request->post();
+			$user = User::findOne($post[ 'id' ]);
+			if (!is_null($user))
+			{
+				$user->active = $post[ 'state' ];
+				$user->save();
 			}
+			echo $post[ 'state' ];
+
 			Yii::$app->end();
 		}
 

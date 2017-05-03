@@ -6,7 +6,7 @@
 	/**
 	 * @author    Evgenii Kuteiko <kuteiko@mail.ru>
 	 * @copyright Copyright (c) 2017
-	 * @date      19.04.17
+	 * @date      2017-04-19
 	 */
 	class RoleForm extends \yii\base\Model
 	{
@@ -24,15 +24,14 @@
 		public function attributeLabels ()
 		{
 			return [
-				'name'       => Yii::tr('Name', [], 'rbac'),
-				'description'       => Yii::tr('Description', [], 'rbac'),
-				'ruleName' => Yii::tr('Rule name', [], 'rbac'),
-				'data' => Yii::tr('Data', [], 'rbac'),
-				'childRoles' => Yii::tr('Child roles', [], 'rbac'),
+				'name'             => Yii::tr('Name', [], 'rbac'),
+				'description'      => Yii::tr('Description', [], 'rbac'),
+				'ruleName'         => Yii::tr('Rule name', [], 'rbac'),
+				'data'             => Yii::tr('Data', [], 'rbac'),
+				'childRoles'       => Yii::tr('Child roles', [], 'rbac'),
 				'childPermissions' => Yii::tr('Child permissions', [], 'rbac'),
 			];
 		}
-
 
 		/**
 		 * @inheritdoc
@@ -41,16 +40,12 @@
 		{
 			return [
 				[ [ 'name' ], 'required' ],
-				/*[ 'name', 'unique', 'on' => [ self::SCENARIO_ADD ], 'when' => function ()
-				{
-					return ( !is_null(Yii::$app->authManager->getRole($this->name)) );
-				}
-				],*/
-				[ [ 'name', 'method' ], 'string', 'min' => 1, 'max' => 64 ],
+				[ 'name', 'uniqueName', 'on' => [ self::SCENARIO_ADD ] ],
+				[ [ 'name', 'method' ], 'string', 'length' => [ 1, 64 ] ],
 				[ [ 'description', 'ruleName', 'data' ], 'string' ],
 				[ [ 'childPermissions' ],
 					'required',
-					'message' => Yii::tr('Select a child roles or premissions', [], 'rbac'),
+					'message' => Yii::tr('Select child roles or permissions', [], 'rbac'),
 					'when'    => function ()
 					{
 						if (!is_array($this->childRoles) and !is_array($this->childPermissions))
@@ -66,8 +61,14 @@
 		public function scenarios ()
 		{
 			$scenarios = parent::scenarios();
-			$scenarios[ self::SCENARIO_ADD ] = [ 'name', 'childRoles' ];
+			$scenarios[ self::SCENARIO_ADD ] = [ 'name', 'childPermissions' ];
 
 			return $scenarios;
+		}
+
+		public function uniqueName ($attribute)
+		{
+			if (!is_null(Yii::$app->authManager->getRole($this->$attribute)))
+				$this->addError($attribute, Yii::tr('{attribute} "{value}" has already been taken.', [ 'attribute' => $attribute, 'value' => $this->$attribute ], 'yii'));
 		}
 	}
