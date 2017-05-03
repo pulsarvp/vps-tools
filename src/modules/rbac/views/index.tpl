@@ -66,10 +66,10 @@
 							{/foreach}
 						</td>
 						<td>
-							{if $role.name != 'admin'}
+							{if $role.name != 'admin' and $role.name!='registered'}
 
 								{Html::a(Html::fa('pencil'),'#roles',['class'=>'btn btn-xs btn-success role-edit', 'data-id'=>{$role.name} ])}
-								{Html::a(Html::fa('remove'),{Url::toRoute(['rbac/delete-role','id'=>$role.name])},['class'=>'btn btn-xs btn-danger role-delete', 'data-id'=>{$role.name}, 'data-toggle'=>'confirmation', 'data-title'=>{Yii::tr('Remove?',[],'rbac')}, 'title'=>{Yii::tr('Remove?',[],'rbac')}  ])}
+								{Html::a(Html::fa('remove'),{Url::toRoute(['rbac/delete-role','id'=>$role.name])},['class'=>'btn btn-xs btn-danger role-delete', 'data-id'=>{$role.name}, 'data-toggle'=>'confirmation', 'data-title'=>{Yii::tr('Remove?',[],'rbac')}, 'title'=>{Yii::tr('Remove?',[],'rbac')}, 'data-btn-ok-label'=>"{Yii::tr('Yes', [], 'rbac')}", 'data-btn-cancel-label'=>"{Yii::tr('No', [], 'rbac')}"  ])}
 							{/if}
 						</td>
 					</tr>
@@ -108,6 +108,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
+				<h3 class="modal-title" id="modalLabel"></h3>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -126,7 +127,7 @@
 				{/Form}
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary role-form">Save changes</button>
+				<button type="button" class="btn btn-primary role-form">{Yii::tr('Save changes', [], 'rbac')}</button>
 			</div>
 		</div>
 	</div>
@@ -168,6 +169,7 @@
 	});
 
 	$('.role-add').click(function (e) {
+		$('#modalLabel').html('{Yii::tr('Adding Role', [], 'rbac')}');
 		$('#method').val('rbac-add');
 		$('#name').val('');
 		$('#ruleName').val('');
@@ -190,6 +192,7 @@
 		var role = roles.getByName(roleName);
 		if (role !== null) {
 			$('#method').val('rbac-edit');
+			$('#modalLabel').html('{Yii::tr('Editing a Role', [], 'rbac')}');
 			$('#name').val(role.name);
 			$('#description').val(role.description);
 			$('.form-group').removeClass('has-error');

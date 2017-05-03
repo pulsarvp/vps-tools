@@ -2,6 +2,7 @@
 	return [
 		"Active"                            => "Активный",
 		"Add"                               => "Добавить",
+		"Adding Role"                       => "Добавление роли",
 		"Close"                             => "Закрыть",
 		"Child permissions"                 => "Дочерние разрешения",
 		"Child roles"                       => "Дочерние роли",
@@ -9,9 +10,11 @@
 		"Disable"                           => "Деактивировать",
 		"Description"                       => "Описание",
 		"Edit"                              => "Редактировать",
+		"Editing a Role"                    => "Редактирование роли",
 		"Email"                             => "Email",
 		"Enable"                            => "Активировать",
 		"Name"                              => "Название",
+		"No"                                => "Нет",
 		"Remove?"                           => "Удалить?",
 		"Permissions"                       => "Разрешения",
 		"Role"                              => "Роль",
@@ -20,6 +23,7 @@
 		"Rule name"                         => "Название правила",
 		"Rules"                             => "Правила",
 		"Save"                              => "Сохранить",
+		"Save changes"                      => "Сохранить изменения",
 		"Select child roles or permissions" => "Выберите дочерние роли или разрешения",
 		"Select child roles"                => "Выберите дочерние роли",
 		"Select permissions"                => "Выберите разрешения",
@@ -30,4 +34,5 @@
 		"Username"                          => "Имя",
 		"Users"                             => "Пользователи",
 		"User not found."                   => "Пользователь не найден.",
+		"Yes"                               => "Да",
 	];
