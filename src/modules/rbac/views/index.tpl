@@ -69,7 +69,7 @@
 							{if $role.name != 'admin' and $role.name!='registered'}
 
 								{Html::a(Html::fa('pencil'),'#roles',['class'=>'btn btn-xs btn-success role-edit', 'data-id'=>{$role.name} ])}
-								{Html::a(Html::fa('remove'),{Url::toRoute(['rbac/delete-role','id'=>$role.name])},['class'=>'btn btn-xs btn-danger role-delete', 'data-id'=>{$role.name}, 'data-toggle'=>'confirmation', 'data-title'=>{Yii::tr('Remove?',[],'rbac')}, 'title'=>{Yii::tr('Remove?',[],'rbac')}, 'data-btn-ok-label'=>"{Yii::tr('Yes', [], 'rbac')}", 'data-btn-cancel-label'=>"{Yii::tr('No', [], 'rbac')}"  ])}
+								{Html::a(Html::fa('remove'),{Url::toRoute(['rbac/delete-role','id'=>$role.name])},['class'=>'btn btn-xs btn-danger role-delete', 'data-id'=>{$role.name}, 'data-toggle'=>'confirmation', 'data-title'=>{Yii::tr('Remove?',[],'rbac')}, 'title'=>{Yii::tr('Remove?',[],'rbac')}, 'data-btn-ok-label'=>"{Yii::tr('Yes', [], 'rbac')}",'data-btn-ok-class'=>"btn btn-xs btn-danger", 'data-btn-cancel-label'=>"{Yii::tr('No', [], 'rbac')}"  ])}
 							{/if}
 						</td>
 					</tr>
@@ -108,10 +108,10 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h3 class="modal-title" id="modalLabel"></h3>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
+				<h3 class="modal-title" id="modalLabel"></h3>
 			</div>
 			<div class="modal-body">
 				{Form assign='f' id="role-form" action="#roles" options=['data-pjax' => true]}
