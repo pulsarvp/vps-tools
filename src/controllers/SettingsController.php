@@ -10,10 +10,11 @@
 	{
 		public $defaultAction = 'list';
 
-		private $_modelClass = 'common\models\Setting';
+		private $_modelClass = 'vps\tools\modules\setting\models\Setting';
 
 		/**
 		 * Setting for model class.
+		 *
 		 * @param $class
 		 * @throws \yii\base\InvalidConfigException
 		 */
@@ -36,6 +37,7 @@
 
 		/**
 		 * Updates or creates setting with given name and value.
+		 *
 		 * @param $name
 		 * @param $value
 		 */
