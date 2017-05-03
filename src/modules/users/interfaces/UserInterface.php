@@ -1,9 +1,10 @@
 <?php
-		namespace vps\tools\modules\rbac\intefaces;
+	namespace vps\tools\modules\users\interfaces;
+
 	/**
 	 * @author    Evgenii Kuteiko <kuteiko@mail.ru>
 	 * @copyright Copyright (c) 2017
-	 * @date      19.04.17
+	 * @date      2017-04-19
 	 */
 	interface UserInterface
 	{
@@ -16,7 +17,7 @@
 
 		/**
 		 * Returns an name user.
-		 * @return string .
+		 * @return string
 		 */
 		public function getName ();
 
