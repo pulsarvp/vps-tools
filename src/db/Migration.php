@@ -11,12 +11,37 @@
 	class Migration extends \yii\db\Migration
 	{
 		/**
+		 * @var string
+		 */
+		public $charset = 'utf8';
+		/**
+		 * @var string
+		 */
+		public $collate = 'utf8_general_ci';
+		/**
+		 * @var string
+		 */
+		public $engine = 'InnoDB';
+
+		/**
+		 * @inheritdoc
+		 */
+		public function createTable ($table, $columns, $options = null)
+		{
+			if (is_null($options) and $this->db->driverName === 'mysql')
+				$options = 'CHARACTER SET ' . $this->charset . ' COLLATE ' . $this->collate . ' ENGINE=' . $this->engine;
+
+			parent::createTable($table, $columns, $options);
+		}
+
+		/**
 		 * Creates database view.
 		 *
-		 * @param string $name View name.
-		 * @param Query  $query Query that is used to create view.
+		 * @param string $name    View name.
+		 * @param Query  $query   Query that is used to create view.
 		 * @param bool   $replace Whether to replace existing view with the
 		 *                        same name.
+		 *
 		 * @throws \yii\db\Exception
 		 * @see dropView
 		 */
@@ -35,6 +60,7 @@
 		 * Drops view by name.
 		 *
 		 * @param string $name
+		 *
 		 * @see createView
 		 */
 		public function dropView ($name)
@@ -50,6 +76,7 @@
 		 *
 		 * @param string      $table
 		 * @param string|null $column
+		 *
 		 * @return string[]
 		 */
 		public function findForeignKeys ($table, $column = null)
@@ -72,6 +99,7 @@
 		 * new line just in case.
 		 *
 		 * @param string $path Path to the file.
+		 *
 		 * @throws \Exception
 		 * @throws \yii\db\Exception
 		 */
@@ -113,7 +141,7 @@
 			if ($this->db->getDriverName() == 'mysql')
 			{
 				preg_match("/dbname=([^;]*)/", $this->db->dsn, $match);
-				if (isset($match[ 1 ]))
+				if (isset( $match[ 1 ] ))
 					return $match[ 1 ];
 			}
 

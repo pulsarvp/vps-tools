@@ -167,7 +167,6 @@
 		],
 		"bPaginate" : false
 	});
-
 	$('.role-add').click(function (e) {
 		$('#modalLabel').html('{Yii::tr('Adding Role', [], 'user')}');
 		$('#method').val('rbac-add');
@@ -179,15 +178,12 @@
 		childRoles.selectpicker('val', 0);
 		$('#childPermissions').selectpicker('val', 0);
 	});
-
 	$('.role-edit').click(function (e) {
 		e.preventDefault();
 		e.stopPropagation();
 		setEditData($(this).data('id'));
 		$('#formModal').modal('show');
-
 	});
-
 	function setEditData (roleName) {
 		var role = roles.getByName(roleName);
 		if (role !== null) {
@@ -197,7 +193,6 @@
 			$('#description').val(role.description);
 			$('.form-group').removeClass('has-error');
 			$('.error-block').addClass('hide');
-
 			$('#ruleName').val(role.ruleName);
 			$('#data').val(role.description);
 			childRoles.find('[value=' + role.name + ']').remove();
@@ -206,11 +201,9 @@
 			$('#childPermissions').selectpicker('val', role.childPermissions);
 		}
 	}
-
 	$('.role-form').click(function () {
 		$('#role-form').submit();
 	});
-
 	$('.select-user-role').change(function () {
 		jQuery.ajax({
 			url      : '/rbac/user-role',

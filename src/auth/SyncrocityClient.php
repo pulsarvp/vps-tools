@@ -2,7 +2,6 @@
 	namespace vps\tools\auth;
 
 	use Yii;
-	use yii\authclient\OAuth2;
 
 	/**
 	 * This class performs oAuth provider functionality with Syncrocity client.
@@ -15,7 +14,7 @@
 	 * @author  Anna Manaenkova <anna.manaenkova@phystech.edu>
 	 * @package vps\tools\auth
 	 */
-	class SyncrocityClient extends OAuth2
+	class SyncrocityClient extends BaseClient
 	{
 
 		/**
