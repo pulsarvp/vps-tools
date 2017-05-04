@@ -14,7 +14,8 @@
 			return [
 				'auth' => [
 					'class'           => 'yii\authclient\AuthAction',
-					'successCallback' => [ $this, 'successAuth' ]
+					'successCallback' => [ $this, 'successAuth' ],
+					'cancelUrl'       => Url::toRoute([ 'user/cancel' ])
 				]
 			];
 		}
@@ -25,22 +26,12 @@
 				'access' => [
 					'class' => AccessControl::className(),
 					'rules' => [
-						[
-							'allow'       => true,
-							'actions'     => [],
-							'controllers' => [],
-							'roles'       => [ '@' ]
-						],
-						[
-							'allow'        => true,
-							'actions'      => [ 'auth', 'login' ],
-							'controllers'  => [ 'user' ],
-							'roles'        => [ '?' ],
-							'denyCallback' => function ($rule, $action) { $this->error('You are already logged in.'); },
-						],
+						[ 'allow' => true, 'actions' => [ 'auth', 'login', 'cancel' ], 'roles' => [ '?' ] ],
+						[ 'allow' => true, 'actions' => [ 'index', 'logout' ], 'roles' => [ '@' ] ],
 						[
 							'allow'         => true,
 							'actions'       => [ 'management' ],
+							'controllers'   => [ 'user' ],
 							'roles'         => [ '@' ],
 							'matchCallback' => function ($rule, $action)
 							{
@@ -68,6 +59,12 @@
 		public function actionManagement ()
 		{
 			$this->_tpl = '@userViews/management';
+		}
+
+		public function actionCancel ()
+		{
+			Yii::$app->notification->errorToSession(Yii::$app->settings->get('text_auth_deny'));
+			$this->redirect(Url::toRoute([ 'user/login' ]));
 		}
 
 		public function actionLogin ()
