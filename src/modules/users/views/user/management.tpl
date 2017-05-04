@@ -1,0 +1,3 @@
+<div>
+	{Rbac}{/Rbac}
+</div>

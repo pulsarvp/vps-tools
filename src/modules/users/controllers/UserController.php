@@ -3,7 +3,9 @@
 
 	use vps\tools\controllers\WebController;
 	use vps\tools\helpers\TimeHelper;
+	use vps\tools\helpers\Url;
 	use Yii;
+	use yii\filters\AccessControl;
 
 	class UserController extends WebController
 	{
@@ -17,12 +19,66 @@
 			];
 		}
 
+		public function behaviors ()
+		{
+			return [
+				'access' => [
+					'class' => AccessControl::className(),
+					'rules' => [
+						[
+							'allow'       => true,
+							'actions'     => [],
+							'controllers' => [],
+							'roles'       => [ '@' ]
+						],
+						[
+							'allow'        => true,
+							'actions'      => [ 'auth', 'login' ],
+							'controllers'  => [ 'user' ],
+							'roles'        => [ '?' ],
+							'denyCallback' => function ($rule, $action) { $this->error('You are already logged in.'); },
+						],
+						[
+							'allow'         => true,
+							'actions'       => [ 'management' ],
+							'roles'         => [ '@' ],
+							'matchCallback' => function ($rule, $action)
+							{
+								if (!Yii::$app->user->identity->active)
+									$this->redirect(Url::toRoute('user/index'));
+								else
+									return true;
+							}
+						],
+
+					],
+				],
+			];
+		}
+
+		public function actionIndex ()
+		{
+			$this->title = 'User';
+			$this->_tpl = '@userViews/index';
+			$userClass = Yii::$app->getModule('users')->modelUser;
+			$user = $userClass::findOne(Yii::$app->user->id);
+			$this->data('user', $user);
+		}
+
+		public function actionManagement ()
+		{
+			$this->_tpl = '@userViews/management';
+		}
+
 		public function actionLogin ()
 		{
+			$this->_tpl = '@userViews/login';
+			$this->data('defaultClient', $userClass = Yii::$app->getModule('users')->defaultClient);
 		}
 
 		public function actionLogout ()
 		{
+			$this->_tpl = '@userViews/logout';
 			Yii::$app->user->logout();
 			$this->redirect('/');
 		}

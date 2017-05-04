@@ -45,12 +45,6 @@
 		public function assignRole ($name);
 
 		/**
-		 * Checks the active user.
-		 * @return bool.
-		 */
-		public function isActive ();
-
-		/**
 		 * Revokes all roles to user.
 		 */
 		public function revokeAllRoles ();

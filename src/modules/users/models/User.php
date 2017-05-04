@@ -5,7 +5,6 @@
 	use vps\tools\helpers\TimeHelper;
 	use vps\tools\modules\users\interfaces\UserInterface;
 	use Yii;
-	use yii\db\ActiveRecord;
 	use yii\web\IdentityInterface;
 
 	/**
@@ -16,7 +15,7 @@
 	 * @property string  $profile
 	 * @property string  $loginDT
 	 */
-	class User extends ActiveRecord implements UserInterface, IdentityInterface
+	class User extends \yii\db\ActiveRecord implements UserInterface, IdentityInterface
 	{
 		/**
 		 * Role admin
@@ -27,7 +26,7 @@
 		 */
 		const R_REGISTERED = 'registered';
 
-		private $auth_key;
+		private $_authkey;
 
 		// Getters and setters.
 
@@ -36,7 +35,7 @@
 		 */
 		public function getAuthKey ()
 		{
-			return $this->auth_key;
+			return $this->_authkey;
 		}
 
 		/**
@@ -116,7 +115,7 @@
 		 */
 		public static function findIdentityByAccessToken ($token, $type = null)
 		{
-			return static::findOne([ 'access_token' => $token ]);
+			return null;
 		}
 
 		/**
@@ -124,7 +123,7 @@
 		 */
 		public function generateAuthKey ()
 		{
-			$this->auth_key = Yii::$app->security->generateRandomString();
+			$this->_authkey = Yii::$app->security->generateRandomString();
 		}
 
 		/**
@@ -161,8 +160,9 @@
 		public function rules ()
 		{
 			return [
-				[ [ 'active' ], 'integer' ],
-				[ [ 'name', 'email' ], 'string', 'max' => 255 ],
+				[ [ 'active' ], 'boolean' ],
+				[ [ 'name' ], 'string', 'length' => [ 1, 255 ] ],
+				[ [ 'email' ], 'string', 'length' => [ 6, 255 ] ],
 				[ [ 'email' ], 'unique' ],
 				[ [ 'profile' ], 'string', 'max' => 45 ],
 				[ [ 'loginDT' ], 'safe' ]
@@ -194,12 +194,4 @@
 			return $this->name;
 		}
 
-		/**
-		 * Checks the active user.
-		 * @return bool.
-		 */
-		public function isActive ()
-		{
-			return $this->active;
-		}
 	}

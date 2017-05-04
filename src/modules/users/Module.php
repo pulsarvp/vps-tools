@@ -21,6 +21,11 @@
 		 */
 		public $modelUser = 'vps\tools\modules\users\models\User';
 
+		/**
+		 * @var string default client oauth
+		 */
+		public $defaultClient = 'liot';
+
 		public $title = '';
 
 		/**
@@ -31,6 +36,18 @@
 			$app->setAliases([ '@userViews' => __DIR__ . '/views/user' ]);
 			$app->setAliases([ '@rbacViews' => __DIR__ . '/views/rbac' ]);
 			$app->getUrlManager()->addRules([
+				[ 'class'   => 'vps\tools\web\UrlRule',
+				  'pattern' => 'user',
+				  'route'   => $this->id . '/user/index'
+				],
+				[ 'class'   => 'vps\tools\web\UrlRule',
+				  'pattern' => 'user/index',
+				  'route'   => $this->id . '/user/index'
+				],
+				[ 'class'   => 'vps\tools\web\UrlRule',
+				  'pattern' => 'user/management',
+				  'route'   => $this->id . '/user/management'
+				],
 				[ 'class'   => 'vps\tools\web\UrlRule',
 				  'pattern' => 'user/login',
 				  'route'   => $this->id . '/user/login'
