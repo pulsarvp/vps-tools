@@ -1,13 +1,17 @@
 {
-	"name": "miptliot/vps-tools",
-	"description": "Tools and other stuff that are used in every project.",
+	"name": "pulsarvp/vps-tools",
+	"description": "Tools and other stuff that are used in every PulsarVP project.",
 	"type": "library",
 	"license": "MIT",
-	"homepage": "http://liot.mipt.ru",
+	"homepage": "http://pulsarvp.ru",
 	"authors": [
 		{
 			"name": "Anna Manaenkova",
 			"email": "anna.manaenkova@phystech.edu"
+		},
+		{
+			"name": "Evgenii Kuteiko",
+			"email": "kuteiko@mail.ru "
 		}
 	],
 	"require": {
@@ -32,9 +36,6 @@
 		"asset-installer-paths": {
 			"npm-asset-library": "vendor/npm",
 			"bower-asset-library": "vendor/bower"
-		},
-		"branch-alias": {
-			"dev-master": "1.0.x-dev"
 		}
 	}
 }
