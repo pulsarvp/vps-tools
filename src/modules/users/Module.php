@@ -95,6 +95,13 @@
 				];
 			}
 
+			$app->setComponents([
+				'user' => [
+					'class'     => 'vps\tools\web\User',
+					'returnUrl' => '/',
+				]
+			]);
+
 			$this->title = Yii::tr('User management', [], 'user');
 		}
 	}

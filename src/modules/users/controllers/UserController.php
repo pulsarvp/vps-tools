@@ -63,7 +63,7 @@
 
 		public function actionCancel ()
 		{
-			Yii::$app->notification->errorToSession(Yii::$app->settings->get('text_auth_deny'));
+			Yii::$app->notification->errorToSession(Yii::$app->settings->get('text_auth_deny',Yii::tr('You have rejected the authorization request.',[],'user')));
 			$this->redirect(Url::toRoute([ 'user/login' ]));
 		}
 
