@@ -2,9 +2,48 @@
 	namespace tests\db;
 
 	use vps\tools\db\Migration;
+	use Yii;
 
 	class MigrationTest extends \PHPUnit_Framework_TestCase
 	{
+		public function testCheckCollation ()
+		{
+			$variables = [
+				'character_set_client'     => 'utf8mb4',
+				'character_set_connection' => 'utf8',
+				'character_set_database'   => 'utf8',
+				'character_set_results'    => 'utf8mb4',
+				'character_set_server'     => 'utf8',
+				'collation_connection'     => 'utf8_general_ci',
+				'collation_database'       => 'utf8_general_ci',
+				'collation_server'         => 'utf8_general_ci'
+			];
+			$old = [];
+			foreach ($variables as $variable => $coll)
+			{
+				$sql = "show variables like '" . $variable . "'";
+				$old[] = Yii::$app->db->createCommand($sql)->queryOne();
+			}
+
+			foreach ($variables as $variable => $coll)
+			{
+				$sql = "SET global " . $variable . "=" . $coll;
+
+				Yii::$app->db->createCommand($sql)->execute();
+			}
+
+			$migration = new Migration();
+			$this->assertFalse($migration->checkCollation('latin1', false));
+			$this->assertFalse($migration->checkCollation('utf8', false));
+			$this->assertEquals($migration->checkCollation('utf8'), []);
+
+			foreach ($old as $variable)
+			{
+				$sql = "SET global " . $variable[ 'Variable_name' ] . "=" . $variable[ 'Value' ];
+				Yii::$app->db->createCommand($sql)->execute();
+			}
+		}
+
 		public function testFindForeignKeys ()
 		{
 			$migration = new Migration();

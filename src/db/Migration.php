@@ -1,6 +1,8 @@
 <?php
 	namespace vps\tools\db;
 
+	use vps\tools\helpers\StringHelper;
+	use yii\base\InvalidConfigException;
 	use yii\db\Query;
 
 	/**
@@ -31,6 +33,42 @@
 			$this->db->createCommand($sql)->execute();
 
 			echo ' done (time: ' . sprintf('%.3f', microtime(true) - $time) . "s)\n";
+		}
+
+		/**
+		 * Server encoding checking
+		 *
+		 * @param string $encoding
+		 *
+		 */
+		public function checkCollation ($encoding = 'utf8', $exception = true)
+		{
+			$variables = [
+				'character_set_client',
+				'character_set_connection',
+				'character_set_database',
+				'character_set_results',
+				'character_set_server',
+				'character_set_system',
+				'collation_connection',
+				'collation_database',
+				'collation_server'
+			];
+			foreach ($variables as $variable)
+			{
+				$sql = "show variables like '" . $variable . "'";
+				$value = $this->db->createCommand($sql)->queryOne();
+				$pos = StringHelper::pos($value[ 'Value' ], $encoding);
+				if ($pos !== 0)
+				{
+					if (!$exception)
+						return false;
+					else
+						throw new InvalidConfigException ("Parameter " . $variable . " does not match $encoding.");
+				}
+
+			}
+			return true;
 		}
 
 		/**
