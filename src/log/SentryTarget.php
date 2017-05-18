@@ -1,5 +1,5 @@
 <?php
-	namespace vps\tools\sentry;
+	namespace vps\tools\log;
 
 	use Raven_Stacktrace;
 	use Yii;
