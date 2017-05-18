@@ -16,7 +16,8 @@
 		"yiisoft/yii2-authclient": ">=2.0.0",
 		"yiisoft/yii2-apidoc": ">=2.0.0",
 		"creocoder/yii2-nested-sets": "*",
-		"yiisoft/yii2-smarty": "*"
+		"yiisoft/yii2-smarty": "*",
+		"sentry/sentry": "*"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "*",
