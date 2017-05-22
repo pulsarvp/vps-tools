@@ -15,7 +15,8 @@
 		}
 	],
 	"require": {
-		"yiisoft/yii2": ">=2.0.7",
+		"php": ">=7.0.10",
+		"yiisoft/yii2": ">=2.0.11",
 		"yiisoft/yii2-bootstrap": ">=2.0.0",
 		"yiisoft/yii2-authclient": ">=2.0.0",
 		"yiisoft/yii2-apidoc": ">=2.0.0",
