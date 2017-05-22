@@ -30,7 +30,7 @@ before_script:
   - php -r "echo INTL_ICU_VERSION . \"\n\";"
   - php -r "echo INTL_ICU_DATA_VERSION . \"\n\";"
   - mysql --version
-  - ffmpeg --version
+  - ffmpeg -version
 
   # initialize databases
   - mysql -e 'CREATE DATABASE `vps_tools_test`;';
