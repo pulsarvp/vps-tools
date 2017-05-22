@@ -3,7 +3,7 @@
 
 	use vps\tools\helpers\FileHelper;
 
-	class FileHelperTest extends \PHPUnit_Framework_TestCase
+	class FileHelperTest extends \PHPUnit\Framework\TestCase
 	{
 		public $datapath = __DIR__ . '/../data/file_helper';
 

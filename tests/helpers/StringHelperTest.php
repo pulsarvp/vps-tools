@@ -3,7 +3,7 @@
 
 	use vps\tools\helpers\StringHelper;
 
-	class StringHelperTest extends \PHPUnit_Framework_TestCase
+	class StringHelperTest extends \PHPUnit\Framework\TestCase
 	{
 		public function testClear ()
 		{

@@ -3,7 +3,7 @@
 
 	use vps\tools\helpers\HumanHelper;
 
-	class HumanHelperTest extends \PHPUnit_Framework_TestCase
+	class HumanHelperTest extends \PHPUnit\Framework\TestCase
 	{
 		public function testBitrate ()
 		{

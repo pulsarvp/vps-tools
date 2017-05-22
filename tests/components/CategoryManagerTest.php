@@ -3,7 +3,7 @@
 
 	use Yii;
 
-	class CategoryManagerTest extends \PHPUnit_Framework_TestCase
+	class CategoryManagerTest extends \PHPUnit\Framework\TestCase
 	{
 		private $_category;
 		private $_modelClass = 'tests\models\Category';

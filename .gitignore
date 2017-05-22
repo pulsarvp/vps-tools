@@ -3,5 +3,4 @@
 composer.lock
 tests/data
 /data/
-tests/config/db.php
 /docs/
