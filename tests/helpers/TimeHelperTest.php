@@ -84,7 +84,7 @@
 
 		public function testNow ()
 		{
-			// @TODO: somehow test it.
+			$this->assertNotEmpty(TimeHelper::now());
 		}
 
 		public function testToFrames ()

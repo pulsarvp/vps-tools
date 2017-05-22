@@ -1,6 +1,7 @@
 # vps-tools
 
 Набор инструментов для работы сервисов PulsarVP.
+[![Build Status](https://img.shields.io/travis/pulsarvp/vps-tools.svg)](http://travis-ci.org/pulsarvp/vps-tools)
 
 ## Для запуска тестов
 * Из корня `composer install`.

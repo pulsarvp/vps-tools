@@ -33,7 +33,7 @@
 
 		public function testMaxUpload ()
 		{
-			// @TODO somehow test it.
+			$this->assertNotEmpty(HumanHelper::maxUpload());
 		}
 
 		public function testSize ()

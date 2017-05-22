@@ -118,45 +118,45 @@
 		{
 			$this->assertNull(FileHelper::listItems('ashdjghajsdgj'));
 
-			$this->assertEquals([ 'dir_1', 'dir_2', 'dir_3', 'zdir' ], FileHelper::listDirs($this->datapath));
+			$this->assertEquals([ 'dir_1', 'dir_2', 'dir_3', 'zdir' ], sort(FileHelper::listDirs($this->datapath)));
 			$this->assertEquals([
 				realpath($this->datapath . '/dir_1'),
 				realpath($this->datapath . '/dir_2'),
 				realpath($this->datapath . '/dir_3'),
 				realpath($this->datapath . '/zdir')
-			], FileHelper::listDirs($this->datapath, true));
+			], sort(FileHelper::listDirs($this->datapath, true)));
 
 			$this->assertEquals([], FileHelper::listDirs($this->datapath . '/dir_3'));
 
 			$this->assertEquals([
 				realpath($this->datapath . '/dir_1/dir_1_2/dir_1_2_1'),
 				realpath($this->datapath . '/dir_1/dir_1_2/dir_1_2_2')
-			], FileHelper::listDirs($this->datapath . '/dir_1/dir_1_2', true));
+			], sort(FileHelper::listDirs($this->datapath . '/dir_1/dir_1_2'), true));
 		}
 
 		public function testListFiles ()
 		{
 			$this->assertNull(FileHelper::listFiles('ashdjghajsdgj'));
 
-			$this->assertEquals([ 'file3.txt', 'file4.txt' ], FileHelper::listFiles($this->datapath));
+			$this->assertEquals([ 'file3.txt', 'file4.txt' ], sort(FileHelper::listFiles($this->datapath)));
 			$this->assertEquals([
 				realpath($this->datapath . '/file3.txt'),
 				realpath($this->datapath . '/file4.txt')
-			], FileHelper::listFiles($this->datapath, true));
+			], sort(FileHelper::listFiles($this->datapath, true)));
 
 			$this->assertEquals([ 'file10.txt' ], FileHelper::listFiles($this->datapath . '/dir_3'));
 
 			$this->assertEquals([
 				realpath($this->datapath . '/dir_1/dir_1_2/file6.txt'),
 				realpath($this->datapath . '/dir_1/dir_1_2/file7.txt')
-			], FileHelper::listFiles($this->datapath . '/dir_1/dir_1_2', true));
+			], sort(FileHelper::listFiles($this->datapath . '/dir_1/dir_1_2', true)));
 		}
 
 		public function testListItems ()
 		{
 			$this->assertNull(FileHelper::listItems('ashdjghajsdgj'));
 
-			$this->assertEquals([ 'dir_1', 'dir_2', 'dir_3', 'file3.txt', 'file4.txt', 'zdir' ], FileHelper::listItems($this->datapath));
+			$this->assertEquals([ 'dir_1', 'dir_2', 'dir_3', 'file3.txt', 'file4.txt', 'zdir' ], sort(FileHelper::listItems($this->datapath)));
 			$this->assertEquals([
 				realpath($this->datapath . '/dir_1'),
 				realpath($this->datapath . '/dir_2'),
@@ -164,7 +164,7 @@
 				realpath($this->datapath . '/file3.txt'),
 				realpath($this->datapath . '/file4.txt'),
 				realpath($this->datapath . '/zdir')
-			], FileHelper::listItems($this->datapath, true));
+			], sort(FileHelper::listItems($this->datapath, true)));
 
 			$this->assertEquals([ 'file10.txt' ], FileHelper::listItems($this->datapath . '/dir_3'));
 
@@ -173,7 +173,7 @@
 				realpath($this->datapath . '/dir_1/dir_1_2/dir_1_2_2'),
 				realpath($this->datapath . '/dir_1/dir_1_2/file6.txt'),
 				realpath($this->datapath . '/dir_1/dir_1_2/file7.txt')
-			], FileHelper::listItems($this->datapath . '/dir_1/dir_1_2', true));
+			], sort(FileHelper::listItems($this->datapath . '/dir_1/dir_1_2', true)));
 		}
 
 		public function testMimetypeFile ()
@@ -199,13 +199,13 @@
 		{
 			$this->assertNull(FileHelper::listPatternItems('ashdjghajsdgj'));
 
-			$this->assertEquals(FileHelper::listItems($this->datapath), FileHelper::listPatternItems($this->datapath));
-			$this->assertEquals([ 'dir_1_2_1', 'dir_1_2_2' ], FileHelper::listPatternItems($this->datapath . '/dir_1/dir_1_2', 'dir_*'));
-			$this->assertEquals([ 'file6.txt', 'file7.txt' ], FileHelper::listPatternItems($this->datapath . '/dir_1/dir_1_2', '*.txt'));
+			$this->assertEquals(FileHelper::listItems($this->datapath), sort(FileHelper::listPatternItems($this->datapath)));
+			$this->assertEquals([ 'dir_1_2_1', 'dir_1_2_2' ], sort(FileHelper::listPatternItems($this->datapath . '/dir_1/dir_1_2', 'dir_*')));
+			$this->assertEquals([ 'file6.txt', 'file7.txt' ], sort(FileHelper::listPatternItems($this->datapath . '/dir_1/dir_1_2', '*.txt')));
 			$this->assertEquals([
 				$this->datapath . '/dir_1/dir_1_2/file6.txt',
 				$this->datapath . '/dir_1/dir_1_2/file7.txt'
-			], FileHelper::listPatternItems($this->datapath . '/dir_1/dir_1_2', '*.txt', true));
+			], sort(FileHelper::listPatternItems($this->datapath . '/dir_1/dir_1_2', '*.txt', true)));
 		}
 
 		public function testListRelativeFiles ()
@@ -216,7 +216,7 @@
 				'dir_1_2/dir_1_2_1/file5.txt',
 				'dir_1_2/file6.txt',
 				'dir_1_2/file7.txt'
-			], FileHelper::listRelativeFiles($this->datapath . '/dir_1/dir_1_2', $this->datapath . '/dir_1'));
+			], sort(FileHelper::listRelativeFiles($this->datapath . '/dir_1/dir_1_2', $this->datapath . '/dir_1')));
 		}
 
 		public function testExtension ()
