@@ -1,9 +1,9 @@
 <?php
-	namespace vps\tools\modules\users\models;
+	namespace vps\tools\modules\user\models;
 
 	use vps\tools\helpers\ArrayHelper;
 	use vps\tools\helpers\TimeHelper;
-	use vps\tools\modules\users\interfaces\UserInterface;
+	use vps\tools\modules\user\interfaces\UserInterface;
 	use Yii;
 	use yii\web\IdentityInterface;
 
@@ -55,7 +55,7 @@
 		{
 			$auth = Yii::$app->getAuthManager();
 			$roles = $auth->getRolesByUser($this->id);
-			$role = array_shift($roles);
+			$role = current($roles);
 
 			return $role ? $role->name : null;
 		}
@@ -161,8 +161,8 @@
 		{
 			return [
 				[ [ 'active' ], 'boolean' ],
-				[ [ 'name' ], 'string', 'length' => [ 1, 255 ] ],
-				[ [ 'email' ], 'string', 'length' => [ 6, 255 ] ],
+				[ [ 'name' ], 'string', 'length' => [ 1, 128 ] ],
+				[ [ 'email' ], 'string', 'length' => [ 6, 128 ] ],
 				[ [ 'email' ], 'unique' ],
 				[ [ 'profile' ], 'string', 'max' => 45 ],
 				[ [ 'loginDT' ], 'safe' ]

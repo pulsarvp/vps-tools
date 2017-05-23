@@ -6,7 +6,7 @@
 			</div>
 			<div class="panel-body">
 				<div class="row">
-					<div class=" col-md-8 col-lg-8 ">
+					<div class="col-sm-12">
 						<table class="table table-user-information">
 							<tbody>
 								<tr>
@@ -15,7 +15,7 @@
 								</tr>
 								<tr>
 									<td>{Yii::tr('Login DT')}</td>
-									<td>{Yii::$app->formatter->asDate($user->loginDT,"dd MMMM yyyy HH:mm")}</td>
+									<td>{Yii::$app->formatter->asDatetime($user->loginDT)}</td>
 								</tr>
 							</tbody>
 						</table>

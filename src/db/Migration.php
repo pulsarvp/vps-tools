@@ -10,29 +10,6 @@
 	 */
 	class Migration extends \yii\db\Migration
 	{
-		/**
-		 * @var string
-		 */
-		public $charset = 'utf8';
-		/**
-		 * @var string
-		 */
-		public $collate = 'utf8_general_ci';
-		/**
-		 * @var string
-		 */
-		public $engine = 'InnoDB';
-
-		/**
-		 * @inheritdoc
-		 */
-		public function createTable ($table, $columns, $options = null)
-		{
-			if (is_null($options) and $this->db->driverName === 'mysql')
-				$options = 'CHARACTER SET ' . $this->charset . ' COLLATE ' . $this->collate . ' ENGINE=' . $this->engine;
-
-			parent::createTable($table, $columns, $options);
-		}
 
 		/**
 		 * Creates database view.

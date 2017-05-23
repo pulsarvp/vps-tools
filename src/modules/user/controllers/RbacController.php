@@ -1,7 +1,6 @@
 <?php
-	namespace vps\tools\modules\users\controllers;
+	namespace vps\tools\modules\user\controllers;
 
-	use common\models\User;
 	use vps\tools\controllers\WebController;
 	use Yii;
 
@@ -13,8 +12,9 @@
 		 */
 		public function actionUserRole ()
 		{
+			$userClass = $this->module->modelUser;
 			$post = Yii::$app->request->post();
-			$user = User::findOne($post[ 'id' ]);
+			$user = $userClass::findOne($post[ 'id' ]);
 			if (!is_null($user))
 			{
 				$user->revokeAllRoles();
@@ -31,9 +31,9 @@
 		 */
 		public function actionUserState ()
 		{
-
+			$userClass = $this->module->modelUser;
 			$post = Yii::$app->request->post();
-			$user = User::findOne($post[ 'id' ]);
+			$user = $userClass::findOne($post[ 'id' ]);
 			if (!is_null($user))
 			{
 				$user->active = $post[ 'state' ];

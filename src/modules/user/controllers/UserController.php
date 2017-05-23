@@ -1,5 +1,5 @@
 <?php
-	namespace vps\tools\modules\users\controllers;
+	namespace vps\tools\modules\user\controllers;
 
 	use vps\tools\controllers\WebController;
 	use vps\tools\helpers\TimeHelper;
@@ -30,8 +30,7 @@
 						[ 'allow' => true, 'actions' => [ 'index', 'logout' ], 'roles' => [ '@' ] ],
 						[
 							'allow'         => true,
-							'actions'       => [ 'management' ],
-							'controllers'   => [ 'user' ],
+							'actions'       => [ 'manage' ],
 							'roles'         => [ '@' ],
 							'matchCallback' => function ($rule, $action)
 							{
@@ -51,26 +50,26 @@
 		{
 			$this->title = 'User';
 			$this->_tpl = '@userViews/index';
-			$userClass = Yii::$app->getModule('users')->modelUser;
+			$userClass = $this->module->modelUser;
 			$user = $userClass::findOne(Yii::$app->user->id);
 			$this->data('user', $user);
 		}
 
-		public function actionManagement ()
+		public function actionManage ()
 		{
-			$this->_tpl = '@userViews/management';
+			$this->_tpl = '@userViews/manage';
 		}
 
 		public function actionCancel ()
 		{
-			Yii::$app->notification->errorToSession(Yii::$app->settings->get('text_auth_deny',Yii::tr('You have rejected the authorization request.',[],'user')));
+			Yii::$app->notification->errorToSession(Yii::tr('You have rejected the authorization request.', [], 'user'));
 			$this->redirect(Url::toRoute([ 'user/login' ]));
 		}
 
 		public function actionLogin ()
 		{
 			$this->_tpl = '@userViews/login';
-			$this->data('defaultClient', $userClass = Yii::$app->getModule('users')->defaultClient);
+			$this->data('defaultClient', $userClass = $userClass = $this->module->defaultClient);
 		}
 
 		public function actionLogout ()
@@ -87,14 +86,11 @@
 		 */
 		public function successAuth ($client)
 		{
-			$userClass = Yii::$app->getModule('users')->modelUser;
+			$userClass = $this->module->modelUser;
 			$attributes = $client->getUserAttributes();
 			if (is_array($attributes) and isset( $attributes[ 'email' ] ))
 			{
-				$user = $userClass::find()->where([ 'profile' => $attributes[ 'profile' ] ])->one();
-
-				if ($user == null)
-					$user = $userClass::find()->where([ 'email' => $attributes[ 'email' ] ])->one();
+				$user = $userClass::find()->where([ 'profile' => $attributes[ 'profile' ] ])->orWhere([ 'email' => $attributes[ 'email' ] ])->one();
 
 				if ($user == null)
 				{
@@ -103,7 +99,7 @@
 				}
 
 				if ($user == null or !isset( $user->id ))
-					throw new \Exception('Authorization failed.');
+					throw new \Exception(Yii::tr('Authorization failed.', [], 'user'));
 				elseif ($user->active == false)
 				{
 					Yii::$app->notification->errorToSession(Yii::tr('Your account is not approved yet.', [], 'user'));
@@ -113,7 +109,7 @@
 					$user->loginDT = TimeHelper::now();
 					$user->save();
 
-					Yii::$app->user->login($user, 604800);
+					Yii::$app->user->login($user, Yii::$app->user->authTimeout);
 				}
 			}
 			else

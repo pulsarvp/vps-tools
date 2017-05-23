@@ -1,5 +1,5 @@
 <?php
-	namespace vps\tools\modules\users\interfaces;
+	namespace vps\tools\modules\user\interfaces;
 
 	/**
 	 * @author    Evgenii Kuteiko <kuteiko@mail.ru>

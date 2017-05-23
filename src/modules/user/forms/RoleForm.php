@@ -1,5 +1,5 @@
 <?php
-	namespace vps\tools\modules\users\forms;
+	namespace vps\tools\modules\user\forms;
 
 	use Yii;
 
@@ -40,8 +40,8 @@
 		{
 			return [
 				[ [ 'name' ], 'required' ],
-				[ 'name', 'uniqueName', 'on' => [ self::SCENARIO_ADD ] ],
 				[ [ 'name', 'method' ], 'string', 'length' => [ 1, 64 ] ],
+				[ 'name', 'uniqueName', 'on' => [ self::SCENARIO_ADD ] ],
 				[ [ 'description', 'ruleName', 'data' ], 'string' ],
 				[ [ 'childPermissions' ],
 					'required',

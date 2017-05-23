@@ -1,8 +1,8 @@
 <?php
-	namespace vps\tools\modules\users\widgets;
+	namespace vps\tools\modules\user\widgets;
 
 	use vps\tools\helpers\ArrayHelper;
-	use vps\tools\modules\users\forms\RoleForm;
+	use vps\tools\modules\user\forms\RoleForm;
 	use Yii;
 	use yii\base\Widget;
 	use yii\rbac\Role;
@@ -62,7 +62,7 @@
 			$rules = Yii::$app->authManager->getRules();
 
 			return $this->renderFile('@rbacViews/index.tpl', [
-				'title'       => Yii::tr('User management', [], 'user'),
+				'title'       => Yii::tr('User manage', [], 'user'),
 				'users'       => $users,
 				'roles'       => $data,
 				'rules'       => $rules,

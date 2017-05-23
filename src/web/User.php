@@ -6,11 +6,11 @@
 		/**
 		 * @inheritdoc.
 		 */
-		public $identityClass = 'vps\tools\modules\users\models\User';
+		public $identityClass = 'vps\tools\modules\user\models\User';
 		/**
 		 * @inheritdoc.
 		 */
-		public $authTimeou = 86400;
+		public $authTimeout = 86400;
 		/**
 		 * @inheritdoc.
 		 */

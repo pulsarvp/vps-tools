@@ -1,5 +1,5 @@
 <?php
-	namespace vps\tools\modules\users;
+	namespace vps\tools\modules\user;
 
 	use Yii;
 	use yii\base\BootstrapInterface;
@@ -14,17 +14,17 @@
 		/**
 		 * @var string the namespace that controller classes are in
 		 */
-		public $controllerNamespace = 'vps\tools\modules\users\controllers';
+		public $controllerNamespace = 'vps\tools\modules\user\controllers';
 
 		/**
 		 * @var string the namespace that model User
 		 */
-		public $modelUser = 'vps\tools\modules\users\models\User';
+		public $modelUser = 'vps\tools\modules\user\models\User';
 
 		/**
 		 * @var string default client oauth
 		 */
-		public $defaultClient = 'liot';
+		public $defaultClient = 'syncrocity';
 
 		public $title = '';
 
@@ -45,8 +45,8 @@
 				  'route'   => $this->id . '/user/index'
 				],
 				[ 'class'   => 'vps\tools\web\UrlRule',
-				  'pattern' => 'user/management',
-				  'route'   => $this->id . '/user/management'
+				  'pattern' => 'user/manage',
+				  'route'   => $this->id . '/user/manage'
 				],
 				[ 'class'   => 'vps\tools\web\UrlRule',
 				  'pattern' => 'user/login',
@@ -102,6 +102,6 @@
 				]
 			]);
 
-			$this->title = Yii::tr('User management', [], 'user');
+			$this->title = Yii::tr('User manage', [], 'user');
 		}
 	}
