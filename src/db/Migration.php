@@ -39,7 +39,10 @@
 		 * Server encoding checking
 		 *
 		 * @param string $encoding
+		 * @param bool   $exception
 		 *
+		 * @return bool
+		 * @throws InvalidConfigException
 		 */
 		public function checkCollation ($encoding = 'utf8', $exception = true)
 		{
@@ -64,7 +67,7 @@
 					if (!$exception)
 						return false;
 					else
-						throw new InvalidConfigException ("Parameter " . $variable . " does not match $encoding.");
+						throw new InvalidConfigException ("Parameter $variable does not match $encoding.");
 				}
 
 			}

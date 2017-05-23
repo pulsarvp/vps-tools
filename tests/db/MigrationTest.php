@@ -1,10 +1,12 @@
 <?php
 	namespace tests\db;
 
+	use PHPUnit\Framework\TestCase;
 	use vps\tools\db\Migration;
 	use Yii;
+	use yii\base\InvalidConfigException;
 
-	class MigrationTest extends \PHPUnit_Framework_TestCase
+	class MigrationTest extends TestCase
 	{
 		public function testCheckCollation ()
 		{
@@ -35,7 +37,9 @@
 			$migration = new Migration();
 			$this->assertFalse($migration->checkCollation('latin1', false));
 			$this->assertFalse($migration->checkCollation('utf8', false));
-			$this->assertEquals($migration->checkCollation('utf8'), []);
+
+			$this->expectException(InvalidConfigException::class);
+			$migration->checkCollation('utf8');
 
 			foreach ($old as $variable)
 			{
