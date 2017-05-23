@@ -19,6 +19,8 @@ install:
         phpenv config-rm xdebug.ini || echo "xdebug is not installed"
     fi
   - travis_retry composer self-update && composer --version
+  - composer config -g github-oauth.github.com 113b72a696de98d56c87b7fca62f0560b85ce0ed
+
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
   - travis_retry composer install --prefer-dist --no-interaction
 
