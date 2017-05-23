@@ -19,6 +19,13 @@
 		"issues": "https://github.com/pulsarvp/vps-tools/issues"
 	},
 	"require": {
+		"php": ">=7.0.10",
+		"ext-curl": "*",
+		"ext-intl": "*",
+		"ext-libxml": "*",
+		"ext-mbstring": "*",
+		"ext-mcrypt": "*",
+		"ext-mysqli": "*",
 		"yiisoft/yii2": "~2.0",
 		"yiisoft/yii2-bootstrap": "~2.0",
 		"yiisoft/yii2-authclient": "~2.0",

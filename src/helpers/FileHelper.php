@@ -7,6 +7,7 @@
 		const MIME_PHP = 'text/x-php';
 		const MIME_TXT = 'text/plain';
 		const MIME_XML = 'application/xml';
+		const MIME_TEXT_XML = 'text/xml';
 
 		/**
 		 * Clears given directory without deleting it itself.
