@@ -1,6 +1,7 @@
 <?php
 	namespace vps\tools\log;
 
+	use Raven_Client;
 	use Raven_Stacktrace;
 	use Yii;
 	use yii\log\Logger;
@@ -15,27 +16,27 @@
 	{
 
 		/**
-		 * @var string Sentry DSN
+		 * @var Raven_Client
 		 */
-		public $sentry_dsn;
+		private $_client;
 
 		/**
 		 * @var string Sentry DSN
 		 */
-		public $sentry_use;
+		private $_dsn;
 
 		/**
-		 * @var \Raven_Client
+		 * @var string Sentry use
 		 */
-		protected $client;
+		private $_use;
 
 		public function init ()
 		{
 			parent::init();
 
-			$this->sentry_use = Yii::$app->settings->get('sentry_use', 0);
-			$this->sentry_dsn = Yii::$app->settings->get('sentry_dsn', '');
-			$this->client = new \Raven_Client($this->sentry_dsn);
+			$this->_use = Yii::$app->settings->get('sentry_use', 0);
+			$this->_dsn = Yii::$app->settings->get('sentry_dsn', '');
+			$this->_client = new Raven_Client($this->_dsn);
 		}
 
 		/**
@@ -44,13 +45,13 @@
 		 */
 		public function export ()
 		{
-			if ($this->sentry_use)
+			if ($this->_use)
 				foreach ($this->messages as $message)
 				{
 					list( $msg, $level, $category, $timestamp, $traces ) = $message;
 					$levelName = Logger::getLevelName($level);
 					$data = [
-						'timestamp' => gmdate('Y-m-d\TH:i:s\Z', $timestamp),
+						'timestamp' => Yii::$app->formatter->asDatetime($timestamp, 'Y-m-d\TH:i:s\Z'),
 						'level'     => $levelName,
 						'tags'      => [ 'category' => $category ],
 						'message'   => $msg,
@@ -61,7 +62,11 @@
 							'frames' => Raven_Stacktrace::get_stack_info($traces),
 						];
 					}
-					$this->client->capture($data, false);
+					$curtime = time();
+					if (( $curtime - $timestamp ) < 3600)
+					{
+						$this->_client->capture($data, false);
+					}
 				}
 		}
 	}
