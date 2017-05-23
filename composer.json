@@ -14,6 +14,10 @@
 			"email": "kuteiko@mail.ru"
 		}
 	],
+	"support": {
+		"email": "dev@lectoriy.ru",
+		"issues": "https://github.com/pulsarvp/vps-tools/issues"
+	},
 	"require": {
 		"yiisoft/yii2": "~2.0",
 		"yiisoft/yii2-bootstrap": "~2.0",

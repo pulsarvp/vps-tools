@@ -133,10 +133,12 @@
 
 			$this->assertEquals([], FileHelper::listDirs($this->datapath . '/dir_3'));
 
+			$list = FileHelper::listDirs($this->datapath . '/dir_1/dir_1_2', true);
+			sort($list);
 			$this->assertEquals([
 				realpath($this->datapath . '/dir_1/dir_1_2/dir_1_2_1'),
 				realpath($this->datapath . '/dir_1/dir_1_2/dir_1_2_2')
-			], FileHelper::listDirs($this->datapath . '/dir_1/dir_1_2', true));
+			], $list);
 		}
 
 		public function testListFiles ()
