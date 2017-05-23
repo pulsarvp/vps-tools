@@ -83,9 +83,16 @@
 		 */
 		protected function initUserAttributes ()
 		{
-			return $this->api('me', 'GET');
+			$token = $this->getAccessToken();
+			if (!is_object($token))
+			{
+				Yii::$app->getSession()->removeAll();
+				$token = $this->restoreAccessToken();
+			}
+			if (is_object($token))
+				return $this->api('me', 'GET', [], [ 'Authorization' => 'Bearer ' . $token->token ]);
+			else
+				return false;
 		}
 
 	}
-
-	?>
