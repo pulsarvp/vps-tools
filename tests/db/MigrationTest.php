@@ -3,7 +3,7 @@
 
 	use vps\tools\db\Migration;
 
-	class MigrationTest extends \PHPUnit_Framework_TestCase
+	class MigrationTest extends \PHPUnit\Framework\TestCase
 	{
 		public function testFindForeignKeys ()
 		{

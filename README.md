@@ -1,5 +1,7 @@
 # vps-tools
 
+[![Build Status](https://img.shields.io/travis/pulsarvp/vps-tools.svg)](http://travis-ci.org/pulsarvp/vps-tools)
+
 Набор инструментов для работы сервисов PulsarVP.
 
 ## Для запуска тестов
