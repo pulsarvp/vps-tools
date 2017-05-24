@@ -14,7 +14,6 @@
 			{
 				$tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
 			}
-
 			$this->createTable('auth_rule', [
 				'name'       => $this->string(64)->notNull(),
 				'data'       => $this->text()->null(),
@@ -81,8 +80,7 @@
 			$auth->add($unverified);
 
 			$this->renameColumn("user", 'isApproved', 'active');
-
-			$userClass = Yii::$app->getModule('rbac')->modelUser;
+			$userClass = Yii::$app->getModule('user')->modelUser;
 			$users = $userClass::find()->all();
 			foreach ($users as $user)
 			{

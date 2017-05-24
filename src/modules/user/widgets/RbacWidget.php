@@ -1,8 +1,8 @@
 <?php
-	namespace vps\tools\modules\rbac\widgets;
+	namespace vps\tools\modules\user\widgets;
 
 	use vps\tools\helpers\ArrayHelper;
-	use vps\tools\modules\rbac\forms\RoleForm;
+	use vps\tools\modules\user\forms\RoleForm;
 	use Yii;
 	use yii\base\Widget;
 	use yii\rbac\Role;
@@ -40,7 +40,7 @@
 		 */
 		public function run ()
 		{
-			$userClass = Yii::$app->getModule('rbac')->modelUser;
+			$userClass = Yii::$app->getModule('users')->modelUser;
 
 			$users = $userClass::find()->orderBy('name')->all();
 			$roles = Yii::$app->authManager->getRoles();
@@ -62,7 +62,7 @@
 			$rules = Yii::$app->authManager->getRules();
 
 			return $this->renderFile('@rbacViews/index.tpl', [
-				'title'       => Yii::tr('Manage rbac', [], 'rbac'),
+				'title'       => Yii::tr('User manage', [], 'user'),
 				'users'       => $users,
 				'roles'       => $data,
 				'rules'       => $rules,
@@ -115,10 +115,10 @@
 				$auth->add($role);
 			else
 			{
-				$auth->update($roleForm->name, $role);
+				$auth->update($roleForm->method, $role);
 				$auth->removeChildren($role);
 			}
-			
+
 			if (is_array($roleForm->childRoles) and count($roleForm->childRoles) > 0)
 				foreach ($roleForm->childRoles as $childRole)
 				{

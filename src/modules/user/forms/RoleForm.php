@@ -1,5 +1,5 @@
 <?php
-	namespace vps\tools\modules\rbac\forms;
+	namespace vps\tools\modules\user\forms;
 
 	use Yii;
 
@@ -24,12 +24,12 @@
 		public function attributeLabels ()
 		{
 			return [
-				'name'             => Yii::tr('Name', [], 'rbac'),
-				'description'      => Yii::tr('Description', [], 'rbac'),
-				'ruleName'         => Yii::tr('Rule name', [], 'rbac'),
-				'data'             => Yii::tr('Data', [], 'rbac'),
-				'childRoles'       => Yii::tr('Child roles', [], 'rbac'),
-				'childPermissions' => Yii::tr('Child permissions', [], 'rbac'),
+				'name'             => Yii::tr('Name', [], 'user'),
+				'description'      => Yii::tr('Description', [], 'user'),
+				'ruleName'         => Yii::tr('Rule name', [], 'user'),
+				'data'             => Yii::tr('Data', [], 'user'),
+				'childRoles'       => Yii::tr('Child roles', [], 'user'),
+				'childPermissions' => Yii::tr('Child permissions', [], 'user'),
 			];
 		}
 
@@ -40,12 +40,12 @@
 		{
 			return [
 				[ [ 'name' ], 'required' ],
-				[ 'name', 'uniqueName', 'on' => [ self::SCENARIO_ADD ] ],
 				[ [ 'name', 'method' ], 'string', 'length' => [ 1, 64 ] ],
+				[ 'name', 'uniqueName', 'on' => [ self::SCENARIO_ADD ] ],
 				[ [ 'description', 'ruleName', 'data' ], 'string' ],
 				[ [ 'childPermissions' ],
 					'required',
-					'message' => Yii::tr('Select child roles or permissions', [], 'rbac'),
+					'message' => Yii::tr('Select child roles or permissions', [], 'user'),
 					'when'    => function ()
 					{
 						if (!is_array($this->childRoles) and !is_array($this->childPermissions))

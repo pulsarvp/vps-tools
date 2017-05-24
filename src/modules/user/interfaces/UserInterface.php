@@ -1,9 +1,10 @@
 <?php
-		namespace vps\tools\modules\rbac\intefaces;
+	namespace vps\tools\modules\user\interfaces;
+
 	/**
 	 * @author    Evgenii Kuteiko <kuteiko@mail.ru>
 	 * @copyright Copyright (c) 2017
-	 * @date      19.04.17
+	 * @date      2017-04-19
 	 */
 	interface UserInterface
 	{
@@ -42,12 +43,6 @@
 		 * @param string $name the name role
 		 */
 		public function assignRole ($name);
-
-		/**
-		 * Checks the active user.
-		 * @return bool.
-		 */
-		public function isActive ();
 
 		/**
 		 * Revokes all roles to user.
