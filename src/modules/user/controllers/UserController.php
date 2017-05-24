@@ -4,6 +4,7 @@
 	use vps\tools\controllers\WebController;
 	use vps\tools\helpers\TimeHelper;
 	use vps\tools\helpers\Url;
+	use vps\tools\modules\user\models\User;
 	use Yii;
 	use yii\filters\AccessControl;
 
@@ -88,9 +89,13 @@
 		{
 			$userClass = $this->module->modelUser;
 			$attributes = $client->getUserAttributes();
-			if (is_array($attributes) and isset( $attributes[ 'email' ] ))
+			if (is_array($attributes) and isset($attributes[ 'email' ]))
 			{
-				$user = $userClass::find()->where([ 'profile' => $attributes[ 'profile' ] ])->orWhere([ 'email' => $attributes[ 'email' ] ])->one();
+				/** @var User $user */
+				$user = $userClass::find()
+					->where([ 'profile' => $attributes[ 'profile' ] ])
+					->orWhere([ 'email' => $attributes[ 'email' ] ])
+					->one();
 
 				if ($user == null)
 				{
@@ -98,7 +103,7 @@
 					$user->register($attributes[ 'name' ], $attributes[ 'email' ], $attributes[ 'profile' ]);
 				}
 
-				if ($user == null or !isset( $user->id ))
+				if ($user == null or !isset($user->id))
 					throw new \Exception(Yii::tr('Authorization failed.', [], 'user'));
 				elseif ($user->active == false)
 				{
