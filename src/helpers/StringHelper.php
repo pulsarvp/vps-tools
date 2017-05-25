@@ -3,6 +3,7 @@
 
 	/**
 	 * Class StringHelper
+	 *
 	 * @package vps\tools\helpers
 	 */
 	class StringHelper extends \yii\helpers\BaseStringHelper
@@ -13,6 +14,7 @@
 		 * $result = StringHelper::clear("{}test  (* asd");
 		 * // $result will be: 'test   asd'
 		 * ```
+		 *
 		 * @param string $str string
 		 * @return string converted string
 		 */
@@ -28,6 +30,7 @@
 		 * // $result will be:
 		 * // [ 'It', 'is', 'a second', 'test' ]
 		 * ```
+		 *
 		 * @inheritdoc
 		 */
 		public static function explode ($string, $delimiter = ',', $trim = true, $skipEmpty = true)
@@ -42,6 +45,7 @@
 		 * // $result will be:
 		 * // [ 'sd', 'ds', 'd', 'ds', 'd', 'ds', 'd', 'cs' ]
 		 * ```
+		 *
 		 * @param string   $string
 		 * @param string[] $delimiters
 		 * @return array|null
@@ -64,10 +68,10 @@
 		 * // $result will be:
 		 * // 10
 		 * ```
+		 *
 		 * @param  string  $string String to be searched for character.
 		 * @param  string  $char
-		 * @param  integer $n      Which occurrence to search for. If negative then character will be searched from the
-		 *                         end of string.
+		 * @param  integer $n Which occurrence to search for. If negative then character will be searched from the end of string.
 		 * @return integer|null Nth occurrence (if existed), null otherwise.
 		 * @see rpos
 		 */
@@ -94,8 +98,9 @@
 		 * // $result will be:
 		 * // NdSa6w7As8E9fa5
 		 * ```
+		 *
 		 * @param int     $length Desired string length.
-		 * @param boolean $upper  Whether use also upper letters.
+		 * @param boolean $upper Whether use also upper letters.
 		 * @return string|null Generated string.
 		 */
 		public static function random ($length = 10, $upper = false)
@@ -119,10 +124,10 @@
 		 * // $result will be:
 		 * // 10
 		 * ```
+		 *
 		 * @param  string  $string String to be searched for character.
 		 * @param  string  $char
-		 * @param  integer $n      Which occurrence to search for. If negative then character will be searched from the
-		 *                         begin of string.
+		 * @param  integer $n Which occurrence to search for. If negative then character will be searched from the begin of string.
 		 * @return integer|null Nth occurrence (if existed), null otherwise.
 		 * @see pos
 		 */

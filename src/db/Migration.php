@@ -10,8 +10,7 @@
 		 *
 		 * @param string $name View name.
 		 * @param Query  $query Query that is used to create view.
-		 * @param bool   $replace Whether to replace existing view with the
-		 *                        same name.
+		 * @param bool   $replace Whether to replace existing view with the same name.
 		 * @throws \yii\db\Exception
 		 * @see dropView
 		 */

@@ -5,6 +5,7 @@
 
 	/**
 	 * Class TimeHelper
+	 *
 	 * @package vps\tools\helpers
 	 */
 	class TimeHelper
@@ -28,9 +29,9 @@
 		 * ```
 		 *
 		 * @param integer|string|\DateTime $date The value to be formatted. The following types of value are supported:
-		 *                                       - an integer representing a UNIX timestamp,
-		 *                                       - a string that can be [parsed to create a DateTime object](http://php.net/manual/en/datetime.formats.php). The timestamp is assumed to be in default time zone unless a time zone is explicitly given.
-		 *                                       - a PHP [DateTime](http://php.net/manual/en/class.datetime.php) object.
+		 * - an integer representing a UNIX timestamp,
+		 * - a string that can be [parsed to create a DateTime object](http://php.net/manual/en/datetime.formats.php). The timestamp is assumed to be in default time zone unless a time zone is explicitly given.
+		 * - a PHP [DateTime](http://php.net/manual/en/class.datetime.php) object.
 		 * @return string The formatted result.
 		 * @throws \yii\base\InvalidParamException If the input value can not be evaluated as a date value.
 		 */
@@ -47,6 +48,7 @@
 		 * // $result will be:
 		 * // '02:23:13'
 		 * ```
+		 *
 		 * @param  integer|string $frames Number of frames.
 		 * @return string Time in format HH:MM:SS.MSS.
 		 */
@@ -78,7 +80,8 @@
 		 * // $result will be:
 		 * // '00:00:00'
 		 * ```
-		 * @param  integer|string $frames               Number of frames.
+		 *
+		 * @param  integer|string $frames Number of frames.
 		 * @param boolean         $withLeadingZeroHours If hours are zero should one include them in output or not.
 		 * @return string Time in format (HH:)MM:SS.
 		 */
@@ -105,6 +108,7 @@
 		 * $result = TimeHelper::fromFramesToMs(45);
 		 * // $result will be: 1800
 		 * ```
+		 *
 		 * @param  int $frames Number of frames
 		 * @return int Number of milliseconds.
 		 */
@@ -123,6 +127,7 @@
 		 * // $result will be:
 		 * // '02:23:13'
 		 * ```
+		 *
 		 * @param integer|string $seconds
 		 * @param boolean        $withLeadingZeroHours If hours are zero should one include them in output or not.
 		 * @return string Time in format (HH:)MM:SS.
@@ -150,6 +155,7 @@
 		 * $result = TimeHelper::now();
 		 * // $result will be: '2017-02-22 11:11:11'
 		 * ```
+		 *
 		 * @return string The formatted current date and time.
 		 */
 		public static function now ()
@@ -163,6 +169,7 @@
 		 * $result = TimeHelper::toMs('00:00:01.12');
 		 * // $result will be: 1480
 		 * ```
+		 *
 		 * @param string $time Input time in format HH:MM:SS, HH:MM:SS.FF or HH:MM:SS.MSS.
 		 * @return null|integer NUll in case of wrong format input or milliseconds otherwise.
 		 */
@@ -192,6 +199,7 @@
 		 * $result = TimeHelper::toSeconds('00:07:02.360');
 		 * // $result will be: 422
 		 * ```
+		 *
 		 * @param string $time Input time in format HH:MM:SS, HH:MM:SS.FF or HH:MM:SS.MSS.
 		 * @return null|integer NUll in case of wrong format input or seconds otherwise.
 		 */
@@ -231,6 +239,7 @@
 		 * $result = TimeHelper::toFrames('00:07:02.360');
 		 * // $result will be: 10559
 		 * ```
+		 *
 		 * @param string $time Input time in format HH:MM:SS, HH:MM:SS.FF or HH:MM:SS.MSS.
 		 * @return null|integer NUll in case of wrong format input or frames otherwise.
 		 */

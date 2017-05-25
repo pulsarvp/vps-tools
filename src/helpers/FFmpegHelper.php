@@ -5,6 +5,7 @@
 
 	/**
 	 * Class FFmpegHelper
+	 *
 	 * @package vps\tools\helpers
 	 */
 	class FFmpegHelper
@@ -12,7 +13,7 @@
 		/**
 		 * Gets video file info. Filters parameters with $names keys if necessary.
 		 * ```php
-		 * $result = FFmpegHelper::info('/path/to/the/file.mp4', [ 'duration', 'bitrate' ]);
+		 * $result = FFmpegHelper::info('/path/to/the/file.mp4', [ 'duration', 'bit_rate' ]);
 		 * ```
 		 *
 		 * @param string     $path

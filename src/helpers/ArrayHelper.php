@@ -3,6 +3,7 @@
 
 	/**
 	 * Class ArrayHelper
+	 *
 	 * @package vps\tools\helpers
 	 */
 	class ArrayHelper extends \yii\helpers\BaseArrayHelper
@@ -30,7 +31,7 @@
 		{
 			$return = $array;
 			// Check if keys are the same.
-			if (count($return) == count($column) and empty( array_diff(array_keys($return), array_keys($column)) ))
+			if (count($return) == count($column) and empty(array_diff(array_keys($return), array_keys($column))))
 			{
 				foreach ($return as $k => &$ret)
 					$ret[] = $column[ $k ];
@@ -83,7 +84,7 @@
 				if (array_key_exists($key, $array))
 				{
 					$value = $array[ $key ];
-					unset( $array[ $key ] );
+					unset($array[ $key ]);
 				}
 
 				if (( $pos = strpos($key, '.') ) !== false)
@@ -124,8 +125,7 @@
 		 * ```
 		 *
 		 * @param  array $array
-		 * @return array|null Exactly the input array but with null values instead of empty ones. Null if $array is not
-		 *                    array.
+		 * @return array|null Exactly the input array but with null values instead of empty ones. Null if $array is not array.
 		 */
 		public static function emptyToNull ($array)
 		{
@@ -134,7 +134,7 @@
 				$return = [];
 				foreach ($array as $key => $item)
 				{
-					if (empty( $item ))
+					if (empty($item))
 						$return[ $key ] = null;
 					elseif (is_array($item))
 						$return[ $key ] = self::emptyToNull($item);
@@ -202,7 +202,7 @@
 				if (!is_array($keys))
 					$keys = [ $keys ];
 				foreach ($keys as $key)
-					if (isset( $array[ $key ] ))
+					if (isset($array[ $key ]))
 						$return[ $key ] = $array[ $key ];
 
 				return $return;
@@ -329,7 +329,7 @@
 		 * ```
 		 *
 		 * @param array   $array Input array.
-		 * @param integer $num   Number of element to extract.
+		 * @param integer $num Number of element to extract.
 		 * @return array|null Array with random element from $array. Null if $array is not array.
 		 */
 		public static function mix ($array, $num)
@@ -385,7 +385,7 @@
 
 			$data = [];
 			foreach ($objects as $object)
-				$data[] = isset ( $object->$attribute ) ? $object->$attribute : null;
+				$data[] = isset ($object->$attribute) ? $object->$attribute : null;
 
 			return $data;
 		}
@@ -419,7 +419,7 @@
 		 *
 		 * @param  array  $objects
 		 * @param  string $attribute Attribute name.
-		 * @param  string $children  Children attribute name.
+		 * @param  string $children Children attribute name.
 		 * @return array
 		 */
 		public static function objectsAttributeRecursive ($objects, $attribute, $children = 'children')
@@ -430,9 +430,9 @@
 			$data = [];
 			foreach ($objects as $item)
 			{
-				if (isset( $item->$attribute ))
+				if (isset($item->$attribute))
 					$data[] = $item->$attribute;
-				if (isset( $item->$children ))
+				if (isset($item->$children))
 					$data = array_merge($data, self::objectsAttributeRecursive($item->$children, $attribute, $children));
 			}
 
@@ -468,8 +468,7 @@
 		 * ```
 		 *
 		 * @param array  $array
-		 * @param string $key   Key name of the array element, may be specified in a dot format to retrieve the value
-		 *                      of a sub-array or the property of an embedded object.
+		 * @param string $key Key name of the array element, may be specified in a dot format to retrieve the value fof a sub-array or the property of an embedded object.
 		 * @param mixed  $value Value to be set.
 		 */
 		public static function setValue (&$array, $key, $value)
