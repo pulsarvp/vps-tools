@@ -62,11 +62,7 @@
 							'frames' => Raven_Stacktrace::get_stack_info($traces),
 						];
 					}
-					$curtime = time();
-					if (( $curtime - $timestamp ) < 3600)
-					{
-						$this->_client->capture($data, false);
-					}
+					$this->_client->capture($data, false);
 				}
 		}
 	}
