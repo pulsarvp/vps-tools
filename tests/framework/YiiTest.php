@@ -3,7 +3,7 @@
 
 	use Yii;
 
-	class YiiTest extends \PHPUnit_Framework_TestCase
+	class YiiTest extends \PHPUnit\Framework\TestCase
 	{
 		public function testP ()
 		{

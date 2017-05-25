@@ -4,7 +4,7 @@
 	use vps\tools\helpers\RemoteFileHelper;
 	use \yii\base\ErrorException;
 
-	class RemoteFileHelperTest extends \PHPUnit_Framework_TestCase
+	class RemoteFileHelperTest extends \PHPUnit\Framework\TestCase
 	{
 		private $_datapath = __DIR__ . '/../data/remote_file_helper';
 

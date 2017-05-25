@@ -65,8 +65,7 @@
 		 *
 		 * @param string  $message Message.
 		 * @param integer $type Message type.
-		 * @param boolean $isRaw Whether given message is raw text or should
-		 *                         be translated.
+		 * @param boolean $isRaw Whether given message is raw text or should be translated.
 		 */
 		public function __construct ($message, $type = self::ERROR, $isRaw = false)
 		{

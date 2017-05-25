@@ -3,7 +3,7 @@
 
 	use Yii;
 
-	class SettingManagerTest extends \PHPUnit_Framework_TestCase
+	class SettingManagerTest extends \PHPUnit\Framework\TestCase
 	{
 		private $_setting;
 		private $_modelClass = 'tests\models\Setting';

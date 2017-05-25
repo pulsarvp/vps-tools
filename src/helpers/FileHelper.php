@@ -1,15 +1,46 @@
 <?php
 	namespace vps\tools\helpers;
 
+	/**
+	 * Class FileHelper
+	 *
+	 * @package vps\tools\helpers
+	 */
 	class FileHelper extends \yii\helpers\BaseFileHelper
 	{
-		const MIME_DIR = 'directory';
-		const MIME_PHP = 'text/x-php';
-		const MIME_TXT = 'text/plain';
-		const MIME_XML = 'application/xml';
+		const MIME_DIR      = 'directory';
+		const MIME_PHP      = 'text/x-php';
+		const MIME_TXT      = 'text/plain';
+		const MIME_XML      = 'application/xml';
+		const MIME_TEXT_XML = 'text/xml';
 
 		/**
 		 * Clears given directory without deleting it itself.
+		 * ```php
+		 * // + dir_1
+		 * //  + dir_1_1
+		 * //    - file1.txt
+		 * //    - file2.txt
+		 * //  + dir_1_2
+		 * //    + dir_1_2_1
+		 * //      - file5.txt
+		 * //  + dir_1_3
+		 * //    - file8.txt
+		 * //    - file9.txt
+		 *
+		 * $result = FileHelper::clearDir('/var/www/dir_1/dir_1_3');
+		 * // $result will be: true
+		 *
+		 * // + dir_1
+		 * //  + dir_1_1
+		 * //    - file1.txt
+		 * //    - file2.txt
+		 * //  + dir_1_2
+		 * //    + dir_1_2_1
+		 * //      - file5.txt
+		 * //  + dir_1_3
+		 *
+		 * ```
 		 *
 		 * @param  string $path
 		 * @return boolean
@@ -41,6 +72,21 @@
 
 		/**
 		 * Recursively count files and directories in given directory.
+		 * ```php
+		 * // + dir_1
+		 * //  + dir_1_1
+		 * //    - file1.txt
+		 * //    - file2.txt
+		 * //  + dir_1_2
+		 * //    + dir_1_2_1
+		 * //      - file5.txt
+		 * //  + dir_1_3
+		 * //    - file8.txt
+		 * //    - file9.txt
+		 *
+		 * $result = FileHelper::countItems('/var/www/dir_1/dir_1_3');
+		 * // $result will be: 2
+		 * ```
 		 *
 		 * @param string $path
 		 * @return int|null
@@ -65,6 +111,21 @@
 
 		/**
 		 * Counts files and directories in given directory. Not recursive.
+		 * ```php
+		 * // + dir_1
+		 * //  + dir_1_1
+		 * //    - file1.txt
+		 * //    - file2.txt
+		 * //  + dir_1_2
+		 * //    + dir_1_2_1
+		 * //      - file5.txt
+		 * //  + dir_1_3
+		 * //    - file8.txt
+		 * //    - file9.txt
+		 *
+		 * $result = FileHelper::countItemsInDir('/var/www/dir_1/dir_1_3');
+		 * // $result will be: 1
+		 * ```
 		 *
 		 * @param  string $path The directory under which the items should be counted.
 		 * @return integer|null
@@ -83,6 +144,30 @@
 
 		/**
 		 * Deletes given file without rising an exception.
+		 * ```php
+		 * // + dir_1
+		 * //  + dir_1_1
+		 * //    - file1.txt
+		 * //    - file2.txt
+		 * //  + dir_1_2
+		 * //    + dir_1_2_1
+		 * //      - file5.txt
+		 * //  + dir_1_3
+		 * //    - file.txt
+		 * //    - file9.txt
+		 *
+		 * FileHelper::deleteFile('/var/www/dir_1/dir_1_3/file.txt');
+		 * // $result will be: екгу
+		 * // + dir_1
+		 * //  + dir_1_1
+		 * //    - file1.txt
+		 * //    - file2.txt
+		 * //  + dir_1_2
+		 * //    + dir_1_2_1
+		 * //      - file5.txt
+		 * //  + dir_1_3
+		 * //    - file9.txt
+		 * ```
 		 *
 		 * @param string $path
 		 * @return bool
@@ -102,8 +187,24 @@
 
 		/**
 		 * Gets directories list in given directory.
+		 * ```php
+		 * // + dir_1
+		 * //  + dir_1_1
+		 * //    - file1.txt
+		 * //    - file2.txt
+		 * //  + dir_1_2
+		 * //    + dir_1_2_1
+		 * //      - file5.txt
+		 * //  + dir_1_3
+		 * //    - file8.txt
+		 * //    - file9.txt
 		 *
-		 * @param  string  $path     The directory under which the items will be looked for.
+		 * $result = FileHelper::listDirs('/var/www/dir_1');
+		 * // $result will be:
+		 * // [ 'dir_1_1', 'dir_1_2', 'dir_1_3' ]
+		 * ```
+		 *
+		 * @param  string  $path The directory under which the items will be looked for.
 		 * @param  boolean $absolute Whether return path to items should be absolute.
 		 * @return array|null List of paths to the found items.
 		 */
@@ -127,8 +228,24 @@
 
 		/**
 		 * Gets files list in given directory.
+		 * ```php
+		 * // + dir_1
+		 * //  + dir_1_1
+		 * //    - file1.txt
+		 * //    - file2.txt
+		 * //  + dir_1_2
+		 * //    + dir_1_2_1
+		 * //      - file5.txt
+		 * //  + dir_1_3
+		 * //    - file8.txt
+		 * //    - file9.txt
 		 *
-		 * @param  string  $path     The directory under which the items will be looked for.
+		 * $result = FileHelper::listFiles('/var/www/dir_1/dir_1_3');
+		 * // $result will be:
+		 * // [ 'file8.txt', 'file9.txt' ]
+		 * ```
+		 *
+		 * @param  string  $path The directory under which the items will be looked for.
 		 * @param  boolean $absolute Whether return path to items should be absolute.
 		 * @return array|null List of paths to the found items.
 		 */
@@ -152,8 +269,24 @@
 
 		/**
 		 * Gets files and directories list in given directory.
+		 * ```php
+		 * // + dir_1
+		 * //  + dir_1_1
+		 * //    - file1.txt
+		 * //    - file2.txt
+		 * //  + dir_1_2
+		 * //    + dir_1_2_1
+		 * //      - file5.txt
+		 * //  + dir_1_3
+		 * //    - file8.txt
+		 * //    - file9.txt
 		 *
-		 * @param  string  $path     The directory under which the items will be looked for.
+		 * $result = FileHelper::listItems('/var/www/dir_1/dir_1_2');
+		 * // $result will be:
+		 * // [ 'dir_1_2_1', 'file5.txt' ]
+		 * ```
+		 *
+		 * @param  string  $path The directory under which the items will be looked for.
 		 * @param  boolean $absolute Whether return path to items should be absolute.
 		 * @return array|null List of paths to the found items.
 		 */
@@ -176,8 +309,23 @@
 		/**
 		 * Gets files and directories list in given directory and order it by
 		 * modification time. Not recursive.
+		 * ```php
+		 * // + dir_1
+		 * //  + dir_1_1
+		 * //    - file1.txt
+		 * //    - file2.txt
+		 * //  + dir_1_2
+		 * //    + dir_1_2_1
+		 * //      - file5.txt
+		 * //  + dir_1_3
+		 * //    - file8.txt
+		 * //    - file9.txt
+		 * $result = FileHelper::listItemsByDate('/var/www/dir_1/dir_1_3');
+		 * // $result will be:
+		 * [ 'file9.txt', 'file8.txt' ]
+		 * ```
 		 *
-		 * @param  string  $path  The directory under which the files will be looked for.
+		 * @param  string  $path The directory under which the files will be looked for.
 		 * @param  integer $order Order direction. Default is descending.
 		 * @return array|null Array of pairs 'modification time - full path to the file'.
 		 */
@@ -205,9 +353,26 @@
 
 		/**
 		 * Gets files list in given directory that match pattern.
+		 * ```php
+		 * // + dir_1
+		 * //  + dir_1_1
+		 * //    - file1.txt
+		 * //    - file2.txt
+		 * //  + dir_1_2
+		 * //    + dir_1_2_1
+		 * //      - file5.txt
+		 * //  + dir_1_3
+		 * //    - file8.txt
+		 * //    - file9.txt
+		 * //  - file10.php
+		 * $result = FileHelper::listPatternItems('/var/www/dir_1_3', '*.php');
+		 *
+		 * // $result will be:
+		 * // ['file10.php']
+		 * ```
 		 *
 		 * @param  string  $pattern
-		 * @param  string  $path     The directory under which the items will be looked for.
+		 * @param  string  $path The directory under which the items will be looked for.
 		 * @param  boolean $absolute Whether return path to items should be absolute.
 		 * @return array List of paths to the found items.
 		 */
@@ -234,6 +399,21 @@
 
 		/**
 		 * Finds recursively files in given path and return list of paths relative to second parameter.
+		 * ```php
+		 * // + dir_1
+		 * //  + dir_1_1
+		 * //    - file1.txt
+		 * //    - file2.txt
+		 * //  + dir_1_2
+		 * //    + dir_1_2_1
+		 * //      - file5.txt
+		 * //  + dir_1_3
+		 * //    - file8.txt
+		 * //    - file9.txt
+		 * $result = FileHelper::listRelativeFiles('/var/www/dir_1/dir_1_3',/var/www/dir_1);
+		 * // $result will be:
+		 * // [ 'dir_1_3/file8.txt', 'dir_1_3/file9.txt' ]
+		 * ```
 		 *
 		 * @param  string $path
 		 * @param  string $relativepath
@@ -261,6 +441,10 @@
 
 		/**
 		 * Get mimetype of the given file.
+		 * ```php
+		 * $result = FileHelper::mimetypeFile('/var/www/phpunit.xml');
+		 * // $result wiil be: 'application/xml'
+		 * ```
 		 *
 		 * @param  string $path Path to the file.
 		 * @return string|null

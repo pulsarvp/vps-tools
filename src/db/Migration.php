@@ -1,6 +1,8 @@
 <?php
 	namespace vps\tools\db;
 
+	use vps\tools\helpers\StringHelper;
+	use yii\base\InvalidConfigException;
 	use yii\db\Query;
 
 	/**
@@ -10,13 +12,13 @@
 	 */
 	class Migration extends \yii\db\Migration
 	{
+
 		/**
 		 * Creates database view.
 		 *
 		 * @param string $name View name.
 		 * @param Query  $query Query that is used to create view.
-		 * @param bool   $replace Whether to replace existing view with the
-		 *                        same name.
+		 * @param bool   $replace Whether to replace existing view with the same name.
 		 * @throws \yii\db\Exception
 		 * @see dropView
 		 */
@@ -32,9 +34,49 @@
 		}
 
 		/**
+		 * Server encoding checking
+		 *
+		 * @param string $encoding
+		 * @param bool   $exception
+		 *
+		 * @return bool
+		 * @throws InvalidConfigException
+		 */
+		public function checkCollation ($encoding = 'utf8', $exception = true)
+		{
+			$variables = [
+				'character_set_client',
+				'character_set_connection',
+				'character_set_database',
+				'character_set_results',
+				'character_set_server',
+				'character_set_system',
+				'collation_connection',
+				'collation_database',
+				'collation_server'
+			];
+			foreach ($variables as $variable)
+			{
+				$sql = "show variables like '" . $variable . "'";
+				$value = $this->db->createCommand($sql)->queryOne();
+				$pos = StringHelper::pos($value[ 'Value' ], $encoding);
+				if ($pos !== 0)
+				{
+					if (!$exception)
+						return false;
+					else
+						throw new InvalidConfigException ("Parameter $variable does not match $encoding.");
+				}
+
+			}
+			return true;
+		}
+
+		/**
 		 * Drops view by name.
 		 *
 		 * @param string $name
+		 *
 		 * @see createView
 		 */
 		public function dropView ($name)
@@ -50,6 +92,7 @@
 		 *
 		 * @param string      $table
 		 * @param string|null $column
+		 *
 		 * @return string[]
 		 */
 		public function findForeignKeys ($table, $column = null)
@@ -72,6 +115,7 @@
 		 * new line just in case.
 		 *
 		 * @param string $path Path to the file.
+		 *
 		 * @throws \Exception
 		 * @throws \yii\db\Exception
 		 */
