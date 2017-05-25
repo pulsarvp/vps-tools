@@ -29,21 +29,21 @@
 
 			foreach ($variables as $variable => $coll)
 			{
-				$sql = "SET global " . $variable . "=" . $coll;
+				$sql = "SET " . $variable . "=" . $coll;
 
 				Yii::$app->db->createCommand($sql)->execute();
 			}
 
 			$migration = new Migration();
 			$this->assertFalse($migration->checkCollation('latin1', false));
-			$this->assertFalse($migration->checkCollation('utf8', false));
+			$this->assertTrue($migration->checkCollation('utf8', false));
 
 			$this->expectException(InvalidConfigException::class);
-			$migration->checkCollation('utf8');
+			$migration->checkCollation('latin1');
 
 			foreach ($old as $variable)
 			{
-				$sql = "SET global " . $variable[ 'Variable_name' ] . "=" . $variable[ 'Value' ];
+				$sql = "SET " . $variable[ 'Variable_name' ] . "=" . $variable[ 'Value' ];
 				Yii::$app->db->createCommand($sql)->execute();
 			}
 		}
