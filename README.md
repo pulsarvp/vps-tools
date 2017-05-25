@@ -1,6 +1,7 @@
 # vps-tools
 
 [![Build Status](https://img.shields.io/travis/pulsarvp/vps-tools.svg)](http://travis-ci.org/pulsarvp/vps-tools)
+[![Dependency Status](https://www.versioneye.com/user/projects/592623c025feb90062a6aae8/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/592623c025feb90062a6aae8)
 
 Набор инструментов для работы сервисов PulsarVP.
 
