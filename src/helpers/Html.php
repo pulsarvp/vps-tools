@@ -3,26 +3,38 @@
 
 	use Yii;
 
+	/**
+	 * Class Html
+	 *
+	 * @package vps\tools\helpers
+	 */
 	class Html extends \yii\helpers\BaseHtml
 	{
 		/**
 		 * Overwritten method. By default i18n is used.
+		 * ```php
+		 * Html::a('Google', 'http://google.com', [ 'raw' => true]);
+		 * // <a href="http://google.com">Google</a>
+		 *
+		 * Html::a('Home', Url::toRoute(['site/index']), [ 'raw' => true]);
+		 * // <a href="site/index">Home</a>
+		 * ```
 		 *
 		 * @inheritdoc
 		 */
 		public static function a ($text, $url = null, $options = [])
 		{
-			if (!isset( $options[ 'title' ] ))
+			if (!isset($options[ 'title' ]))
 				$options[ 'title' ] = $text;
-			if (isset( $options[ 'raw' ] ) and $options[ 'raw' ] == true)
+			if (isset($options[ 'raw' ]) and $options[ 'raw' ] == true)
 			{
-				unset( $options[ 'raw' ] );
+				unset($options[ 'raw' ]);
 
 				return parent::a($text, $url, $options);
 			}
 			else
 			{
-				unset( $options[ 'raw' ] );
+				unset($options[ 'raw' ]);
 
 				return parent::a(Yii::t('app', $text), $url, $options);
 			}
@@ -30,11 +42,19 @@
 
 		/**
 		 * Generates link with font-awesome icon as text.
+		 * ```php
+		 * Html::afa('google', 'http://google.com');
+		 * // <a href="http://google.com"><i class="fa fa-google"></i></a>
+		 *
+		 * Html::afa('edit', Url::toRoute(['user/edit', 'id'=>'2']));
+		 * // <a href="user/edit/2"><i class="fa fa-edit"></i></a>
+		 * ```
+		 *
 		 * @inheritdoc
 		 */
 		public static function afa ($name, $url = null, $options = [])
 		{
-			if (!isset( $options[ 'title' ] ))
+			if (!isset($options[ 'title' ]))
 				$options[ 'title' ] = $name;
 
 			return parent::a(self::fa($name, $options), $url, $options);
@@ -42,13 +62,16 @@
 
 		/**
 		 * Creates button checkbox or radio group.
+		 *```php
+		 * Html::buttonGroup('Group', null, ['1'=>'first','2'=>'Second'], 'radio' );
+		 * ```
 		 *
 		 * @link http://getbootstrap.com/javascript/#buttons-checkbox-radio
-		 * @param string            $name     Name for the inputs.
+		 * @param string            $name Name for the inputs.
 		 * @param string|array|null $selected Selected values.
-		 * @param array             $items    The data item used to generate the checkboxes. The array keys are the
+		 * @param array             $items The data item used to generate the checkboxes. The array keys are the
 		 *                                    input values, while the array values are the corresponding labels.
-		 * @param string            $type     Input type - checkbox/radio.
+		 * @param string            $type Input type - checkbox/radio.
 		 * @return string
 		 */
 		public static function buttonGroup ($name, $selected, $items, $type = 'checkbox')
@@ -68,25 +91,30 @@
 		/**
 		 * Creates button with FontAwesome icon.
 		 *
-		 * @param string $text    Button text.
-		 * @param string $fa      Icon name.
+		 * ```php
+		 * Html::buttonFa('Save', 'save', [ 'raw' => true ]);
+		 * // <button type="button"><i class="fa fa-save margin"></i>Save</button>
+		 * ```
+		 *
+		 * @param string $text Button text.
+		 * @param string $fa Icon name.
 		 * @param array  $options Additional options.
 		 * @return string
 		 */
 		public static function buttonFa ($text, $fa, $options = [])
 		{
 			$icon = self::tag('i', '', [ 'class' => 'fa fa-' . $fa . ' margin' ]);
-			if (!isset( $options[ 'title' ] ))
+			if (!isset($options[ 'title' ]))
 				$options[ 'title' ] = $text;
-			if (isset( $options[ 'raw' ] ) and $options[ 'raw' ] == true)
+			if (isset($options[ 'raw' ]) and $options[ 'raw' ] == true)
 			{
-				unset( $options[ 'raw' ] );
+				unset($options[ 'raw' ]);
 
 				return parent::button($icon . $text, $options);
 			}
 			else
 			{
-				unset( $options[ 'raw' ] );
+				unset($options[ 'raw' ]);
 
 				return parent::button($icon . Yii::t('app', $text), $options);
 			}
@@ -94,6 +122,11 @@
 
 		/**
 		 * Compresses HTML, removes all new lines, tabs and spaces.
+		 * ```php
+		 * $input =  '<a href="#test" >adsda</a> <div> </div>dcl sskd';
+		 * Html::compress($input);
+		 * // return '<a href="#test">adsda</a><div></div>dcl sskd'
+		 * ```
 		 *
 		 * @param string $input
 		 * @param array  $preserve
@@ -150,6 +183,10 @@
 
 		/**
 		 * Generates Font-Awesome icon.
+		 * ```php
+		 * Html::fa('icon');
+		 * // <i class="fa fa-icon"></i>
+		 * ```
 		 *
 		 * @param string $name Font-Awesome icon name. Will be appended after 'fa-' prefix.
 		 * @param array  $options
@@ -157,7 +194,7 @@
 		 */
 		public static function fa ($name, $options = [])
 		{
-			if (!isset( $options[ 'class' ] ))
+			if (!isset($options[ 'class' ]))
 				$options[ 'class' ] = '';
 			$options[ 'class' ] = trim($options[ 'class' ] . ' fa fa-' . $name);
 
@@ -166,8 +203,11 @@
 
 		/**
 		 * Generates bootstrap list group with order displayed.
+		 * ```php
+		 * Html::listGroupOrder([['title'=> 'Title', 'order' => '1']]);
+		 * ```
 		 *
-		 * @param array $items   Array of elements with following structure:
+		 * @param array $items Array of elements with following structure:
 		 *                       * title - item title.
 		 *                       * order - Item order.
 		 *                       * id
@@ -178,9 +218,9 @@
 		 */
 		public static function listGroupOrder ($items, $options = [])
 		{
-			$options[ 'class' ] = isset( $options[ 'class' ] ) ? $options[ 'class' ] . ' list-group' : 'list-group';
-			$orderClass = isset( $options[ 'orderClass' ] ) ? $options[ 'orderClass' ] : 'default';
-			$title = isset( $options[ 'title' ] ) ? $options[ 'title' ] : 'title';
+			$options[ 'class' ] = isset($options[ 'class' ]) ? $options[ 'class' ] . ' list-group' : 'list-group';
+			$orderClass = isset($options[ 'orderClass' ]) ? $options[ 'orderClass' ] : 'default';
+			$title = isset($options[ 'title' ]) ? $options[ 'title' ] : 'title';
 
 			$options[ 'item' ] = function ($item, $index) use ($orderClass, $title)
 			{
@@ -192,6 +232,30 @@
 
 		/**
 		 * Generates table.
+		 * ```php
+		 * Html::table([ 1, 2, 3 ], [ [ 2, 3, 4 ], [ 3, 4, 5 ] ], [ 'class' => 'table' ]);
+		 * // <table class="table">
+		 * //   <thead>
+		 * //       <tr>
+		 * //           <td>1</td>
+		 * //           <td>2</td>
+		 * //           <td>3</td>
+		 * //       </tr>
+		 * //   </thead>
+		 * // <tbody>
+		 * //       <tr>
+		 * //           <td>2</td>
+		 * //           <td>3</td>
+		 * //           <td>4</td>
+		 * //       </tr>
+		 * //       <tr>
+		 * //           <td>3</td>
+		 * //           <td>4</td>
+		 * //           <td>5</td>
+		 * //       </tr>
+		 * // </tbody>
+		 * // </table>
+		 * ```
 		 *
 		 * @param array $head
 		 * @param array $body
@@ -202,7 +266,7 @@
 		{
 			$table = self::beginTag('table', $options);
 
-			if (!empty( $head ) and is_array($head))
+			if (!empty($head) and is_array($head))
 			{
 				$table .= self::beginTag('thead');
 				$table .= self::beginTag('tr');

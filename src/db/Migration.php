@@ -14,11 +14,9 @@
 		/**
 		 * Creates database view.
 		 *
-		 * @param string $name    View name.
-		 * @param Query  $query   Query that is used to create view.
-		 * @param bool   $replace Whether to replace existing view with the
-		 *                        same name.
-		 *
+		 * @param string $name View name.
+		 * @param Query  $query Query that is used to create view.
+		 * @param bool   $replace Whether to replace existing view with the same name.
 		 * @throws \yii\db\Exception
 		 * @see dropView
 		 */
@@ -118,7 +116,7 @@
 			if ($this->db->getDriverName() == 'mysql')
 			{
 				preg_match("/dbname=([^;]*)/", $this->db->dsn, $match);
-				if (isset( $match[ 1 ] ))
+				if (isset($match[ 1 ]))
 					return $match[ 1 ];
 			}
 
