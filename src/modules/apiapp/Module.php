@@ -1,8 +1,9 @@
 <?php
 	namespace vps\tools\modules\apiapp;
 
-	use Yii;
+	use vps\tools\helpers\ConfigurationHelper;
 	use yii\base\BootstrapInterface;
+	use Yii;
 
 	/**
 	 * Class Module ApiApp
@@ -32,17 +33,7 @@
 			], false);
 
 			// Add module I18N category.
-			if (!isset($app->i18n->translations[ 'apiapp.*' ]))
-			{
-				Yii::$app->i18n->translations[ 'apiapp*' ] = [
-					'class'            => 'yii\i18n\PhpMessageSource',
-					'basePath'         => __DIR__ . '/messages',
-					'forceTranslation' => true,
-					'fileMap'          => [
-						'apiapp' => 'apiapp.php',
-					]
-				];
-			}
+			ConfigurationHelper::addTranslation('apiapp', [ 'apiapp' => 'apiapp.php' ], __DIR__ . '/messages');
 
 			$this->title = Yii::tr($this->title, [], 'apiapp');
 		}

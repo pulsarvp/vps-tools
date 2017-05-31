@@ -17,7 +17,7 @@
 				{/if}
 			</div>
 			<div class="col-md-2 text-right">
-				{Yii::tr('Version {version}', ['version' => Yii::$app->version])}
+				{Yii::tr('Version {version}', ['version' => Yii::$app->version], 'widgets/footer')}
 			</div>
 		</div>
 	</div>

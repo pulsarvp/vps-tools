@@ -1,6 +1,7 @@
 <?php
 	namespace vps\tools\modules\setting;
 
+	use vps\tools\helpers\ConfigurationHelper;
 	use yii\base\BootstrapInterface;
 	use Yii;
 
@@ -31,18 +32,7 @@
 				],
 			], false);
 
-			// Add module I18N category.
-			if (!isset($app->i18n->translations[ 'apiapp.*' ]))
-			{
-				Yii::$app->i18n->translations[ 'setting*' ] = [
-					'class'            => 'yii\i18n\PhpMessageSource',
-					'basePath'         => __DIR__ . '/messages',
-					'forceTranslation' => true,
-					'fileMap'          => [
-						'setting' => 'setting.php',
-					]
-				];
-			}
+			ConfigurationHelper::addTranslation('setting', [ 'setting' => 'setting.php' ], __DIR__ . '/messages');
 
 			$this->title = Yii::tr($this->title, [], 'setting');
 		}
