@@ -1,12 +1,15 @@
 <?php
 	namespace vps\tools\widgets;
 
+	use vps\tools\helpers\ConfigurationHelper;
 	use yii\base\Widget;
 	use yii\web\View;
+	use Yii;
 
 	/**
 	 * Widget footer site
 	 * Class FooterWidget
+	 *
 	 * @package vps\tools\widgets
 	 */
 	class FooterWidget extends Widget
@@ -62,6 +65,10 @@
 					]
 				]
 			]);
+
+			ConfigurationHelper::addTranslation('widgets', [ 'widgets/footer' => 'footer.php' ], __DIR__ . '/messages');
+
+			Yii::$app->view->registerCss('footer .footer-links a:not(:last-child) { margin-right: 10px }');
 		}
 
 		/**
@@ -69,7 +76,6 @@
 		 */
 		public function run ()
 		{
-
 			return $this->renderFile(__DIR__ . '/views/footer.tpl', [
 				'copyrightFrom' => $this->copyrightFrom,
 				'company'       => $this->company,
