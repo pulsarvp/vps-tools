@@ -9,7 +9,7 @@
 					{$company['title']}
 				{/if}
 			</div>
-			<div class="col-md-7">
+			<div class="col-md-7 footer-links">
 				{if !empty($links)}
 					{foreach $links as $link}
 						{Html::a( $link['title'], $link['url'])}

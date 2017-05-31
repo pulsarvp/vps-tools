@@ -67,6 +67,8 @@
 			]);
 
 			ConfigurationHelper::addTranslation('widgets', [ 'widgets/footer' => 'footer.php' ], __DIR__ . '/messages');
+
+			Yii::$app->view->registerCss('footer .footer-links a:not(:last-child) { margin-right: 10px }');
 		}
 
 		/**
