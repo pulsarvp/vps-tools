@@ -24,7 +24,8 @@
 
 		public function safeDown()
 		{
-		echo "<?= $className ?> cannot be reverted.\n";
+			echo "<?= $className ?> cannot be reverted.\n";
 
-		return false;
+			return false;
+		}
 	}
