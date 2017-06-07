@@ -1,4 +1,5 @@
 <?php
+
 	namespace vps\tools\db;
 
 	use vps\tools\helpers\StringHelper;
@@ -67,9 +68,16 @@
 					else
 						throw new InvalidConfigException ("Parameter $variable does not match $encoding.");
 				}
-
 			}
+
 			return true;
+		}
+
+		public function checkEngine ($name, $default = true, $exception = true)
+		{
+			$engines = $this->db->createCommand("SHOW ENGINES")->execute();
+			var_dump($engines);
+			exit();
 		}
 
 		/**
