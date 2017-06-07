@@ -1,10 +1,12 @@
 <?php
+
 	namespace tests\db;
 
 	use PHPUnit\Framework\TestCase;
 	use vps\tools\db\Migration;
 	use Yii;
 	use yii\base\InvalidConfigException;
+	use yii\db\Exception;
 
 	class MigrationTest extends TestCase
 	{
@@ -46,6 +48,82 @@
 				$sql = "SET " . $variable[ 'Variable_name' ] . "=" . $variable[ 'Value' ];
 				Yii::$app->db->createCommand($sql)->execute();
 			}
+		}
+
+		public function testCheckEngine ()
+		{
+			$enginesResult = Yii::$app->db->createCommand("SHOW ENGINES")->queryAll();
+
+			$engineDefault = null;
+			$engineYes = null;
+			$engineNo = null;
+			$engineDisabled = null;
+
+			foreach ($enginesResult as $result)
+			{
+				switch ($result[ 'Support' ])
+				{
+					case 'DEFAULT':
+						$engineDefault = $result[ 'Engine' ];
+						break;
+
+					case 'YES':
+						$engineYes = $result[ 'Engine' ];
+						break;
+
+					case 'DISABLED':
+						$engineDisabled = $result[ 'Engine' ];
+						break;
+
+					case 'NO':
+						$engineNo = $result[ 'Engine' ];
+						break;
+				}
+			}
+
+			$migration = new Migration();
+
+			if ($engineDefault)
+			{
+				$this->assertTrue($migration->checkEngine($engineDefault));
+				$this->assertTrue($migration->checkEngine($engineDefault, false));
+				$this->assertTrue($migration->checkEngine($engineDefault, false, false));
+			}
+
+			if ($engineYes)
+			{
+				$this->expectException(Exception::class);
+				$this->expectExceptionMessage("Engine $engineYes is enabled but not default.");
+				$migration->checkEngine($engineYes);
+
+				$this->assertFalse($migration->checkEngine($engineYes, true, false));
+				$this->assertTrue($migration->checkEngine($engineYes, false));
+				$this->assertTrue($migration->checkEngine($engineYes, false, false));
+			}
+
+			if ($engineNo)
+			{
+				$this->expectException(Exception::class);
+				$this->expectExceptionMessage("Engine $engineNo is not supported.");
+				$migration->checkEngine($engineNo);
+
+				$this->assertFalse($migration->checkEngine($engineNo, false, false));
+			}
+
+			if ($engineDisabled)
+			{
+				$this->expectException(Exception::class);
+				$this->expectExceptionMessage("Engine $engineDisabled is supported but disabled.");
+				$migration->checkEngine($engineDisabled);
+
+				$this->assertFalse($migration->checkEngine($engineDisabled, false, false));
+			}
+
+			$this->expectException(Exception::class);
+			$this->expectExceptionMessage("Engine _random_ not found in the list of database engines.");
+			$migration->checkEngine("_random_");
+
+			$this->assertFalse($migration->checkEngine("_random_", false, false));
 		}
 
 		public function testFindForeignKeys ()
