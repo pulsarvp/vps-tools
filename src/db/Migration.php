@@ -4,6 +4,7 @@
 
 	use vps\tools\helpers\StringHelper;
 	use yii\base\InvalidConfigException;
+	use yii\db\Exception;
 	use yii\db\Query;
 
 	/**
@@ -73,11 +74,57 @@
 			return true;
 		}
 
-		public function checkEngine ($name, $default = true, $exception = true)
+		/**
+		 * Check if provided engine is supported and enabled.
+		 *
+		 * @param string $name Engine name.
+		 * @param bool   $default Whether to check if engine is default.
+		 * @param bool   $exception Whether to throw exception on error.
+		 * @return bool True in case of engine is enabled and (in case of default is true) default. Otherwise exception is thrown (id exception is true) or false returned.
+		 * @throws \yii\db\Exception
+		 */
+		public function checkEngine (string $name = 'InnoDB', bool $default = true, bool $exception = true)
 		{
-			$engines = $this->db->createCommand("SHOW ENGINES")->execute();
-			var_dump($engines);
-			exit();
+			$engines = $this->db->createCommand("SHOW ENGINES")->queryAll();
+			foreach ($engines as $engine)
+			{
+				if (strcasecmp($engine[ 'Engine' ], $name) == 0)
+				{
+					switch ($engine[ 'Support' ])
+					{
+						case 'DEFAULT':
+							return true;
+
+						case 'YES':
+							if ($default)
+							{
+								if ($exception)
+									throw new Exception("Engine $name is enabled but not default.");
+								else
+									return false;
+							}
+							else
+								return true;
+
+						case 'DISABLED':
+							if ($exception)
+								throw new Exception("Engine $name is supported but disabled.");
+							else
+								return false;
+
+						default:
+							if ($exception)
+								throw new Exception("Engine $name is not supported.");
+							else
+								return false;
+					}
+				}
+			}
+
+			if ($exception)
+				throw new Exception("Engine $name not found in the list of database engines.");
+			else
+				return false;
 		}
 
 		/**
