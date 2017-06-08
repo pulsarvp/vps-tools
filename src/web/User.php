@@ -20,4 +20,14 @@
 		 */
 		public $loginUrl = [ 'user/login' ];
 
+		/**
+		 * Set authTimeout.
+		 *
+		 * @param string $name
+		 */
+		public function setAuthTimeoutDb ($name)
+		{
+			$this->authTimeout = Yii::$app->settings->get($name);
+		}
+
 	}
