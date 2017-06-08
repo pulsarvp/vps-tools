@@ -1,4 +1,5 @@
 <?php
+
 	namespace vps\tools\widgets;
 
 	use vps\tools\helpers\ConfigurationHelper;
@@ -68,7 +69,7 @@
 
 			ConfigurationHelper::addTranslation('widgets', [ 'widgets/footer' => 'footer.php' ], __DIR__ . '/messages');
 
-			Yii::$app->view->registerCss('footer .footer-links a:not(:last-child) { margin-right: 10px }');
+			Yii::$app->view->registerCss('footer .footer-links {text-align: center} footer .footer-links a:not(:last-child) { margin-right: 10px } footer .footer-version {text-align: right}');
 		}
 
 		/**

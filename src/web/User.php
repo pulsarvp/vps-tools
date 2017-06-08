@@ -1,5 +1,8 @@
 <?php
+
 	namespace vps\tools\web;
+
+	use Yii;
 
 	class User extends \yii\web\User
 	{
@@ -19,5 +22,15 @@
 		 * @inheritdoc.
 		 */
 		public $loginUrl = [ 'user/login' ];
+
+		/**
+		 * Set authTimeout.
+		 *
+		 * @param string $name
+		 */
+		public function setAuthTimeoutDb ($name = 'user_auth_timeout')
+		{
+			$this->authTimeout = Yii::$app->settings->get($name);
+		}
 
 	}
