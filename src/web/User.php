@@ -1,5 +1,8 @@
 <?php
+
 	namespace vps\tools\web;
+
+	use Yii;
 
 	class User extends \yii\web\User
 	{
@@ -25,7 +28,7 @@
 		 *
 		 * @param string $name
 		 */
-		public function setAuthTimeoutDb ($name)
+		public function setAuthTimeoutDb ($name = 'user_auth_timeout')
 		{
 			$this->authTimeout = Yii::$app->settings->get($name);
 		}
