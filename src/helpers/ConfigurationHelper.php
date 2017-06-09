@@ -1,9 +1,9 @@
 <?php
+
 	namespace vps\tools\helpers;
 
 	use Yii;
 	use yii\base\InvalidConfigException;
-	use yii\base\Object;
 	use yii\i18n\PhpMessageSource;
 
 	/**
@@ -24,6 +24,7 @@
 		 * @param string      $name
 		 * @param array       $fileMap
 		 * @param string|null $basePath
+		 *
 		 * @throws \yii\base\InvalidConfigException
 		 */
 		public static function addTranslation ($name, $fileMap, $basePath = null)
@@ -31,8 +32,8 @@
 			$name .= '*';
 			if (isset(Yii::$app->i18n->translations[ $name ]))
 			{
-				Yii::$app->i18n->translations[ $name ][ 'fileMap' ] = array_merge(
-					Yii::$app->i18n->translations[ $name ][ 'fileMap' ],
+				Yii::$app->i18n->translations[ $name ]->fileMap = array_merge(
+					Yii::$app->i18n->translations[ $name ]->fileMap,
 					$fileMap
 				);
 			}
