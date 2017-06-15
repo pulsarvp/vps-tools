@@ -36,8 +36,13 @@
 			parent::init();
 
 			$this->_use = Yii::$app->settings->get('sentry_use', 0);
-			$this->_dsn = Yii::$app->settings->get('sentry_dsn', '');
-			$this->_client = new Raven_Client($this->_dsn);
+			if ($this->_use)
+			{
+				$this->_dsn = Yii::$app->settings->get('sentry_dsn', '');
+				$this->_client = new Raven_Client($this->_dsn);
+				$this->_client->setEnvironment(YII_DEBUG ? 'DEV' : 'PROD');
+				$this->_client->setRelease(Yii::$app->version);
+			}
 		}
 
 		/**
@@ -50,12 +55,22 @@
 				foreach ($this->messages as $message)
 				{
 					list($msg, $level, $category, $timestamp, $traces) = $message;
-					$levelName = Logger::getLevelName($level);
+
+					if (!Yii::$app->user->isGuest)
+						$user = [
+							'id'    => Yii::$app->user->id,
+							'email' => Yii::$app->user->identity->email,
+							'name'  => Yii::$app->user->identity->name
+						];
+					else
+						$user = [];
+
 					$data = [
 						'timestamp' => $timestamp,
-						'level'     => $levelName,
+						'level'     => Logger::getLevelName($level),
 						'tags'      => [ 'category' => $category ],
 						'message'   => $msg,
+						'user'      => $user
 					];
 					if (!empty($traces))
 					{
