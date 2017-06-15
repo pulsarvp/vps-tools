@@ -1,4 +1,5 @@
 <?php
+
 	namespace vps\tools\log;
 
 	use Raven_Client;
@@ -48,15 +49,15 @@
 			if ($this->_use)
 				foreach ($this->messages as $message)
 				{
-					list( $msg, $level, $category, $timestamp, $traces ) = $message;
+					list($msg, $level, $category, $timestamp, $traces) = $message;
 					$levelName = Logger::getLevelName($level);
 					$data = [
-						'timestamp' => Yii::$app->formatter->asDatetime($timestamp, 'Y-m-d\TH:i:s\Z'),
+						'timestamp' => $timestamp,
 						'level'     => $levelName,
 						'tags'      => [ 'category' => $category ],
 						'message'   => $msg,
 					];
-					if (!empty( $traces ))
+					if (!empty($traces))
 					{
 						$data[ 'sentry.interfaces.Stacktrace' ] = [
 							'frames' => Raven_Stacktrace::get_stack_info($traces),
