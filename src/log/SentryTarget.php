@@ -5,6 +5,7 @@
 	use Raven_Client;
 	use Raven_Stacktrace;
 	use Yii;
+	use yii\base\Exception;
 	use yii\log\Logger;
 	use yii\log\Target;
 
@@ -56,14 +57,19 @@
 				{
 					list($msg, $level, $category, $timestamp, $traces) = $message;
 
-					if (!Yii::$app->user->isGuest)
-						$user = [
-							'id'    => Yii::$app->user->id,
-							'email' => Yii::$app->user->identity->email,
-							'name'  => Yii::$app->user->identity->name
-						];
-					else
-						$user = [];
+					$user = [];
+					try
+					{
+						if (Yii::$app->user and !Yii::$app->user->isGuest)
+							$user = [
+								'id'    => Yii::$app->user->id,
+								'email' => Yii::$app->user->identity->email,
+								'name'  => Yii::$app->user->identity->name
+							];
+					}
+					catch (Exception $e)
+					{
+					}
 
 					$data = [
 						'timestamp' => $timestamp,
