@@ -1,4 +1,5 @@
 <?php
+
 	namespace vps\tools\helpers;
 
 	/**
@@ -378,6 +379,8 @@
 		 */
 		public static function listPatternItems ($path, $pattern = '*', $absolute = false)
 		{
+			$data = [];
+
 			if (is_dir($path) and is_readable($path))
 			{
 				$files = glob($path . '/' . $pattern);
@@ -385,16 +388,13 @@
 				if ($absolute)
 					return $files;
 
-				$data = [];
 				$n = strlen($path . '/');
 
 				foreach ($files as $file)
 					$data[] = substr($file, $n);
-
-				return $data;
 			}
 
-			return null;
+			return $data;
 		}
 
 		/**
