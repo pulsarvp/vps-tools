@@ -1,4 +1,5 @@
 <?php
+
 	namespace tests\helpers;
 
 	use vps\tools\helpers\FileHelper;
@@ -214,7 +215,7 @@
 
 		public function testListPatternsItems ()
 		{
-			$this->assertNull(FileHelper::listPatternItems('ashdjghajsdgj'));
+			$this->assertEquals([], FileHelper::listPatternItems('ashdjghajsdgj'));
 
 			$list = FileHelper::listItems($this->datapath);
 			$listParent = FileHelper::listPatternItems($this->datapath);
