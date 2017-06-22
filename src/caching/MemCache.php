@@ -12,6 +12,7 @@
 	 * ```php
 	 * 'cache'     => [
 	 *    'class'             => 'vps\tools\caching\MemCache',
+	 *    'keyPrefixDb'       => 'cache_key_prefix',
 	 *    'enableMemcachedDb' => 'cache_memcached',
 	 *    'serverDb'          => [
 	 *        'port' => 'cache_port',
@@ -48,5 +49,16 @@
 		public function setEnableMemcachedDb ($name)
 		{
 			$this->useMemcached = Yii::$app->settings->get($name);
+		}
+
+		/**
+		 * Set keyPrefix from DB settings.
+		 * @see [[\vps\tools\components\SettingManager]]
+		 *
+		 * @param string $name
+		 */
+		public function setKeyPrefixDb ($name)
+		{
+			$this->keyPrefix = Yii::$app->settings->get($name);
 		}
 	}
