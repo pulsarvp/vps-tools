@@ -63,7 +63,7 @@
 		private function login ()
 		{
 			$this->_sessionID = $this->send('ox.logon', [ $this->_login, $this->_password ]);
-			if (is_array($this->_sessionID) or !is_string($this->_sessionID))
+			if (!is_string($this->_sessionID))
 			{
 				$message = isset($this->_sessionID[ 'faultString' ]) ? $this->_sessionID[ 'faultString' ] : print_r($this->_sessionID, true);
 				throw new InvalidConfigException($message);
