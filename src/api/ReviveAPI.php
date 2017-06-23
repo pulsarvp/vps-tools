@@ -10,7 +10,6 @@
 
 	use Yii;
 	use yii\base\InvalidConfigException;
-	use yii\web\NotFoundHttpException;
 
 	/**
 	 * Class ReviveAPI
@@ -58,14 +57,17 @@
 		private function validateUrl ()
 		{
 			if (filter_var($this->_url, FILTER_VALIDATE_URL) === false)
-				throw new InvalidConfigException(Yii::tr('The must be Url.'));
+				throw new InvalidConfigException(Yii::tr('The setting banner_api_url must be valid URL. Current value is: {_url}', [ '_url' => $this->_url ]));
 		}
 
 		private function login ()
 		{
 			$this->_sessionID = $this->send('ox.logon', [ $this->_login, $this->_password ]);
-			if (is_array($this->_sessionID))
-				throw new NotFoundHttpException($this->_sessionID[ 'faultString' ]);
+			if (is_array($this->_sessionID) or !is_string($this->_sessionID))
+			{
+				$message = isset($this->_sessionID[ 'faultString' ]) ? $this->_sessionID[ 'faultString' ] : print_r($this->_sessionID, true);
+				throw new InvalidConfigException($message);
+			}
 		}
 
 		/**
