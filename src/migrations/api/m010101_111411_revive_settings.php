@@ -13,16 +13,23 @@
 		public function up ()
 		{
 
+			$banner_use = '1';
 			$banner_api_url = 'http://revive/api/v2/xmlrpc/';
 			$banner_api_login = '';
 			$banner_api_password = '';
 			if (Yii::$app->controller->interactive)
 			{
+				$banner_use = Yii::$app->controller->prompt('Show banners. [0/1]', [ 'default' => $banner_use ]);
 				$banner_api_url = Yii::$app->controller->prompt('Enter link for the Revive API', [ 'default' => $banner_api_url ]);
 				$banner_api_login = Yii::$app->controller->prompt('Enter login for the Revive API', [ 'default' => $banner_api_login ]);
 				$banner_api_password = Yii::$app->controller->prompt('Enter password for the Revive API', [ 'default' => $banner_api_password ]);
 			}
 
+			$this->insert('setting', [
+				'name'        => 'banner_use',
+				'value'       => $banner_use,
+				'description' => 'Показывать баннеры.'
+			]);
 			$this->insert('setting', [
 				'name'        => 'banner_api_url',
 				'value'       => $banner_api_url,
@@ -46,7 +53,7 @@
 		public function down ()
 		{
 			$this->delete('setting', [
-				'name' => [ 'banner_api_url', 'banner_api_login', 'banner_api_password' ]
+				'name' => [ 'banner_use', 'banner_api_url', 'banner_api_login', 'banner_api_password' ]
 			]);
 		}
 	}

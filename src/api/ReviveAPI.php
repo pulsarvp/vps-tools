@@ -9,6 +9,8 @@
 	namespace vps\tools\api;
 
 	use Yii;
+	use yii\base\InvalidConfigException;
+	use yii\web\NotFoundHttpException;
 
 	/**
 	 * Class ReviveAPI
@@ -22,10 +24,16 @@
 
 		public function init ()
 		{
-			$this->_url = Yii::$app->settings->get('banner_api_url');
-			$this->_login = Yii::$app->settings->get('banner_api_login');
-			$this->_password = Yii::$app->settings->get('banner_api_password');
-			$this->login();
+			if (Yii::$app->settings->get('banner_use'))
+			{
+				$this->_url = Yii::$app->settings->get('banner_api_url');
+				$this->validateUrl();
+				$this->_login = Yii::$app->settings->get('banner_api_login');
+				$this->_password = Yii::$app->settings->get('banner_api_password');
+				$this->login();
+			}
+			else
+				throw new InvalidConfigException(Yii::tr('Banners are not enabled.'));
 		}
 
 		/**
@@ -47,9 +55,17 @@
 			return $this->send('ox.getUserList', [ $this->_sessionID ]);
 		}
 
+		private function validateUrl ()
+		{
+			if (filter_var($this->_url, FILTER_VALIDATE_URL) === false)
+				throw new InvalidConfigException(Yii::tr('The must be Url.'));
+		}
+
 		private function login ()
 		{
-			$this->_sessionID = $this->send('ox.logon', [$this->_login, $this->_password]);
+			$this->_sessionID = $this->send('ox.logon', [ $this->_login, $this->_password ]);
+			if (is_array($this->_sessionID))
+				throw new NotFoundHttpException($this->_sessionID[ 'faultString' ]);
 		}
 
 		/**
