@@ -1,7 +1,7 @@
 # vps-tools
 
 [![Build Status](https://img.shields.io/travis/pulsarvp/vps-tools.svg)](http://travis-ci.org/pulsarvp/vps-tools)
-[![Dependency Status](https://www.versioneye.com/user/projects/592623c025feb90062a6aae8/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/592623c025feb90062a6aae8)
+[![Dependency Status](https://www.versioneye.com/user/projects/594c0e326725bd005dd074dd/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/594c0e326725bd005dd074dd)
 
 [![Code Climate](https://codeclimate.com/github/pulsarvp/vps-tools/badges/gpa.svg)](https://codeclimate.com/github/pulsarvp/vps-tools)
 [![Issue Count](https://codeclimate.com/github/pulsarvp/vps-tools/badges/issue_count.svg)](https://codeclimate.com/github/pulsarvp/vps-tools)
