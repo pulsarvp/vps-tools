@@ -26,17 +26,17 @@
 			$this->insert('setting', [
 				'name'        => 'banner_api_url',
 				'value'       => $banner_api_url,
-				'description' => 'Базовая ссылка для Revive API.'
+				'description' => 'Базовая ссылка для доступа к Revive API.'
 			]);
 			$this->insert('setting', [
 				'name'        => 'banner_api_login',
 				'value'       => $banner_api_login,
-				'description' => 'Логин для Revive API.'
+				'description' => 'Логин для доступа к Revive API.'
 			]);
 			$this->insert('setting', [
 				'name'        => 'banner_api_password',
 				'value'       => $banner_api_password,
-				'description' => 'Пароль для Revive API.'
+				'description' => 'Пароль для доступа к Revive API.'
 			]);
 		}
 

@@ -16,12 +16,16 @@
 	class ReviveAPI extends \yii\base\Object
 	{
 		private $_url;
+		private $_login;
+		private $_password;
 		private $_sessionID;
 
 		public function init ()
 		{
 			$this->_url = Yii::$app->settings->get('banner_api_url');
-			$this->_login();
+			$this->_login = Yii::$app->settings->get('banner_api_login');
+			$this->_password = Yii::$app->settings->get('banner_api_password');
+			$this->login();
 		}
 
 		/**
@@ -31,7 +35,7 @@
 		 */
 		public function getAgencies ()
 		{
-			return $this->_send('ox.getAgencyList', [ $this->_sessionID ]);
+			return $this->send('ox.getAgencyList', [ $this->_sessionID ]);
 		}
 
 		/**
@@ -40,12 +44,12 @@
 		 */
 		public function getUsers ()
 		{
-			return $this->_send('ox.getUserList', [ $this->_sessionID ]);
+			return $this->send('ox.getUserList', [ $this->_sessionID ]);
 		}
 
-		private function _login ()
+		private function login ()
 		{
-			$this->_sessionID = $this->_send('ox.logon', [ Yii::$app->settings->get('banner_api_login'), Yii::$app->settings->get('banner_api_password') ]);
+			$this->_sessionID = $this->send('ox.logon', [$this->_login, $this->_password]);
 		}
 
 		/**
@@ -56,7 +60,7 @@
 		 *
 		 * @return mixed
 		 */
-		private function _send (string $method, array $params)
+		private function send (string $method, array $params)
 		{
 
 			$request = xmlrpc_encode_request($method, $params);
