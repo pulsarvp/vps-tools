@@ -58,6 +58,16 @@
 		}
 
 		/**
+		 * Get Banners list by campaign name
+		 *
+		 * @return array
+		 */
+		public function getBanners ($name)
+		{
+			return $this->send('ox.getBanners', [ $this->_sessionID, $name ]);
+		}
+
+		/**
 		 * Get Campaigns list by advertiser name
 		 *
 		 * @return array
