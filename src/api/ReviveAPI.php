@@ -36,6 +36,18 @@
 		}
 
 		/**
+		 * Get Adverties list for a name user or agency
+		 *
+		 * @param string $name
+		 *
+		 * @return array
+		 */
+		public function getAdvertisers ($name)
+		{
+			return $this->send('ox.getAdvertisers', [ $this->_sessionID, $name ]);
+		}
+
+		/**
 		 * Get Agency list
 		 *
 		 * @return array
@@ -65,8 +77,8 @@
 			$this->_sessionID = $this->send('ox.logon', [ $this->_login, $this->_password ]);
 			if (!is_string($this->_sessionID))
 			{
-				$message = isset($this->_sessionID[ 'faultString' ]) ? $this->_sessionID[ 'faultString' ] : print_r($this->_sessionID, true);
-				throw new InvalidConfigException($message);
+
+				throw new InvalidConfigException(isset($this->_sessionID[ 'faultString' ]) ? $this->_sessionID[ 'faultString' ] : print_r($this->_sessionID, true));
 			}
 		}
 
