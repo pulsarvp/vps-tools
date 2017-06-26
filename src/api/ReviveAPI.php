@@ -58,6 +58,16 @@
 		}
 
 		/**
+		 * Get Campaigns list by advertiser name
+		 *
+		 * @return array
+		 */
+		public function getCampaigns ($name)
+		{
+			return $this->send('ox.getCampaigns', [ $this->_sessionID, $name ]);
+		}
+
+		/**
 		 * Get Users list
 		 * @return array
 		 */
