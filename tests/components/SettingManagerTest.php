@@ -1,4 +1,5 @@
 <?php
+
 	namespace tests\components;
 
 	use Yii;
@@ -6,7 +7,7 @@
 	class SettingManagerTest extends \PHPUnit\Framework\TestCase
 	{
 		private $_setting;
-		private $_modelClass = 'tests\models\Setting';
+		private $_modelClass = 'vps\tools\modules\setting\models\Setting';
 
 		public function setUp ()
 		{
