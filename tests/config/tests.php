@@ -16,7 +16,7 @@
 						'basePath'       => '@tests/messages',
 						'sourceLanguage' => 'en',
 						'fileMap'        => [
-							'app'              => 'app.php'
+							'app' => 'app.php'
 						],
 					],
 				],
@@ -25,8 +25,8 @@
 				'class' => 'yii\web\Session'
 			],
 			'settings' => [
-				'class'      => '\vps\tools\components\SettingManager',
-				'modelClass' => 'tests\models\Setting'
+				'class'      => '\vps\tools\modules\setting\components\SettingManager',
+				'modelClass' => '\vps\tools\modules\setting\models\Setting'
 			]
 		]
 	];

@@ -2,7 +2,7 @@
 	"name": "pulsarvp/vps-tools",
 	"description": "Tools and other stuff that are used in every PulsarVP project.",
 	"type": "library",
-	"license": "MIT",
+	"license": "GNU GPLv3",
 	"homepage": "http://pulsarvp.ru",
 	"authors": [
 		{
