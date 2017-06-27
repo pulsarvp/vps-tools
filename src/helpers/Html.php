@@ -1,4 +1,5 @@
 <?php
+
 	namespace vps\tools\helpers;
 
 	use Yii;
@@ -103,7 +104,11 @@
 		 */
 		public static function buttonFa ($text, $fa, $options = [])
 		{
-			$icon = self::tag('i', '', [ 'class' => 'fa fa-' . $fa . ' margin' ]);
+			$class = 'fa fa-' . $fa;
+			if (!empty(trim($text)))
+				$class .= ' margin';
+
+			$icon = self::tag('i', '', [ 'class' => $class ]);
 			if (!isset($options[ 'title' ]))
 				$options[ 'title' ] = $text;
 			if (isset($options[ 'raw' ]) and $options[ 'raw' ] == true)
