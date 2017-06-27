@@ -1,4 +1,5 @@
 <?php
+
 	namespace vps\tools\modules\setting\widgets;
 
 	use vps\tools\modules\setting\models\Setting;
@@ -25,7 +26,7 @@
 					]
 				]
 			]);
-			Yii::$app->view->registerCss('#setting-list .value {font-family: monospace; white-space: pre-wrap}');
+			Yii::$app->view->registerCss('#setting-list .value {font-family: Menlo, monospace; overflow-wrap: break-word; word-wrap: break-word; max-width: 500px}');
 		}
 
 		/**
