@@ -2,7 +2,8 @@
 	<div class="container{if $fluid}-fluid{/if}">
 		<div class="row">
 			<div class="col-sm-3 footer-copyright">
-				&copy; {if date('Y')>$copyrightFrom}{$copyrightFrom}-{date('Y')}{else}{date('Y')}{/if}
+				{assign year date('Y')}
+				&copy; {if $copyrightFrom and $year>$copyrightFrom}{$copyrightFrom}-{/if}{$year}
 				{if !empty($company['url'])}
 					{Html::a( $company['title'], $company['url'])}
 				{else}
