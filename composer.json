@@ -43,5 +43,11 @@
 		"psr-4": {
 			"vps\\tools\\": "src"
 		}
+	},
+	"config": {
+		"fxp-asset.installer-paths": {
+			"npm-asset-library": "vendor/npm",
+			"bower-asset-library": "vendor/bower"
+		}
 	}
 }
