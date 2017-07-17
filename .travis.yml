@@ -44,8 +44,6 @@ script:
   - composer validate --no-check-lock
   # run PHPUnit
   - vendor/bin/phpunit --configuration tests/phpunit.xml --stderr
-  # code coverage
-  - vendor/bin/phpunit --coverage-clover coverage.xml
 
 after_success:
   # upload code coverage report
