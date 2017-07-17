@@ -43,4 +43,10 @@ script:
   # validate composer.json
   - composer validate --no-check-lock
   # run PHPUnit
-  - vendor/phpunit/phpunit/phpunit --configuration tests/phpunit.xml --stderr
+  - vendor/bin/phpunit --configuration tests/phpunit.xml --stderr
+  # code covarage
+  - vendor/bin/phpunit --coverage-clover=coverage.xml
+
+after_success:
+  # upload code coverage report
+  - bash <(curl -s https://codecov.io/bash)
