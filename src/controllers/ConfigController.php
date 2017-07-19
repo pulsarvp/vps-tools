@@ -36,6 +36,7 @@
 
 			foreach ($name as $item)
 			{
+
 				if ($item != 'api')
 					$this->getControllersAndActions($item);
 				else
@@ -47,7 +48,7 @@
 		{
 			if (RemoteFileHelper::exists(BASE_PATH . '/../' . $name))
 			{
-				Console::printColor($name, 'red');
+				Console::printColor($name, 'cyan');
 				$controllerlist = FileHelper::listPatternItems(BASE_PATH . '/../' . $name . '/controllers', '*', true);
 
 				$this->printActions($controllerlist);
@@ -58,10 +59,15 @@
 		{
 			if (RemoteFileHelper::exists(BASE_PATH . '/../' . $name))
 			{
-				Console::printColor($name, 'red');
-				$controllerlist = FileHelper::listPatternItems(BASE_PATH . '/../' . $name . '/modules', 'v?/controllers/*', true);
-
-				$this->printActions($controllerlist);
+				Console::printColor($name, 'cyan');
+				$versionList = FileHelper::listPatternItems(BASE_PATH . '/../' . $name . '/modules', 'v?', true);
+				foreach ($versionList as $version)
+				{
+					$versionName = strtolower(substr($version, strrpos($version, DIRECTORY_SEPARATOR) + 1, 2));
+					Console::printColor($versionName, 'magenta');
+					$controllerlist = FileHelper::listPatternItems($version . '/controllers/', '*', true);
+					$this->printActions($controllerlist);
+				}
 			}
 		}
 
@@ -70,7 +76,9 @@
 			asort($controllerlist);
 			foreach ($controllerlist as $controller)
 			{
-				Console::printColor(' - ' . $controller, 'green');
+				$controllerName = strtolower(substr($controller, strrpos($controller, DIRECTORY_SEPARATOR) + 1, -14));
+
+				Console::printColor('- ' . $controllerName, 'yellow');
 
 				$handle = fopen($controller, "r");
 				if ($handle)
@@ -83,7 +91,7 @@
 						foreach ($matches as $key => $item)
 						{
 							if (isset($item[ 1 ]) and $item[ 1 ] != 'with')
-								Console::printColor(' ' . $item[ 1 ], 'green');
+								Console::printColor("   $controllerName/" . $item[ 1 ], 'green');
 						}
 					}
 
@@ -94,12 +102,13 @@
 						{
 							if (strlen($display[ 1 ]) > 2)
 							{
-								Console::printColor(' ' . strtolower($display[ 1 ]), 'green');
+								Console::printColor("   $controllerName/" . strtolower($display[ 1 ]), 'green');
 							}
 						}
 					}
 				}
 				fclose($handle);
+				Console::printColor('');
 			}
 		}
 
@@ -108,7 +117,7 @@
 
 			if (RemoteFileHelper::exists(BASE_PATH . '/../' . $name))
 			{
-				Console::printColor($name, 'red');
+				Console::printColor($name, 'cyan');
 				$handle = fopen(BASE_PATH . '/../' . $name . '/bootstrap.php', "r");
 				if ($handle)
 				{
@@ -125,34 +134,36 @@
 							foreach ([ 'version', 'id', 'language' ] as $name)
 							{
 								if (isset($config[ $name ]))
-									Console::printColor($name . ' = ' . $config[ $name ], 'green');
+									Console::printColor('   ' . $name . ' = ' . $config[ $name ], 'green');
 							}
-							Console::printColor('- Components', 'green');
+							Console::printColor('components:', 'yellow');
 							foreach ($config[ 'components' ] as $key => $item)
 							{
-								Console::printColor(' ' . $key, 'green');
+								Console::printColor('   ' . $key, 'green');
 							}
 						}
 					}
 				}
 				fclose($handle);
+				Console::printColor('');
 			}
 		}
 
 		private function getInfoConsole ()
 		{
-			Console::printColor('console', 'red');
+			Console::printColor('console', 'cyan');
 
 			foreach ([ 'version', 'id', 'language' ] as $name)
 			{
 				if (isset(Yii::$app->$name))
-					Console::printColor($name . ' = ' . Yii::$app->$name, 'green');
+					Console::printColor('   ' . $name . ' = ' . Yii::$app->$name, 'green');
 			}
-			Console::printColor('- Components', 'green');
+			Console::printColor('components:', 'yellow');
 			foreach (Yii::$app->getComponents() as $key => $item)
 			{
-				Console::printColor(' ' . $key, 'green');
+				Console::printColor('   ' . $key, 'green');
 			}
+			Console::printColor('');
 		}
 
 	}
