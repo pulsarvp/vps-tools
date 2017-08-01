@@ -1,6 +1,7 @@
 /vendor/
 .idea
 composer.lock
+clover.xml
 tests/data
 /data/
 /tests/config/db.php
