@@ -7,4 +7,12 @@
             <directory suffix="Test.php">helpers</directory>
         </testsuite>
     </testsuites>
+    <filter>
+        <whitelist addUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">../src</directory>
+        </whitelist>
+    </filter>
+    <logging>
+        <log type="coverage-clover" target="../clover.xml"/>
+    </logging>
 </phpunit>
