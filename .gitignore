@@ -2,6 +2,7 @@
 .idea
 clover.xml
 composer.lock
+clover.xml
 tests/data
 /data/
 /tests/config/db.php
