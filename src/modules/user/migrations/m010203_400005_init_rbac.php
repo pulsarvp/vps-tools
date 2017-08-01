@@ -4,7 +4,7 @@
 	/**
 	 * Class m010101_100001_init_rbac
 	 */
-	class m010101_100001_init_rbac extends Migration
+	class m010203_400005_init_rbac extends Migration
 	{
 		/** @inheritdoc */
 		public function up ()
@@ -79,22 +79,23 @@
 			$unverified = $auth->createRole('registered');
 			$auth->add($unverified);
 
-			$this->renameColumn("user", 'isApproved', 'active');
-			$userClass = Yii::$app->getModule('user')->modelUser;
+			//$this->renameColumn("user", 'isApproved', 'active');
+			$userClass = Yii::$app->getModule('users')->modelUser;
 			$users = $userClass::find()->all();
-			foreach ($users as $user)
-			{
-				if ($user->active == 1)
-					$user->assignRole('admin');
-				else
-					$user->assignRole('registered');
-			}
+			if (count($users) > 0)
+				foreach ($users as $user)
+				{
+					if ($user->active == 1)
+						$user->assignRole('admin');
+					else
+						$user->assignRole('registered');
+				}
 		}
 
 		/** @inheritdoc */
 		public function down ()
 		{
-			$this->renameColumn("user", 'active', 'isApproved');
+			//$this->renameColumn("user", 'active', 'isApproved');
 
 			$auth = Yii::$app->getAuthManager();
 			$auth->removeAll();

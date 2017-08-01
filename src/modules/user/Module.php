@@ -1,4 +1,5 @@
 <?php
+
 	namespace vps\tools\modules\user;
 
 	use Yii;
@@ -70,7 +71,7 @@
 				  'ajax'    => true,
 				  'route'   => $this->id . '/rbac/user-role'
 				],
-				[ 'class'   => 'vps\tools\web\UrlRule',
+				[ 'class' => 'vps\tools\web\UrlRule',
 				  'pattern' => 'rbac/user-state',
 				  'verb'    => 'POST',
 				  'ajax'    => true,
@@ -80,10 +81,10 @@
 				  'pattern' => 'rbac/delete-role',
 				  'route'   => $this->id . '/rbac/delete-role'
 				],
-			], false);
+			], true);
 
 			// Add module I18N category.
-			if (!isset( $app->i18n->translations[ 'user.*' ] ))
+			if (!isset($app->i18n->translations[ 'user.*' ]))
 			{
 				Yii::$app->i18n->translations[ 'user*' ] = [
 					'class'            => 'yii\i18n\PhpMessageSource',

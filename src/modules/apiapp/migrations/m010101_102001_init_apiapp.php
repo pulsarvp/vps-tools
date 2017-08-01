@@ -5,7 +5,7 @@
 	/**
 	 * Create table apiapp
 	 */
-	class m010101_100001_init_apiapp extends Migration
+	class m010101_102001_init_apiapp extends Migration
 	{
 		/**
 		 * @inheritdoc
