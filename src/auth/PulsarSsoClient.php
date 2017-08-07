@@ -1,4 +1,5 @@
 <?php
+
 	namespace vps\tools\auth;
 
 	use Yii;
@@ -34,7 +35,7 @@
 		 */
 		public function getLogoutUrl ($redirectTo = null)
 		{
-			if (empty( $redirectTo ))
+			if (empty($redirectTo))
 				return $this->_logoutUrl;
 			else
 				return $this->_logoutUrl . '?next=' . urlencode($redirectTo);
@@ -52,7 +53,6 @@
 			$this->authUrl = $url . '/oauth2/authorize';
 			$this->tokenUrl = $url . '/oauth/token';
 			$this->apiBaseUrl = $url . '/oauth';
-			$this->returnUrl = Yii::$app->request->hostInfo . '/' . Yii::$app->request->pathInfo;
 		}
 
 		/**
