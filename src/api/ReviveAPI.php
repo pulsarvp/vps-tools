@@ -68,6 +68,16 @@
 		}
 
 		/**
+		 * Get Banners list by zone name
+		 *
+		 * @return array
+		 */
+		public function getBannersByZone ($zone)
+		{
+			return $this->send('ox.getBannersByZone', [ $this->_sessionID, $zone ]);
+		}
+
+		/**
 		 * Get Campaigns list by advertiser name
 		 *
 		 * @return array
