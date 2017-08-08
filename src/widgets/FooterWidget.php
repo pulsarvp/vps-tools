@@ -69,7 +69,7 @@
 
 			ConfigurationHelper::addTranslation('widgets', [ 'widgets/footer' => 'footer.php' ], __DIR__ . '/messages');
 
-			Yii::$app->view->registerCss('footer .footer-links {text-align: center} footer .footer-links a:not(:last-child) { margin-right: 10px } footer .footer-version {text-align: right}');
+			Yii::$app->view->registerCss('footer .footer-links {text-align: center} footer .footer-links a{white-space:nowrap} .footer-links a:not(:last-child) { margin-right: 10px } footer .footer-version {text-align: right}');
 		}
 
 		/**
