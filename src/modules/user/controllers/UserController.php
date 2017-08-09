@@ -1,6 +1,8 @@
 <?php
+
 	namespace vps\tools\modules\user\controllers;
 
+	use vps\tools\auth\AuthAction;
 	use vps\tools\controllers\WebController;
 	use vps\tools\helpers\TimeHelper;
 	use vps\tools\helpers\Url;
@@ -14,7 +16,7 @@
 		{
 			return [
 				'auth' => [
-					'class'           => 'yii\authclient\AuthAction',
+					'class'           => AuthAction::className(),
 					'successCallback' => [ $this, 'successAuth' ],
 					'cancelUrl'       => Url::toRoute([ 'user/cancel' ])
 				]
@@ -101,6 +103,7 @@
 				{
 					$user = new $userClass;
 					$user->register($attributes[ 'name' ], $attributes[ 'email' ], $attributes[ 'profile' ]);
+					$user->assignRole(User::R_REGISTERED);
 				}
 
 				if ($user == null or !isset($user->id))

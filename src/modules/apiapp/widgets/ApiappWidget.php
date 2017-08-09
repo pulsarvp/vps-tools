@@ -1,4 +1,5 @@
 <?php
+
 	namespace vps\tools\modules\apiapp\widgets;
 
 	use vps\tools\helpers\StringHelper;
@@ -44,6 +45,7 @@
 		public function run ()
 		{
 			$apiapps = Apiapp::find()->orderBy('name')->all();
+			$appnew = $this->addApp();
 			$viewID = Yii::$app->session->get('viewID', 0);
 			Yii::$app->session->set('viewID', 0);
 
@@ -51,7 +53,7 @@
 				'title'   => Yii::tr('Manage api application', [], 'apiapp'),
 				'apiapps' => $apiapps,
 				'view'    => $viewID,
-				'appnew'  => $this->addApp()
+				'appnew'  => $appnew
 			]);
 		}
 
@@ -79,6 +81,7 @@
 					$appNew->setAttributes([ 'name' => '', 'token' => '' ]);
 
 					Yii::$app->response->redirect($url);
+					Yii::$app->end();
 				}
 			}
 
