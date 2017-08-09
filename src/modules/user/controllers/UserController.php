@@ -103,6 +103,7 @@
 				{
 					$user = new $userClass;
 					$user->register($attributes[ 'name' ], $attributes[ 'email' ], $attributes[ 'profile' ]);
+					$user->assignRole(User::R_REGISTERED);
 				}
 
 				if ($user == null or !isset($user->id))
