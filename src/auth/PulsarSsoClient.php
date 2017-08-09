@@ -1,4 +1,5 @@
 <?php
+
 	namespace vps\tools\auth;
 
 	use Yii;
@@ -6,10 +7,10 @@
 	/**
 	 * This class performs oAuth provider functionality with Pulsar SSO client.
 	 *
-	 * @property string $clientIdDb oAuth app id from database setting name.
+	 * @property string $clientIdDb     oAuth app id from database setting name.
 	 * @property string $clientSecretDb oAuth secret key from database setting name.
-	 * @property string $clientUrlDb oAuth URL from database setting name.
-	 * @property string $url Base URL to perform request.
+	 * @property string $clientUrlDb    oAuth URL from database setting name.
+	 * @property string $url            Base URL to perform request.
 	 *
 	 * @package vps\tools\auth
 	 */
@@ -34,10 +35,23 @@
 		 */
 		public function getLogoutUrl ($redirectTo = null)
 		{
-			if (empty( $redirectTo ))
+			if (empty($redirectTo))
 				return $this->_logoutUrl;
 			else
 				return $this->_logoutUrl . '?next=' . urlencode($redirectTo);
+		}
+
+		/**
+		 * @return string return URL.
+		 */
+		public function getReturnUrl ()
+		{
+			$returnUrl = parent::getReturnUrl();
+
+			if ($returnUrl === $this->defaultReturnUrl())
+				return Yii::$app->request->hostInfo . '/' . Yii::$app->request->pathInfo;
+			else
+				return Yii::$app->request->hostInfo . '/' . $returnUrl;
 		}
 
 		/**
@@ -52,7 +66,6 @@
 			$this->authUrl = $url . '/oauth2/authorize';
 			$this->tokenUrl = $url . '/oauth/token';
 			$this->apiBaseUrl = $url . '/oauth';
-			$this->returnUrl = Yii::$app->request->hostInfo . '/' . Yii::$app->request->pathInfo;
 		}
 
 		/**
