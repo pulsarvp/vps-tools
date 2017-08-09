@@ -208,7 +208,7 @@
 	});
 	$('.select-user-role').change(function () {
 		jQuery.ajax({
-			url      : '/rbac/user-role',
+			url      : '{Url::toRoute(['rbac/user-role'])}',
 			type     : 'POST',
 			data     : { _csrf : '{Yii::$app->request->getCsrfToken()}', id : $(this).data('id'), roles : $(this).val() },
 			dataType : "json",
@@ -218,7 +218,7 @@
 		var id     = $(this).data('id');
 		var button = $('#btn' + id);
 		jQuery.ajax({
-			url      : '/rbac/user-state',
+			url      : '{Url::toRoute(['rbac/user-state'])}',
 			type     : 'POST',
 			data     : { _csrf : '{Yii::$app->request->getCsrfToken()}', id : id, state : $(this).data('state') },
 			dataType : "json",
