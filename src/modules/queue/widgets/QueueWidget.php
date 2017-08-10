@@ -38,8 +38,7 @@
 				]
 			]);
 
-			Yii::$app->view->registerCss('#queue-list th{width:60px;}');
-			Yii::$app->view->registerCss('.job pre{display:block; overflow:hidden; color:#EBEBEB; padding:.5em; border:0px; background:inherit;}');
+			Yii::$app->view->registerCss('.job pre{display:block; overflow:hidden; color:#EBEBEB; padding:.5em; border:0px; background:inherit; font-size:11px; min-width:350px; white-space:pre-wrap; word-wrap:break-word;}');
 		}
 
 		/**
