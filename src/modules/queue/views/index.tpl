@@ -1,8 +1,9 @@
+<h1>{Yii::tr("Queue management", [], 'queue')}</h1>
 <table class="table table-striped table-bordered" id="queue-list">
 	<thead>
 		<tr>
 			{foreach $fields as $key}
-				<th class="nowrap">
+				<th>
 					{Yii::tr($key|ucfirst,[],'queue')}
 					{if isset($sort)}
 						{if array_key_exists($key, $sort->attributeOrders)}
@@ -28,10 +29,12 @@
 	<tbody>
 		{foreach $queues as $queue}
 			<tr id="{$queue->id}" data-id="{$queue->id}">
-				<td class="job">{$queue->job}</td>
-				<td>{$queue->ttr}</td>
-				<td>{$queue->delay}</td>
-				<td>{$queue->priority}</td>
+				<td class="job">
+					<pre>{$queue->job}</pre>
+				</td>
+				<td class="text-center">{$queue->ttr}</td>
+				<td class="text-center">{$queue->delay}</td>
+				<td class="text-center">{$queue->priority}</td>
 				<td>{Yii::$app->formatter->asDatetime($queue->pushed_at)}</td>
 				<td>{Yii::$app->formatter->asDatetime($queue->reserved_at)}</td>
 				<td>{Yii::$app->formatter->asDatetime($queue->done_at)}</td>

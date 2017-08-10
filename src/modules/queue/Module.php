@@ -1,9 +1,10 @@
 <?php
+
 	namespace vps\tools\modules\queue;
 
 	use vps\tools\helpers\ConfigurationHelper;
-	use yii\base\BootstrapInterface;
 	use Yii;
+	use yii\base\BootstrapInterface;
 
 	/**
 	 * Class Module Queue
@@ -35,6 +36,6 @@
 			// Add module I18N category.
 			ConfigurationHelper::addTranslation('queue', [ 'queue' => 'queue.php' ], __DIR__ . '/messages');
 
-			$this->title = Yii::tr($this->title, [], 'queue');
+			$this->title = Yii::tr("Queue management", [], 'queue');
 		}
 	}

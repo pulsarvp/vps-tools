@@ -38,7 +38,8 @@
 				]
 			]);
 
-			Yii::$app->view->registerCss('#queue-list .job {font-family: Menlo, monospace; overflow-wrap: break-word; word-wrap: break-word; max-width: 500px}');
+			Yii::$app->view->registerCss('#queue-list th{width:60px;}');
+			Yii::$app->view->registerCss('.job pre{display:block; overflow:hidden; color:#EBEBEB; padding:.5em; border:0px; background:inherit;}');
 		}
 
 		/**
@@ -64,6 +65,11 @@
 					'pageSizeParam'  => false,
 				]
 			]);
+			foreach ($provider->models as $queue)
+			{
+				$json = json_decode($queue->job);
+				$queue->job = str_replace([ "\\\\", "\/" ], [ "\\", "/" ], json_encode($json, JSON_PRETTY_PRINT));
+			}
 
 			return $this->renderFile('@queueViews/index.tpl', [
 				'title'      => Yii::tr('View queue list', [], 'queue'),
