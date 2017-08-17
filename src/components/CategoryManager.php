@@ -200,6 +200,7 @@
 
 			$this->_root = $class::find()->roots()->one();
 			$this->_data = $this->_root->children()->all();
+			$this->buildPaths();
 		}
 
 		/**
