@@ -15,7 +15,7 @@
 			FileHelper::createDirectory($this->_datapath);
 			$imagine = new Imagine();
 			$file = 'https://www.google.ru/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png';
-			$cropBoxData = '{"x":50,"y":0,"width":50,"height":50,"rotate":0,"scaleX":1,"scaleY":1}';
+			$cropBoxData = [ 'x' => '50', 'y' => '0', 'width' => '50', 'height' => '50' ];
 
 			$this->assertFalse(ImageHelper::cropSquare('', $this->_datapath . '/img_2.png', $cropBoxData));
 

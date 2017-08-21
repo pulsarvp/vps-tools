@@ -22,14 +22,14 @@
 		/**
 		 * Crop image to square.
 		 * ```php
-		 * $cropBoxData = '{"x":50,"y":0,"width":50,"height":50,"rotate":0,"scaleX":1,"scaleY":1}';
+		 * $cropBoxData = ["x"=>'50',"y"=>'0',"width"=>'50',"height"=>'50'];
 		 * $result = ImageHelper::cropSquare('/var/www/img.png','var/www/img_crop.png',$cropBoxData);
 		 * // $result will be: true
 		 * ```
 		 *
 		 * @param string $file
 		 * @param string $filepath
-		 * @param string $cropBoxData
+		 * @param array $cropBoxData
 		 *
 		 * @return boolean
 		 */
@@ -43,14 +43,14 @@
 			$crop = $imagine->open($file);
 			$size = $crop->getSize();
 
-			if (!is_null($cropBoxData))
+			if (is_array($cropBoxData))
 			{
-				$coorImg = json_decode($cropBoxData);
-				$coorImg->x = max($coorImg->x, 0);
-				$coorImg->y = max($coorImg->y, 0);
-				$coorImg->width = min($coorImg->width, $size->getWidth());
-				$coorImg->height = min($coorImg->height, $size->getHeight());
-				$crop->crop(new Point($coorImg->x, $coorImg->y), new Box($coorImg->width, $coorImg->height))->save($filepath);
+
+				$cropBoxData['x'] = max($cropBoxData['x'], 0);
+				$cropBoxData['y'] = max($cropBoxData['y'], 0);
+				$cropBoxData['width'] = min($cropBoxData['width'], $size->getWidth());
+				$cropBoxData['height'] = min($cropBoxData['height'], $size->getHeight());
+				$crop->crop(new Point($cropBoxData['x'], $cropBoxData['y']), new Box($cropBoxData['width'], $cropBoxData['height']))->save($filepath);
 			}
 			else
 			{
