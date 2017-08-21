@@ -2,6 +2,7 @@
 
 	namespace vps\tools\modules\user;
 
+	use vps\tools\modules\user\models\User;
 	use Yii;
 	use yii\base\BootstrapInterface;
 
@@ -23,9 +24,18 @@
 		public $modelUser = 'vps\tools\modules\user\models\User';
 
 		/**
+		 * @var boolean
+		 */
+		public $autoactivate = false;
+		/**
 		 * @var string default client oauth
 		 */
 		public $defaultClient = 'syncrocity';
+
+		/**
+		 * @var string default role user
+		 */
+		public $defaultRole = 'registered';
 
 		public $title = '';
 
@@ -71,7 +81,7 @@
 				  'ajax'    => true,
 				  'route'   => $this->id . '/rbac/user-role'
 				],
-				[ 'class' => 'vps\tools\web\UrlRule',
+				[ 'class'   => 'vps\tools\web\UrlRule',
 				  'pattern' => 'rbac/user-state',
 				  'verb'    => 'POST',
 				  'ajax'    => true,
@@ -96,13 +106,16 @@
 				];
 			}
 
-			$app->setComponents([
-				'user' => [
-					'class'     => 'vps\tools\web\User',
-					'returnUrl' => '/',
-				]
-			]);
-
 			$this->title = Yii::tr('User manage', [], 'user');
+		}
+
+		/**
+		 * @inheritdoc
+		 */
+		public function init ()
+		{
+			parent::init();
+			if(empty($this->defaultRole))
+				$this->defaultRole= User::R_REGISTERED;
 		}
 	}

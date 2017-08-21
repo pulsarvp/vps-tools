@@ -32,6 +32,8 @@ before_script:
   - php -r "echo INTL_ICU_DATA_VERSION . \"\n\";"
   - mysql --version
 
+  - printf "\n" | pecl install imagick
+
   # initialize databases
   - mysql -e 'CREATE DATABASE `vps_tools_test`;';
   - mysql -e "CREATE USER 'vps_tools_test'@'localhost' IDENTIFIED BY '123';";

@@ -102,8 +102,8 @@
 				if ($user == null)
 				{
 					$user = new $userClass;
-					$user->register($attributes[ 'name' ], $attributes[ 'email' ], $attributes[ 'profile' ]);
-					$user->assignRole(User::R_REGISTERED);
+					$user->register($attributes[ 'name' ], $attributes[ 'email' ], $attributes[ 'profile' ], $this->module->autoactivate);
+					$user->assignRole($this->module->defaultRoute);
 				}
 
 				if ($user == null or !isset($user->id))

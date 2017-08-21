@@ -135,8 +135,9 @@
 		 *
 		 * @return bool Whether user save was successful.
 		 */
-		public function register ($name, $email, $profile)
+		public function register ($name, $email, $profile, $active)
 		{
+			$this->active = $active;
 			$this->name = $name;
 			$this->email = $email;
 			$this->profile = $profile;
