@@ -9,11 +9,14 @@
 	 */
 	class FileHelper extends \yii\helpers\BaseFileHelper
 	{
-		const MIME_DIR      = 'directory';
-		const MIME_PHP      = 'text/x-php';
-		const MIME_TXT      = 'text/plain';
-		const MIME_XML      = 'application/xml';
-		const MIME_TEXT_XML = 'text/xml';
+		const MIME_DIR       = 'directory';
+		const MIME_PDF       = 'application/pd';
+		const MIME_PHP       = 'text/x-php';
+		const MIME_PPT       = 'application/vnd.ms-powerpoint';
+		const MIME_TXT       = 'text/plain';
+		const MIME_TEXT_XML  = 'text/xml';
+		const MIME_TEXT_HTML = 'text/html';
+		const MIME_XML       = 'application/xml';
 
 		/**
 		 * Clears given directory without deleting it itself.
@@ -44,6 +47,7 @@
 		 * ```
 		 *
 		 * @param  string $path
+		 *
 		 * @return boolean
 		 */
 		public static function clearDir ($path)
@@ -90,6 +94,7 @@
 		 * ```
 		 *
 		 * @param string $path
+		 *
 		 * @return int|null
 		 */
 		public static function countItems ($path)
@@ -129,6 +134,7 @@
 		 * ```
 		 *
 		 * @param  string $path The directory under which the items should be counted.
+		 *
 		 * @return integer|null
 		 */
 		public static function countItemsInDir ($path)
@@ -171,6 +177,7 @@
 		 * ```
 		 *
 		 * @param string $path
+		 *
 		 * @return bool
 		 */
 		public static function deleteFile ($path)
@@ -205,8 +212,9 @@
 		 * // [ 'dir_1_1', 'dir_1_2', 'dir_1_3' ]
 		 * ```
 		 *
-		 * @param  string  $path The directory under which the items will be looked for.
+		 * @param  string  $path     The directory under which the items will be looked for.
 		 * @param  boolean $absolute Whether return path to items should be absolute.
+		 *
 		 * @return array|null List of paths to the found items.
 		 */
 		public static function listDirs ($path, $absolute = false)
@@ -246,8 +254,9 @@
 		 * // [ 'file8.txt', 'file9.txt' ]
 		 * ```
 		 *
-		 * @param  string  $path The directory under which the items will be looked for.
+		 * @param  string  $path     The directory under which the items will be looked for.
 		 * @param  boolean $absolute Whether return path to items should be absolute.
+		 *
 		 * @return array|null List of paths to the found items.
 		 */
 		public static function listFiles ($path, $absolute = false)
@@ -287,8 +296,9 @@
 		 * // [ 'dir_1_2_1', 'file5.txt' ]
 		 * ```
 		 *
-		 * @param  string  $path The directory under which the items will be looked for.
+		 * @param  string  $path     The directory under which the items will be looked for.
 		 * @param  boolean $absolute Whether return path to items should be absolute.
+		 *
 		 * @return array|null List of paths to the found items.
 		 */
 		public static function listItems ($path, $absolute = false)
@@ -326,8 +336,9 @@
 		 * [ 'file9.txt', 'file8.txt' ]
 		 * ```
 		 *
-		 * @param  string  $path The directory under which the files will be looked for.
+		 * @param  string  $path  The directory under which the files will be looked for.
 		 * @param  integer $order Order direction. Default is descending.
+		 *
 		 * @return array|null Array of pairs 'modification time - full path to the file'.
 		 */
 		public static function listItemsByDate ($path, $order = SORT_DESC)
@@ -373,8 +384,9 @@
 		 * ```
 		 *
 		 * @param  string  $pattern
-		 * @param  string  $path The directory under which the items will be looked for.
+		 * @param  string  $path     The directory under which the items will be looked for.
 		 * @param  boolean $absolute Whether return path to items should be absolute.
+		 *
 		 * @return array List of paths to the found items.
 		 */
 		public static function listPatternItems ($path, $pattern = '*', $absolute = false)
@@ -417,6 +429,7 @@
 		 *
 		 * @param  string $path
 		 * @param  string $relativepath
+		 *
 		 * @return array
 		 */
 		public static function listRelativeFiles ($path, $relativepath)
@@ -447,6 +460,7 @@
 		 * ```
 		 *
 		 * @param  string $path Path to the file.
+		 *
 		 * @return string|null
 		 */
 		public static function mimetypeFile ($path)
@@ -467,6 +481,7 @@
 		 * Get extension of the given file.
 		 *
 		 * @param  string $file Path to the file.
+		 *
 		 * @return string
 		 */
 		public static function extension ($file)
