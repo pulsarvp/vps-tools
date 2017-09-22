@@ -10,9 +10,8 @@
 	class FileHelper extends \yii\helpers\BaseFileHelper
 	{
 		const MIME_DIR       = 'directory';
-		const MIME_PDF       = 'application/pd';
+		const MIME_PDF       = 'application/pdf';
 		const MIME_PHP       = 'text/x-php';
-		const MIME_PPT       = 'application/vnd.ms-powerpoint';
 		const MIME_TXT       = 'text/plain';
 		const MIME_TEXT_XML  = 'text/xml';
 		const MIME_TEXT_HTML = 'text/html';
