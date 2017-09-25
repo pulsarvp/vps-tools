@@ -77,6 +77,10 @@
 			return [
 				'email'   => 'email',
 				'name'    => 'username',
+				'image'   => function ($attributes)
+				{
+					return isset($attributes[ 'image' ]) ? $attributes[ 'image' ] : '';
+				},
 				'profile' => function ($attributes)
 				{
 					return $attributes[ 'id' ] . '@' . $this->name;

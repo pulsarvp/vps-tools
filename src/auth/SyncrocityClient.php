@@ -1,15 +1,14 @@
 <?php
-	namespace vps\tools\auth;
 
-	use Yii;
+	namespace vps\tools\auth;
 
 	/**
 	 * This class performs oAuth provider functionality with Syncrocity client.
 	 *
-	 * @property string $clientIdDb oAuth app id from database setting name.
+	 * @property string $clientIdDb     oAuth app id from database setting name.
 	 * @property string $clientSecretDb oAuth secret key from database setting name.
-	 * @property string $clientUrlDb oAuth URL from database setting name.
-	 * @property string $url Base URL to perform request.
+	 * @property string $clientUrlDb    oAuth URL from database setting name.
+	 * @property string $url            Base URL to perform request.
 	 *
 	 * @author  Anna Manaenkova <anna.manaenkova@phystech.edu>
 	 * @package vps\tools\auth
@@ -44,6 +43,10 @@
 				'profile' => function ($attributes)
 				{
 					return $attributes[ 'id' ] . '@' . $this->name;
+				},
+				'image'   => function ($attributes)
+				{
+					return isset($attributes[ 'image' ]) ? $attributes[ 'image' ] : '';
 				}
 			];
 		}

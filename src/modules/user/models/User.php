@@ -1,4 +1,5 @@
 <?php
+
 	namespace vps\tools\modules\user\models;
 
 	use vps\tools\helpers\ArrayHelper;
@@ -14,6 +15,7 @@
 	 * @property string  $name
 	 * @property string  $profile
 	 * @property string  $loginDT
+	 * @property string  $image
 	 */
 	class User extends \yii\db\ActiveRecord implements UserInterface, IdentityInterface
 	{
@@ -99,6 +101,7 @@
 				'name'    => Yii::tr('Name', [], 'user'),
 				'profile' => Yii::tr('Profile', [], 'user'),
 				'loginDT' => Yii::tr('Login Dt', [], 'user'),
+				'image'   => Yii::tr('Image', [], 'user'),
 			];
 		}
 
@@ -165,6 +168,7 @@
 				[ [ 'name' ], 'string', 'length' => [ 1, 128 ] ],
 				[ [ 'email' ], 'string', 'length' => [ 6, 128 ] ],
 				[ [ 'email' ], 'unique' ],
+				[ [ 'image' ], 'string', 'max' => 255 ],
 				[ [ 'profile' ], 'string', 'max' => 45 ],
 				[ [ 'loginDT' ], 'safe' ]
 			];
