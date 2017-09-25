@@ -1,4 +1,5 @@
 <?php
+
 	namespace vps\tools\auth;
 
 	use Yii;
@@ -47,6 +48,10 @@
 				'roles'   => function ($attributes)
 				{
 					return '';
+				},
+				'image'   => function ($attributes)
+				{
+					return isset($attributes[ 'image' ]) ? $attributes[ 'image' ] : '';
 				}
 			];
 		}
