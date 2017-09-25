@@ -103,8 +103,8 @@
 				{
 					$user = new $userClass;
 					$user->register($attributes[ 'name' ], $attributes[ 'email' ], $attributes[ 'profile' ], $this->module->autoactivate);
-					if($attributes[ 'image' ])
-					$user->image = $attributes[ 'image' ];
+					if ($attributes[ 'image' ])
+						$user->image = $attributes[ 'image' ];
 					$user->save();
 					$user->assignRole($this->module->defaultRoute);
 				}
