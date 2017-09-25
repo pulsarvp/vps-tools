@@ -2,6 +2,8 @@
 
 	namespace vps\tools\helpers;
 
+	use yii\base\UnknownMethodException;
+
 	/**
 	 * Class FileHelper
 	 *
@@ -16,6 +18,24 @@
 		const MIME_TEXT_XML  = 'text/xml';
 		const MIME_TEXT_HTML = 'text/html';
 		const MIME_XML       = 'application/xml';
+
+		/**
+		 * @inheritdoc
+		 */
+		public static function __callStatic ($name, $arguments)
+		{
+			if (preg_match("/is[A-Z][\w]+/", $name))
+			{
+				preg_match("/[A-Z][\w]+/", $name, $matches);
+				$extension = strtolower(current($matches));
+				if (FileHelper::extension($arguments[ 0 ]) == $extension)
+					return true;
+
+				return false;
+			}
+			else
+				throw new UnknownMethodException('Calling unknown static method: ' . "$name()");
+		}
 
 		/**
 		 * Clears given directory without deleting it itself.
