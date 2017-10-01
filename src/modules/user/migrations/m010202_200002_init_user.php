@@ -9,11 +9,6 @@
 		/** @inheritdoc */
 		public function up ()
 		{
-			$tableOptions = null;
-			if ($this->db->driverName === 'mysql')
-			{
-				$tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
-			}
 			$this->createTable('user', [
 				'id'      => $this->primaryKey(),
 				'name'    => $this->string(128)->null(),
@@ -21,7 +16,7 @@
 				'email'   => $this->string(128)->unique()->null(),
 				'active'  => $this->boolean()->defaultValue(1),
 				'loginDT' => $this->dateTime()->null()
-			], $tableOptions);
+			]);
 		}
 
 		/** @inheritdoc */
