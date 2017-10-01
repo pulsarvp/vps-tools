@@ -16,11 +16,29 @@
 	{
 
 		/**
+		 * Builds a SQL statement for adding a foreign key constraint to an existing table.
+		 * The method will properly quote the table and column names.
+		 *
+		 * @param string       $name       the name of the foreign key constraint.
+		 * @param string       $table      the table that the foreign key constraint will be added to.
+		 * @param string|array $columns    the name of the column to that the constraint will be added on. If there are multiple columns, separate them with commas or use an array.
+		 * @param string       $refTable   the table that the foreign key references to.
+		 * @param string|array $refColumns the name of the column that the foreign key references to. If there are multiple columns, separate them with commas or use an array.
+		 * @param string       $delete     the ON DELETE option. Most DBMS support these options: RESTRICT, CASCADE, NO ACTION, SET DEFAULT, SET NULL
+		 * @param string       $update     the ON UPDATE option. Most DBMS support these options: RESTRICT, CASCADE, NO ACTION, SET DEFAULT, SET NULL
+		 */
+		public function addForeignKey ($name, $table, $columns, $refTable, $refColumns, $delete = "CASCADE", $update = "CASCADE")
+		{
+			parent::addForeignKey($name, $table, $columns, $refTable, $refColumns, $delete, $update);
+		}
+
+		/**
 		 * Creates database view.
 		 *
-		 * @param string $name View name.
-		 * @param Query  $query Query that is used to create view.
+		 * @param string $name    View name.
+		 * @param Query  $query   Query that is used to create view.
 		 * @param bool   $replace Whether to replace existing view with the same name.
+		 *
 		 * @throws \yii\db\Exception
 		 * @see dropView
 		 */
@@ -77,9 +95,10 @@
 		/**
 		 * Check if provided engine is supported and enabled.
 		 *
-		 * @param string $name Engine name.
-		 * @param bool   $default Whether to check if engine is default.
+		 * @param string $name      Engine name.
+		 * @param bool   $default   Whether to check if engine is default.
 		 * @param bool   $exception Whether to throw exception on error.
+		 *
 		 * @return bool True in case of engine is enabled and (in case of default is true) default. Otherwise exception is thrown (id exception is true) or false returned.
 		 * @throws \yii\db\Exception
 		 */
