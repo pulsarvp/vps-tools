@@ -53,7 +53,7 @@
 		 *
 		 * @return string|null
 		 */
-		public function getRole ()
+		public function getRoleName ()
 		{
 			$auth = Yii::$app->getAuthManager();
 			$roles = $auth->getRolesByUser($this->id);
@@ -67,7 +67,7 @@
 		 *
 		 * @return array
 		 */
-		public function getRoles ()
+		public function getRolesNames ()
 		{
 			$auth = Yii::$app->getAuthManager();
 			$rolesByUser = $auth->getRolesByUser($this->id);

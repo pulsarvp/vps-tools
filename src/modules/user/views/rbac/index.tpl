@@ -24,7 +24,7 @@
 						<td>
 							<select class="selectpicker select-user-role" title="{Yii::tr('Select role', [], 'user')}..." data-id="{$user->id}" multiple {if $user->id == Yii::$app->user->id}disabled="1"{/if}>
 								{foreach $roles as $role}
-									<option value="{$role.name}"{if in_array($role.name,$user->roles)} selected="selected"{/if}>{$role.name}</option>
+									<option value="{$role.name}"{if in_array($role.name,$user->rolesNames)} selected="selected"{/if}>{$role.name}</option>
 								{/foreach}
 							</select>
 						</td>
