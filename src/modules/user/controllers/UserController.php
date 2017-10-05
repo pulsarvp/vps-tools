@@ -106,9 +106,19 @@
 					if ($attributes[ 'image' ])
 						$user->image = $attributes[ 'image' ];
 					$user->save();
-					$user->assignRole($this->module->defaultRoute);
-				}
+					$auth = Yii::$app->getAuthManager();
 
+					if ($attributes[ 'roles' ])
+					{
+						foreach ($attributes[ 'roles' ] as $role)
+						{
+							if ($auth->getRole($role))
+								$user->assignRole($role);
+						}
+					}
+					else
+						$user->assignRole($this->module->defaultRoute);
+				}
 				if ($user == null or !isset($user->id))
 					throw new \Exception(Yii::tr('Authorization failed.', [], 'user'));
 				elseif ($user->active == false)

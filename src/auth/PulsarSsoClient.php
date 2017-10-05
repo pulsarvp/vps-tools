@@ -84,6 +84,10 @@
 				'profile' => function ($attributes)
 				{
 					return $attributes[ 'id' ] . '@' . $this->name;
+				},
+				'roles'   => function ($attributes)
+				{
+					return isset($attributes[ 'roles' ]) ? $attributes[ 'roles' ] : null;
 				}
 			];
 		}
