@@ -36,6 +36,10 @@
 		{
 			return [
 				'email'   => 'email',
+				'image'   => function ($attributes)
+				{
+					return isset($attributes[ 'image' ]) ? $attributes[ 'image' ] : '';
+				},
 				'name'    => function ($attributes)
 				{
 					return trim($attributes[ 'name' ] . ' ' . $attributes[ 'surname' ]);
@@ -44,9 +48,9 @@
 				{
 					return $attributes[ 'id' ] . '@' . $this->name;
 				},
-				'image'   => function ($attributes)
+				'roles'   => function ($attributes)
 				{
-					return isset($attributes[ 'image' ]) ? $attributes[ 'image' ] : '';
+					return isset($attributes[ 'roles' ]) ? $attributes[ 'roles' ] : null;
 				}
 			];
 		}

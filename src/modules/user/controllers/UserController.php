@@ -106,13 +106,18 @@
 					if ($attributes[ 'image' ] and $user->image != $attributes[ 'image' ])
 						$user->image = $attributes[ 'image' ];
 					$user->save();
-					$user->assignRole($this->module->defaultRoute);
+					if ($attributes[ 'image' ] and $user->image != $attributes[ 'image' ])
+					{
+						$user->image = $attributes[ 'image' ];
+						$user->save();
+
+						if ($attributes[ 'roles' ])
+							$user->assignRoles($attributes[ 'roles' ]);
+						else
+							$user->assignRole($this->module->defaultRole);
+					}
 				}
-				if ($attributes[ 'image' ] and $user->image != $attributes[ 'image' ])
-				{
-					$user->image = $attributes[ 'image' ];
-					$user->save();
-				}
+
 				if ($user == null or !isset($user->id))
 					throw new \Exception(Yii::tr('Authorization failed.', [], 'user'));
 				elseif ($user->active == false)

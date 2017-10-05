@@ -90,6 +90,17 @@
 		}
 
 		/**
+		 * Assigns role to user.
+		 *
+		 * @param string[] $names the roles names
+		 */
+		public function assignRoles ($names)
+		{
+			foreach ($names as $name)
+				$this->assignRole($name);
+		}
+
+		/**
 		 * @inheritdoc
 		 */
 		public function attributeLabels ()
@@ -192,6 +203,7 @@
 
 		/**
 		 * Returns an name user.
+		 *
 		 * @return string
 		 */
 		public function getName ()
