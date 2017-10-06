@@ -1,4 +1,5 @@
 <?php
+
 	namespace vps\tools\net;
 
 	/**
@@ -117,13 +118,13 @@
 		/**
 		 * Sends POST request.
 		 *
-		 * @param null|array $data Additional data to append to request.
+		 * @param array|string $data Additional data to append to request.
 		 * @return string|CurlResponse
 		 */
 		public function post ($data)
 		{
 			$this->_options[ CURLOPT_POST ] = 1;
-			$this->_options[ CURLOPT_POSTFIELDS ] = http_build_query($data);
+			$this->_options[ CURLOPT_POSTFIELDS ] = is_array($data) ? http_build_query($data) : $data;
 
 			return $this->send();
 		}
