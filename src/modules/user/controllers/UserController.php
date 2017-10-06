@@ -4,6 +4,7 @@
 
 	use vps\tools\auth\AuthAction;
 	use vps\tools\controllers\WebController;
+	use vps\tools\helpers\StringHelper;
 	use vps\tools\helpers\TimeHelper;
 	use vps\tools\helpers\Url;
 	use vps\tools\modules\user\models\User;
@@ -78,8 +79,23 @@
 		public function actionLogout ()
 		{
 			$this->_tpl = '@userViews/logout';
+			$user = Yii::$app->user->identity;
+			$referrer = Yii::$app->getRequest()->getReferrer();
 			Yii::$app->user->logout();
-			$this->redirect('/');
+			if ($user->redirectAfterLogout)
+				foreach ($user->guestRestrictedRoutes as $url)
+				{
+
+					if (StringHelper::pos($referrer, Url::toRoute([ $url ])))
+					{
+
+						$this->redirect(Yii::$app->user->returnUrl);
+						Yii::$app->end();
+					}
+				}
+
+			$this->redirect($referrer);
+			Yii::$app->end();
 		}
 
 		/**
@@ -121,6 +137,10 @@
 					$user->save();
 
 					Yii::$app->user->login($user, Yii::$app->user->authTimeout);
+					if ($user->redirectAfterLogin)
+						$this->redirect(Yii::$app->getUser()->getReturnUrl());
+					else
+						$this->redirect(Url::toRoute([ '/site/index' ]));
 				}
 			}
 			else

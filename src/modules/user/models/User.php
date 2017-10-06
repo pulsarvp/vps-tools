@@ -27,7 +27,19 @@
 		 * Role registered user
 		 */
 		const R_REGISTERED = 'registered';
-
+		/**
+		 * Redirect after login
+		 */
+		public $redirectAfterLogin = false;
+		/**
+		 * Redirect after logout
+		 */
+		public $redirectAfterLogout = true;
+		/**
+		 * List of URLs not available to the guest
+		 */
+		public $guestRestrictedRoutes = [];
+		
 		private $_authkey;
 
 		// Getters and setters.

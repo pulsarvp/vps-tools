@@ -1,4 +1,5 @@
 <?php
+
 	namespace vps\tools\controllers;
 
 	use Yii;
@@ -85,6 +86,9 @@
 				$this->_assetBundle = Yii::$app->assetManager->getBundle($this->assetName);
 				$this->_tpl = $this->id . '/' . $this->action->id;
 
+				if ($this->id . '/' . $this->action->id != 'user/auth')
+					Yii::$app->getUser()->setReturnUrl(Yii::$app->getRequest()->referrer);
+
 				return true;
 			}
 			else
@@ -106,7 +110,7 @@
 		 * Add user error message.
 		 *
 		 * @param  string  $message Message text.
-		 * @param  boolean $isRaw Whether given text is raw. If not it will be processed with [[Yii::tr()]].
+		 * @param  boolean $isRaw   Whether given text is raw. If not it will be processed with [[Yii::tr()]].
 		 */
 		public function error ($message, $isRaw = false)
 		{
@@ -117,7 +121,7 @@
 		 * Add user message.
 		 *
 		 * @param  string  $message Message text.
-		 * @param  boolean $isRaw Whether given text is raw. If not it will be processed with [[Yii::tr()]].
+		 * @param  boolean $isRaw   Whether given text is raw. If not it will be processed with [[Yii::tr()]].
 		 */
 		public function message ($message, $isRaw = false)
 		{
@@ -139,7 +143,7 @@
 		 * Add user warning.
 		 *
 		 * @param  string  $message Message text.
-		 * @param  boolean $isRaw Whether given text is raw. If not it will be processed with [[Yii::tr()]].
+		 * @param  boolean $isRaw   Whether given text is raw. If not it will be processed with [[Yii::tr()]].
 		 */
 		public function warning ($message, $isRaw = false)
 		{
