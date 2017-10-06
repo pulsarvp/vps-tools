@@ -88,10 +88,7 @@
 				->where([ 'name' => $name ])
 				->one(Yii::$app->db);
 
-			if ($row[ 'fixed' ])
-				return true;
-			else
-				return false;
+			return $row[ 'fixed' ];
 		}
 
 		/**

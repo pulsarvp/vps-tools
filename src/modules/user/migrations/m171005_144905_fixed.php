@@ -9,7 +9,7 @@
 		/** @inheritdoc */
 		public function up ()
 		{
-			$this->addColumn('auth_item', 'fixed', $this->boolean()->defaultValue(0)->null());
+			$this->addColumn('auth_item', 'fixed', $this->boolean()->defaultValue(0));
 			$this->update('auth_item', [ 'fixed' => 1 ], [ 'name' => [ 'admin', 'registered' ] ]);
 		}
 
