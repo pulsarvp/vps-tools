@@ -53,11 +53,15 @@
 		 * Adds header.
 		 *
 		 * @param string $header
+		 * @param string $value
 		 * @return Curl
 		 */
-		public function addHeader ($header)
+		public function addHeader ($header, $value = null)
 		{
-			$this->_headers[] = $header;
+			if ($value)
+				$this->_headers[] = "$header: $value";
+			else
+				$this->_headers[] = $header;
 
 			return $this;
 		}
