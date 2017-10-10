@@ -1,10 +1,12 @@
 <?php
+
 	namespace vps\tools\modules\user\widgets;
 
 	use vps\tools\helpers\ArrayHelper;
 	use vps\tools\modules\user\forms\RoleForm;
 	use Yii;
 	use yii\base\Widget;
+	use yii\db\Query;
 	use yii\rbac\Role;
 	use yii\web\View;
 
@@ -54,6 +56,7 @@
 					'data'             => $role->data,
 					'childRoles'       => ArrayHelper::objectsAttribute(Yii::$app->authManager->getChildren($role->name), 'name'),
 					'childPermissions' => ArrayHelper::objectsAttribute(Yii::$app->authManager->getChildren($role->name), 'name'),
+					'fixed'            => $this->isFixed($role->name)
 				];
 				$data[] = $item;
 			}
@@ -69,6 +72,23 @@
 				'permissions' => $permissions,
 				'roleForm'    => $this->addRole()
 			]);
+		}
+
+		/**
+		 * Is fixed role
+		 *
+		 * @param $name
+		 *
+		 * @return bool
+		 */
+		private function isFixed ($name)
+		{
+			$row = ( new Query )->from(Yii::$app->authManager->itemTable)
+				->select('fixed')
+				->where([ 'name' => $name ])
+				->one(Yii::$app->db);
+
+			return $row[ 'fixed' ];
 		}
 
 		/**
@@ -107,7 +127,7 @@
 			$role = $auth->createRole($roleForm->name);
 			$role->type = Role::TYPE_ROLE;
 			$role->description = $roleForm->description;
-			if (!empty( $roleForm->ruleName ))
+			if (!empty($roleForm->ruleName))
 				$role->ruleName = $roleForm->ruleName;
 			$role->data = $roleForm->data;
 

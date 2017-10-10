@@ -68,7 +68,7 @@
 							{/foreach}
 						</td>
 						<td>
-							{if $role.name != 'admin' and $role.name!='registered'}
+							{if !$role.fixed}
 
 								{Html::a(Html::fa('pencil'),'#roles',['class'=>'btn btn-xs btn-success role-edit', 'data-id'=>{$role.name} ])}
 								{Html::a(Html::fa('remove'),{Url::toRoute(['rbac/delete-role','id'=>$role.name])},['class'=>'btn btn-xs btn-danger role-delete', 'data-id'=>{$role.name}, 'data-toggle'=>'confirmation', 'data-title'=>{Yii::tr('Remove?',[],'user')}, 'title'=>{Yii::tr('Remove?',[],'user')}, 'data-btn-ok-label'=>"{Yii::tr('Yes', [], 'user')}",'data-btn-ok-class'=>"btn btn-xs btn-danger", 'data-btn-cancel-label'=>"{Yii::tr('No', [], 'user')}"  ])}
