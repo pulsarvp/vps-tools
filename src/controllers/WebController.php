@@ -86,7 +86,7 @@
 				$this->_assetBundle = Yii::$app->assetManager->getBundle($this->assetName);
 				$this->_tpl = $this->id . '/' . $this->action->id;
 
-				if ($this->id . '/' . $this->action->id != 'user/auth')
+				if (strpos(Yii::$app->urlManager->hostInfo, Yii::$app->getRequest()->referrer) >= 0)
 					Yii::$app->getUser()->setReturnUrl(Yii::$app->getRequest()->referrer);
 
 				return true;

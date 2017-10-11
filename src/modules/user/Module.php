@@ -37,6 +37,19 @@
 		 */
 		public $defaultRole = 'registered';
 
+		/**
+		 * Redirect after login
+		 */
+		public $redirectAfterLogin = true;
+		/**
+		 * Redirect after logout
+		 */
+		public $redirectAfterLogout = true;
+		/**
+		 * List of URLs not available to the guest
+		 */
+		public $guestRestrictedRoutes = [];
+
 		public $title = '';
 
 		/**
