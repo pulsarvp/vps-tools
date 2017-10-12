@@ -2,6 +2,7 @@
 
 	namespace vps\tools\controllers;
 
+	use vps\tools\modules\user\filters\AccessControl;
 	use Yii;
 
 	class WebController extends \yii\web\Controller
@@ -28,6 +29,16 @@
 		 * Path to the view tpl file.
 		 */
 		protected $_tpl;
+
+
+		public function behaviors ()
+		{
+			return [
+				'access' => [
+					'class' => AccessControl::className(),
+				],
+			];
+		}
 
 		/**
 		 * Override current template.
