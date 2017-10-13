@@ -30,12 +30,12 @@
 		 */
 		protected $_tpl;
 
-
 		public function behaviors ()
 		{
 			return [
 				'access' => [
 					'class' => AccessControl::className(),
+					'rules' => [],
 				],
 			];
 		}
@@ -77,7 +77,8 @@
 
 			$this->view->registerAssetBundle($this->assetName);
 
-			$this->data('tpl', $this->_tpl . '.tpl');
+			if (!isset($this->_data[ 'tpl' ]) or $this->_data[ 'tpl' ] != 'empty.tpl')
+				$this->_data[ 'tpl' ] = $this->_tpl . '.tpl';
 			$this->forceSetTitle();
 
 			return $this->renderPartial('@app/views/index.tpl', $this->_data);
@@ -97,7 +98,7 @@
 				$this->_assetBundle = Yii::$app->assetManager->getBundle($this->assetName);
 				$this->_tpl = $this->id . '/' . $this->action->id;
 
-				if (strpos(Yii::$app->urlManager->hostInfo, Yii::$app->getRequest()->referrer) >= 0 and $this->action->id != 'login')
+				if (strpos(Yii::$app->urlManager->hostInfo, Yii::$app->getRequest()->referrer) >= 0 and $this->action->controller->id != 'user')
 					Yii::$app->getUser()->setReturnUrl(Yii::$app->getRequest()->referrer);
 
 				return true;

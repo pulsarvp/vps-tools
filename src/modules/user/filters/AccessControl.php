@@ -18,7 +18,7 @@
 		 */
 		public function init ()
 		{
-			parent::init();
+
 			if (Yii::$app->getModule('users')->useAccessControl)
 			{
 				$rules = [
@@ -55,50 +55,8 @@
 						array_push($this->rules, Yii::createObject(array_merge($this->ruleConfig, $rule)));
 					}
 				}
-				//Yii::p($rules);
-				//Yii::p($this->rules);
-				//die();
 			}
-		}
-
-		public function beforeAction ($action)
-		{
-			$user = $this->user;
-			$request = Yii::$app->getRequest();
-			foreach ($this->rules as $rule)
-			{
-				if ($allow = $rule->allows($action, $user, $request))
-				{
-					return true;
-				}
-				elseif ($allow === false)
-				{
-					if (isset($rule->denyCallback))
-					{
-						call_user_func($rule->denyCallback, $rule, $action);
-					}
-					elseif ($this->denyCallback !== null)
-					{
-						call_user_func($this->denyCallback, $rule, $action);
-					}
-					else
-					{
-						$this->denyAccess($user);
-					}
-
-					return false;
-				}
-			}
-			if ($this->denyCallback !== null)
-			{
-				call_user_func($this->denyCallback, null, $action);
-			}
-			else
-			{
-				$this->denyAccess($user);
-			}
-
-			return false;
+			parent::init();
 		}
 
 	}

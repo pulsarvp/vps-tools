@@ -39,7 +39,7 @@
 							'matchCallback' => function ($rule, $action)
 							{
 								if (!Yii::$app->user->identity->active)
-									$this->redirect(Url::toRoute('user/index'));
+									$this->redirect(Url::toRoute('/user/index'));
 								else
 									return true;
 							}
@@ -67,7 +67,7 @@
 		public function actionCancel ()
 		{
 			Yii::$app->notification->errorToSession(Yii::tr('You have rejected the authorization request.', [], 'user'));
-			$this->redirect(Url::toRoute([ 'user/login' ]));
+			$this->redirect(Url::toRoute([ '/user/login' ]));
 		}
 
 		public function actionLogin ()
