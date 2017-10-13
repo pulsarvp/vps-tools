@@ -39,7 +39,7 @@
 							'matchCallback' => function ($rule, $action)
 							{
 								if (!Yii::$app->user->identity->active)
-									$this->redirect(Url::toRoute('/user/index'));
+									$this->redirect(Url::toRoute([ '/user/index' ]));
 								else
 									return true;
 							}
