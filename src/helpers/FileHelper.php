@@ -21,6 +21,7 @@
 
 		private static $_extensionsAudio = [
 			'3gp',
+			'8svx',
 			'aa',
 			'aac',
 			'aax',
@@ -41,64 +42,63 @@
 			'm4b',
 			'm4p',
 			'mmf',
+			'mogg',
 			'mp3',
 			'mpc',
 			'msv',
-			'ogg',
 			'oga',
-			'mogg',
+			'ogg',
 			'opus',
 			'ra',
-			'rm',
 			'raw',
+			'rm',
 			'sln',
 			'tta',
 			'vox',
 			'wav',
+			'webm',
 			'wma',
 			'wv',
-			'webm',
-			'8svx'
 		];
 		private static $_extensionsVideo = [
-			'webm',
-			'mkv',
-			'flv',
-			'vob',
-			'ogg',
-			'ogv',
+			'3g2',
+			'3gp',
+			'amv',
+			'asf',
+			'avi',
 			'drc',
+			'f4a',
+			'f4b',
+			'f4p',
+			'f4v',
+			'flv',
 			'gif',
 			'gifv',
-			'mng',
-			'avi',
-			'mov',
-			'qt',
-			'wmv',
-			'yuv',
-			'rm',
-			'rmvb',
-			'asf',
-			'amv',
-			'mp4',
+			'm2v',
 			'm4p',
 			'm4v',
-			'mpg',
+			'mkv',
+			'mng',
+			'mov',
 			'mp2',
-			'mpeg',
+			'mp4',
 			'mpe',
+			'mpeg',
+			'mpg',
 			'mpv',
-			'm2v',
-			'svi',
-			'3gp',
-			'3g2',
 			'mxf',
-			'roq',
 			'nsv',
-			'f4v',
-			'f4p',
-			'f4a',
-			'f4b'
+			'ogg',
+			'ogv',
+			'qt',
+			'rm',
+			'rmvb',
+			'roq',
+			'svi',
+			'vob',
+			'webm',
+			'wmv',
+			'yuv',
 		];
 
 		/**
@@ -349,7 +349,7 @@
 		 * // [ 'dir_1_1', 'dir_1_2', 'dir_1_3' ]
 		 * ```
 		 *
-		 * @param  string  $path     The directory under which the items will be looked for.
+		 * @param  string  $path The directory under which the items will be looked for.
 		 * @param  boolean $absolute Whether return path to items should be absolute.
 		 *
 		 * @return array|null List of paths to the found items.
@@ -391,7 +391,7 @@
 		 * // [ 'file8.txt', 'file9.txt' ]
 		 * ```
 		 *
-		 * @param  string  $path     The directory under which the items will be looked for.
+		 * @param  string  $path The directory under which the items will be looked for.
 		 * @param  boolean $absolute Whether return path to items should be absolute.
 		 *
 		 * @return array|null List of paths to the found items.
@@ -433,7 +433,7 @@
 		 * // [ 'dir_1_2_1', 'file5.txt' ]
 		 * ```
 		 *
-		 * @param  string  $path     The directory under which the items will be looked for.
+		 * @param  string  $path The directory under which the items will be looked for.
 		 * @param  boolean $absolute Whether return path to items should be absolute.
 		 *
 		 * @return array|null List of paths to the found items.
@@ -473,7 +473,7 @@
 		 * [ 'file9.txt', 'file8.txt' ]
 		 * ```
 		 *
-		 * @param  string  $path  The directory under which the files will be looked for.
+		 * @param  string  $path The directory under which the files will be looked for.
 		 * @param  integer $order Order direction. Default is descending.
 		 *
 		 * @return array|null Array of pairs 'modification time - full path to the file'.
@@ -521,7 +521,7 @@
 		 * ```
 		 *
 		 * @param  string  $pattern
-		 * @param  string  $path     The directory under which the items will be looked for.
+		 * @param  string  $path The directory under which the items will be looked for.
 		 * @param  boolean $absolute Whether return path to items should be absolute.
 		 *
 		 * @return array List of paths to the found items.
