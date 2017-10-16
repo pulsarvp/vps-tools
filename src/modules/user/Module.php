@@ -37,6 +37,24 @@
 		 */
 		public $defaultRole = 'registered';
 
+		/**
+		 * Redirect after login
+		 */
+		public $redirectAfterLogin = true;
+		/**
+		 * Redirect after logout
+		 */
+		public $redirectAfterLogout = true;
+		/**
+		 * Use AccessControl
+		 */
+		public $useAccessControl = true;
+		/**
+		 * List of URLs not available to the guest
+		 */
+		public $guestRestrictedRoutes     = [];
+		public $allowedUnauthorizedRoutes = [];
+
 		public $title = '';
 
 		/**
@@ -115,7 +133,7 @@
 		public function init ()
 		{
 			parent::init();
-			if(empty($this->defaultRole))
-				$this->defaultRole= User::R_REGISTERED;
+			if (empty($this->defaultRole))
+				$this->defaultRole = User::R_REGISTERED;
 		}
 	}
