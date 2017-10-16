@@ -115,6 +115,28 @@
 			self::init();
 		}
 
+		public function testIsAudio ()
+		{
+			$this->assertFalse(FileHelper::isAudio('adskjcnzxk'));
+			$this->assertFalse(FileHelper::isAudio($this->datapath));
+
+			$this->assertTrue(FileHelper::isAudio($this->datapath . '/dir_1/dir_1_1/file1.mp3'));
+			$this->assertTrue(FileHelper::isAudio($this->datapath . '/dir_1/dir_1_1/file1.FLAC'));
+
+			self::init();
+		}
+
+		public function testIsVideo ()
+		{
+			$this->assertFalse(FileHelper::isVideo('adskjcnzxk'));
+			$this->assertFalse(FileHelper::isVideo($this->datapath));
+
+			$this->assertTrue(FileHelper::isVideo($this->datapath . '/dir_1/dir_1_1/file1.avi'));
+			$this->assertTrue(FileHelper::isVideo($this->datapath . '/dir_1/dir_1_1/file1.3GP'));
+
+			self::init();
+		}
+
 		public function testListDirs ()
 		{
 			$this->assertNull(FileHelper::listItems('ashdjghajsdgj'));

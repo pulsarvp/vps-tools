@@ -19,6 +19,88 @@
 		const MIME_TEXT_HTML = 'text/html';
 		const MIME_XML       = 'application/xml';
 
+		private static $_extensionsAudio = [
+			'3gp',
+			'aa',
+			'aac',
+			'aax',
+			'act',
+			'aiff',
+			'amr',
+			'ape',
+			'au',
+			'awb',
+			'dct',
+			'dss',
+			'dvf',
+			'flac',
+			'gsm',
+			'iklax',
+			'ivs',
+			'm4a',
+			'm4b',
+			'm4p',
+			'mmf',
+			'mp3',
+			'mpc',
+			'msv',
+			'ogg',
+			'oga',
+			'mogg',
+			'opus',
+			'ra',
+			'rm',
+			'raw',
+			'sln',
+			'tta',
+			'vox',
+			'wav',
+			'wma',
+			'wv',
+			'webm',
+			'8svx'
+		];
+		private static $_extensionsVideo = [
+			'webm',
+			'mkv',
+			'flv',
+			'vob',
+			'ogg',
+			'ogv',
+			'drc',
+			'gif',
+			'gifv',
+			'mng',
+			'avi',
+			'mov',
+			'qt',
+			'wmv',
+			'yuv',
+			'rm',
+			'rmvb',
+			'asf',
+			'amv',
+			'mp4',
+			'm4p',
+			'm4v',
+			'mpg',
+			'mp2',
+			'mpeg',
+			'mpe',
+			'mpv',
+			'm2v',
+			'svi',
+			'3gp',
+			'3g2',
+			'mxf',
+			'roq',
+			'nsv',
+			'f4v',
+			'f4p',
+			'f4a',
+			'f4b'
+		];
+
 		/**
 		 * @inheritdoc
 		 */
@@ -210,6 +292,42 @@
 			}
 
 			return false;
+		}
+
+		/**
+		 * Checks whether the file is an audio file.
+		 * ```php
+		 * $result = FileHelper::isAudio(file.mp3);
+		 * // $result will be: true
+		 * ```
+		 *
+		 * @param string $path
+		 *
+		 * @return bool
+		 */
+		public static function isAudio ($path)
+		{
+			$ext = strtolower(self::extension($path));
+
+			return in_array($ext, self::$_extensionsAudio);
+		}
+
+		/**
+		 * Checks whether the file is an video file.
+		 * ```php
+		 * $result = FileHelper::isAudio(file.avi);
+		 * // $result will be: true
+		 * ```
+		 *
+		 * @param string $path
+		 *
+		 * @return bool
+		 */
+		public static function isVideo ($path)
+		{
+			$ext = strtolower(self::extension($path));
+
+			return in_array($ext, self::$_extensionsVideo);
 		}
 
 		/**
