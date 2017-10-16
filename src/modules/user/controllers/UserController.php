@@ -123,19 +123,17 @@
 				{
 					$user = new $userClass;
 					$user->register($attributes[ 'name' ], $attributes[ 'email' ], $attributes[ 'profile' ], $this->module->autoactivate);
-					if ($attributes[ 'image' ] and $user->image != $attributes[ 'image' ])
-						$user->image = $attributes[ 'image' ];
-					$user->save();
-					if ($attributes[ 'image' ] and $user->image != $attributes[ 'image' ])
-					{
-						$user->image = $attributes[ 'image' ];
-						$user->save();
 
-						if ($attributes[ 'roles' ])
-							$user->assignRoles($attributes[ 'roles' ]);
-						else
-							$user->assignRole($this->module->defaultRole);
-					}
+					if ($attributes[ 'roles' ])
+						$user->assignRoles($attributes[ 'roles' ]);
+					else
+						$user->assignRole($this->module->defaultRole);
+				}
+
+				if ($attributes[ 'image' ] and $user->image != $attributes[ 'image' ])
+				{
+					$user->image = $attributes[ 'image' ];
+					$user->save();
 				}
 
 				if ($user == null or !isset($user->id))
