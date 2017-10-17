@@ -22,6 +22,7 @@
 		 */
 		public function init ()
 		{
+			$access = ( !is_null(Yii::$app->getModule('users')) and Yii::$app->getModule('users')->useAccessControl );
 			$rules = [
 				[
 					'allow'       => true,
@@ -44,7 +45,7 @@
 				]
 			];
 
-			if (Yii::$app->getModule('users')->useAccessControl)
+			if ($access)
 				foreach (Yii::$app->getModule('users')->allowedUnauthorizedRoutes as $url)
 				{
 					$url = explode('/', trim($url, '/'));
@@ -56,7 +57,7 @@
 					]);
 				}
 
-			if (Yii::$app->getModule('users')->useAccessControl or count($this->rules) == 0)
+			if ($access or count($this->rules) == 0)
 				foreach ($rules as $rule)
 				{
 					if (is_array($rule))

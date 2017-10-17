@@ -97,7 +97,7 @@
 		 */
 		protected function defaultName ()
 		{
-			return 'psso';
+			return 'pulsar';
 		}
 
 		/**
@@ -105,7 +105,7 @@
 		 */
 		protected function defaultTitle ()
 		{
-			return 'PSSO';
+			return 'Pulsar';
 		}
 
 		/**
