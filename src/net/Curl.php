@@ -1,4 +1,5 @@
 <?php
+
 	namespace vps\tools\net;
 
 	/**
@@ -52,11 +53,15 @@
 		 * Adds header.
 		 *
 		 * @param string $header
+		 * @param string $value
 		 * @return Curl
 		 */
-		public function addHeader ($header)
+		public function addHeader ($header, $value = null)
 		{
-			$this->_headers[] = $header;
+			if ($value)
+				$this->_headers[] = "$header: $value";
+			else
+				$this->_headers[] = $header;
 
 			return $this;
 		}
@@ -117,13 +122,13 @@
 		/**
 		 * Sends POST request.
 		 *
-		 * @param null|array $data Additional data to append to request.
+		 * @param array|string $data Additional data to append to request.
 		 * @return string|CurlResponse
 		 */
 		public function post ($data)
 		{
 			$this->_options[ CURLOPT_POST ] = 1;
-			$this->_options[ CURLOPT_POSTFIELDS ] = http_build_query($data);
+			$this->_options[ CURLOPT_POSTFIELDS ] = is_array($data) ? http_build_query($data) : $data;
 
 			return $this->send();
 		}

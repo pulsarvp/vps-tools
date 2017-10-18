@@ -4,6 +4,7 @@
 
 	use vps\tools\auth\AuthAction;
 	use vps\tools\controllers\WebController;
+	use vps\tools\helpers\StringHelper;
 	use vps\tools\helpers\TimeHelper;
 	use vps\tools\helpers\Url;
 	use vps\tools\modules\user\models\User;
@@ -38,7 +39,7 @@
 							'matchCallback' => function ($rule, $action)
 							{
 								if (!Yii::$app->user->identity->active)
-									$this->redirect(Url::toRoute('user/index'));
+									$this->redirect(Url::toRoute([ '/user/index' ]));
 								else
 									return true;
 							}
@@ -66,7 +67,7 @@
 		public function actionCancel ()
 		{
 			Yii::$app->notification->errorToSession(Yii::tr('You have rejected the authorization request.', [], 'user'));
-			$this->redirect(Url::toRoute([ 'user/login' ]));
+			$this->redirect(Url::toRoute([ '/user/login' ]));
 		}
 
 		public function actionLogin ()
@@ -78,8 +79,27 @@
 		public function actionLogout ()
 		{
 			$this->_tpl = '@userViews/logout';
+			$referrer = Yii::$app->getRequest()->getReferrer();
 			Yii::$app->user->logout();
-			$this->redirect('/');
+			if ($this->module->redirectAfterLogout)
+			{
+				foreach ($this->module->guestRestrictedRoutes as $url)
+				{
+					if (StringHelper::pos($referrer, Url::toRoute([ $url ])))
+					{
+						$this->redirect(Yii::$app->user->returnUrl);
+						Yii::$app->end();
+					}
+				}
+			}
+			else
+			{
+				$this->redirect(Yii::$app->user->returnUrl);
+				Yii::$app->end();
+			}
+
+			$this->redirect($referrer);
+			Yii::$app->end();
 		}
 
 		/**
@@ -103,10 +123,17 @@
 				{
 					$user = new $userClass;
 					$user->register($attributes[ 'name' ], $attributes[ 'email' ], $attributes[ 'profile' ], $this->module->autoactivate);
-					if ($attributes[ 'image' ])
-						$user->image = $attributes[ 'image' ];
+
+					if ($attributes[ 'roles' ])
+						$user->assignRoles($attributes[ 'roles' ]);
+					else
+						$user->assignRole($this->module->defaultRole);
+				}
+
+				if ($attributes[ 'image' ] and $user->image != $attributes[ 'image' ])
+				{
+					$user->image = $attributes[ 'image' ];
 					$user->save();
-					$user->assignRole($this->module->defaultRoute);
 				}
 
 				if ($user == null or !isset($user->id))
@@ -121,6 +148,11 @@
 					$user->save();
 
 					Yii::$app->user->login($user, Yii::$app->user->authTimeout);
+					if ($this->module->redirectAfterLogin)
+						$this->redirect(Yii::$app->getUser()->getReturnUrl());
+					else
+						$this->redirect(Url::toRoute([ '/site/index' ]));
+					Yii::$app->end();
 				}
 			}
 			else

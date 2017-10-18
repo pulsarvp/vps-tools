@@ -19,6 +19,88 @@
 		const MIME_TEXT_HTML = 'text/html';
 		const MIME_XML       = 'application/xml';
 
+		private static $_extensionsAudio = [
+			'3gp',
+			'8svx',
+			'aa',
+			'aac',
+			'aax',
+			'act',
+			'aiff',
+			'amr',
+			'ape',
+			'au',
+			'awb',
+			'dct',
+			'dss',
+			'dvf',
+			'flac',
+			'gsm',
+			'iklax',
+			'ivs',
+			'm4a',
+			'm4b',
+			'm4p',
+			'mmf',
+			'mogg',
+			'mp3',
+			'mpc',
+			'msv',
+			'oga',
+			'ogg',
+			'opus',
+			'ra',
+			'raw',
+			'rm',
+			'sln',
+			'tta',
+			'vox',
+			'wav',
+			'webm',
+			'wma',
+			'wv',
+		];
+		private static $_extensionsVideo = [
+			'3g2',
+			'3gp',
+			'amv',
+			'asf',
+			'avi',
+			'drc',
+			'f4a',
+			'f4b',
+			'f4p',
+			'f4v',
+			'flv',
+			'gif',
+			'gifv',
+			'm2v',
+			'm4p',
+			'm4v',
+			'mkv',
+			'mng',
+			'mov',
+			'mp2',
+			'mp4',
+			'mpe',
+			'mpeg',
+			'mpg',
+			'mpv',
+			'mxf',
+			'nsv',
+			'ogg',
+			'ogv',
+			'qt',
+			'rm',
+			'rmvb',
+			'roq',
+			'svi',
+			'vob',
+			'webm',
+			'wmv',
+			'yuv',
+		];
+
 		/**
 		 * @inheritdoc
 		 */
@@ -213,6 +295,42 @@
 		}
 
 		/**
+		 * Checks whether the file is an audio file.
+		 * ```php
+		 * $result = FileHelper::isAudio(file.mp3);
+		 * // $result will be: true
+		 * ```
+		 *
+		 * @param string $path
+		 *
+		 * @return bool
+		 */
+		public static function isAudio ($path)
+		{
+			$ext = strtolower(self::extension($path));
+
+			return in_array($ext, self::$_extensionsAudio);
+		}
+
+		/**
+		 * Checks whether the file is an video file.
+		 * ```php
+		 * $result = FileHelper::isAudio(file.avi);
+		 * // $result will be: true
+		 * ```
+		 *
+		 * @param string $path
+		 *
+		 * @return bool
+		 */
+		public static function isVideo ($path)
+		{
+			$ext = strtolower(self::extension($path));
+
+			return in_array($ext, self::$_extensionsVideo);
+		}
+
+		/**
 		 * Gets directories list in given directory.
 		 * ```php
 		 * // + dir_1
@@ -231,7 +349,7 @@
 		 * // [ 'dir_1_1', 'dir_1_2', 'dir_1_3' ]
 		 * ```
 		 *
-		 * @param  string  $path     The directory under which the items will be looked for.
+		 * @param  string  $path The directory under which the items will be looked for.
 		 * @param  boolean $absolute Whether return path to items should be absolute.
 		 *
 		 * @return array|null List of paths to the found items.
@@ -273,7 +391,7 @@
 		 * // [ 'file8.txt', 'file9.txt' ]
 		 * ```
 		 *
-		 * @param  string  $path     The directory under which the items will be looked for.
+		 * @param  string  $path The directory under which the items will be looked for.
 		 * @param  boolean $absolute Whether return path to items should be absolute.
 		 *
 		 * @return array|null List of paths to the found items.
@@ -315,7 +433,7 @@
 		 * // [ 'dir_1_2_1', 'file5.txt' ]
 		 * ```
 		 *
-		 * @param  string  $path     The directory under which the items will be looked for.
+		 * @param  string  $path The directory under which the items will be looked for.
 		 * @param  boolean $absolute Whether return path to items should be absolute.
 		 *
 		 * @return array|null List of paths to the found items.
@@ -355,7 +473,7 @@
 		 * [ 'file9.txt', 'file8.txt' ]
 		 * ```
 		 *
-		 * @param  string  $path  The directory under which the files will be looked for.
+		 * @param  string  $path The directory under which the files will be looked for.
 		 * @param  integer $order Order direction. Default is descending.
 		 *
 		 * @return array|null Array of pairs 'modification time - full path to the file'.
@@ -403,7 +521,7 @@
 		 * ```
 		 *
 		 * @param  string  $pattern
-		 * @param  string  $path     The directory under which the items will be looked for.
+		 * @param  string  $path The directory under which the items will be looked for.
 		 * @param  boolean $absolute Whether return path to items should be absolute.
 		 *
 		 * @return array List of paths to the found items.

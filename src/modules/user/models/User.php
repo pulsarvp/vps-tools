@@ -53,7 +53,7 @@
 		 *
 		 * @return string|null
 		 */
-		public function getRole ()
+		public function getRoleName ()
 		{
 			$auth = Yii::$app->getAuthManager();
 			$roles = $auth->getRolesByUser($this->id);
@@ -67,7 +67,7 @@
 		 *
 		 * @return array
 		 */
-		public function getRoles ()
+		public function getRolesNames ()
 		{
 			$auth = Yii::$app->getAuthManager();
 			$rolesByUser = $auth->getRolesByUser($this->id);
@@ -87,6 +87,17 @@
 			$role = $auth->getRole($name);
 			if ($role)
 				$auth->assign($role, $this->id);
+		}
+
+		/**
+		 * Assigns role to user.
+		 *
+		 * @param string[] $names the roles names
+		 */
+		public function assignRoles ($names)
+		{
+			foreach ($names as $name)
+				$this->assignRole($name);
 		}
 
 		/**
@@ -192,6 +203,7 @@
 
 		/**
 		 * Returns an name user.
+		 *
 		 * @return string
 		 */
 		public function getName ()
