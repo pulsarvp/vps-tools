@@ -10,11 +10,11 @@
 						<table class="table table-user-information">
 							<tbody>
 								<tr>
-									<td>{Yii::tr('Email')}</td>
+									<td>{Yii::tr('Email', [], 'user')}</td>
 									<td>{Html::mailto({$user->email})}</td>
 								</tr>
 								<tr>
-									<td>{Yii::tr('Login DT')}</td>
+									<td>{Yii::tr('Login DT', [], 'user')}</td>
 									<td>{Yii::$app->formatter->asDatetime($user->loginDT)}</td>
 								</tr>
 							</tbody>
