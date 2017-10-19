@@ -7,7 +7,7 @@
 	use yii\base\Widget;
 	use yii\web\View;
 
-	class LoginMenuWidget extends Widget
+	class UserMenuWidget extends Widget
 	{
 
 		public $loginUrl = null;
@@ -28,11 +28,6 @@
 							'Html' => '\vps\tools\helpers\Html',
 							'Url'  => '\vps\tools\helpers\Url'
 						],
-						'widgets' => [
-							'blocks' => [
-								'Form' => '\vps\tools\html\Form',
-							]
-						]
 					]
 				]
 			]);
@@ -43,13 +38,14 @@
 		 */
 		public function run ()
 		{
+			$auth_client_default = Yii::$app->settings->get('auth_client_default');
 			if (is_null($this->loginUrl))
-				if (Yii::$app->settings->get('auth_client_default'))
-					$this->loginUrl = Url::toRoute([ '/user/auth', 'authclient' => Yii::$app->settings->get('auth_client_default') ]);
+				if ($auth_client_default)
+					$this->loginUrl = Url::toRoute([ '/user/auth', 'authclient' => $auth_client_default ]);
 				else
 					$this->loginUrl = Url::toRoute([ '/user/login' ]);
 
-			return $this->renderFile('@userViews/login.menu.tpl', [
+			return $this->renderFile('@userViews/menu.tpl', [
 				'useUserLink' => $this->useUserLink,
 				'loginUrl'    => $this->loginUrl,
 			]);
