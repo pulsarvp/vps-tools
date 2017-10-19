@@ -36,13 +36,16 @@
 		{
 			parent::init();
 
-			$this->_use = Yii::$app->settings->get('sentry_use', 0);
-			if ($this->_use)
+			if (Yii::$app->has('settings'))
 			{
-				$this->_dsn = Yii::$app->settings->get('sentry_dsn', '');
-				$this->_client = new Raven_Client($this->_dsn);
-				$this->_client->setEnvironment(YII_DEBUG ? 'DEV' : 'PROD');
-				$this->_client->setRelease(Yii::$app->version);
+				$this->_use = Yii::$app->settings->get('sentry_use', 0);
+				if ($this->_use)
+				{
+					$this->_dsn = Yii::$app->settings->get('sentry_dsn', '');
+					$this->_client = new Raven_Client($this->_dsn);
+					$this->_client->setEnvironment(YII_DEBUG ? 'DEV' : 'PROD');
+					$this->_client->setRelease(Yii::$app->version);
+				}
 			}
 		}
 
