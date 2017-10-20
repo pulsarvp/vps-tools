@@ -61,7 +61,7 @@
 		 */
 		protected function defaultName ()
 		{
-			return 'sso';
+			return 'npoed';
 		}
 
 		/**
@@ -69,7 +69,7 @@
 		 */
 		protected function defaultTitle ()
 		{
-			return 'sso';
+			return 'npoed';
 		}
 
 		/**
