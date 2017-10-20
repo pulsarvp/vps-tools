@@ -116,8 +116,14 @@
 				/** @var User $user */
 				$user = $userClass::find()
 					->where([ 'profile' => $attributes[ 'profile' ] ])
-					->orWhere([ 'email' => $attributes[ 'email' ] ])
 					->one();
+				
+				if ($user == null)
+				{
+					$user = $userClass::find()
+						->where([ 'email' => $attributes[ 'email' ] ])
+						->one();
+				}
 
 				if ($user == null)
 				{
