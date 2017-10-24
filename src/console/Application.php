@@ -9,7 +9,7 @@
 	 */
 	class Application extends \yii\console\Application
 	{
-		protected $_nullComponents = [ 'migrate' => 'settings' ];
+		protected $_nullComponents = [ 'migrate' => [ 'settings' ] ];
 
 		public function __construct ($config = [])
 		{
