@@ -1,7 +1,7 @@
 <?php
 
 	namespace vps\tools\console;
-	
+
 	/**
 	 * @author    Anna Manaenkova <witzawitz@gmail.com>
 	 * @copyright Copyright (c) 2017
@@ -9,7 +9,7 @@
 	 */
 	class Application extends \yii\console\Application
 	{
-		protected $_nullComponents = [ 'settings' ];
+		protected $_nullComponents = [ 'migrate' => 'settings' ];
 
 		public function __construct ($config = [])
 		{
@@ -24,26 +24,23 @@
 			// Remove unnecessary components for migrations.
 			$argv = $_SERVER[ 'argv' ];
 			$argc = $_SERVER[ 'argc' ];
-			if ($argc == 1)
-				$setNullComponents = true;
-			elseif ($argc > 1)
+
+			if ($argc > 1)
 			{
 				list($controller,) = explode("/", $argv[ 1 ]);
-				if (
-					$controller == "migrate"
-					or !isset($config[ 'controllerMap' ][ $controller ])
-				)
-					$setNullComponents = true;
-			}
-
-			if ($setNullComponents)
-			{
-				foreach ($this->_nullComponents as $nc)
-					if (isset($config[ 'components' ][ $nc ]))
-						$config[ 'components' ][ $nc ] = null;
+				if ($controller)
+				{
+					if (isset($this->_nullComponents[ $controller ]))
+					{
+						foreach ($this->_nullComponents[ $controller ] as $component)
+						{
+							if (isset($config[ 'components' ][ $component ]))
+								$config[ 'components' ][ $component ] = null;
+						}
+					}
+				}
 			}
 
 			return $config;
 		}
-
 	}
