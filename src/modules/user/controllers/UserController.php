@@ -73,12 +73,8 @@
 		public function actionLogin ()
 		{
 			$this->_tpl = '@userViews/login';
-			$auth_client_default = Yii::$app->settings->get('auth_client_default');
-			if ($auth_client_default) $userClass = $auth_client_default;
-			else
-				$userClass = $this->module->defaultClient;
-
-			$this->data('defaultClient', $userClass);
+			$auth_client_default = Yii::$app->settings->get('auth_client_default', $this->module->defaultClient);
+			$this->data('defaultClient', $auth_client_default);
 		}
 
 		public function actionLogout ()
