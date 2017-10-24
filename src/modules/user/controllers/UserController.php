@@ -73,7 +73,8 @@
 		public function actionLogin ()
 		{
 			$this->_tpl = '@userViews/login';
-			$this->data('defaultClient', $userClass = $userClass = $this->module->defaultClient);
+			$defaultClient = Yii::$app->settings->get('auth_client_default', $this->module->defaultClient);
+			$this->data('defaultClient', $defaultClient);
 		}
 
 		public function actionLogout ()
@@ -117,7 +118,7 @@
 				$user = $userClass::find()
 					->where([ 'profile' => $attributes[ 'profile' ] ])
 					->one();
-				
+
 				if ($user == null)
 				{
 					$user = $userClass::find()
