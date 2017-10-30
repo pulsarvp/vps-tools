@@ -1,5 +1,6 @@
 <?php
-	use yii\db\Migration;
+
+	use vps\tools\db\Migration;
 
 	/**
 	 * Class m010101_100001_init_rbac
@@ -9,17 +10,12 @@
 		/** @inheritdoc */
 		public function up ()
 		{
-			$tableOptions = null;
-			if ($this->db->driverName === 'mysql')
-			{
-				$tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
-			}
 			$this->createTable('auth_rule', [
 				'name'       => $this->string(64)->notNull(),
 				'data'       => $this->text()->null(),
 				'created_at' => $this->integer()->null(),
 				'updated_at' => $this->integer()->null()
-			], $tableOptions);
+			]);
 			$this->addPrimaryKey('name', 'auth_rule', 'name');
 
 			$this->createTable('auth_item', [
@@ -30,7 +26,7 @@
 				'data'        => $this->text()->null(),
 				'created_at'  => $this->integer()->null(),
 				'updated_at'  => $this->integer()->null()
-			], $tableOptions);
+			]);
 			$this->addPrimaryKey('name', 'auth_item', 'name');
 
 			$this->createIndex('type', 'auth_item', 'type');
@@ -41,7 +37,7 @@
 			$this->createTable('auth_item_child', [
 				'parent' => $this->string(64)->notNull(),
 				'child'  => $this->string(64)->notNull()
-			], $tableOptions);
+			]);
 			$this->addPrimaryKey('parent', 'auth_item_child', [ 'parent', 'child' ]);
 
 			$this->createIndex('child', 'auth_item_child', 'child');
@@ -53,7 +49,7 @@
 				'item_name'  => $this->string(64)->notNull(),
 				'user_id'    => $this->integer()->notNull(),
 				'created_at' => $this->integer()->null()
-			], $tableOptions);
+			]);
 			$this->addPrimaryKey('item_name', 'auth_assignment', [ 'item_name', 'user_id' ]);
 
 			$this->createIndex('user_id', 'auth_assignment', 'user_id');
@@ -79,24 +75,31 @@
 			$unverified = $auth->createRole('registered');
 			$auth->add($unverified);
 
-			//$this->renameColumn("user", 'isApproved', 'active');
-			$userClass = Yii::$app->getModule('users')->modelUser;
-			$users = $userClass::find()->all();
-			if (count($users) > 0)
-				foreach ($users as $user)
+			if ($this->hasColumn('user', 'isApproved'))
+				$this->renameColumn("user", 'isApproved', 'active');
+
+			$module = null;
+			if (Yii::$app->hasModule('users'))
+			{
+				$userClass = Yii::$app->getModule('users')->modelUser;
+				$users = $userClass::find()->all();
+				if (count($users) > 0)
 				{
-					if ($user->active == 1)
-						$user->assignRole('admin');
-					else
-						$user->assignRole('registered');
+					/** @var \vps\tools\modules\user\models\User $user */
+					foreach ($users as $user)
+					{
+						if ($user->active == 1)
+							$user->assignRole('admin');
+						else
+							$user->assignRole('registered');
+					}
 				}
+			}
 		}
 
 		/** @inheritdoc */
 		public function down ()
 		{
-			//$this->renameColumn("user", 'active', 'isApproved');
-
 			$auth = Yii::$app->getAuthManager();
 			$auth->removeAll();
 

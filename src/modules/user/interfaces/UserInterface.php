@@ -27,7 +27,7 @@
 		 * @return string|null
 		 */
 
-		public function getRole ();
+		public function getRoleName ();
 
 		/**
 		 * Gets user all roles.
@@ -35,7 +35,7 @@
 		 * @return array
 		 */
 
-		public function getRoles ();
+		public function getRolesNames ();
 
 		/**
 		 * Assigns role to user.

@@ -37,6 +37,10 @@
 		{
 			return [
 				'email'   => 'email',
+				'image'   => function ($attributes)
+				{
+					return isset($attributes[ 'image' ]) ? $attributes[ 'image' ] : '';
+				},
 				'name'    => function ($attributes)
 				{
 					return trim(implode(' ', [ $attributes[ 'lastname' ], $attributes[ 'firstname' ], $attributes[ 'secondname' ] ]));
@@ -47,11 +51,7 @@
 				},
 				'roles'   => function ($attributes)
 				{
-					return '';
-				},
-				'image'   => function ($attributes)
-				{
-					return isset($attributes[ 'image' ]) ? $attributes[ 'image' ] : '';
+					return isset($attributes[ 'roles' ]) ? $attributes[ 'roles' ] : null;
 				}
 			];
 		}
@@ -61,7 +61,7 @@
 		 */
 		protected function defaultName ()
 		{
-			return 'sso';
+			return 'npoed';
 		}
 
 		/**
@@ -69,7 +69,7 @@
 		 */
 		protected function defaultTitle ()
 		{
-			return 'sso';
+			return 'npoed';
 		}
 
 		/**
