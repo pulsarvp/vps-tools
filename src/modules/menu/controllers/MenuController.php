@@ -29,6 +29,7 @@
 			$type = MenuType::findOne(Yii::$app->request->get('type'));
 			if ($type == null)
 				return;
+			$root = null;
 			$parentId = Yii::$app->request->get('parentID');
 			if (!is_null($parentId))
 			{

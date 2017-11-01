@@ -5,7 +5,7 @@
 		{$f->field($model,'title')->textInput()}
 		{$f->field($model,'text')->textarea(['class' => 'redactor'])}
 		{if isset($menudrop)}
-			{$f->field($model,'menus')->dropDownList($menudrop,['class'=>'selectpicker','multiple'=>true])}
+			{$f->field($model,'menus')->label(Yii::tr('Menu', [], 'page'))->dropDownList($menudrop,['class'=>'selectpicker','multiple'=>true])}
 		{/if}
 	</div>
 	{Html::submitButton(Yii::tr('Save', [], 'page'), ['class' => 'btn btn-success btn-block'])}

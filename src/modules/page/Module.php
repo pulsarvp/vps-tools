@@ -49,6 +49,7 @@
 		public function bootstrap ($app)
 		{
 			$app->setAliases([ '@pageViews' => __DIR__ . '/views' ]);
+			$app->setAliases([ '@vpsViews' => __DIR__ . '/../../views' ]);
 			$app->getUrlManager()->addRules([
 				[ 'class'   => 'vps\tools\web\UrlRule',
 				  'pattern' => 'page/add',

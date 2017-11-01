@@ -32,12 +32,12 @@
 
 			$this->createTable('pagemenu', [
 				'pageID' => $this->integer()->notNull(),
-				'menuID' => $this->integer()->notNull(),
+				'menuID' => $this->integer()->null(),
 			], $tableOptions);
 			$this->createIndex('page', 'pagemenu', 'pageID');
 			$this->createIndex('menu', 'pagemenu', 'menuID');
 			$this->addForeignKey('pagemenu_page', 'pagemenu', 'pageID', 'page', 'id');
-			$this->addForeignKey('pagemenu_menu', 'pagemenu', 'menuID', 'menu', 'id');
+			$this->addForeignKey('pagemenu_menu', 'pagemenu', 'menuID', 'menu', 'id', 'SET NULL');
 		}
 
 		/**

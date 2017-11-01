@@ -45,4 +45,4 @@
 		{/foreach}
 	</tbody>
 </table>
-{include file='@pageViews/../../views/pagination.tpl'}
+{include file='@vpsViews/pagination.tpl'}

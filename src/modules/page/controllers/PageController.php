@@ -68,7 +68,7 @@
 					{
 						$page = $r->post("Page", []);
 
-						if (isset($page[ 'menus' ]))
+						if (!empty($page[ 'menus' ]))
 						{
 							foreach ($page[ 'menus' ] as $menu)
 							{
@@ -85,6 +85,7 @@
 				}
 			}
 
+			$this->setTitle(Yii::tr('Add page', [], 'page'));
 			$this->data('model', $model);
 			$this->_tpl = '@pageViews/form';
 		}
@@ -147,6 +148,7 @@
 				}
 			}
 
+			$this->setTitle(Yii::tr('Edit page', [], 'page'));
 			$this->data('model', $model);
 			$this->_tpl = '@pageViews/form';
 		}
@@ -164,7 +166,7 @@
 			{
 				Yii::$app->notification->error(Yii::tr('Given page does not exist.', [], 'page'));
 			}
-
+			$this->setTitle($page->title);
 			$this->data('page', $page);
 			$this->_tpl = '@pageViews/page';
 		}
@@ -182,7 +184,7 @@
 				Yii::$app->notification->errorToSession(Yii::tr('Given page does not exist.', [], 'page'));
 				$this->redirect(Url::toRoute([ '/page/index' ]));
 			}
-
+			$this->setTitle(Yii::tr('View page', [], 'page'));
 			$this->data('page', $page);
 			$this->data('useMenu', $this->module->useMenu);
 			$this->_tpl = '@pageViews/view';
@@ -196,11 +198,11 @@
 				$types = $this->module->modelMenuType::find()->asArray()->all();
 				$menutypes = ArrayHelper::map($types, 'id', 'title');
 
-				$menus = $this->module->modelMenu::find()->where('level>0')->orderBy([ 'typeID' => SORT_ASC, 'lft' => SORT_ASC ])->all();
+				$menus = $this->module->modelMenu::find()->leaves()->orderBy([ 'typeID' => SORT_ASC, 'lft' => SORT_ASC ])->all();
 				$menulist = [];
 				foreach ($menus as $menu)
 				{
-					$menulist[ $menutypes[ $menu->typeID ] ][ $menu->id ] = str_repeat('-', $menu->level - 1) . ' ' . Yii::tr($menu->name);
+					$menulist[ $menutypes[ $menu->typeID ] ][ $menu->id ] = str_repeat('-', $menu->depth - 1) . ' ' . Yii::tr($menu->title);
 				}
 				$this->data('menudrop', $menulist);
 			}

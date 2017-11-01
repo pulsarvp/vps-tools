@@ -1,5 +1,4 @@
 {if isset($page)}
-	{use class='\vps\tools\helpers\ArrayHelper'}
 	<div class="content">
 	<h1>
 		{$page->title}
@@ -16,9 +15,10 @@
 	<div class="guid">{$page->guid}</div>
 	<div class="date">{Yii::$app->formatter->asDatetime($page->dt)}</div>
 	<div class="text">{$page->text}</div>
-	{if useMenu}
+	{if useMenu and count($page->menu) > 0}
+		<p>{Yii::tr('Menu',[],'page')}</p>
 		{foreach $page->menu as $menu}
-			<a href="{$menu->url}" target="_blank">{Yii::tr($menu->name)}</a>
+			<a href="{$menu->url}" target="_blank">{Yii::tr($menu->title)}</a>
 		{/foreach}
 		</div>
 		</div>
