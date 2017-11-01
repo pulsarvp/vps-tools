@@ -1,6 +1,8 @@
 <?php
+
 	namespace vps\tools\controllers;
 
+	use vps\tools\modules\user\filters\AccessControl;
 	use Yii;
 
 	class WebController extends \yii\web\Controller
@@ -27,6 +29,16 @@
 		 * Path to the view tpl file.
 		 */
 		protected $_tpl;
+
+		public function behaviors ()
+		{
+			return [
+				'access' => [
+					'class' => AccessControl::className(),
+					'rules' => [],
+				],
+			];
+		}
 
 		/**
 		 * Override current template.
@@ -65,7 +77,8 @@
 
 			$this->view->registerAssetBundle($this->assetName);
 
-			$this->data('tpl', $this->_tpl . '.tpl');
+			if (!isset($this->_data[ 'tpl' ]) or $this->_data[ 'tpl' ] != 'empty.tpl')
+				$this->_data[ 'tpl' ] = $this->_tpl . '.tpl';
 			$this->forceSetTitle();
 
 			return $this->renderPartial('@app/views/index.tpl', $this->_data);
@@ -84,6 +97,9 @@
 
 				$this->_assetBundle = Yii::$app->assetManager->getBundle($this->assetName);
 				$this->_tpl = $this->id . '/' . $this->action->id;
+
+				if (strpos(Yii::$app->urlManager->hostInfo, Yii::$app->getRequest()->referrer) >= 0 and $this->action->controller->id != 'user')
+					Yii::$app->getUser()->setReturnUrl(Yii::$app->getRequest()->referrer);
 
 				return true;
 			}
@@ -106,7 +122,7 @@
 		 * Add user error message.
 		 *
 		 * @param  string  $message Message text.
-		 * @param  boolean $isRaw Whether given text is raw. If not it will be processed with [[Yii::tr()]].
+		 * @param  boolean $isRaw   Whether given text is raw. If not it will be processed with [[Yii::tr()]].
 		 */
 		public function error ($message, $isRaw = false)
 		{
@@ -117,7 +133,7 @@
 		 * Add user message.
 		 *
 		 * @param  string  $message Message text.
-		 * @param  boolean $isRaw Whether given text is raw. If not it will be processed with [[Yii::tr()]].
+		 * @param  boolean $isRaw   Whether given text is raw. If not it will be processed with [[Yii::tr()]].
 		 */
 		public function message ($message, $isRaw = false)
 		{
@@ -139,7 +155,7 @@
 		 * Add user warning.
 		 *
 		 * @param  string  $message Message text.
-		 * @param  boolean $isRaw Whether given text is raw. If not it will be processed with [[Yii::tr()]].
+		 * @param  boolean $isRaw   Whether given text is raw. If not it will be processed with [[Yii::tr()]].
 		 */
 		public function warning ($message, $isRaw = false)
 		{

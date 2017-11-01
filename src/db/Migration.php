@@ -14,6 +14,13 @@
 	 */
 	class Migration extends \yii\db\Migration
 	{
+		/**
+		 * @inheritdoc
+		 */
+		public function addForeignKey ($name, $table, $columns, $refTable, $refColumns, $delete = "CASCADE", $update = "CASCADE")
+		{
+			parent::addForeignKey($name, $table, $columns, $refTable, $refColumns, $delete, $update);
+		}
 
 		/**
 		 * Creates database view.
@@ -21,6 +28,7 @@
 		 * @param string $name View name.
 		 * @param Query  $query Query that is used to create view.
 		 * @param bool   $replace Whether to replace existing view with the same name.
+		 *
 		 * @throws \yii\db\Exception
 		 * @see dropView
 		 */
@@ -80,6 +88,7 @@
 		 * @param string $name Engine name.
 		 * @param bool   $default Whether to check if engine is default.
 		 * @param bool   $exception Whether to throw exception on error.
+		 *
 		 * @return bool True in case of engine is enabled and (in case of default is true) default. Otherwise exception is thrown (id exception is true) or false returned.
 		 * @throws \yii\db\Exception
 		 */
@@ -217,5 +226,19 @@
 			}
 
 			return null;
+		}
+
+		/**
+		 * Checks whether column for a table  exist.
+		 *
+		 * @param string $table
+		 * @param string $column
+		 * @return bool
+		 */
+		public function hasColumn ($table, $column)
+		{
+			$schema = $this->db->getTableSchema($table);
+
+			return isset($schema->columns[ $column ]);
 		}
 	}
