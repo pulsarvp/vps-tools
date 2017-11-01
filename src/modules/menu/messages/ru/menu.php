@@ -1,10 +1,15 @@
 <?php
 	return [
+		"Add root menu item"                         => "Добавить пункт меню",
 		"Add menu item"                              => "Добавить пункт меню",
+		"Add menu subitem"                           => "Добавить подпункт меню",
+		"Add menu subitem to {title}"                => "Добавить подпункт меню для {title}",
+		"Cancel"                                     => "Отмена",
 		"Delete selected menu and all its children?" => "Удалить этот пункт меню и все его подпункты?",
 		"Depth"                                      => "Глубина",
-		"Edit menu tiem"                             => "Редактировать пункт меню",
+		"Edit menu item"                             => "Редактировать пункт меню",
 		"ID"                                         => "ID",
+		"Index menu"                                 => "Управление меню",
 		"Guid"                                       => "Гуид",
 		"Lft"                                        => "Lft",
 		"Manage menu"                                => "Управление менюм",

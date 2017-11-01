@@ -25,20 +25,22 @@
 
 			$menu = new Menu();
 			$this->_tpl = '@menuViews/add';
+			$this->setTitle(Yii::tr('Add menu item', [], 'menu'));
+			$type = MenuType::findOne(Yii::$app->request->get('type'));
+			if ($type == null)
+				return;
+			$parentId = Yii::$app->request->get('parentID');
+			if (!is_null($parentId))
+			{
+				$root = Menu::findOne([ 'id' => $parentId, 'typeID' => $type->id ]);
+				$this->setTitle(Yii::tr('Add menu subitem to {title}', [ 'title' => $root->title ], 'menu'));
+			}
+
 			if (Yii::$app->request->isPost)
 			{
-				$type = MenuType::findOne(Yii::$app->request->get('type'));
-				if ($type == null)
-					return;
-
 				$post = Yii::$app->request->post('Menu');
 
-				$parentId = Yii::$app->request->get('parentID');
-				if (!is_null($parentId))
-				{
-					$root = Menu::findOne([ 'id' => $parentId, 'typeID' => $type->id ]);
-				}
-				else
+				if (is_null($root))
 				{
 					$root = Menu::findOne([ 'title' => $type->guid . '_ROOT', 'typeID' => $type->id ]);
 					if ($root == null)
@@ -49,7 +51,7 @@
 				}
 
 				$menu->setAttributes([
-					'title'   => $post[ 'title' ],
+					'title'  => $post[ 'title' ],
 					'url'    => $post[ 'url' ],
 					'path'   => $post[ 'path' ],
 					'typeID' => $type->id
@@ -59,7 +61,6 @@
 				Yii::$app->notification->messageToSession(Yii::tr('Menu item was saved.', [], 'menu'));
 				$this->redirect(Url::toRoute([ '/menu/index', 'type' => $type->id ]));
 			}
-			$this->setTitle(Yii::tr('Add menu item', [], 'menu'));
 			$this->data('model', $menu);
 		}
 
@@ -81,8 +82,8 @@
 
 				$menu->updateAttributes([
 					'title' => $post[ 'title' ],
-					'url'  => $post[ 'url' ],
-					'path' => $post[ 'path' ]
+					'url'   => $post[ 'url' ],
+					'path'  => $post[ 'path' ]
 				]);
 
 				$menu->save();

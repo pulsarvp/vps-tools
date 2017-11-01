@@ -12,7 +12,7 @@
 	</div>
 	<div class="col-md-3">
 		{if isset($type->id)}
-			{Html::a(Yii::tr('Add item menu', [], 'menu'),Url::toRoute(['menu/add','type'=>$type->id]),['class'=>'btn btn-primary'])}
+			{Html::a(Yii::tr('Add root menu item', [], 'menu'),Url::toRoute(['menu/add','type'=>$type->id]),['class'=>'btn btn-primary'])}
 		{/if}
 	</div>
 </div>
@@ -42,9 +42,9 @@
 							{Html::fa('eye-slash',['class'=>'menu-visible'])}
 						{/if}
 					</td>
-					<td>{Html::a(Html::fa('pencil'),Url::toRoute(['menu/edit','id'=>$menu->id]),['class'=>'btn btn-xs btn-success menu-edit'])}</td>
-					<td>{Html::a(Html::fa('plus'),Url::toRoute(['menu/add','parentID'=>$menu->id,'type'=>$type->id]),['class'=>'btn btn-xs btn-primary menu-add'])}</td>
-					<td>{Html::fa('remove',['class'=>'btn btn-xs btn-danger menu-delete','data-toggle'=>'confirmation', 'data-title'=>{Yii::tr('Delete selected menu and all its children?',[],'menu')}, 'title'=>{Yii::tr('Delete selected menu and all its children?',[],'menu')}, 'data-btn-ok-label'=>"{Yii::tr('Yes', [], 'menu')}",'data-btn-ok-class'=>"btn btn-xs btn-danger", 'data-btn-cancel-label'=>"{Yii::tr('No', [], 'menu')}"  ])}</td>
+					<td>{Html::a(Html::fa('pencil'),Url::toRoute(['menu/edit','id'=>$menu->id]),['class'=>'btn btn-xs btn-success menu-edit','title'=>Yii::tr('Edit menu item')])}</td>
+					<td>{Html::a(Html::fa('plus'),Url::toRoute(['menu/add','parentID'=>$menu->id,'type'=>$type->id]),['class'=>'btn btn-xs btn-primary menu-add','title'=>Yii::tr('Add menu subitem')])}</td>
+					<td>{Html::a(Html::fa('remove'),'',['class'=>'btn btn-xs btn-danger menu-delete' ,'data-toggle'=>'confirmation', 'data-title'=>{Yii::tr('Delete selected menu and all its children?',[],'menu')}, 'title'=>{Yii::tr('Delete selected menu and all its children?',[],'menu')}, 'data-btn-ok-label'=>"{Yii::tr('Yes', [], 'menu')}",'data-btn-ok-class'=>"btn btn-xs btn-danger", 'data-btn-cancel-label'=>"{Yii::tr('No', [], 'menu')}" ])}</td>
 				</tr>
 			{/foreach}
 		</tbody>
