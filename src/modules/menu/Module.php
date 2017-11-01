@@ -8,7 +8,11 @@
 
 	/**
 	 * Class Module
-	 *
+	 *'menus'   => [
+	 * 'class'         => 'vps\tools\modules\menu\Module',
+	 * 'usePage'       => false,
+	 * 'modelPage '     => 'vps\tools\modules\page\models\Page'
+	 * ],
 	 * @package vps\tools\modules\menu
 	 */
 	class Module extends \yii\base\Module implements BootstrapInterface
@@ -17,6 +21,14 @@
 		 * @var string the namespace that controller classes are in
 		 */
 		public $controllerNamespace = 'vps\tools\modules\menu\controllers';
+		/**
+		 * @var boolean view functional page
+		 */
+		public $usePage = false;
+		/**
+		 * @var string the class menu
+		 */
+		public $modelPage = 'vps\tools\modules\page\models\Page';
 
 		public $title = "Manage menu";
 

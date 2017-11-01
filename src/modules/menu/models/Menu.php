@@ -1,6 +1,8 @@
 <?php
+
 	namespace vps\tools\modules\menu\models;
 
+	use vps\tools\modules\menu\db\NestedSetsQuery;
 	use Yii;
 	use yii\db\ActiveRecord;
 
@@ -24,6 +26,21 @@
 	{
 		public $active = false;
 
+		/**
+		 * @return \yii\db\ActiveQuery|null
+		 */
+		public function getPage ()
+		{
+			if (Yii::$app->getModule('pages')->usePage)
+				return $this->hasOne(Yii::$app->getModule('pages')->modelPage, [ 'id' => 'pageID' ])
+					->viaTable('pagemenu', [ 'menuID' => 'id' ]);
+			else
+				return null;
+		}
+
+		/**
+		 * @return \yii\db\ActiveQuery
+		 */
 		public function getType ()
 		{
 			return $this->hasOne(MenuType::className(), [ 'id' => 'typeID' ]);
@@ -48,6 +65,9 @@
 			];
 		}
 
+		/**
+		 * @inheritdoc
+		 */
 		public function behaviors ()
 		{
 			return [
@@ -59,9 +79,12 @@
 			];
 		}
 
+		/**
+		 * @inheritdoc
+		 */
 		public static function find ()
 		{
-			return new \common\db\NestedSetsQuery(get_called_class());
+			return new NestedSetsQuery(get_called_class());
 		}
 
 		/**
@@ -71,7 +94,7 @@
 		{
 			return [
 				[ [ 'lft', 'rgt', 'depth', 'visible', 'typeID', 'tree' ], 'integer' ],
-				[ [ 'name', 'path','url' ], 'string', 'max' => 128 ]
+				[ [ 'name', 'path', 'url' ], 'string', 'max' => 128 ]
 			];
 		}
 
@@ -83,6 +106,9 @@
 			return 'menu';
 		}
 
+		/**
+		 * @inheritdoc
+		 */
 		public function transactions ()
 		{
 			return [

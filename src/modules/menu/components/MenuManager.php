@@ -12,7 +12,7 @@
 	class MenuManager extends yii\base\Object
 	{
 		private $_types;
-		private $_data;
+		private $_data = [];
 
 		public function init ()
 		{

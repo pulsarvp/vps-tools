@@ -2,7 +2,7 @@
 
 	namespace vps\tools\modules\menu\controllers;
 
-	use vps\tools\controllers\WebController;
+	use app\base\Controller;
 	use vps\tools\helpers\Url;
 	use vps\tools\modules\menu\models\Menu;
 	use vps\tools\modules\menu\models\MenuType;
@@ -14,7 +14,7 @@
 	 * @copyright Copyright (c) 2017
 	 * @date      2017-09-26
 	 */
-	class MenuController extends WebController
+	class MenuController extends Controller
 	{
 
 		/**
