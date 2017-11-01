@@ -12,7 +12,7 @@
 		</li>
 		{assign depth $object->depth}
 		{/if}
-		<li{if $object->active} class="active"{/if}>{Html::a($object->title, $object->url)}
+		<li class="{if $object->active}active {/if}level-{$object->depth}">{Html::a($object->title, $object->url)}
 			{/foreach}
 			{if $depth > 1}
 			{str_repeat('</li></ul>', $depth-1)}</li>
