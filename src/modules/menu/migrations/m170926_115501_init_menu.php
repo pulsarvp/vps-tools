@@ -12,29 +12,24 @@
 		 */
 		public function up ()
 		{
-			$tableOptions = null;
-			if ($this->db->driverName === 'mysql')
-			{
-				$tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
-			}
 			$this->createTable('menutype', [
 				'id'        => $this->primaryKey(),
 				'guid'        => $this->string(128)->notNull()->unique(),
 				'title'        => $this->string(255)->null(),
-			], $tableOptions);
+			]);
 
 			$this->createTable('menu', [
 				'id'        => $this->primaryKey(),
-				'name'        => $this->string(128)->notNull(),
+				'title'        => $this->string(128)->notNull(),
 				'url'        => $this->string(128)->null(),
 				'path'        => $this->string(128)->null(),
-				'lft'        => $this->integer()->null(),
-				'rgt'        => $this->integer()->null(),
-				'depth'        => $this->integer()->null(),
+				'lft'        => $this->integer()->notNull(),
+				'rgt'        => $this->integer()->notNull(),
+				'depth'        => $this->integer()->notNull(),
 				'tree'        => $this->integer()->null(),
 				'visible'        => $this->boolean()->defaultValue(1),
-				'typeID'        => $this->string(255)->null(),
-			], $tableOptions);
+				'typeID'        => $this->integer()->notNull(),
+			]);
 			$this->createIndex('type','menu','typeID');
 			$this->addForeignKey('menu_type','menu','typeID','menutype','id', 'CASCADE','CASCADE');
 

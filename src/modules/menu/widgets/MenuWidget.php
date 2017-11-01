@@ -16,13 +16,13 @@
 		 */
 		public $classUl;
 		/**
-		 * List menuitem
+		 * Guid menutype
 		 *
 		 * ```php
-		 * menus = Yii::$app->menu->forType( Yii::$app->settings->get( 'backendmain' ) )
+		 * menutype =Yii::$app->settings->get( 'backendmain' )
 		 * ```
 		 */
-		public $menus;
+		public $menutype;
 
 		/**
 		 * Template the menu tree
@@ -62,10 +62,9 @@
 			else
 				$template = '@menuViews/menu.tpl';
 
-
 			return $this->renderFile($template, [
-				'menus'   => $this->menus,
-				'classUl' => $this->classUl
+				'menutype' => $this->menutype,
+				'classUl'  => $this->classUl
 			]);
 		}
 	}

@@ -1,9 +1,9 @@
 <?php
 	return [
-		"Add item menu"                              => "Добавить пункт меню",
+		"Add menu item"                              => "Добавить пункт меню",
 		"Delete selected menu and all its children?" => "Удалить этот пункт меню и все его подпункты?",
 		"Depth"                                      => "Глубина",
-		"Edit item menu"                             => "Редактировать пункт меню",
+		"Edit menu tiem"                             => "Редактировать пункт меню",
 		"ID"                                         => "ID",
 		"Guid"                                       => "Гуид",
 		"Lft"                                        => "Lft",

@@ -40,16 +40,16 @@
 				}
 				else
 				{
-					$root = Menu::findOne([ 'name' => $type->guid . '_ROOT', 'typeID' => $type->id ]);
+					$root = Menu::findOne([ 'title' => $type->guid . '_ROOT', 'typeID' => $type->id ]);
 					if ($root == null)
 					{
-						$root = new Menu([ 'name' => $type->guid . '_ROOT', 'typeID' => $type->id ]);
+						$root = new Menu([ 'title' => $type->guid . '_ROOT', 'typeID' => $type->id ]);
 						$root->makeRoot();
 					}
 				}
 
 				$menu->setAttributes([
-					'name'   => $post[ 'name' ],
+					'title'   => $post[ 'title' ],
 					'url'    => $post[ 'url' ],
 					'path'   => $post[ 'path' ],
 					'typeID' => $type->id
@@ -59,7 +59,7 @@
 				Yii::$app->notification->messageToSession(Yii::tr('Menu item was saved.', [], 'menu'));
 				$this->redirect(Url::toRoute([ '/menu/index', 'type' => $type->id ]));
 			}
-			$this->setTitle(Yii::tr('Add item menu', [], 'menu'));
+			$this->setTitle(Yii::tr('Add menu item', [], 'menu'));
 			$this->data('model', $menu);
 		}
 
@@ -80,7 +80,7 @@
 				$post = Yii::$app->request->post('Menu');
 
 				$menu->updateAttributes([
-					'name' => $post[ 'name' ],
+					'title' => $post[ 'title' ],
 					'url'  => $post[ 'url' ],
 					'path' => $post[ 'path' ]
 				]);
@@ -90,7 +90,7 @@
 				$this->redirect(Url::toRoute([ '/menu/index', 'type' => $menu->typeID ]));
 			}
 			$this->data('model', $menu);
-			$this->setTitle(Yii::tr('Edit item menu', [], 'menu'));
+			$this->setTitle(Yii::tr('Edit menu item', [], 'menu'));
 			$this->_tpl = '@menuViews/add';
 		}
 
@@ -125,12 +125,11 @@
 				$menu = Menu::findOne($id);
 				if ($menu !== null)
 				{
-					$visible = $menu->visible == 1 ? 0 : 1;
-					$menu->setAttribute('visible', $visible);
+					$menu->setAttribute('visible', $menu->visible == 1 ? 0 : 1);
 					if (!$menu->save())
 						echo Json::encode(current($menu->firstErrors));
 					else
-						echo $visible;
+						echo $menu->visible;
 				}
 			}
 			Yii::$app->end();

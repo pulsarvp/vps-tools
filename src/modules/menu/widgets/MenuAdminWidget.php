@@ -41,7 +41,7 @@
 			if (!is_null($type))
 			{
 				$type = MenuType::findOne($type);
-				$root = Menu::findOne([ 'name' => $type->guid . '_ROOT', 'typeID' => $type->id ]);
+				$root = Menu::findOne([ 'title' => $type->guid . '_ROOT', 'typeID' => $type->id ]);
 				$menus = $root->children()->all();
 			}
 

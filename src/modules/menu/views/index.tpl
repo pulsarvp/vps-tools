@@ -32,7 +32,7 @@
 		<tbody>
 			{foreach $menus as $menu}
 				<tr data-id="{$menu->id}">
-					<td class="depth-{$menu->depth}">{$menu->name}</td>
+					<td class="depth-{$menu->depth}">{$menu->title}</td>
 					<td>{$menu->url}</td>
 					<td>{$menu->path}</td>
 					<td>

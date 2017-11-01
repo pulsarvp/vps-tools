@@ -10,7 +10,7 @@
 	 * This is the model class for table "menu".
 	 *
 	 * @property integer  $id
-	 * @property string   $name
+	 * @property string   $title
 	 * @property string   $url
 	 * @property string   $path
 	 * @property integer  $lft
@@ -53,7 +53,7 @@
 		{
 			return [
 				'id'      => Yii::tr('ID', [], 'menu'),
-				'name'    => Yii::tr('Name', [], 'menu'),
+				'title'   => Yii::tr('Title', [], 'menu'),
 				'url'     => Yii::tr('Url', [], 'menu'),
 				'path'    => Yii::tr('Path', [], 'menu'),
 				'lft'     => Yii::tr('Lft', [], 'menu'),
@@ -94,7 +94,7 @@
 		{
 			return [
 				[ [ 'lft', 'rgt', 'depth', 'visible', 'typeID', 'tree' ], 'integer' ],
-				[ [ 'name', 'path', 'url' ], 'string', 'max' => 128 ]
+				[ [ 'title', 'path', 'url' ], 'string', 'max' => 128 ]
 			];
 		}
 
