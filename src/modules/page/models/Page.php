@@ -27,7 +27,7 @@
 	class Page extends Model
 	{
 		public $menus = [];
-		public $updateUrl = false;
+		public $updateUrl = true;
 
 		/**
 		 * @return \yii\db\ActiveQuery
