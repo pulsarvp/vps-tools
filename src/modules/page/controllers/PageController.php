@@ -128,7 +128,7 @@
 			$name = StringHelper::random();
 			$filepath = '/img/upload/' . $name[ 0 ] . '/' . $name[ 1 ];
 			$path = $datapath . $filepath;
-			
+
 			FileHelper::createDirectory($path);
 			if (!is_writable($path))
 			{

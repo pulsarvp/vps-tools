@@ -29,6 +29,16 @@
 			else
 				$('.update_url').addClass('hide');
 		});
+		function showError (error) {
+			$('.redactor-box').parent().find('.error-block').remove();
+			$('.field-page-text').addClass('has-error');
+			$('.redactor-box').parent().append('<div class="help-block help-block-error error-block"><ul class="list-unstyled"><li>' + error + '</li></ul></div>');
+		}
+
+		function hideError (error) {
+			$('.redactor-box').parent().find('.error-block').remove();
+			$('.field-page-text').removeClass('has-error');
+		}
 
 		$('.textarea').redactor({
 			minHeight                : 300,
@@ -37,15 +47,32 @@
 			removeComments           : true,
 			buttons                  : [ 'bold', 'italic', 'unorderedlist', 'orderedlist', 'outdent', 'indent', 'lists', 'link', 'image' ],
 			imageUpload              : '{Url::toRoute(["/page/image"])}',
+			fileUpload               : '{Url::toRoute(["/page/image"])}',
 			imageEditable            : true,
 			imageResizable           : true,
 			uploadFileFields         : { '{Yii::$app->request->csrfParam}' : '{Yii::$app->request->csrfToken}' },
 			uploadImageFields        : { '{Yii::$app->request->csrfParam}' : '{Yii::$app->request->csrfToken}' },
+			changeCallback      : function (json) {
+				hideError();
+			},
+			clickCallback      : function (json) {
+				hideError();
+			},
+			modalOpenedCallback : function (json) {
+				hideError();
+			},
+			fileUploadErrorCallback  : function (json) {
+				if (json.message) {
+					showError(json.message)
+				}
+			},
 			imageUploadErrorCallback : function (json) {
-				if (json.message)
-					alert(json.message);
+				if (json.message) {
+					showError(json.message)
+				}
 			},
 			uploadStartCallback      : function (e) {
+				console.log(e);
 				if (e.dataTransfer)
 					var fileElement = e.dataTransfer.files;
 				else
@@ -53,9 +80,8 @@
 				if (fileElement[ 0 ]) {
 					var fileSize = fileElement[ 0 ].size;
 					if (fileSize > {HumanHelper::maxBytesUpload()}) {
-						alert('{Yii::tr('Image size exceeds {max}.', [ 'max' => HumanHelper::maxUpload() ], 'page')}');
+						showError('{Yii::tr('Image size exceeds {max}.', [ 'max' => HumanHelper::maxUpload() ], 'page')}');
 						this.progress.hide();
-						throw 'stop';
 					}
 				}
 			}
