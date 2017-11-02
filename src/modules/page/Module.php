@@ -68,6 +68,10 @@
 				  'route'   => $this->id . '/page/activate'
 				],
 				[ 'class'   => 'vps\tools\web\UrlRule',
+				  'pattern' => 'page/image',
+				  'route'   => $this->id . '/page/image'
+				],
+				[ 'class'   => 'vps\tools\web\UrlRule',
 				  'pattern' => 'page/view/<id:[\w\-]+>',
 				  'route'   => $this->id . '/page/view'
 				],
