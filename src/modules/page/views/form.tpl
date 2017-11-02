@@ -29,9 +29,36 @@
 			else
 				$('.update_url').addClass('hide');
 		});
+
 		$('.textarea').redactor({
-			minHeight : 300,
-			buttons   : [ 'bold', 'italic', 'unorderedlist', 'orderedlist', 'outdent', 'indent', 'lists', 'link' ]
+			minHeight                : 300,
+			replaceDivs              : false,
+			deniedTags               : [ 'script' ],
+			removeComments           : true,
+			buttons                  : [ 'bold', 'italic', 'unorderedlist', 'orderedlist', 'outdent', 'indent', 'lists', 'link', 'image' ],
+			imageUpload              : '{Url::toRoute(["/page/image"])}',
+			imageEditable            : true,
+			imageResizable           : true,
+			uploadFileFields         : { '{Yii::$app->request->csrfParam}' : '{Yii::$app->request->csrfToken}' },
+			uploadImageFields        : { '{Yii::$app->request->csrfParam}' : '{Yii::$app->request->csrfToken}' },
+			imageUploadErrorCallback : function (json) {
+				if (json.message)
+					alert(json.message);
+			},
+			uploadStartCallback      : function (e) {
+				if (e.dataTransfer)
+					var fileElement = e.dataTransfer.files;
+				else
+					var fileElement = $("input[type='file']").prop('files');
+				if (fileElement[ 0 ]) {
+					var fileSize = fileElement[ 0 ].size;
+					if (fileSize > {HumanHelper::maxBytesUpload()}) {
+						alert('{Yii::tr('Image size exceeds {max}.', [ 'max' => HumanHelper::maxUpload() ], 'page')}');
+						this.progress.hide();
+						throw 'stop';
+					}
+				}
+			}
 		});
 	});
 </script>

@@ -3,6 +3,9 @@
 	namespace vps\tools\modules\page\controllers;
 
 	use vps\tools\helpers\ArrayHelper;
+	use vps\tools\helpers\FileHelper;
+	use vps\tools\helpers\HumanHelper;
+	use vps\tools\helpers\StringHelper;
 	use vps\tools\helpers\Url;
 	use vps\tools\modules\page\models\Page;
 	use vps\tools\modules\page\models\PageMenu;
@@ -29,7 +32,7 @@
 						],
 						[
 							'allow'   => true,
-							'actions' => [ 'view', 'add', 'edit', 'activate', 'delete' ],
+							'actions' => [ 'image', 'view', 'add', 'edit', 'activate', 'delete' ],
 							'roles'   => [ '@' ]
 						],
 					],
@@ -93,7 +96,7 @@
 			}
 			if ($this->module->useMenu)
 				$model->menus = ArrayHelper::objectsAttribute($model->menu, 'id');
-			
+
 			$this->savePage($model);
 			$this->setTitle(Yii::tr('Edit page', [], 'page'));
 			$this->data('model', $model);
@@ -116,6 +119,42 @@
 			$this->setTitle($page->title);
 			$this->data('page', $page);
 			$this->_tpl = '@pageViews/page';
+		}
+
+		public function actionImage ()
+		{
+
+			$datapath = Yii::$app->settings->get('datapath');
+			$name = StringHelper::random();
+			$filepath = '/img/upload/' . $name[ 0 ] . '/' . $name[ 1 ];
+			$path = $datapath . $filepath;
+			
+			FileHelper::createDirectory($path);
+			if (!is_writable($path))
+			{
+				echo json_encode([ 'error' => true, 'message' => Yii::tr('Path {path} is not writable.', [ 'path' => $path ], 'page') ]);
+				Yii::$app->end();
+			}
+
+			$file = $_FILES[ 'file' ];
+			$allowed = [ 'image/png', 'image/jpg', 'image/jpeg' ];
+			if (!in_array(strtolower($file[ 'type' ]), $allowed))
+			{
+				echo json_encode([ 'error' => true, 'message' => Yii::tr('Image type {type} is not allowed.', [ 'type' => $file[ 'type' ] ], 'page') ]);
+				Yii::$app->end();
+			}
+
+			$ext = pathinfo($file[ 'name' ], PATHINFO_EXTENSION);
+			$filename = $name . '.' . $ext;
+
+			if (file_exists($path . '/' . $filename))
+				unlink($path . '/' . $filename);
+
+			copy($file[ 'tmp_name' ], $path . '/' . $filename);
+			unlink($file[ 'tmp_name' ]);
+
+			echo json_encode([ 'filelink' => $filepath . '/' . $filename ]);
+			Yii::$app->end();
 		}
 
 		/**
