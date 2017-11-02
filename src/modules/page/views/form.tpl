@@ -52,13 +52,13 @@
 			imageResizable           : true,
 			uploadFileFields         : { '{Yii::$app->request->csrfParam}' : '{Yii::$app->request->csrfToken}' },
 			uploadImageFields        : { '{Yii::$app->request->csrfParam}' : '{Yii::$app->request->csrfToken}' },
-			changeCallback      : function (json) {
+			changeCallback           : function (json) {
 				hideError();
 			},
-			clickCallback      : function (json) {
+			clickCallback            : function (json) {
 				hideError();
 			},
-			modalOpenedCallback : function (json) {
+			modalOpenedCallback      : function (json) {
 				hideError();
 			},
 			fileUploadErrorCallback  : function (json) {
@@ -72,7 +72,6 @@
 				}
 			},
 			uploadStartCallback      : function (e) {
-				console.log(e);
 				if (e.dataTransfer)
 					var fileElement = e.dataTransfer.files;
 				else
@@ -82,6 +81,7 @@
 					if (fileSize > {HumanHelper::maxBytesUpload()}) {
 						showError('{Yii::tr('Image size exceeds {max}.', [ 'max' => HumanHelper::maxUpload() ], 'page')}');
 						this.progress.hide();
+						throw 'stop';
 					}
 				}
 			}

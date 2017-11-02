@@ -144,6 +144,12 @@
 				Yii::$app->end();
 			}
 
+			if ($file[ 'size' ] > HumanHelper::maxBytesUpload())
+			{
+				echo json_encode([ 'error' => true, 'message' => Yii::tr('Image size exceeds {max}.', [ 'max' => HumanHelper::maxUpload() ], 'page') ]);
+				Yii::$app->end();
+			}
+
 			$ext = pathinfo($file[ 'name' ], PATHINFO_EXTENSION);
 			$filename = $name . '.' . $ext;
 
