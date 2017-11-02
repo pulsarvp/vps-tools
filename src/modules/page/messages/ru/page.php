@@ -16,7 +16,7 @@
 		"Deactivate"                                        => "Деактивировать",
 		"Description"                                       => "Описание",
 		"Edit page"                                         => "Редактировать страницу",
-		"Given page does not exist."                        => "Такой страница не существует.",
+		"Given page does not exist."                        => "Такая страница не существует.",
 		"Guid"                                              => "Гуид",
 		"Edit"                                              => "Редактировать",
 		"Manage page"                                       => "Управление страницами",
