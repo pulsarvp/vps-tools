@@ -3,9 +3,12 @@
 		{Form assign="f" id="create-form" upload=true}
 		{$f->field($model,'guid')->textInput()}
 		{$f->field($model,'title')->textInput()}
-		{$f->field($model,'text')->textarea(['class' => 'redactor'])}
+		{$f->field($model,'text')->textarea(['class' => 'textarea'])}
 		{if isset($menudrop)}
 			{$f->field($model,'menus')->label(Yii::tr('Menu', [], 'page'))->dropDownList($menudrop,['class'=>'selectpicker','multiple'=>true])}
+			<div class="update_url hide">
+				{$f->field($model,'updateUrl')->checkbox()}
+			</div>
 		{/if}
 	</div>
 	{Html::submitButton(Yii::tr('Save', [], 'page'), ['class' => 'btn btn-success btn-block'])}
@@ -13,9 +16,12 @@
 </div>
 <script>
 	$().ready(function () {
-		$('#redactor').redactor({
+		$('#page-menus').on('change', function () {
+			$('.update_url').removeClass('hide');
+		});
+		$('.textarea').redactor({
 			minHeight : 300,
-			buttons   : [ 'html', 'bold', 'italic', 'lists', 'link' ]
+			buttons   : [ 'bold', 'italic', 'unorderedlist', 'orderedlist', 'outdent', 'indent', 'lists', 'link' ]
 		});
 	});
 </script>

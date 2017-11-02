@@ -46,44 +46,18 @@
 			{
 				$post = Yii::$app->request->post();
 				$page = Page::findOne($post[ 'id' ]);
-				$active = $page->active ? 0 : 1;
-				$page->updateAttributes([ 'active' => $active ]);
+				$page->updateAttributes([ 'active' => $page->active ? 0 : 1 ]);
 
-				echo $active;
+				echo $page->active;
 			}
 			Yii::$app->end();
 		}
 
 		public function actionAdd ()
 		{
-			$r = Yii::$app->request;
-
 			$this->_menulist();
 			$model = new Page;
-			if ($r->isPost and $model->load($r->post()))
-			{
-				if ($model->validate())
-				{
-					if ($model->save())
-					{
-						$page = $r->post("Page", []);
-
-						if (!empty($page[ 'menus' ]))
-						{
-							foreach ($page[ 'menus' ] as $menu)
-							{
-								$pagemenu = new PageMenu();
-								$pagemenu->pageID = $model->id;
-								$pagemenu->menuID = $menu;
-								$pagemenu->save();
-							}
-						}
-						$this->redirect(Url::toRoute([ '/pages/page/view', 'id' => $model->id ]));
-					}
-					else
-						Yii::$app->notification->errorToSession(Yii::tr('Page has not been created.', [], 'page'));
-				}
-			}
+			$this->savePage($model);
 
 			$this->setTitle(Yii::tr('Add page', [], 'page'));
 			$this->data('model', $model);
@@ -110,7 +84,6 @@
 
 		public function actionEdit ($id)
 		{
-			$r = Yii::$app->request;
 			$this->_menulist();
 			$model = Page::find()->where([ 'id' => $id ])->orWhere([ 'guid' => $id ])->one();
 			if ($model === null)
@@ -120,34 +93,8 @@
 			}
 			if ($this->module->useMenu)
 				$model->menus = ArrayHelper::objectsAttribute($model->menu, 'id');
-			if ($r->isPost and $model->load($r->post()))
-			{
-				if ($model->validate())
-				{
-					if ($model->save())
-					{
-						$page = $r->post("Page", []);
-
-						if (isset($page[ 'menus' ]))
-						{
-							PageMenu::deleteAll([ 'pageID' => $model->id ]);
-
-							foreach ($page[ 'menus' ] as $menu)
-							{
-								$pagemenu = new PageMenu();
-								$pagemenu->pageID = $model->id;
-								$pagemenu->menuID = $menu;
-								$pagemenu->save();
-							}
-						}
-
-						$this->redirect(Url::toRoute([ '/pages/page/view', 'id' => $model->id ]));
-					}
-					else
-						Yii::$app->notification->errorToSession(Yii::tr('Page has not been created.', [], 'page'));
-				}
-			}
-
+			
+			$this->savePage($model);
 			$this->setTitle(Yii::tr('Edit page', [], 'page'));
 			$this->data('model', $model);
 			$this->_tpl = '@pageViews/form';
@@ -160,11 +107,11 @@
 		 */
 		public function actionFrontend ($id)
 		{
-			$page = Page::find()->where([ 'id' => $id ])->orWhere([ 'guid' => $id ])->one();
+			$page = Page::find()->where([ 'guid' => $id ])->one();
 
 			if ($page === null)
 			{
-				Yii::$app->notification->error(Yii::tr('Given page does not exist.', [], 'page'));
+				throw new \yii\web\HttpException(404);
 			}
 			$this->setTitle($page->title);
 			$this->data('page', $page);
@@ -198,13 +145,50 @@
 				$types = $this->module->modelMenuType::find()->asArray()->all();
 				$menutypes = ArrayHelper::map($types, 'id', 'title');
 
-				$menus = $this->module->modelMenu::find()->leaves()->orderBy([ 'typeID' => SORT_ASC, 'lft' => SORT_ASC ])->all();
+				$menus = $this->module->modelMenu::find()->where([ '>', 'depth', 0 ])->orderBy([ 'typeID' => SORT_ASC, 'lft' => SORT_ASC ])->all();
+
 				$menulist = [];
 				foreach ($menus as $menu)
 				{
 					$menulist[ $menutypes[ $menu->typeID ] ][ $menu->id ] = str_repeat('-', $menu->depth - 1) . ' ' . Yii::tr($menu->title);
 				}
 				$this->data('menudrop', $menulist);
+			}
+		}
+
+		private function savePage ($model)
+		{
+			$r = Yii::$app->request;
+			if ($r->isPost and $model->load($r->post()))
+			{
+				if ($model->save())
+				{
+					$page = $r->post("Page", []);
+
+					if (isset($page[ 'menus' ]))
+					{
+						PageMenu::deleteAll([ 'pageID' => $model->id ]);
+						if (!empty($page[ 'menus' ]))
+							foreach ($page[ 'menus' ] as $menu)
+							{
+								$pagemenu = new PageMenu();
+								$pagemenu->pageID = $model->id;
+								$pagemenu->menuID = $menu;
+								$pagemenu->save();
+								if (isset($page[ 'updateUrl' ]))
+								{
+									$pagemenu->menu->url = '/page/' . $model->guid;
+									$pagemenu->menu->save();
+								}
+							}
+					}
+
+					$this->redirect(Url::toRoute([ '/pages/page/view', 'id' => $model->id ]));
+				}
+				else
+				{
+					Yii::$app->notification->error(Yii::tr('Page has not been created.', [], 'page'));
+				}
 			}
 		}
 	}

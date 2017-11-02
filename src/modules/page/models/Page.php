@@ -27,6 +27,7 @@
 	class Page extends Model
 	{
 		public $menus = [];
+		public $updateUrl = false;
 
 		/**
 		 * @return \yii\db\ActiveQuery
@@ -58,6 +59,7 @@
 				'active' => Yii::tr('Active', [], 'page'),
 				'dt'     => Yii::tr('Date', [], 'page'),
 				'menu'   => Yii::tr('Menu', [], 'page'),
+				'updateUrl'   => Yii::tr('Update selected menu items URL to match this page', [], 'page'),
 			];
 		}
 

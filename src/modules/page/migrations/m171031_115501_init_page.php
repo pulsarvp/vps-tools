@@ -16,11 +16,7 @@
 		 */
 		public function up ()
 		{
-			$tableOptions = null;
-			if ($this->db->driverName === 'mysql')
-			{
-				$tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
-			}
+
 			$this->createTable('page', [
 				'id'     => $this->primaryKey(),
 				'guid'   => $this->string(128)->unique(),
@@ -28,12 +24,12 @@
 				'text'   => $this->text()->notNull(),
 				'active' => $this->boolean()->defaultValue(0),
 				'dt'     => $this->dateTime()->null()
-			], $tableOptions);
+			]);
 
 			$this->createTable('pagemenu', [
 				'pageID' => $this->integer()->notNull(),
 				'menuID' => $this->integer()->null(),
-			], $tableOptions);
+			]);
 			$this->createIndex('page', 'pagemenu', 'pageID');
 			$this->createIndex('menu', 'pagemenu', 'menuID');
 			$this->addForeignKey('pagemenu_page', 'pagemenu', 'pageID', 'page', 'id');
