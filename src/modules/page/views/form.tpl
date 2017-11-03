@@ -16,6 +16,7 @@
 					{Html::a(Yii::tr('Cancel', [], 'menu'),Yii::$app->request->referrer,['class'=>'btn btn-danger'])}
 				</div>
 			</div>
+			<input type="hidden" id="{Yii::$app->request->csrfParam}" name="{Yii::$app->request->csrfParam}" value="{Yii::$app->request->csrfToken}">
 		{/Form}
 	</div>
 </div>
@@ -41,47 +42,46 @@
 		}
 
 		$('.textarea').redactor({
-			minHeight                : 300,
-			replaceDivs              : false,
-			deniedTags               : [ 'script' ],
-			removeComments           : true,
-			buttons                  : [ 'bold', 'italic', 'unorderedlist', 'orderedlist', 'outdent', 'indent', 'lists', 'link', 'image' ],
-			imageUpload              : '{Url::toRoute(["/page/image"])}',
-			fileUpload               : '{Url::toRoute(["/page/image"])}',
-			imageEditable            : true,
-			imageResizable           : true,
-			uploadFileFields         : { '{Yii::$app->request->csrfParam}' : '{Yii::$app->request->csrfToken}' },
-			uploadImageFields        : { '{Yii::$app->request->csrfParam}' : '{Yii::$app->request->csrfToken}' },
-			changeCallback           : function (json) {
-				hideError();
-			},
-			clickCallback            : function (json) {
-				hideError();
-			},
-			modalOpenedCallback      : function (json) {
-				hideError();
-			},
-			fileUploadErrorCallback  : function (json) {
-				if (json.message) {
-					showError(json.message)
-				}
-			},
-			imageUploadErrorCallback : function (json) {
-				if (json.message) {
-					showError(json.message)
-				}
-			},
-			uploadStartCallback      : function (e) {
-				if (e.dataTransfer)
-					var fileElement = e.dataTransfer.files;
-				else
-					var fileElement = $("input[type='file']").prop('files');
-				if (fileElement[ 0 ]) {
-					var fileSize = fileElement[ 0 ].size;
-					if (fileSize > {HumanHelper::maxBytesUpload()}) {
-						showError('{Yii::tr('Image size exceeds {max}.', [ 'max' => HumanHelper::maxUpload() ], 'page')}');
-						this.progress.hide();
-						throw 'stop';
+			minHeight         : 300,
+			script            : false,
+			buttons           : [ 'bold', 'italic', 'unorderedlist', 'orderedlist', 'outdent', 'indent', 'lists', 'link', 'image' ],
+			imageUpload       : '{Url::toRoute(["/page/image"])}',
+			fileUpload        : '{Url::toRoute(["/page/image"])}',
+			imageEditable     : true,
+			imageResizable    : true,
+			fileUploadFields  : '#{Yii::$app->request->csrfParam}',
+			imageUploadFields : '#{Yii::$app->request->csrfParam}',
+			callbacks         : {
+				change           : function () {
+					hideError();
+				},
+				click            : function () {
+					hideError();
+				},
+				modalOpened      : function () {
+					hideError();
+				},
+				fileUploadError  : function (json) {
+					if (json.message) {
+						showError(json.message)
+					}
+				},
+				imageUploadError : function (json) {
+					if (json.message) {
+						showError(json.message)
+					}
+				},
+				uploadStart      : function (e) {
+					if (e.dataTransfer)
+						var fileElement = e.dataTransfer.files;
+					else
+						var fileElement = $("input[type='file']").prop('files');
+					if (fileElement[ 0 ]) {
+						var fileSize = fileElement[ 0 ].size;
+						if (fileSize > {HumanHelper::maxBytesUpload()}) {
+							showError('{Yii::tr('Image size exceeds {max}.', [ 'max' => HumanHelper::maxUpload() ], 'page')}');
+							return false;
+						}
 					}
 				}
 			}

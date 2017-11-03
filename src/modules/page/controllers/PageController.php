@@ -159,7 +159,12 @@
 			copy($file[ 'tmp_name' ], $path . '/' . $filename);
 			unlink($file[ 'tmp_name' ]);
 
-			echo json_encode([ 'filelink' => $filepath . '/' . $filename ]);
+			$array = [
+				'url' => $filepath . '/' . $filename,
+				'id'  => 'fancybox'
+			];
+
+			echo stripslashes(json_encode($array));
 			Yii::$app->end();
 		}
 
