@@ -1,6 +1,6 @@
 <div class="form-group">
 	<div class="col-md-3">
-		<select id="menu-type" name="type" class="selectpicker show-tick" title="{Yii::tr('Select', [], 'menu') }" data-width="100%">
+		<select id="menu-type" name="type" class="selectpicker show-tick" title="{Yii::tr('Select type', [], 'menu') }" data-width="100%">
 			{foreach $menuTypes as $menuType}
 				{if isset($type->id) and $menuType->id==$type->id}
 					<option value="{$menuType->id}" selected data-content="{$menuType->title}">{$menuType->guid}</option>
@@ -42,8 +42,8 @@
 							{Html::fa('eye-slash',['class'=>'menu-visible'])}
 						{/if}
 					</td>
-					<td>{Html::a(Html::fa('pencil'),Url::toRoute(['menu/edit','id'=>$menu->id]),['class'=>'btn btn-xs btn-success menu-edit','title'=>Yii::tr('Edit menu item')])}</td>
-					<td>{Html::a(Html::fa('plus'),Url::toRoute(['menu/add','parentID'=>$menu->id,'type'=>$type->id]),['class'=>'btn btn-xs btn-primary menu-add','title'=>Yii::tr('Add menu subitem')])}</td>
+					<td>{Html::a(Html::fa('pencil'),Url::toRoute(['menu/edit','id'=>$menu->id]),['class'=>'btn btn-xs btn-success menu-edit','title'=>Yii::tr('Edit menu item', [], 'menu')])}</td>
+					<td>{Html::a(Html::fa('plus'),Url::toRoute(['menu/add','parentID'=>$menu->id,'type'=>$type->id]),['class'=>'btn btn-xs btn-primary menu-add','title'=>Yii::tr('Add menu subitem', [], 'menu')])}</td>
 					<td>{Html::a(Html::fa('remove'),'',['class'=>'btn btn-xs btn-danger menu-delete' ,'data-toggle'=>'confirmation', 'data-title'=>{Yii::tr('Delete selected menu and all its children?',[],'menu')}, 'title'=>{Yii::tr('Delete selected menu and all its children?',[],'menu')}, 'data-btn-ok-label'=>"{Yii::tr('Yes', [], 'menu')}",'data-btn-ok-class'=>"btn btn-xs btn-danger", 'data-btn-cancel-label'=>"{Yii::tr('No', [], 'menu')}" ])}</td>
 				</tr>
 			{/foreach}
