@@ -1,5 +1,5 @@
 {assign depth 0}
-<ul class="menu-items">
+<ul class="{$classUl}">
 	{foreach Yii::$app->menu->forType($menutype) as $object}
 	{if $depth == $object->depth}
 	{if !$object@first}</li>{/if}
