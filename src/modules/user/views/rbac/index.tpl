@@ -33,7 +33,7 @@
 								{Html::fa('check',['class'=>'text-success'])}
 							{/if}
 						</td>
-						<td>{Yii::$app->formatter->asDatetime($user->loginDT)}</td>
+						<td data-order="{Yii::$app->formatter->asTimestamp($user->loginDT)}">{Yii::$app->formatter->asDatetime($user->loginDT)}</td>
 						<td>
 							<button id="btn{$user->id}" class="btn btn-xs user-state btn-{if $user->active}danger{else}success{/if}" {if $user->id == Yii::$app->user->id}disabled="1"{/if} data-id="{$user->id}" data-state="{1 - $user->active}">
 								{if $user->active}{Yii::tr('Disable', [], 'user')}{else}{Yii::tr('Enable', [], 'user')}{/if}
