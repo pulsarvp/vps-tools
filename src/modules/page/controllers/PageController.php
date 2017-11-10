@@ -31,10 +31,21 @@
 							'roles'   => [ '?', '@' ]
 						],
 						[
-							'allow'   => true,
+							'allow'         => true,
 							'actions' => [ 'image', 'view', 'add', 'edit', 'activate', 'delete' ],
-							'roles'   => [ '@' ]
-						],
+							'roles'         => [ '@' ],
+							'matchCallback' => function ($rule, $action)
+							{
+								if (count(array_intersect_key([ 'admin', 'admin_page' ], Yii::$app->authManager->getRolesByUser(Yii::$app->user->id)))==0)
+								{
+									Yii::$app->notification->errorToSession(Yii::tr('You have no permissions.', [], 'user'));
+									$this->redirect(Url::toRoute([ '/user/index' ]));
+									return false;
+								}
+								else
+									return true;
+							}
+						]
 					],
 				],
 			];
