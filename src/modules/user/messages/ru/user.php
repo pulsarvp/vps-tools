@@ -44,6 +44,6 @@
 		"Yes"                                          => "Да",
 		"You are already logged in."                   => "Вы уже авторизованы в системе.",
 		"Your account is not approved yet."            => "Ваш аккаунт ещё не прошёл модерацию.",
-		"You have no permissions."                     => "У вас нет прав доступа",
+		"You have no permissions."                     => "У вас нет прав доступа.",
 		"You have rejected the authorization request." => "Вы отклонили запрос авторизации.",
 	];
