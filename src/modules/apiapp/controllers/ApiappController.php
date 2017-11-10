@@ -1,4 +1,5 @@
 <?php
+
 	namespace vps\tools\modules\apiapp\controllers;
 
 	use vps\tools\controllers\WebController;
@@ -19,11 +20,16 @@
 		{
 			if (parent::beforeAction($action) and Yii::$app->request->isAjax)
 			{
+				if (!Yii::$app->user->can('admin') or !Yii::$app->user->can('admin_apiapp'))
+				{
+					return false;
+				}
+
 				return true;
 			}
 			else
 				return false;
 		}
-		
+
 	}
 

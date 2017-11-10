@@ -7,6 +7,7 @@
 	use vps\tools\modules\menu\models\Menu;
 	use vps\tools\modules\menu\models\MenuType;
 	use Yii;
+	use yii\filters\AccessControl;
 	use yii\helpers\Json;
 
 	/**
@@ -16,7 +17,36 @@
 	 */
 	class MenuController extends Controller
 	{
-
+		public function behaviors ()
+		{
+			return [
+				'access' => [
+					'class' => AccessControl::className(),
+					'rules' => [
+						[
+							'allow'         => true,
+							'actions' => [ 'add', 'edit', 'delete', 'visible' ],
+							'roles'         => [ '@' ],
+							'denyCallback'  => function ($rule, $action)
+							{
+								Yii::$app->notification->errorToSession(Yii::tr('You have no permissions.'));
+								$this->redirect([ '/user/index' ]);
+							},
+							'matchCallback' => function ($rule, $action)
+							{
+								if (count(array_intersect_key([ 'admin', 'admin_menu' ], Yii::$app->authManager->getRolesByUser(Yii::$app->user->id)))==0)
+								{
+									Yii::$app->notification->errorToSession(Yii::tr('You have no permissions.', [], 'user'));
+									$this->redirect(Url::toRoute([ '/site/index' ]));
+								}
+								else
+									return true;
+							}
+						]
+					],
+				],
+			];
+		}
 		/**
 		 * Removes old menu items and saves new menu items
 		 */
