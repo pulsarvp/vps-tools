@@ -37,7 +37,7 @@
 								if (count(array_intersect_key([ 'admin', 'admin_menu' ], Yii::$app->authManager->getRolesByUser(Yii::$app->user->id)))==0)
 								{
 									Yii::$app->notification->errorToSession(Yii::tr('You have no permissions.', [], 'user'));
-									$this->redirect(Url::toRoute([ '/user/index' ]));
+									$this->redirect(Url::toRoute([ '/site/index' ]));
 								}
 								else
 									return true;
