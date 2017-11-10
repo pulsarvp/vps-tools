@@ -36,20 +36,20 @@
 		public function defaultNormalizeUserAttributeMap ()
 		{
 			return [
-				'email'   => 'email',
-				'image'   => function ($attributes)
+				'email'        => 'email',
+				'image' => function ($attributes)
 				{
-					return isset($attributes[ 'image' ]) ? $attributes[ 'image' ] : '';
+					return isset($attributes[ 'icon_profile' ]) ? $attributes[ 'icon_profile' ] : '';
 				},
-				'name'    => function ($attributes)
+				'name'         => function ($attributes)
 				{
 					return trim(implode(' ', [ $attributes[ 'lastname' ], $attributes[ 'firstname' ], $attributes[ 'secondname' ] ]));
 				},
-				'profile' => function ($attributes)
+				'profile'      => function ($attributes)
 				{
 					return $attributes[ 'user_id' ] . '@' . $this->name;
 				},
-				'roles'   => function ($attributes)
+				'roles'        => function ($attributes)
 				{
 					return isset($attributes[ 'roles' ]) ? $attributes[ 'roles' ] : null;
 				}
