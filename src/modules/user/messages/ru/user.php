@@ -42,6 +42,7 @@
 		"User not found."                              => "Пользователь не найден.",
 		"Wrong oAuth2 server response."                => "Некорректный ответ сервера oAuth2.",
 		"Yes"                                          => "Да",
+		"You are already logged in."                   => "Вы уже авторизованы в системе.",
 		"Your account is not approved yet."            => "Ваш аккаунт ещё не прошёл модерацию.",
 		"You have rejected the authorization request." => "Вы отклонили запрос авторизации.",
 	];

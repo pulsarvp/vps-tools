@@ -31,6 +31,16 @@
 					'class' => AccessControl::className(),
 					'rules' => [
 						[ 'allow' => true, 'actions' => [ 'auth', 'login', 'cancel' ], 'roles' => [ '?' ] ],
+						[
+							'allow'        => false,
+							'actions'      => [ 'auth', 'login', 'cancel' ],
+							'roles'        => [ '@' ],
+							'denyCallback' => function ($rule, $action)
+							{
+								Yii::$app->notification->errorToSession(Yii::tr('You are already logged in.', [], 'user'));
+								$this->redirect(Url::toRoute([ '/user/index' ]));
+							}
+						],
 						[ 'allow' => true, 'actions' => [ 'index', 'logout' ], 'roles' => [ '@' ] ],
 						[
 							'allow'         => true,
