@@ -3,7 +3,6 @@
 	namespace vps\tools\modules\apiapp\controllers;
 
 	use vps\tools\controllers\WebController;
-	use vps\tools\modules\user\models\User;
 	use Yii;
 
 	/**
@@ -21,8 +20,7 @@
 		{
 			if (parent::beforeAction($action) and Yii::$app->request->isAjax)
 			{
-				$roles = Yii::$app->authManager->getRolesByUser(Yii::$app->user->id);
-				if (!Yii::$app->user->identity->active or !( array_key_exists(User::R_ADMIN, $roles) or array_key_exists('admin_apiapp', $roles) ))
+				if (!Yii::$app->user->identity->active or !( Yii::$app->user->can('admin') or Yii::$app->user->can('admin_apiapp') ))
 				{
 					return false;
 				}

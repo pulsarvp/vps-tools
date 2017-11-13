@@ -3,11 +3,9 @@
 	namespace vps\tools\modules\menu\controllers;
 
 	use app\base\Controller;
-	use vps\tools\helpers\ArrayHelper;
 	use vps\tools\helpers\Url;
 	use vps\tools\modules\menu\models\Menu;
 	use vps\tools\modules\menu\models\MenuType;
-	use vps\tools\modules\user\models\User;
 	use Yii;
 	use yii\filters\AccessControl;
 	use yii\helpers\Json;
@@ -27,7 +25,7 @@
 					'rules' => [
 						[
 							'allow'         => true,
-							'actions' => [ 'add', 'edit', 'delete', 'visible' ],
+							'actions'       => [ 'add', 'edit', 'delete', 'visible' ],
 							'roles'         => [ '@' ],
 							'denyCallback'  => function ($rule, $action)
 							{
@@ -36,8 +34,7 @@
 							},
 							'matchCallback' => function ($rule, $action)
 							{
-								$roles = Yii::$app->authManager->getRolesByUser(Yii::$app->user->id);
-								if (!Yii::$app->user->identity->active or !( array_key_exists(User::R_ADMIN, $roles) or array_key_exists('admin_menu', $roles) ))
+								if (!Yii::$app->user->identity->active or !( Yii::$app->user->can('admin') or Yii::$app->user->can('admin_menu') ))
 								{
 									Yii::$app->notification->errorToSession(Yii::tr('You have no permissions.', [], 'user'));
 									$this->redirect(Url::toRoute([ '/site/index' ]));
@@ -50,6 +47,7 @@
 				],
 			];
 		}
+
 		/**
 		 * Removes old menu items and saves new menu items
 		 */

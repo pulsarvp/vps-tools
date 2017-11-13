@@ -9,7 +9,6 @@
 	use vps\tools\helpers\Url;
 	use vps\tools\modules\page\models\Page;
 	use vps\tools\modules\page\models\PageMenu;
-	use vps\tools\modules\user\models\User;
 	use Yii;
 	use yii\filters\AccessControl;
 
@@ -37,8 +36,7 @@
 							'roles'         => [ '@' ],
 							'matchCallback' => function ($rule, $action)
 							{
-								$roles = Yii::$app->authManager->getRolesByUser(Yii::$app->user->id);
-								if (!Yii::$app->user->identity->active or !( array_key_exists(User::R_ADMIN, $roles) or array_key_exists('admin_page', $roles) ))
+								if (!Yii::$app->user->identity->active or !(Yii::$app->user->can('admin') or Yii::$app->user->can('admin_page')))
 								{
 									Yii::$app->notification->errorToSession(Yii::tr('You have no permissions.', [], 'user'));
 									$this->redirect(Url::toRoute([ '/site/index' ]));

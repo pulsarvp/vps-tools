@@ -4,7 +4,6 @@
 
 	use vps\tools\controllers\WebController;
 	use vps\tools\modules\setting\models\Setting;
-	use vps\tools\modules\user\models\User;
 	use Yii;
 	use yii\helpers\Json;
 
@@ -18,8 +17,7 @@
 		{
 			if (parent::beforeAction($action) and Yii::$app->request->isAjax)
 			{
-				$roles = Yii::$app->authManager->getRolesByUser(Yii::$app->user->id);
-				if (!Yii::$app->user->identity->active or !( array_key_exists(User::R_ADMIN, $roles) or array_key_exists('admin_setting', $roles) ))
+				if (!Yii::$app->user->identity->active or !( Yii::$app->user->can('admin') or Yii::$app->user->can('admin_setting') ))
 				{
 					return false;
 				}
