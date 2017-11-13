@@ -32,14 +32,15 @@
 						],
 						[
 							'allow'         => true,
-							'actions' => [ 'image', 'view', 'add', 'edit', 'activate', 'delete' ],
+							'actions'       => [ 'image', 'view', 'add', 'edit', 'activate', 'delete' ],
 							'roles'         => [ '@' ],
 							'matchCallback' => function ($rule, $action)
 							{
-								if (count(array_intersect_key([ 'admin', 'admin_page' ], Yii::$app->authManager->getRolesByUser(Yii::$app->user->id)))==0)
+								if (!Yii::$app->user->identity->active or !(Yii::$app->user->can('admin') or Yii::$app->user->can('admin_page')))
 								{
 									Yii::$app->notification->errorToSession(Yii::tr('You have no permissions.', [], 'user'));
 									$this->redirect(Url::toRoute([ '/site/index' ]));
+
 									return false;
 								}
 								else

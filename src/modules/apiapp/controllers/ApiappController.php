@@ -20,7 +20,7 @@
 		{
 			if (parent::beforeAction($action) and Yii::$app->request->isAjax)
 			{
-				if (!Yii::$app->user->can('admin') or !Yii::$app->user->can('admin_apiapp'))
+				if (!Yii::$app->user->identity->active or !( Yii::$app->user->can('admin') or Yii::$app->user->can('admin_apiapp') ))
 				{
 					return false;
 				}

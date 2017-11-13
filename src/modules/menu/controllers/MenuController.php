@@ -25,7 +25,7 @@
 					'rules' => [
 						[
 							'allow'         => true,
-							'actions' => [ 'add', 'edit', 'delete', 'visible' ],
+							'actions'       => [ 'add', 'edit', 'delete', 'visible' ],
 							'roles'         => [ '@' ],
 							'denyCallback'  => function ($rule, $action)
 							{
@@ -34,7 +34,7 @@
 							},
 							'matchCallback' => function ($rule, $action)
 							{
-								if (count(array_intersect_key([ 'admin', 'admin_menu' ], Yii::$app->authManager->getRolesByUser(Yii::$app->user->id)))==0)
+								if (!Yii::$app->user->identity->active or !( Yii::$app->user->can('admin') or Yii::$app->user->can('admin_menu') ))
 								{
 									Yii::$app->notification->errorToSession(Yii::tr('You have no permissions.', [], 'user'));
 									$this->redirect(Url::toRoute([ '/site/index' ]));
@@ -47,6 +47,7 @@
 				],
 			];
 		}
+
 		/**
 		 * Removes old menu items and saves new menu items
 		 */
