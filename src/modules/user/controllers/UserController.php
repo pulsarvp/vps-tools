@@ -48,8 +48,9 @@
 							'roles'         => [ '@' ],
 							'matchCallback' => function ($rule, $action)
 							{
-								if (!Yii::$app->user->identity->active or count(array_intersect_key([ User::R_ADMIN, 'admin_user' ], Yii::$app->authManager->getRolesByUser(Yii::$app->user->id)))==0)
+								if (!Yii::$app->user->identity->active or !(Yii::$app->user->can(User::R_ADMIN) or Yii::$app->user->can('admin_user')))
 								{
+
 									Yii::$app->notification->errorToSession(Yii::tr('You have no permissions.', [], 'user'));
 									$this->redirect(Url::toRoute([ '/site/index' ]));
 								}
