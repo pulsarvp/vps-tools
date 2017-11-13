@@ -9,6 +9,7 @@
 	use vps\tools\helpers\Url;
 	use vps\tools\modules\page\models\Page;
 	use vps\tools\modules\page\models\PageMenu;
+	use vps\tools\modules\user\models\User;
 	use Yii;
 	use yii\filters\AccessControl;
 
@@ -32,14 +33,16 @@
 						],
 						[
 							'allow'         => true,
-							'actions' => [ 'image', 'view', 'add', 'edit', 'activate', 'delete' ],
+							'actions'       => [ 'image', 'view', 'add', 'edit', 'activate', 'delete' ],
 							'roles'         => [ '@' ],
 							'matchCallback' => function ($rule, $action)
 							{
-								if (count(array_intersect_key([ 'admin', 'admin_page' ], Yii::$app->authManager->getRolesByUser(Yii::$app->user->id)))==0)
+								$roles = Yii::$app->authManager->getRolesByUser(Yii::$app->user->id);
+								if (!Yii::$app->user->identity->active or !( array_key_exists(User::R_ADMIN, $roles) or array_key_exists('admin_page', $roles) ))
 								{
 									Yii::$app->notification->errorToSession(Yii::tr('You have no permissions.', [], 'user'));
 									$this->redirect(Url::toRoute([ '/site/index' ]));
+
 									return false;
 								}
 								else

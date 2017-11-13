@@ -3,9 +3,11 @@
 	namespace vps\tools\modules\menu\controllers;
 
 	use app\base\Controller;
+	use vps\tools\helpers\ArrayHelper;
 	use vps\tools\helpers\Url;
 	use vps\tools\modules\menu\models\Menu;
 	use vps\tools\modules\menu\models\MenuType;
+	use vps\tools\modules\user\models\User;
 	use Yii;
 	use yii\filters\AccessControl;
 	use yii\helpers\Json;
@@ -34,7 +36,8 @@
 							},
 							'matchCallback' => function ($rule, $action)
 							{
-								if (count(array_intersect_key([ 'admin', 'admin_menu' ], Yii::$app->authManager->getRolesByUser(Yii::$app->user->id)))==0)
+								$roles = Yii::$app->authManager->getRolesByUser(Yii::$app->user->id);
+								if (!Yii::$app->user->identity->active or !( array_key_exists(User::R_ADMIN, $roles) or array_key_exists('admin_menu', $roles) ))
 								{
 									Yii::$app->notification->errorToSession(Yii::tr('You have no permissions.', [], 'user'));
 									$this->redirect(Url::toRoute([ '/site/index' ]));
