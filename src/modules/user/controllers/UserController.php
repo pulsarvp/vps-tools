@@ -48,7 +48,7 @@
 							'roles'         => [ '@' ],
 							'matchCallback' => function ($rule, $action)
 							{
-								if (!Yii::$app->user->identity->active or !(Yii::$app->user->can(User::R_ADMIN) or Yii::$app->user->can('admin_user')))
+								if (!Yii::$app->user->identity->active or !( Yii::$app->user->can(User::R_ADMIN) or Yii::$app->user->can('admin_user') ))
 								{
 
 									Yii::$app->notification->errorToSession(Yii::tr('You have no permissions.', [], 'user'));
@@ -124,59 +124,64 @@
 		 */
 		public function successAuth ($client)
 		{
-			$userClass = $this->module->modelUser;
-			$attributes = $client->getUserAttributes();
-			if (is_array($attributes) and isset($attributes[ 'email' ]))
+			if (method_exists($client, 'successAuth'))
 			{
-				/** @var User $user */
-				$user = $userClass::find()
-					->where([ 'profile' => $attributes[ 'profile' ] ])
-					->one();
-
-				if ($user == null)
-				{
-					$user = $userClass::find()
-						->where([ 'email' => $attributes[ 'email' ] ])
-						->one();
-				}
-
-				if ($user == null)
-				{
-					$user = new $userClass;
-					$user->register($attributes[ 'name' ], $attributes[ 'email' ], $attributes[ 'profile' ], $this->module->autoactivate);
-
-					if ($attributes[ 'roles' ])
-						$user->assignRoles($attributes[ 'roles' ]);
-					else
-						$user->assignRole($this->module->defaultRole);
-				}
-
-				if ($attributes[ 'image' ] and $user->image != $attributes[ 'image' ])
-				{
-					$user->image = $attributes[ 'image' ];
-					$user->save();
-				}
-
-				if ($user == null or !isset($user->id))
-					throw new \Exception(Yii::tr('Authorization failed.', [], 'user'));
-				elseif ($user->active == false)
-				{
-					Yii::$app->notification->errorToSession(Yii::tr('Your account is not approved yet.', [], 'user'));
-				}
-				else
-				{
-					$user->loginDT = TimeHelper::now();
-					$user->save();
-
-					Yii::$app->user->login($user, Yii::$app->user->authTimeout);
-					if ($this->module->redirectAfterLogin)
-						$this->redirect(Yii::$app->getUser()->getReturnUrl());
-					else
-						$this->redirect(Url::toRoute([ '/site/index' ]));
-					Yii::$app->end();
-				}
+				$user = $client->successAuth();
 			}
 			else
-				throw new \Exception(Yii::tr('Wrong oAuth2 server response.', [], 'user'));
+			{
+
+				$userClass = $this->module->modelUser;
+				$attributes = $client->getUserAttributes();
+				if (is_array($attributes) and isset($attributes[ 'email' ]))
+				{
+					/** @var User $user */
+					$user = $userClass::find()
+						->where([ 'profile' => $attributes[ 'profile' ] ])
+						->one();
+
+					if ($user == null)
+					{
+						$user = $userClass::find()
+							->where([ 'email' => $attributes[ 'email' ] ])
+							->one();
+					}
+
+					if ($user == null)
+					{
+						$user = new $userClass;
+						$user->register($attributes[ 'name' ], $attributes[ 'email' ], $attributes[ 'profile' ], $this->module->autoactivate);
+
+						if ($attributes[ 'roles' ])
+							$user->assignRoles($attributes[ 'roles' ]);
+						else
+							$user->assignRole($this->module->defaultRole);
+					}
+
+					if ($attributes[ 'image' ] and $user->image != $attributes[ 'image' ])
+					{
+						$user->image = $attributes[ 'image' ];
+						$user->save();
+					}
+				}
+			}
+			if ($user == null or !isset($user->id))
+				throw new \Exception(Yii::tr('Authorization failed.', [], 'user'));
+			elseif ($user->active == false)
+			{
+				Yii::$app->notification->errorToSession(Yii::tr('Your account is not approved yet.', [], 'user'));
+			}
+			else
+			{
+				$user->loginDT = TimeHelper::now();
+				$user->save();
+
+				Yii::$app->user->login($user, Yii::$app->user->authTimeout);
+				if ($this->module->redirectAfterLogin)
+					$this->redirect(Yii::$app->getUser()->getReturnUrl());
+				else
+					$this->redirect(Url::toRoute([ '/site/index' ]));
+				Yii::$app->end();
+			}
 		}
 	}
