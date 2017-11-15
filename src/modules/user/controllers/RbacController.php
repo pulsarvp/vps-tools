@@ -18,10 +18,11 @@
 			if (!is_null($user))
 			{
 				$user->revokeAllRoles();
-				foreach ($post[ 'roles' ] as $item)
-				{
-					$user->assignRole($item);
-				}
+				if (is_array($post[ 'roles' ]))
+					foreach ($post[ 'roles' ] as $item)
+					{
+						$user->assignRole($item);
+					}
 			}
 			Yii::$app->end();
 		}
