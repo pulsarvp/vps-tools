@@ -4,6 +4,8 @@
 			<th>{Yii::tr('Name', [], 'setting')}</th>
 			<th>{Yii::tr('Value', [], 'setting')}</th>
 			<th>{Yii::tr('Description', [], 'setting')}</th>
+			<th>{Yii::tr('Type', [], 'setting')}</th>
+			<th>{Yii::tr('Rule', [], 'setting')}</th>
 			<th></th>
 		</tr>
 	</thead>
@@ -13,6 +15,8 @@
 				<td class="name">{$setting->name}</td>
 				<td class="value">{$setting->value}</td>
 				<td class="description">{$setting->description}</td>
+				<td class="type">{$setting->type}</td>
+				<td class="rule">{$setting->rule}</td>
 				<td class="control nowrap">
 					<div class="edit">
 						{Html::buttonFa('', 'pencil', [ 'class' => 'btn btn-xs btn-primary setting-edit', 'title' => Yii::tr('Edit', [], 'setting') ])}
@@ -28,6 +32,10 @@
 </table>
 <script>
 	$(document).ready(function () {
+		$(document).on('focus', 'tr.active', function () {
+			$(this).find('p.error').remove();
+		});
+
 		var valueOld       = '';
 		var descriptionOld = '';
 
@@ -68,10 +76,10 @@
 				success  : function (data) {
 					if (data != 0) {
 						tr.addClass('danger');
-						closeSetting(tr);
-						tr.find('td.value').append(data);
+						tr.find('td.value').append('<p class="error">' + data + '</p>');
 					}
 					else {
+						tr.removeClass('danger');
 						tr.addClass('success');
 						valueOld       = newValue;
 						descriptionOld = newDescription;
