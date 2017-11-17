@@ -2,6 +2,7 @@
 
 	namespace vps\tools\modules\user;
 
+	use vps\tools\helpers\ConfigurationHelper;
 	use vps\tools\modules\user\models\User;
 	use Yii;
 	use yii\base\BootstrapInterface;
@@ -111,18 +112,7 @@
 				],
 			], true);
 
-			// Add module I18N category.
-			if (!isset($app->i18n->translations[ 'user.*' ]))
-			{
-				Yii::$app->i18n->translations[ 'user*' ] = [
-					'class'            => 'yii\i18n\PhpMessageSource',
-					'basePath'         => __DIR__ . '/messages',
-					'forceTranslation' => true,
-					'fileMap'          => [
-						'user' => 'user.php',
-					]
-				];
-			}
+			ConfigurationHelper::addTranslation('user', [ 'user' => 'user.php' ], __DIR__ . '/messages');
 
 			$this->title = Yii::tr('User manage', [], 'user');
 		}
