@@ -79,6 +79,7 @@
 
 		public function actionManage ()
 		{
+			$this->title = Yii::tr('User manage', [], 'user');
 			$this->_tpl = '@userViews/manage';
 		}
 
@@ -90,6 +91,7 @@
 
 		public function actionLogin ()
 		{
+			$this->title = Yii::tr('Login', [], 'user');
 			$this->_tpl = '@userViews/login';
 			$defaultClient = Yii::$app->settings->get('auth_client_default', $this->module->defaultClient);
 			$this->data('defaultClient', $defaultClient);
