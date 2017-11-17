@@ -48,14 +48,18 @@
 							'roles'         => [ '@' ],
 							'matchCallback' => function ($rule, $action)
 							{
-								if (!Yii::$app->user->identity->active or !( Yii::$app->user->can(User::R_ADMIN) or Yii::$app->user->can('admin_user') ))
+								if (!Yii::$app->user->identity->active)
 								{
-
-									Yii::$app->notification->errorToSession(Yii::tr('You have no permissions.', [], 'user'));
-									$this->redirect(Url::toRoute([ '/site/index' ]));
+									Yii::$app->notification->errorToSession(Yii::tr('Your account is not approved yet.', [], 'user'));
+									$action->controller->redirect(Url::toRoute([ '/site/index' ]));
 								}
-								else
-									return true;
+								elseif (!( Yii::$app->user->can('admin') or Yii::$app->user->can('admin_user') ))
+								{
+									Yii::$app->notification->errorToSession(Yii::tr('You have no permissions.', [], 'user'));
+									$action->controller->redirect(Url::toRoute([ '/site/index' ]));
+								}
+
+								return true;
 							}
 						],
 

@@ -2,6 +2,7 @@
 
 	namespace vps\tools\modules\user\filters;
 
+	use vps\tools\helpers\Url;
 	use Yii;
 	use yii\base\Action;
 	use yii\filters\AccessControl as Base;
@@ -38,11 +39,22 @@
 					'denyCallback' => function ($rule, $action) { Yii::$app->notification->error(Yii::tr('You are already logged in.')); },
 				],
 				[
-					'allow'       => true,
-					'actions'     => [],
-					'controllers' => [],
-					'roles'       => [ '@' ]
-				]
+					'allow'         => true,
+					'actions'       => [],
+					'controllers'   => [],
+					'roles'         => [ '@' ],
+					'matchCallback' => function ($rule, $action)
+					{
+
+						if (!Yii::$app->user->identity->active)
+						{
+							Yii::$app->notification->errorToSession(Yii::tr('Your account is not approved yet.', [], 'user'));
+							$action->controller->redirect(Url::toRoute([ '/site/index' ]));
+						}
+
+						return true;
+					}
+				],
 			];
 
 			if ($access)
