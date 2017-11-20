@@ -13,6 +13,11 @@
 	 */
 	class Setting extends ActiveRecord
 	{
+		public function getHidden(){
+			$rule = json_decode($this->rule, true);
+			if(isset($rule['hidden']))
+				return $rule['hidden'];
+		}
 		/**
 		 * @inheritdoc
 		 */
@@ -64,6 +69,16 @@
 					break;
 				case 'time':
 					$rules = [ [ 'value', 'time', 'format' => 'php:H:i:s' ] ];
+					break;
+				case 'string':
+					if ($this->rule != '')
+					{
+						$rule = json_decode($this->rule, true);
+						unset($rule[ 'hidden' ]);
+						$rules = [ [ 'value', $this->type ] + $rule ];
+					}
+					else
+						$rules = [ [ 'value', $this->type ] ];
 					break;
 				case '':
 					$rules = [ [ 'value', 'string' ] ];

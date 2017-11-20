@@ -13,7 +13,14 @@
 		{foreach $settings as $setting}
 			<tr id="{$setting->name}" data-name="{$setting->name}">
 				<td class="name">{$setting->name}</td>
-				<td class="value">{$setting->value}</td>
+				<td class="value" data-hidden="{$setting->hidden}">
+					{if $setting->hidden}
+						***
+						<span class="hide">{$setting->value}</span>
+					{else}
+						{$setting->value}
+					{/if}
+				</td>
 				<td class="description">{$setting->description}</td>
 				<td class="type">{$setting->type}</td>
 				<td class="rule">{$setting->rule}</td>
@@ -36,6 +43,7 @@
 			$(this).find('p.error').remove();
 		});
 
+		var hidden         = false;
 		var valueOld       = '';
 		var descriptionOld = '';
 
@@ -43,8 +51,10 @@
 			var tr = $('tr.active');
 			if (tr.length == 0)
 				return;
-
-			tr.find('td.value').html(valueOld).removeClass('info').attr('contenteditable', false);
+			if (hidden)
+				tr.find('td.value').html('***<span class="hide">' + valueOld + '</span>').removeClass('info').attr('contenteditable', false);
+			else
+				tr.find('td.value').html(valueOld).removeClass('info').attr('contenteditable', false);
 			tr.find('td.description').html(descriptionOld).removeClass('info').attr('contenteditable', false);
 
 			tr.find('.control .save').hide();
@@ -91,12 +101,16 @@
 
 		$('.setting-edit').click(function () {
 			$('tr').removeClass('success');
-
+			hidden = false;
 			var tr            = $(this).parents('tr');
 			var tdValue       = tr.find('td.value');
 			var tdDescription = tr.find('td.description');
-			valueOld          = tdValue.html();
-			descriptionOld    = tdDescription.html();
+			if (tdValue.data('hidden')) {
+				tdValue.html(tdValue.find('span.hide').html());
+				hidden = true;
+			}
+			valueOld       = tdValue.html();
+			descriptionOld = tdDescription.html();
 
 			tdValue.attr('contenteditable', true).addClass('info');
 			tdDescription.attr('contenteditable', true).addClass('info');
