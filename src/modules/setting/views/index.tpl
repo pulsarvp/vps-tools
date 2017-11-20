@@ -16,7 +16,6 @@
 				<td class="value" data-hidden="{$setting->hidden}">
 					{if $setting->hidden}
 						***
-						<span class="hide">{$setting->value}</span>
 					{else}
 						{$setting->value}
 					{/if}
@@ -52,7 +51,7 @@
 			if (tr.length == 0)
 				return;
 			if (hidden)
-				tr.find('td.value').html('***<span class="hide">' + valueOld + '</span>').removeClass('info').attr('contenteditable', false);
+				tr.find('td.value').html('***').removeClass('info').attr('contenteditable', false);
 			else
 				tr.find('td.value').html(valueOld).removeClass('info').attr('contenteditable', false);
 			tr.find('td.description').html(descriptionOld).removeClass('info').attr('contenteditable', false);
@@ -95,6 +94,33 @@
 						descriptionOld = newDescription;
 						closeSetting(tr);
 					}
+				},
+				error    : function (data) {
+					if (data != 0) {
+						tr.addClass('danger');
+						tr.find('td.value').append('<p class="error">' + data.statusText + '</p>');
+					}
+				}
+			});
+		}
+
+		function getSetting () {
+			var tr = $('tr.active');
+			if (tr.length == 0)
+				return;
+
+			var name = tr.data('name');
+
+			jQuery.ajax({
+				url      : '{Url::toRoute('setting/value')}',
+				type     : 'POST',
+				data     : {
+					'{Yii::$app->request->csrfParam}' : '{Yii::$app->request->getCsrfToken()}',
+					name                              : name
+				},
+				dataType : "json",
+				success  : function (data) {
+					tr.find('td.value').text(data)
 				}
 			});
 		}
@@ -102,11 +128,13 @@
 		$('.setting-edit').click(function () {
 			$('tr').removeClass('success');
 			hidden = false;
-			var tr            = $(this).parents('tr');
+			var tr = $(this).parents('tr');
+			tr.addClass('active');
+
 			var tdValue       = tr.find('td.value');
 			var tdDescription = tr.find('td.description');
 			if (tdValue.data('hidden')) {
-				tdValue.html(tdValue.find('span.hide').html());
+				getSetting();
 				hidden = true;
 			}
 			valueOld       = tdValue.html();
@@ -119,7 +147,6 @@
 			tr.find('.control .edit').hide();
 			tr.find('.control .save').show();
 
-			tr.addClass('active');
 			$('.setting-edit').attr('disabled', true);
 		});
 

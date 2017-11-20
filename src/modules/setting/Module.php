@@ -1,9 +1,10 @@
 <?php
+
 	namespace vps\tools\modules\setting;
 
 	use vps\tools\helpers\ConfigurationHelper;
-	use yii\base\BootstrapInterface;
 	use Yii;
+	use yii\base\BootstrapInterface;
 
 	/**
 	 * Class Module
@@ -29,6 +30,12 @@
 				[ 'class'   => 'yii\web\UrlRule',
 				  'pattern' => 'setting/edit',
 				  'route'   => $this->id . '/setting/edit'
+				],
+			], false);
+			$app->getUrlManager()->addRules([
+				[ 'class'   => 'yii\web\UrlRule',
+				  'pattern' => 'setting/value',
+				  'route'   => $this->id . '/setting/value'
 				],
 			], false);
 
