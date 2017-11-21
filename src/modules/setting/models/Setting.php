@@ -13,11 +13,13 @@
 	 */
 	class Setting extends ActiveRecord
 	{
-		public function getHidden(){
+		public function getHidden ()
+		{
 			$rule = json_decode($this->rule, true);
-			if(isset($rule['hidden']))
-				return $rule['hidden'];
+			if (isset($rule[ 'hidden' ]))
+				return $rule[ 'hidden' ];
 		}
+
 		/**
 		 * @inheritdoc
 		 */
@@ -107,8 +109,9 @@
 		{
 			if (!$this->hasErrors())
 			{
-				exec($this->$attribute . ' -version 2>&1', $output, $return_var);
-				if ($return_var)
+				$return_var1 = $return_var2 = $return_var3 = 0;
+				exec('command -v ' . $this->$attribute . '', $output, $return_var);
+				if ($return_var==127)
 					$this->addError($attribute, Yii::tr('Command not found.', [], 'setting'));
 			}
 		}

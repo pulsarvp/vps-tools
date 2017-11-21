@@ -71,7 +71,7 @@
 			var name           = tr.data('name');
 			var newValue       = tr.find('td.value').text();
 			var newDescription = tr.find('td.description').html();
-
+			tr.find('p.error').remove();
 			jQuery.ajax({
 				url      : '{Url::toRoute('setting/edit')}',
 				type     : 'POST',

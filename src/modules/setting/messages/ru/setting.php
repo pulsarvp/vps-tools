@@ -1,6 +1,7 @@
 <?php
 	return [
 		"Close"                                => "Закрыть",
+		"Command not found."                   => "Команда не найдена.",
 		"Description"                          => "Описание",
 		"Edit"                                 => "Редактировать",
 		"Manage settings"                      => "Управление настройками",
