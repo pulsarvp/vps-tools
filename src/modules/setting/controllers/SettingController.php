@@ -47,5 +47,21 @@
 			}
 			Yii::$app->end();
 		}
+
+		/**
+		 * This action is for AJAX request. It is update role to user
+		 */
+		public function actionValue ()
+		{
+			if (Yii::$app->request->isAjax)
+			{
+				$setting = Setting::findOne([ 'name' => Yii::$app->request->post('name') ]);
+				if ($setting !== null)
+				{
+					echo Json::encode($setting->value);
+				}
+			}
+			Yii::$app->end();
+		}
 	}
 

@@ -4,6 +4,8 @@
 			<th>{Yii::tr('Name', [], 'setting')}</th>
 			<th>{Yii::tr('Value', [], 'setting')}</th>
 			<th>{Yii::tr('Description', [], 'setting')}</th>
+			<th>{Yii::tr('Type', [], 'setting')}</th>
+			<th>{Yii::tr('Rule', [], 'setting')}</th>
 			<th></th>
 		</tr>
 	</thead>
@@ -11,8 +13,16 @@
 		{foreach $settings as $setting}
 			<tr id="{$setting->name}" data-name="{$setting->name}">
 				<td class="name">{$setting->name}</td>
-				<td class="value">{$setting->value}</td>
+				<td class="value" data-hidden="{$setting->hidden}">
+					{if $setting->hidden}
+						***
+					{else}
+						{$setting->value}
+					{/if}
+				</td>
 				<td class="description">{$setting->description}</td>
+				<td class="type">{$setting->type}</td>
+				<td class="rule">{$setting->rule}</td>
 				<td class="control nowrap">
 					<div class="edit">
 						{Html::buttonFa('', 'pencil', [ 'class' => 'btn btn-xs btn-primary setting-edit', 'title' => Yii::tr('Edit', [], 'setting') ])}
@@ -28,6 +38,11 @@
 </table>
 <script>
 	$(document).ready(function () {
+		$(document).on('focus', 'tr.active', function () {
+			$(this).find('p.error').remove();
+		});
+
+		var hidden         = false;
 		var valueOld       = '';
 		var descriptionOld = '';
 
@@ -35,8 +50,10 @@
 			var tr = $('tr.active');
 			if (tr.length == 0)
 				return;
-
-			tr.find('td.value').html(valueOld).removeClass('info').attr('contenteditable', false);
+			if (hidden)
+				tr.find('td.value').html('***').removeClass('info').attr('contenteditable', false);
+			else
+				tr.find('td.value').html(valueOld).removeClass('info').attr('contenteditable', false);
 			tr.find('td.description').html(descriptionOld).removeClass('info').attr('contenteditable', false);
 
 			tr.find('.control .save').hide();
@@ -54,7 +71,7 @@
 			var name           = tr.data('name');
 			var newValue       = tr.find('td.value').text();
 			var newDescription = tr.find('td.description').html();
-
+			tr.find('p.error').remove();
 			jQuery.ajax({
 				url      : '{Url::toRoute('setting/edit')}',
 				type     : 'POST',
@@ -68,27 +85,60 @@
 				success  : function (data) {
 					if (data != 0) {
 						tr.addClass('danger');
-						closeSetting(tr);
-						tr.find('td.value').append(data);
+						tr.find('td.value').append('<p class="error">' + data + '</p>');
 					}
 					else {
+						tr.removeClass('danger');
 						tr.addClass('success');
 						valueOld       = newValue;
 						descriptionOld = newDescription;
 						closeSetting(tr);
 					}
+				},
+				error    : function (data) {
+					if (data != 0) {
+						tr.addClass('danger');
+						tr.find('td.value').append('<p class="error">' + data.statusText + '</p>');
+					}
+				}
+			});
+		}
+
+		function getSetting () {
+			var tr = $('tr.active');
+			if (tr.length == 0)
+				return;
+
+			var name = tr.data('name');
+
+			jQuery.ajax({
+				url      : '{Url::toRoute('setting/value')}',
+				type     : 'POST',
+				data     : {
+					'{Yii::$app->request->csrfParam}' : '{Yii::$app->request->getCsrfToken()}',
+					name                              : name
+				},
+				dataType : "json",
+				success  : function (data) {
+					tr.find('td.value').text(data)
 				}
 			});
 		}
 
 		$('.setting-edit').click(function () {
 			$('tr').removeClass('success');
+			hidden = false;
+			var tr = $(this).parents('tr');
+			tr.addClass('active');
 
-			var tr            = $(this).parents('tr');
 			var tdValue       = tr.find('td.value');
 			var tdDescription = tr.find('td.description');
-			valueOld          = tdValue.html();
-			descriptionOld    = tdDescription.html();
+			if (tdValue.data('hidden')) {
+				getSetting();
+				hidden = true;
+			}
+			valueOld       = tdValue.html();
+			descriptionOld = tdDescription.html();
 
 			tdValue.attr('contenteditable', true).addClass('info');
 			tdDescription.attr('contenteditable', true).addClass('info');
@@ -97,7 +147,6 @@
 			tr.find('.control .edit').hide();
 			tr.find('.control .save').show();
 
-			tr.addClass('active');
 			$('.setting-edit').attr('disabled', true);
 		});
 
