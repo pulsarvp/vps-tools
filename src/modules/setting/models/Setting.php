@@ -13,6 +13,8 @@
 	 */
 	class Setting extends ActiveRecord
 	{
+		const G_GENERAL = 'general';
+
 		public function getHidden ()
 		{
 			$rule = json_decode($this->rule, true);

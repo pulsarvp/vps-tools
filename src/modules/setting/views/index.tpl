@@ -1,3 +1,5 @@
+{Html::button(Yii::tr('Expand all', [], 'setting'),['class'=>'btn btn-primary collapse-all-show'])}
+{Html::button(Yii::tr('Collapse all', [], 'setting'),['class'=>'btn btn-primary collapse-all-hide'])}
 <table class="table table-striped table-bordered" id="setting-list">
 	<thead>
 		<tr>
@@ -9,35 +11,51 @@
 			<th></th>
 		</tr>
 	</thead>
-	<tbody>
-		{foreach $settings as $setting}
-			<tr id="{$setting->name}" data-name="{$setting->name}">
-				<td class="name">{$setting->name}</td>
-				<td class="value" data-hidden="{$setting->hidden}">
-					{if $setting->hidden}
-						***
-					{else}
-						{$setting->value}
-					{/if}
-				</td>
-				<td class="description">{$setting->description}</td>
-				<td class="type">{$setting->type}</td>
-				<td class="rule">{$setting->rule}</td>
-				<td class="control nowrap">
-					<div class="edit">
-						{Html::buttonFa('', 'pencil', [ 'class' => 'btn btn-xs btn-primary setting-edit', 'title' => Yii::tr('Edit', [], 'setting') ])}
-					</div>
-					<div class="save" style="display: none">
-						{Html::buttonFa('', 'check', [ 'class' => 'btn btn-xs btn-success setting-save', 'title' => Yii::tr('Save', [], 'setting') ])}
-						{Html::buttonFa('', 'remove', [ 'class' => 'btn btn-xs btn-danger setting-close', 'title' => Yii::tr('Close', [], 'setting') ])}
-					</div>
-				</td>
+	{assign var="in" value=true}
+	{foreach $settings as $key=>$groups}
+		<thead>
+			<tr data-toggle="collapse" data-target="#{$key}" aria-controls="{$key}">
+				<th colspan="6">{$key}</th>
 			</tr>
-		{/foreach}
-	</tbody>
+		</thead>
+		<tbody id="{$key}" class="collapse {if $in}in{/if}">
+			{foreach $groups as $setting}
+				<tr id="{$setting->name}" data-name="{$setting->name}">
+					<td class="name">{$setting->name}</td>
+					<td class="value" data-hidden="{$setting->hidden}">
+						{if $setting->hidden}
+							***
+						{else}
+							{$setting->value}
+						{/if}
+					</td>
+					<td class="description">{$setting->description}</td>
+					<td class="type">{$setting->type}</td>
+					<td class="rule">{$setting->rule}</td>
+					<td class="control nowrap">
+						<div class="edit">
+							{Html::buttonFa('', 'pencil', [ 'class' => 'btn btn-xs btn-primary setting-edit', 'title' => Yii::tr('Edit', [], 'setting') ])}
+						</div>
+						<div class="save" style="display: none">
+							{Html::buttonFa('', 'check', [ 'class' => 'btn btn-xs btn-success setting-save', 'title' => Yii::tr('Save', [], 'setting') ])}
+							{Html::buttonFa('', 'remove', [ 'class' => 'btn btn-xs btn-danger setting-close', 'title' => Yii::tr('Close', [], 'setting') ])}
+						</div>
+					</td>
+				</tr>
+			{/foreach}
+		</tbody>
+		{assign var="in" value=false}
+	{/foreach}
 </table>
 <script>
 	$(document).ready(function () {
+		$('.collapse-all-show').on('click', function () {
+			$('.collapse').collapse('show');
+		});
+		$('.collapse-all-hide').on('click', function () {
+			$('.collapse').collapse('hide');
+		});
+
 		$(document).on('focus', 'tr.active', function () {
 			$(this).find('p.error').remove();
 		});
