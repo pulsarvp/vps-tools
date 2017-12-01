@@ -7,18 +7,21 @@
 	class Module extends \yii\debug\Module
 	{
 
-		public $allowedIPsDB   = 'debug_allowed_ips';
-		public $allowedHostsDB = 'debug_allowed_hosts';
+		public $allowedIPsDb   = 'debug_allowed_ips';
+		public $allowedHostsDb = 'debug_allowed_hosts';
 
 		/**
 		 * @inheritdoc
 		 */
 		public function init ()
 		{
-			if (!is_null(Yii::$app->settings->get($this->allowedIPsDB)))
-				$this->allowedIPs = explode(',', Yii::$app->settings->get($this->allowedIPsDB));
-			if (!is_null(Yii::$app->settings->get($this->allowedHostsDB)))
-				$this->allowedHosts = explode(',', Yii::$app->settings->get($this->allowedIPsDB));
+			$ips = Yii::$app->settings->get($this->allowedIPsDb);
+			if (!is_null($ips))
+				$this->allowedIPs = explode(',', $ips);
+
+			$hosts = Yii::$app->settings->get($this->allowedHostsDb);
+			if (!is_null($hosts))
+				$this->allowedHosts = explode(',', $hosts);
 
 			parent::init();
 		}
