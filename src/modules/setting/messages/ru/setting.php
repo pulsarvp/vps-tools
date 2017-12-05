@@ -8,7 +8,8 @@
 		"Name"                                 => "Название",
 		"Rule"                                 => "Правило",
 		"Save"                                 => "Сохранить",
+		"Settings management"                  => "Управление настройками",
 		"This field must be well-formed JSON." => "Это поле должно быть корректым JSON.",
 		"Type"                                 => "Тип",
-		"Value"                                => "Значение"
+		"Value"                                => "Значение",
 	];

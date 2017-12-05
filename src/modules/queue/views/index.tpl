@@ -1,4 +1,3 @@
-<h1>{Yii::tr("Queue management", [], 'queue')}</h1>
 <table class="table table-striped table-bordered" id="queue-list">
 	<thead>
 		<tr>
