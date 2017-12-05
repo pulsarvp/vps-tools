@@ -70,7 +70,7 @@
 
 		public function actionIndex ()
 		{
-			$this->title = 'User';
+			$this->title = Yii::tr('User', [], 'user');
 			$this->_tpl = '@userViews/index';
 			$userClass = $this->module->modelUser;
 			$user = $userClass::findOne(Yii::$app->user->id);
@@ -164,11 +164,14 @@
 							$user->assignRole($this->module->defaultRole);
 					}
 
+					if (in_array(User::R_ADMIN, $attributes[ 'roles' ]))
+						$user->active = 1;
+
 					if ($attributes[ 'image' ] and $user->image != $attributes[ 'image' ])
 					{
 						$user->image = $attributes[ 'image' ];
-						$user->save();
 					}
+					$user->save();
 				}
 			}
 			if ($user == null or !isset($user->id))
