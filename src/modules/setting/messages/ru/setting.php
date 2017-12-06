@@ -13,5 +13,6 @@
 		"Save"                                 => "Сохранить",
 		"This field must be well-formed JSON." => "Это поле должно быть корректым JSON.",
 		"Type"                                 => "Тип",
-		"Value"                                => "Значение"
+		"Value"                                => "Значение",
+		'{attribute} is not a valid URL.'      => 'Значение {attribute} не является правильным URL.',
 	];

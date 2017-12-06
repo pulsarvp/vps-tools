@@ -74,6 +74,9 @@
 				case 'time':
 					$rules = [ [ 'value', 'time', 'format' => 'php:H:i:s' ] ];
 					break;
+				case 'url':
+					$rules = [ [ 'value', 'validateUrl' ] ];
+					break;
 				case 'string':
 					if ($this->rule != '')
 					{
@@ -113,7 +116,7 @@
 			{
 				$return_var1 = $return_var2 = $return_var3 = 0;
 				exec('command -v ' . $this->$attribute . '', $output, $return_var);
-				if ($return_var==127)
+				if ($return_var == 127)
 					$this->addError($attribute, Yii::tr('Command not found.', [], 'setting'));
 			}
 		}
@@ -129,6 +132,20 @@
 			{
 				if (!( is_string($this->$attribute) && is_array(json_decode($this->$attribute, true)) && ( json_last_error() == JSON_ERROR_NONE ) ))
 					$this->addError($attribute, Yii::tr('This field must be well-formed JSON.', [], 'setting'));
+			}
+		}
+
+		/**
+		 * Url validates.
+		 *
+		 * @param string $attribute the attribute currently being validated
+		 */
+		public function validateUrl ($attribute)
+		{
+			if (!$this->hasErrors())
+			{
+				if (filter_var($this->$attribute, FILTER_VALIDATE_URL) === false)
+					$this->addError($attribute, Yii::tr('{attribute} is not a valid URL.', [ 'attribute' => $this->name ],'setting'));
 			}
 		}
 

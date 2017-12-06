@@ -79,6 +79,7 @@
 
 			$('.setting-edit').attr('disabled', false);
 			$('tr').removeClass('active');
+			tr.removeClass('danger');
 		}
 
 		function saveSetting () {
@@ -96,8 +97,8 @@
 				data     : {
 					'{Yii::$app->request->csrfParam}' : '{Yii::$app->request->getCsrfToken()}',
 					name                              : name,
-					value                             : newValue,
-					description                       : newDescription
+					value                             : newValue.trim(),
+					description                       : newDescription.trim()
 				},
 				dataType : "json",
 				success  : function (data) {
@@ -160,7 +161,7 @@
 
 			tdValue.attr('contenteditable', true).addClass('info');
 			tdDescription.attr('contenteditable', true).addClass('info');
-			tdValue.text(valueOld);
+			tdValue.text(valueOld.trim());
 			focusEnd(tdValue.get(0));
 			tr.find('.control .edit').hide();
 			tr.find('.control .save').show();
