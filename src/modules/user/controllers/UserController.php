@@ -85,7 +85,9 @@
 
 		public function actionCancel ()
 		{
-			Yii::$app->notification->errorToSession(Yii::tr('You have rejected the authorization request.', [], 'user'));
+			$collection = Yii::$app->authClientCollection;
+			$client = $collection->getClient(Yii::$app->session->get('client'));
+			Yii::$app->notification->errorToSession(Yii::tr('You have decline the authorization via {client}.', [ 'client' => $client->title ], 'user'));
 			$this->redirect(Url::toRoute([ '/user/login' ]));
 		}
 
