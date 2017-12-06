@@ -139,6 +139,7 @@
 
 				$userClass = $this->module->modelUser;
 				$attributes = $client->getUserAttributes();
+
 				if (is_array($attributes) and isset($attributes[ 'email' ]))
 				{
 					/** @var User $user */
@@ -162,11 +163,10 @@
 							$user->assignRoles($attributes[ 'roles' ]);
 						else
 							$user->assignRole($this->module->defaultRole);
+
+						if (is_array($attributes[ 'roles' ]) and in_array(User::R_ADMIN, $attributes[ 'roles' ]))
+							$user->active = 1;
 					}
-
-					if (in_array(User::R_ADMIN, $attributes[ 'roles' ]))
-						$user->active = 1;
-
 					if ($attributes[ 'image' ] and $user->image != $attributes[ 'image' ])
 					{
 						$user->image = $attributes[ 'image' ];
