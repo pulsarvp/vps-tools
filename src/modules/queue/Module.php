@@ -27,15 +27,14 @@
 		{
 			$app->setAliases([ '@queueViews' => __DIR__ . '/views' ]);
 			$app->getUrlManager()->addRules([
-				[ 'class'   => 'yii\web\UrlRule',
-				  'pattern' => 'queue/<action:[\w\-]+>',
-				  'route'   => $this->id . '/queue/<action>'
+				[
+					'class'   => 'yii\web\UrlRule',
+					'pattern' => 'queue/<action:[\w\-]+>',
+					'route'   => $this->id . '/queue/<action>'
 				],
 			], false);
 
 			// Add module I18N category.
 			ConfigurationHelper::addTranslation('queue', [ 'queue' => 'queue.php' ], __DIR__ . '/messages');
-
-			$this->title = Yii::tr("Queue management", [], 'queue');
 		}
 	}
