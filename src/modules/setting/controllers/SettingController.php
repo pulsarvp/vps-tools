@@ -9,7 +9,6 @@
 
 	class SettingController extends WebController
 	{
-
 		/**
 		 * @inheritdoc
 		 */
