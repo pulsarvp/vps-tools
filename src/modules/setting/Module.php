@@ -18,8 +18,6 @@
 		 */
 		public $controllerNamespace = 'vps\tools\modules\setting\controllers';
 
-		public $title = "Manage settings";
-
 		/**
 		 * @inheritdoc
 		 */
@@ -40,7 +38,10 @@
 			], false);
 
 			ConfigurationHelper::addTranslation('setting', [ 'setting' => 'setting.php' ], __DIR__ . '/messages');
+		}
 
-			$this->title = Yii::tr($this->title, [], 'setting');
+		public function getTitle ()
+		{
+			return Yii::tr("Manage settings", [], 'setting');
 		}
 	}

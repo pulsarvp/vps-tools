@@ -25,20 +25,14 @@
 		 */
 		public static function a ($text, $url = null, $options = [])
 		{
+			if (!isset($options[ 'raw' ]) or $options[ 'raw' ] == false)
+				$text = Yii::tr($text);
+			unset($options[ 'raw' ]);
+
 			if (!isset($options[ 'title' ]))
 				$options[ 'title' ] = $text;
-			if (isset($options[ 'raw' ]) and $options[ 'raw' ] == true)
-			{
-				unset($options[ 'raw' ]);
 
-				return parent::a($text, $url, $options);
-			}
-			else
-			{
-				unset($options[ 'raw' ]);
-
-				return parent::a(Yii::t('app', $text), $url, $options);
-			}
+			return parent::a($text, $url, $options);
 		}
 
 		/**

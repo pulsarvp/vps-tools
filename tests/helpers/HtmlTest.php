@@ -8,8 +8,8 @@
 		public function testA ()
 		{
 			$this->assertEquals('<a href="http://google.com" title="test">test</a>', Html::a('test', 'http://google.com'));
-			$this->assertEquals('<a href="http://google.com" title="link text">текст для ссылки</a>', Html::a('link text', 'http://google.com'));
-			$this->assertEquals('<a href="http://google.com" title="link text">текст для ссылки</a>', Html::a('link text', 'http://google.com'), [ 'raw' => false ]);
+			$this->assertEquals('<a href="http://google.com" title="текст для ссылки">текст для ссылки</a>', Html::a('link text', 'http://google.com'));
+			$this->assertEquals('<a href="http://google.com" title="текст для ссылки">текст для ссылки</a>', Html::a('link text', 'http://google.com'), [ 'raw' => false ]);
 			$this->assertEquals('<a href="http://google.com" title="link text">link text</a>', Html::a('link text', 'http://google.com', [ 'raw' => true ]));
 			$this->assertEquals('<a href="http://google.com" title="Title">link text</a>', Html::a('link text', 'http://google.com', [ 'raw' => true, 'title' => 'Title' ]));
 		}
