@@ -26,7 +26,7 @@
 					]
 				]
 			]);
-			Yii::$app->view->registerCss('#setting-list .value {font-family: Menlo, monospace; overflow-wrap: break-word; word-wrap: break-word; max-width: 500px}');
+			Yii::$app->view->registerCss('#setting-list .value {font-family: Menlo, monospace; overflow-wrap: break-word; word-wrap: break-word; max-width: 500px} .setting-group{cursor:pointer;border-bottom:1px dashed}');
 		}
 
 		/**

@@ -9,6 +9,7 @@
 		"Manage settings"                      => "Управление настройками",
 		"Name"                                 => "Название",
 		"Rule"                                 => "Правило",
+		"Rules"                                => "Правила",
 		"Save"                                 => "Сохранить",
 		"This field must be well-formed JSON." => "Это поле должно быть корректым JSON.",
 		"Type"                                 => "Тип",

@@ -7,7 +7,7 @@
 			<th>{Yii::tr('Value', [], 'setting')}</th>
 			<th>{Yii::tr('Description', [], 'setting')}</th>
 			<th>{Yii::tr('Type', [], 'setting')}</th>
-			<th>{Yii::tr('Rule', [], 'setting')}</th>
+			<th>{Yii::tr('Rules', [], 'setting')}</th>
 			<th></th>
 		</tr>
 	</thead>
@@ -15,7 +15,7 @@
 	{foreach $settings as $key=>$groups}
 		<thead>
 			<tr data-toggle="collapse" data-target="#{$key}" aria-controls="{$key}">
-				<th colspan="6">{$key}</th>
+				<th colspan="6" class="info"><span class="setting-group">{$key}</span></th>
 			</tr>
 		</thead>
 		<tbody id="{$key}" class="collapse {if $in}in{/if}">
