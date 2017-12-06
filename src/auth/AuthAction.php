@@ -2,7 +2,6 @@
 
 	namespace vps\tools\auth;
 
-	use vps\tools\helpers\Url;
 	use Yii;
 	use yii\authclient\AuthAction as BaseAuthAction;
 	use yii\base\Exception;
@@ -52,15 +51,7 @@
 			{
 				if ($get[ 'error' ] == 'access_denied')
 				{
-					$_SESSION[ 'provider' ] = $get[ 'authclient' ];
-
-					// user denied error
-					Yii::$app->notification->errorToSession(Yii::tr('You have declined authorization via «{network}».', [ 'network' => $client->title ]));
-
-					if (!Yii::$app->user->isGuest)
-						$this->redirect(Url::toRoute([ 'user/networks' ]));
-					else
-						$this->redirectCancel();
+					$this->redirectCancel();
 					Yii::$app->end();
 				}
 				else
