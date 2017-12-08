@@ -34,6 +34,7 @@
 		 */
 		public function run ()
 		{
+			$message = null;
 			$groups = Setting::find()->select('group')->orderBy([ 'group' => SORT_ASC ])->groupBy('group')->column();
 			if (array_search(Setting::G_GENERAL, $groups) !== false)
 				$settings[ Setting::G_GENERAL ] = Setting::find()->where([ 'group' => Setting::G_GENERAL ])->orderBy([ 'name' => SORT_ASC ])->all();
@@ -41,12 +42,17 @@
 			{
 				$settings[ $group ] = Setting::find()->where([ 'group' => $group ])->orderBy([ 'name' => SORT_ASC ])->all();
 			}
+			if (!$this->canEdit())
+				$message = [ 'class' => 'warning', 'message' => Yii::tr('You can view but not edit the settings.', [], 'setting') ];
+			if (!$this->canView())
+				$message = [ 'class' => 'danger', 'message' => Yii::tr('You cannot view the settings.', [], 'setting') ];
 
 			return $this->renderFile('@settingViews/index.tpl', [
 				'title'    => Yii::tr('Manage settings'),
 				'settings' => $settings,
 				'canEdit'  => $this->canEdit(),
-				'canView'  => $this->canView()
+				'canView'  => $this->canView(),
+				'message'  => $message
 			]);
 		}
 
