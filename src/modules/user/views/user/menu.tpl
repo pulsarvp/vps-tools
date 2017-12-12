@@ -3,7 +3,13 @@
 		<li>{Html::a(Yii::tr('Login', [], 'user'), $loginUrl)}</li>
 	{else}
 		{if Yii::$app->user->identity->image}
-			{Html::a(Html::img(Yii::$app->user->identity->image),null, [ 'title' => Yii::$app->user->identity->name ,'class'=>'navbar-brand nav-user-image'])}
+			<li>
+				{if $useUserLink}
+					{Html::a(Html::img(Yii::$app->user->identity->image),Url::toRoute(['/user']), [ 'title' => Yii::$app->user->identity->name ,'class'=>'navbar-brand nav-user-image'])}
+				{else}
+					{Html::a(Html::img(Yii::$app->user->identity->image),null, [ 'title' => Yii::$app->user->identity->name ,'class'=>'navbar-brand nav-user-image'])}
+				{/if}
+			</li>
 		{/if}
 
 		{if $useUserLink}
