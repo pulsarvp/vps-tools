@@ -120,6 +120,19 @@
 		}
 
 		/**
+		 * Sends HEAD request.
+		 *
+		 * @return string|CurlResponse
+		 */
+		public function head ()
+		{
+			$this->_options[ CURLOPT_CUSTOMREQUEST ] = 'HEAD';
+			$this->_options[ CURLOPT_NOBODY ] = 1;
+
+			return $this->send();
+		}
+
+		/**
 		 * Sends POST request.
 		 *
 		 * @param array|string $data Additional data to append to request.
