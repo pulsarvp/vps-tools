@@ -57,6 +57,36 @@
 		}
 
 		/**
+		 * Finds header by its name.
+		 * @param $name
+		 * @return null
+		 */
+		public function getHeader ($name)
+		{
+			if (is_array($this->_headers))
+			{
+				foreach ($this->_headers as $header)
+				{
+					$data = explode(': ', $header);
+					if (count($data) == 2 and $data[ 0 ] == $name)
+						return $data[ 1 ];
+				}
+			}
+
+			return null;
+		}
+
+		/**
+		 * Return response headers.
+		 *
+		 * @return null|array
+		 */
+		public function getHeaders ()
+		{
+			return $this->_headers;
+		}
+
+		/**
 		 * Returns response status.
 		 *
 		 * @return int
