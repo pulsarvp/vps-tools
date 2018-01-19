@@ -1,3 +1,11 @@
+{if $message}
+	<div class="noitifcation-container">
+		<div class="notification alert alert-{$message['class']}">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			{$message['message']}
+		</div>
+	</div>
+{/if}
 {if $canView}
 	{Html::button(Yii::tr('Expand all', [], 'setting'),['class'=>'btn btn-primary collapse-all-show'])}
 	{Html::button(Yii::tr('Collapse all', [], 'setting'),['class'=>'btn btn-primary collapse-all-hide'])}
@@ -58,7 +66,7 @@
 			$('.collapse-all-hide').on('click', function () {
 				$('.collapse').collapse('hide');
 			});
-
+			{if $canEdit}
 			$(document).on('focus', 'tr.active', function () {
 				$(this).find('p.error').remove();
 			});
@@ -201,6 +209,7 @@
 				sel.removeAllRanges();
 				sel.addRange(range);
 			}
+			{/if}
 		});
 	</script>
 {/if}
