@@ -2,7 +2,7 @@
 	"name": "pulsarvp/vps-tools",
 	"description": "Tools and other stuff that are used in every PulsarVP project.",
 	"type": "library",
-	"license": "GNU GPLv3",
+	"license": "GPL-3.0-or-later",
 	"homepage": "http://pulsarvp.ru",
 	"authors": [
 		{
