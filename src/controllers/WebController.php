@@ -2,6 +2,7 @@
 
 	namespace vps\tools\controllers;
 
+	use vps\tools\helpers\Url;
 	use vps\tools\modules\user\filters\AccessControl;
 	use Yii;
 
@@ -95,6 +96,13 @@
 				if (!$session->isActive)
 					$session->open();
 
+
+				if (defined('APP_ENV') and APP_ENV == 'deploy' and $action->controller->id!='env' and $this->checkAccessEnv())
+				{
+					$this->redirect(Url::toRoute(['/env']));
+					return true;
+				}
+
 				$this->_assetBundle = Yii::$app->assetManager->getBundle($this->assetName);
 				$this->_tpl = $this->id . '/' . $this->action->id;
 
@@ -185,5 +193,28 @@
 			}
 
 			$this->setTitle(ucfirst(strtolower(Yii::$app->controller->id . ' ' . Yii::$app->controller->action->id)));
+		}
+
+		/**
+		 *
+		 */
+		private function checkAccessEnv ()
+		{
+			$ip = Yii::$app->getRequest()->getUserIP();
+			if (isset(Yii::$app->getModule('debug')->allowedIPsDb))
+				$allowedIPsDb = Yii::$app->getModule('debug')->allowedIPsDb;
+			else
+				$allowedIPsDb = 'debug_allowed_ips';
+			$allowedIPs = Yii::$app->settings->get($allowedIPsDb);
+			if ($allowedIPs)
+				foreach ($allowedIPs as $filter)
+				{
+					if ($filter === '*' || $filter === $ip || ( ( $pos = strpos($filter, '*') ) !== false && !strncmp($ip, $filter, $pos) ))
+					{
+						return false;
+					}
+				}
+
+			return true;
 		}
 	}
