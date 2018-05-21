@@ -10,7 +10,7 @@
 	 * @property-read Setting[] $all
 	 * @property-write string   $modelClass
 	 */
-	class SettingManager extends \yii\base\Object
+	class SettingManager extends \yii\base\BaseObject
 	{
 		/**
 		 * @var string

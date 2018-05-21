@@ -10,7 +10,7 @@
 	 * @property-read string $type
 	 * @property-read string $class
 	 */
-	class Notification extends \yii\base\Object
+	class Notification extends \yii\base\BaseObject
 	{
 		const ERROR   = 0;
 		const WARNING = 1;
