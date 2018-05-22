@@ -9,7 +9,7 @@
 	 * @property-read [[CurlResponse]] $response
 	 * @property-write string $returnTransfer
 	 */
-	class Curl extends \yii\base\Object
+	class Curl extends \yii\base\BaseObject
 	{
 		private $_options = [];
 		private $_params  = [];

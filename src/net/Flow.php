@@ -20,7 +20,7 @@
 	 *
 	 * @author Anna Manaenkova <anna.manaenkova@phystech.edu>
 	 */
-	class Flow extends \yii\base\Object
+	class Flow extends \yii\base\BaseObject
 	{
 		/**
 		 * @var string Pre-name for request paramters.

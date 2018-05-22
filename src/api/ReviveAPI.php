@@ -14,7 +14,7 @@
 	/**
 	 * Class ReviveAPI
 	 */
-	class ReviveAPI extends \yii\base\Object
+	class ReviveAPI extends \yii\base\BaseObject
 	{
 		private $_url;
 		private $_login;

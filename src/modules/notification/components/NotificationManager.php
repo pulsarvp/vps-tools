@@ -11,7 +11,7 @@
 	 * @property-read Notification[] $messages
 	 * @property-read Notification[] $warnings
 	 */
-	class NotificationManager extends \yii\base\Object
+	class NotificationManager extends \yii\base\BaseObject
 	{
 		/**
 		 * The array of notifications.

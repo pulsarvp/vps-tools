@@ -14,7 +14,7 @@
 	 * @property Category $root
 	 * @property  string  $modelClass
 	 */
-	class CategoryManager extends \yii\base\Object
+	class CategoryManager extends \yii\base\BaseObject
 	{
 		/**
 		 * @var Category[] Category tree.
