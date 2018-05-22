@@ -27,6 +27,16 @@
 				]
 			]);
 			Yii::$app->view->registerCss('#setting-list .value {font-family: Menlo, monospace; overflow-wrap: break-word; word-wrap: break-word; max-width: 500px} .setting-group{cursor:pointer;border-bottom:1px dashed}');
+
+			$web = Yii::$app->basePath . '/web';
+			if (is_file($web . '/theme/js/cleave.js'))
+				Yii::$app->view->registerJsFile('/theme/js/cleave.js');
+			if (is_file($web . '/theme/css/codemirror.min.css'))
+				Yii::$app->view->registerCssFile('/theme/css/codemirror.min.css');
+			if (is_file($web . '/theme/js/codemirror.js'))
+				Yii::$app->view->registerJsFile('/theme/js/codemirror.js');
+			if (is_file($web . '/theme/js/javascript.js'))
+				Yii::$app->view->registerJsFile('/theme/js/javascript.js');
 		}
 
 		/**

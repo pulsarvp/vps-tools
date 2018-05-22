@@ -30,7 +30,7 @@
 						{/if}
 					</td>
 					<td class="description">{$setting->description}</td>
-					<td class="type">{$setting->type}</td>
+					<td class="type" data-rule='{$setting->rule}'>{$setting->type}</td>
 					<td class="rule">{$setting->rule}</td>
 					<td class="control nowrap">
 						<div class="edit">
@@ -63,6 +63,7 @@
 		var hidden         = false;
 		var valueOld       = '';
 		var descriptionOld = '';
+		var editor         = '';
 
 		function closeSetting () {
 			var tr = $('tr.active');
@@ -87,8 +88,19 @@
 			if (tr.length == 0)
 				return;
 
-			var name           = tr.data('name');
-			var newValue       = tr.find('td.value').text();
+			var name     = tr.data('name');
+			var newValue = tr.find('td.value').text();
+			if (tr.find('td.value').find('input:checked').val() !== undefined)
+				newValue = tr.find('td.value').find('input:checked').val();
+			else if (tr.find('td.value').find('input').val() !== undefined)
+				newValue = tr.find('td.value').find('input').val();
+			else if (tr.find('td.value').find('select').val() !== undefined)
+				newValue = tr.find('td.value').find('select').val();
+			else if (tr.find('td.value').find('textarea').html() !== undefined)
+				newValue = editor.getValue();
+			else
+				newValue = tr.find('td.value').text();
+			console.log(newValue);
 			var newDescription = tr.find('td.description').html();
 			tr.find('p.error').remove();
 			jQuery.ajax({
@@ -151,6 +163,7 @@
 			tr.addClass('active');
 
 			var tdValue       = tr.find('td.value');
+			var tdType        = tr.find('td.type');
 			var tdDescription = tr.find('td.description');
 			if (tdValue.data('hidden')) {
 				getSetting();
@@ -159,9 +172,8 @@
 			valueOld       = tdValue.html();
 			descriptionOld = tdDescription.html();
 
-			tdValue.attr('contenteditable', true).addClass('info');
 			tdDescription.attr('contenteditable', true).addClass('info');
-			tdValue.text(valueOld.trim());
+			getForm(valueOld, tdValue, tdType);
 			focusEnd(tdValue.get(0));
 			tr.find('.control .edit').hide();
 			tr.find('.control .save').show();
@@ -198,6 +210,175 @@
 			sel.removeAllRanges();
 			sel.addRange(range);
 		}
+
+		function getForm (value, td, type) {
+			switch (type.html()) {
+				case 'boolean':
+					booleanInput(value, td);
+					break;
+				case 'email':
+					emailInput(value, td);
+					break;
+				case 'ip':
+					ipInput(value, td);
+					break;
+				case 'json':
+					jsonInput(value, td);
+					break;
+				case 'in':
+					selectInput(value, td, type.data('rule'));
+					break;
+				case 'date':
+					if (typeof Cleave !== "undefined") {
+						dataInput(value, td);
+						break;
+					}
+				case 'integer':
+					if (typeof Cleave !== "undefined") {
+						integerInput(value, td);
+						break;
+					}
+				case 'datetime':
+					if (typeof Cleave !== "undefined") {
+						dateTimeInput(value, td);
+						break;
+					}
+				case 'time':
+					if (typeof Cleave !== "undefined") {
+						timeInput(value, td);
+						break;
+					}
+				default:
+					defaultForm(value, td);
+					break;
+			}
+			td.addClass('info');
+		}
+
+		function defaultForm (value, td) {
+			td.attr('contenteditable', true);
+			td.text(value.trim());
+		}
+
+		function dataInput (value, td) {
+			var input  = $('.input-cleave').clone();
+			var cleave = new Cleave(input, {
+				date        : true,
+				datePattern : [ 'Y', 'm', 'd' ],
+				delimiter   : '-',
+				uppercase   : true
+			});
+			input.attr('placeholder', 'YYYY-MM-DD');
+			input.val(value.trim());
+			td.html(input);
+		}
+
+		function timeInput (value, td) {
+			var input = $('.input-cleave').clone();
+
+			var cleave = new Cleave(input, {
+				delimiter : ':',
+				blocks    : [ 2, 2, 2 ]
+			});
+			input.attr('placeholder', 'HH:mm:ss');
+			input.val(value.trim());
+			td.html(input);
+		}
+
+		function dateTimeInput (value, td) {
+			var input = $('.input-cleave').clone();
+
+			var cleave = new Cleave(input, {
+				delimiters : [ '-', '-', ' ', ':', ':' ],
+				blocks     : [ 4, 2, 2, 2, 2, 2 ]
+			});
+			input.attr('placeholder', 'YYYY-MM-DD HH:mm:ss');
+			input.val(value.trim());
+			td.html(input);
+		}
+
+		function integerInput (value, td) {
+			var input  = $('.input-cleave').clone();
+			var cleave = new Cleave(input, {
+				numericOnly : true
+			});
+			input.val(value.trim());
+			input.attr('placeholder', '10');
+			td.html(input);
+		}
+
+		function booleanInput (value, td) {
+			var radio = $('.btn-group').clone();
+			radio.removeClass('hide');
+			if (value.trim() != 0) {
+				radio.find('.yes').addClass('active');
+				radio.find('.yes').find('input').attr('checked', 'checked');
+			}
+			else {
+				radio.find('.no').addClass('active');
+				radio.find('.no').find('input').attr('checked', 'checked');
+			}
+			td.html(radio);
+		}
+
+		function selectInput (value, td, rule) {
+			var radio = '<select name="value">';
+			$.each(rule.range, function (val) {
+				if (value == val)
+					radio += '<option value="' + val + '" selected>' + val + '</option>';
+				else
+					radio += '<option value="' + val + '">' + val + '</option>';
+			});
+			radio += '</select>';
+
+			td.html(radio);
+		}
+
+		function emailInput (value, td) {
+			var input = $('.input-cleave').clone();
+			input.val(value.trim());
+			input.attr('type', 'email');
+			input.attr('placeholder', 'example@email.com');
+			td.html(input);
+		}
+
+		function ipInput (value, td) {
+			var input = $('.input-cleave').clone();
+			input.val(value.trim());
+			input.attr('pattern', "\d{ldelim}1,3{rdelim}\.\d{ldelim}1,3{rdelim}\.\d{ldelim}1,3{rdelim}\.\d{ldelim}1,3{rdelim}");
+			input.attr('placeholder', '127.0.0.1');
+			td.html(input);
+		}
+
+		function jsonInput (value, td) {
+			if (typeof CodeMirror != "undefined") {
+				var textarea = $('.textarea').clone();
+				textarea.attr('id', 'textarea-json');
+				textarea.html(value.trim());
+				td.html(textarea);
+				editor = CodeMirror.fromTextArea(document.getElementById('textarea-json'), {
+					lineNumbers : true
+				});
+			}
+			else
+				defaultForm(value, td);
+		}
+
 	});
 </script>
 
+<div class="inputs col-md-3 hide">
+	<input type="text" name="value" value="" class="input-cleave">
+</div>
+<div class="json col-md-3 hide">
+	<textarea name="value" class="textarea"></textarea>
+</div>
+
+<div class="btn-group col-md-3 hide" data-toggle="buttons">
+	<label class="btn btn-primary yes">
+		<input type="radio" name="value" value="1" checked>{Yii::$app->formatter->asBoolean(1)}
+	</label>
+	<label class="btn btn-primary no">
+		<input type="radio" name="value" value="0">{Yii::$app->formatter->asBoolean(0)}
+	</label>
+</div>
