@@ -1,7 +1,7 @@
 <?php
 	namespace vps\tools\net;
 
-	class CurlResponse extends \yii\base\Object
+	class CurlResponse extends \yii\base\BaseObject
 	{
 		const S_UNKNOWN     = 0;
 		const S_OK          = 200;

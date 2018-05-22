@@ -26,7 +26,7 @@
 		"ext-mbstring": "*",
 		"ext-mcrypt": "*",
 		"ext-mysqli": "*",
-		"yiisoft/yii2": "~2.0",
+		"yiisoft/yii2": "~2.0.14",
 		"yiisoft/yii2-bootstrap": "~2.0",
 		"yiisoft/yii2-authclient": "~2.0",
 		"yiisoft/yii2-apidoc": "~2.0",

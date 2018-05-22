@@ -9,7 +9,7 @@
 	/**
 	 * The class for reading menu.
 	 */
-	class MenuManager extends yii\base\Object
+	class MenuManager extends \yii\base\BaseObject
 	{
 		private $_types;
 		private $_data = [];
