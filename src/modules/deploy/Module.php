@@ -8,7 +8,6 @@
 	 * @date      2017-10-31
 	 */
 	use vps\tools\helpers\ConfigurationHelper;
-	use Yii;
 	use yii\base\BootstrapInterface;
 
 	/**
@@ -27,7 +26,7 @@
 		 */
 		public $controllerNamespace = 'vps\tools\modules\deploy\controllers';
 
-		public $img = 'http://img-fotki.yandex.ru/get/5314/31245118.40/0_66e02_1bb503e2_XL';
+		public $img = 'http://pulsarvp.ru/images/_tech.jpg';
 
 		/**
 		 * @inheritdoc
@@ -43,6 +42,5 @@
 				]
 			], false);
 			ConfigurationHelper::addTranslation('deploy', [ 'deploy' => 'deploy.php' ], __DIR__ . '/messages');
-
 		}
 	}
