@@ -16,7 +16,7 @@
 		{
 			if (parent::beforeAction($action) and Yii::$app->request->isAjax)
 			{
-				if (!Yii::$app->user->identity->active or !( Yii::$app->user->can('admin') or Yii::$app->user->can('admin_setting') ))
+				if (!Yii::$app->user->identity->active or !$this->canEdit())
 				{
 					return false;
 				}
@@ -45,6 +45,27 @@
 				}
 			}
 			Yii::$app->end();
+		}
+
+		/**
+		 * This action is for AJAX request. It is update role to user
+		 */
+		public function actionValue ()
+		{
+			if (Yii::$app->request->isAjax)
+			{
+				$setting = Setting::findOne([ 'name' => Yii::$app->request->post('name') ]);
+				if ($setting !== null)
+				{
+					echo Json::encode($setting->value);
+				}
+			}
+			Yii::$app->end();
+		}
+
+		private function canEdit ()
+		{
+			return Yii::$app->user->can('admin') or Yii::$app->user->can('setting_edit');
 		}
 	}
 
