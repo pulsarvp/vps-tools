@@ -16,7 +16,7 @@
 		{
 			if (parent::beforeAction($action) and Yii::$app->request->isAjax)
 			{
-				if (!Yii::$app->user->identity->active or !( Yii::$app->user->can('admin') or Yii::$app->user->can('admin_setting') ))
+				if (!Yii::$app->user->identity->active or !$this->canEdit())
 				{
 					return false;
 				}
@@ -61,6 +61,11 @@
 				}
 			}
 			Yii::$app->end();
+		}
+
+		private function canEdit ()
+		{
+			return Yii::$app->user->can('admin') or Yii::$app->user->can('setting_edit');
 		}
 	}
 
