@@ -1,5 +1,5 @@
 {if isset($pagination)}
-	{use class='yii\widgets\LinkPager' type='block'}
+	{use class='vps\tools\widgets\LinkPager' type='block'}
 	<div class="pagination-container">
 		{LinkPager pagination=$pagination}{/LinkPager}
 		<ul class="pagination">

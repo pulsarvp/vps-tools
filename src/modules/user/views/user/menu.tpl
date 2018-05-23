@@ -11,7 +11,6 @@
 				{/if}
 			</li>
 		{/if}
-
 		{if $useUserLink}
 			<li class="nav-item">
 				<a href="{Url::toRoute(['/user'])}" class="nav-link">{Yii::$app->user->identity->name}</a></li>
