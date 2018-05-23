@@ -1,10 +1,14 @@
 <ul class="nav nav-tabs" role="tablist">
-	<li class="active"><a href="#users" role="tab" data-toggle="tab">{Yii::tr('Users', [], 'user')}</a></li>
-	<li><a href="#roles" role="tab" data-toggle="tab">{Yii::tr('Roles', [], 'user')}</a></li>
-	<li><a href="#permission" role="tab" data-toggle="tab">{Yii::tr('Permissions', [], 'user')}</a></li>
+	<li class="nav-item">
+		<a class="nav-link active" href="#users" role="tab" data-toggle="tab">{Yii::tr('Users', [], 'user')}</a></li>
+	<li class="nav-item">
+		<a class="nav-link" href="#roles" role="tab" data-toggle="tab">{Yii::tr('Roles', [], 'user')}</a></li>
+	<li class="nav-item">
+		<a class="nav-link" href="#permission" role="tab" data-toggle="tab">{Yii::tr('Permissions', [], 'user')}</a>
+	</li>
 </ul>
 <div class="tab-content">
-	<div role="tabpanel" class="tab-pane active" id="users">
+	<div role="tabpanel" class="tab-pane container active" id="users">
 		<table class="table table-hover table-striped" id="user-list">
 			<thead>
 				<tr>
@@ -44,7 +48,7 @@
 			</tbody>
 		</table>
 	</div>
-	<div role="tabpanel" class="tab-pane" id="roles">
+	<div role="tabpanel" class="tab-pane container" id="roles">
 		<table class="table table-hover table-striped" id="role-list">
 			<thead>
 				<tr>
@@ -80,8 +84,7 @@
 		</table>
 		{Html::button({Yii::tr('Add', [], 'user')},['class'=>'btn btn-info role-add'])}
 	</div>
-	<div role="tabpanel" class="tab-pane" id="permission">
-
+	<div role="tabpanel" class="tab-pane container" id="permission">
 		<table class="table table-hover table-striped" id="rule-list">
 			<thead>
 				<tr>
@@ -186,6 +189,7 @@
 		setEditData($(this).data('id'));
 		$('#formModal').modal('show');
 	});
+
 	function setEditData (roleName) {
 		var role = roles.getByName(roleName);
 		if (role !== null) {
@@ -203,6 +207,7 @@
 			$('#childPermissions').selectpicker('val', role.childPermissions);
 		}
 	}
+
 	$('.role-form').click(function () {
 		$('#role-form').submit();
 	});
