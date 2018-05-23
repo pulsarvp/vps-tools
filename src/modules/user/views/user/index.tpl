@@ -1,28 +1,30 @@
-<div>
-	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad">
-		<div class="panel panel-info">
-			<div class="panel-heading">
-				<h3 class="panel-title">{$user->name}</h3>
-			</div>
-			<div class="panel-body">
-				<div class="row">
-					<div class="col-sm-12">
-						<table class="table table-user-information">
-							<tbody>
-								<tr>
-									<td>{Yii::tr('Email', [], 'user')}</td>
-									<td>{Html::mailto({$user->email})}</td>
-								</tr>
-								<tr>
-									<td>{Yii::tr('Login DT', [], 'user')}</td>
-									<td>{Yii::$app->formatter->asDatetime($user->loginDT)}</td>
-								</tr>
-							</tbody>
-						</table>
+<div class="container">
+	<div class="row justify-content-md-center">
+		<div class="col-3 col-lg-6">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<h3 class="panel-title">{$user->name}</h3>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-sm-12">
+							<table class="table table-user-information">
+								<tbody>
+									<tr>
+										<td>{Yii::tr('Email', [], 'user')}</td>
+										<td>{Html::mailto({$user->email})}</td>
+									</tr>
+									<tr>
+										<td>{Yii::tr('Login DT', [], 'user')}</td>
+										<td>{Yii::$app->formatter->asDatetime($user->loginDT)}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="panel-footer">
+				<div class="panel-footer">
+				</div>
 			</div>
 		</div>
 	</div>

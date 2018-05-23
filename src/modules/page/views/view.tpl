@@ -1,8 +1,7 @@
 {if isset($page)}
-	<div class="content">
+	<div class="container">
 	<h1>
 		{$page->title}
-
 	</h1>
 	<span class="text-center">
 			{if !$page->active}

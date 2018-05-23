@@ -7,9 +7,9 @@
 	</div>
 {/if}
 {if $canView}
-	{Html::button(Yii::tr('Expand all', [], 'setting'),['class'=>'btn btn-primary collapse-all-show'])}
-	{Html::button(Yii::tr('Collapse all', [], 'setting'),['class'=>'btn btn-primary collapse-all-hide'])}
-	<table class="table table-striped table-bordered" id="setting-list">
+	{Html::button(Yii::tr('Expand all', [], 'setting'),['class'=>'btn btn-primary btn-sm collapse-all-show'])}
+	{Html::button(Yii::tr('Collapse all', [], 'setting'),['class'=>'btn btn-primary btn-sm collapse-all-hide'])}
+	<table class="table table-striped table-bordered table-hover" id="setting-list">
 		<thead>
 			<tr>
 				<th>{Yii::tr('Name', [], 'setting')}</th>
@@ -46,10 +46,10 @@
 							<td class="type">{$setting->rule}</td>
 							<td class="control nowrap">
 								<div class="edit">
-									{Html::buttonFa('', 'pencil', [ 'class' => 'btn btn-xs btn-primary setting-edit', 'title' => Yii::tr('Edit', [], 'setting') ])}
+									{Html::buttonFa('', 'pencil', [ 'class' => 'btn btn-sm btn-primary setting-edit', 'title' => Yii::tr('Edit', [], 'setting') ])}
 								</div>
 								<div class="save" style="display: none">
-									{Html::buttonFa('', 'check', [ 'class' => 'btn btn-xs btn-success setting-save', 'title' => Yii::tr('Save', [], 'setting') ])}
+									{Html::buttonFa('', 'check', [ 'class' => 'btn btn-sm btn-success setting-save', 'title' => Yii::tr('Save', [], 'setting') ])}
 									{Html::buttonFa('', 'remove', [ 'class' => 'btn btn-xs btn-danger setting-close', 'title' => Yii::tr('Close', [], 'setting') ])}
 								</div>
 							</td>
@@ -384,13 +384,13 @@
 
 		});
 	</script>
-	<div class="inputs col-md-3 hide">
+	<div class="inputs col-md-3 d-none">
 		<input type="text" name="value" value="" class="input-cleave">
 	</div>
-	<div class="json col-md-3 hide">
+	<div class="json col-md-3 d-none">
 		<textarea name="value" class="textarea"></textarea>
 	</div>
-	<div class="btn-group col-md-3 hide" data-toggle="buttons">
+	<div class="btn-group col-md-3 d-none" data-toggle="buttons">
 		<label class="btn btn-primary yes">
 			<input type="radio" name="value" value="1" checked>{Yii::$app->formatter->asBoolean(1)}
 		</label>
