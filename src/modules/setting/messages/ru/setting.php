@@ -12,6 +12,7 @@
 		"Rules"                                   => "Правила",
 		"Save"                                    => "Сохранить",
 		"Settings management"                     => "Управление настройками",
+		"Such a {attribute} does not exist."      => "Такой {attribute} не существует.",
 		"This field must be well-formed JSON."    => "Это поле должно быть корректым JSON.",
 		"Type"                                    => "Тип",
 		"Value"                                   => "Значение",
