@@ -75,6 +75,10 @@
 				  'route'   => $this->id . '/user/index'
 				],
 				[ 'class'   => 'vps\tools\web\UrlRule',
+				  'pattern' => 'user/delete',
+				  'route'   => $this->id . '/user/delete'
+				],
+				[ 'class'   => 'vps\tools\web\UrlRule',
 				  'pattern' => 'user/manage',
 				  'route'   => $this->id . '/user/manage'
 				],
