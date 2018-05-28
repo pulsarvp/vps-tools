@@ -129,7 +129,7 @@
 					success  : function (data) {
 						if (data != 0) {
 							tr.addClass('danger');
-							tr.find('td.value').append('<p class="error">' + data + '</p>');
+							tr.find('td.value').append('<p class="text-danger error">' + data + '</p>');
 						}
 						else {
 							tr.removeClass('danger');
@@ -142,7 +142,7 @@
 					error    : function (data) {
 						if (data != 0) {
 							tr.addClass('danger');
-							tr.find('td.value').append('<p class="error">' + data.statusText + '</p>');
+							tr.find('td.value').append('<p class="text-danger error">' + data.statusText + '</p>');
 						}
 					}
 				});
