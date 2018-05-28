@@ -163,6 +163,15 @@
 			{
 				if (!file_exists($this->$attribute))
 					$this->addError($attribute, Yii::tr('Such a {attribute} does not exist.', [ 'attribute' => $attribute ], 'setting'));
+				if ($this->rule != '')
+				{
+					$rule = json_decode($this->rule, true);
+					if (isset($rule[ 'writable' ]) and $rule[ 'writable' ] == true)
+					{
+						if (!is_writable($this->$attribute))
+							$this->addError($attribute, Yii::tr('Path does not writable.', [], 'setting'));
+					}
+				}
 			}
 		}
 
