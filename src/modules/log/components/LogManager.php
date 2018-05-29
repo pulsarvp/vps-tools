@@ -49,7 +49,8 @@
 				}
 				$log->url = Yii::$app->request->url;
 				$log->server = json_encode($_SERVER);
-				$log->session = json_encode($_SESSION);
+				if (isset($_SESSION))
+					$log->session = json_encode($_SESSION);
 				$log->cookie = json_encode($_COOKIE);
 				$log->post = json_encode($_POST);
 				$log->save();

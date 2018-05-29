@@ -18,7 +18,7 @@
 		<table class="table table-hover table-striped" id="user-list">
 			<thead>
 				<tr>
-					{foreach [ 'id', 'name', 'email', 'roles', 'active', 'loginDT']  as $key}
+					{foreach [ 'id','', 'name', 'email', 'roles', 'active', 'loginDT', 'activeDT']  as $key}
 						<th>
 							{Yii::tr(ucfirst($key), [], 'user')}
 							{if isset($sort)}
@@ -40,7 +40,6 @@
 							{/if}
 						</th>
 					{/foreach}
-					<th class="no-sort"></th>
 					{if Yii::$app->user->can('admin')}
 						<th class="no-sort"></th>
 					{/if}
@@ -50,7 +49,8 @@
 				{foreach $users as $user}
 					<tr>
 						<td>{$user['id']}</td>
-						<td>{$user['name']}</td>
+						<td>{Html::img($user['image'],['class'=>'img-thumbnail','width'=>'50'])}</td>
+						<td>{Html::a($user['name'],Url::toRoute(['user/view','id'=>$user['id']]))}</td>
 						<td>{$user['email']}</td>
 						<td>
 							<select class="selectpicker select-user-role" title="{Yii::tr('Select role', [], 'user')}..." data-id="{$user['id']}" multiple {if $user['id'] == Yii::$app->user->id}disabled="1"{/if}>
@@ -60,22 +60,21 @@
 							</select>
 						</td>
 						<td class="state">
-							{if $user['active']}
-								{Html::fa('check',['class'=>'text-success'])}
-							{/if}
-						</td>
-						<td data-order="{Yii::$app->formatter->asTimestamp($user['loginDT'])}">{Yii::$app->formatter->asDatetime($user['loginDT'])}</td>
-						<td>
-							<button id="btn{$user['id']}" class="btn btn-xs user-state btn-{if $user['active']}danger{else}success{/if}" {if $user['id'] == Yii::$app->user->id}disabled="1"{/if} data-id="{$user['id']}" data-state="{1 - $user['active']}">
-								{if $user['active']}{Yii::tr('Disable', [], 'user')}{else}{Yii::tr('Enable', [], 'user')}{/if}
+							<button id="btn{$user['id']}" class="btn btn-sm user-state btn-{if !$user['active']}danger{else}success{/if}" {if $user['id'] == Yii::$app->user->id}disabled="1"{/if} data-id="{$user['id']}" data-state="{1 - $user['active']}" title="{if !$user['active']}{Yii::tr('Enable', [], 'user')}{else}{Yii::tr('Disable', [], 'user')}{/if}">
+								{if $user['active']}
+									{Html::fa('check',['id'=>"btn{$user['id']}",'class'=>'text-default','title'=>Yii::tr('Disable', [], 'user')])}
+								{else}
+									{Html::fa('ban',['id'=>"btn{$user['id']}",'class'=>'text-default','title'=>Yii::tr('Enable', [], 'user')])}
+								{/if}
 							</button>
 						</td>
+						<td data-order="{Yii::$app->formatter->asTimestamp($user['loginDT'])}">{Yii::$app->formatter->asDatetime($user['loginDT'])}</td>
+						<td data-order="{Yii::$app->formatter->asTimestamp($user['activeDT'])}">{Yii::$app->formatter->asDatetime($user['activeDT'])}</td>
+
 						{if Yii::$app->user->can('admin')}
 							<td>
 								{if $user['id'] != Yii::$app->user->id}
-									<a href="{Url::toRoute(['user/delete','id'=>$user['id']])}" class="btn btn-danger">
-										{Html::fa('remove',['class'=>'text-default'])}
-									</a>
+									{Html::a(Html::fa('remove'),Url::toRoute(['user/delete', 'id' => $user['id']]), [ 'class' => 'btn btn-sm btn-danger', 'title' => Yii::tr('Remove user?', [], 'user'), 'data-toggle'=>'confirmation', 'data-btn-ok-class'=>'btn-xs btn-danger', 'data-title'=>Yii::tr('Remove user?', [], 'user'), 'data-btn-ok-label'=>Yii::tr('Yes', [], 'user'), 'data-btn-cancel-label'=>Yii::tr('No', [], 'user') ])}
 								{/if}
 							</td>
 						{/if}
@@ -271,12 +270,10 @@
 			dataType : "json",
 			success  : function (data) {
 				if (data == 1) {
-					button.html('{Yii::tr('Disable', [], 'user')}').removeClass('btn-success').data('state', 0).addClass('btn-danger');
-					button.parent().parent().find('td.state').html('{Html::fa('check',['class'=>'text-success'])}');
+					button.html('{Html::fa('check',['id'=>"btn{$user['id']}",'class'=>'text-default','title'=>Yii::tr('Disable', [], 'user')])}').attr('title', '{Yii::tr('Disable', [], 'user')}').removeClass('btn-danger').data('state', 0).addClass('btn-success');
 				}
 				else {
-					button.html('{Yii::tr('Enable', [], 'user')}').removeClass('btn-danger').data('state', 1).addClass('btn-success');
-					button.parent().parent().find('td.state').html('');
+					button.html('{Html::fa('ban',['id'=>"btn{$user['id']}",'class'=>'text-default','title'=>Yii::tr('Enable', [], 'user')])}').attr('title', '{Yii::tr('Enable', [], 'user')}').removeClass('btn-success').data('state', 1).addClass('btn-danger');
 				}
 			}
 		});

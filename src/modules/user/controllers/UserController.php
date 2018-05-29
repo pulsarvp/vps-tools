@@ -40,7 +40,7 @@
 								$this->redirect(Url::toRoute([ '/user/index' ]));
 							}
 						],
-						[ 'allow' => true, 'actions' => [ 'index', 'logout' ], 'roles' => [ '@' ] ],
+						[ 'allow' => true, 'actions' => [ 'index', 'logout', 'view' ], 'roles' => [ '@' ] ],
 						[
 							'allow'         => true,
 							'actions'       => [ 'manage', 'delete' ],
@@ -136,6 +136,20 @@
 
 			$this->redirect($referrer);
 			Yii::$app->end();
+		}
+
+		public function actionView ($id)
+		{
+			$this->_tpl = '@userViews/index';
+			$userClass = $this->module->modelUser;
+			$user = $userClass::findOne($id);
+			if ($user == null)
+			{
+				Yii::$app->notification->errorToSession(Yii::tr('Given user does not exist.',[],'user'));
+				$this->redirect(Url::toRoute([ 'user/index' ]));
+			}
+			$this->title = $user->name;
+			$this->data('user', $user);
 		}
 
 		/**

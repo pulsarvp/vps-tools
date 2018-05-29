@@ -71,6 +71,7 @@
 						'email',
 						'name',
 						'loginDT',
+						'activeDT',
 						'active'
 					],
 					'defaultOrder' => [

@@ -1,6 +1,7 @@
 <?php
 	return [
 		"Active"                                           => "Активный",
+		"ActiveDT"                                         => "Активность",
 		"Add"                                              => "Добавить",
 		"Adding Role"                                      => "Добавление роли",
 		"Authorization failed."                            => "Авторизация не удалась.",
@@ -10,6 +11,7 @@
 		"Data"                                             => "Данные",
 		"Disable"                                          => "Деактивировать",
 		"Description"                                      => "Описание",
+		"Given user does not exist."                       => "Такой пользователь не найден.",
 		"Edit"                                             => "Редактировать",
 		"Editing a Role"                                   => "Редактирование роли",
 		"Email"                                            => "Email",
@@ -22,6 +24,7 @@
 		"Profile"                                          => "Профиль",
 		"Remove?"                                          => "Удалить?",
 		"Permissions"                                      => "Разрешения",
+		"Remove user?"                                     => "Удалить пользователя?",
 		"Role"                                             => "Роль",
 		"Roles"                                            => "Роли",
 		"Rule"                                             => "Правило",
