@@ -52,6 +52,10 @@
 			$app->setAliases([ '@vpsViews' => __DIR__ . '/../../views' ]);
 			$app->getUrlManager()->addRules([
 				[ 'class'   => 'vps\tools\web\UrlRule',
+				  'pattern' => 'page/index',
+				  'route'   => 'page/index'
+				],
+				[ 'class'   => 'vps\tools\web\UrlRule',
 				  'pattern' => 'page/add',
 				  'route'   => $this->id . '/page/add'
 				],
