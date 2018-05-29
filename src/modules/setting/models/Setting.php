@@ -74,6 +74,9 @@
 				case 'time':
 					$rules = [ [ 'value', 'time', 'format' => 'php:H:i:s' ] ];
 					break;
+				case 'path':
+					$rules = [ [ 'value', 'validatePath' ] ];
+					break;
 				case 'url':
 					$rules = [ [ 'value', 'validateUrl' ] ];
 					break;
@@ -145,7 +148,30 @@
 			if (!$this->hasErrors())
 			{
 				if (filter_var($this->$attribute, FILTER_VALIDATE_URL) === false)
-					$this->addError($attribute, Yii::tr('{attribute} is not a valid URL.', [ 'attribute' => $this->name ],'setting'));
+					$this->addError($attribute, Yii::tr('{attribute} is not a valid URL.', [ 'attribute' => $this->name ], 'setting'));
+			}
+		}
+
+		/**
+		 * Path validates.
+		 *
+		 * @param string $attribute the attribute currently being validated
+		 */
+		public function validatePath ($attribute)
+		{
+			if (!$this->hasErrors())
+			{
+				if (!file_exists($this->$attribute))
+					$this->addError($attribute, Yii::tr('{attribute} does not exist.', [ 'attribute' => $attribute ], 'setting'));
+				if ($this->rule != '')
+				{
+					$rule = json_decode($this->rule, true);
+					if (isset($rule[ 'writable' ]) and $rule[ 'writable' ] == true)
+					{
+						if (!is_writable($this->$attribute))
+							$this->addError($attribute, Yii::tr('Path is not writable.', [], 'setting'));
+					}
+				}
 			}
 		}
 
