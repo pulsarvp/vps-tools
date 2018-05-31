@@ -9,44 +9,80 @@
 </ul>
 <div class="tab-content">
 	<div role="tabpanel" class="tab-pane container active" id="users">
+		<div class="object-filters form-inline">
+			<div class="filter form-group">
+				<label for="search-user">{Yii::tr('Search:', [], 'user')}</label>
+				<input class="form-control" name="search" id="search-user" type="text" value="{if isset($search)}{$search}{/if}">
+			</div>
+		</div>
 		<table class="table table-hover table-striped" id="user-list">
 			<thead>
 				<tr>
-					<th>{Yii::tr('Username', [], 'user')}</th>
-					<th>{Yii::tr('Email', [], 'user')}</th>
-					<th class="no-sort">{Yii::tr('Roles', [], 'user')}</th>
-					<th>{Yii::tr('Active', [], 'user')}</th>
-					<th>{Yii::tr('Last login', [], 'user')}</th>
-					<th class="no-sort"></th>
+					{foreach [ 'id','', 'name', 'email', 'roles', 'active', 'loginDT', 'activeDT']  as $key}
+						<th>
+							{Yii::tr(ucfirst($key), [], 'user')}
+							{if isset($sort)}
+								{if array_key_exists($key, $sort->attributeOrders)}
+									{if $sort->attributeOrders[$key] == SORT_ASC}
+										<a class="sort" href="{Url::current([ 'sort' => "-`$key`",'page' => "" ])}">
+											<i class="fa fa-sort-numeric-asc"></i>
+										</a>
+									{else}
+										<a class="sort" href="{Url::current([ 'sort' => $key,'page' => "" ])}">
+											<i class="fa fa-sort-numeric-desc"></i>
+										</a>
+									{/if}
+								{elseif array_key_exists($key, $sort->attributes)}
+									<a class="sort" href="{Url::current([ 'sort' => $key,'page' => "" ])}">
+										<i class="fa fa-sort"></i>
+									</a>
+								{/if}
+							{/if}
+						</th>
+					{/foreach}
+					{if Yii::$app->user->can('admin')}
+						<th class="no-sort"></th>
+					{/if}
 				</tr>
 			</thead>
 			<tbody>
 				{foreach $users as $user}
 					<tr>
-						<td>{$user->name}</td>
-						<td>{$user->email}</td>
+						<td>{$user['id']}</td>
+						<td>{Html::img($user['image'],['class'=>'img-thumbnail','width'=>'50'])}</td>
+						<td>{Html::a($user['name'],Url::toRoute(['user/view','id'=>$user['id']]))}</td>
+						<td>{$user['email']}</td>
 						<td>
-							<select class="selectpicker select-user-role" title="{Yii::tr('Select role', [], 'user')}..." data-id="{$user->id}" multiple {if $user->id == Yii::$app->user->id}disabled="1"{/if}>
+							<select class="selectpicker select-user-role" title="{Yii::tr('Select role', [], 'user')}..." data-id="{$user['id']}" multiple {if $user['id'] == Yii::$app->user->id}disabled="1"{/if}>
 								{foreach $roles as $role}
-									<option value="{$role.name}"{if in_array($role.name,$user->rolesNames)} selected="selected"{/if}>{$role.name}</option>
+									<option value="{$role.name}"{if in_array($role.name,explode(',',$user['rolesNames']))} selected="selected"{/if}>{$role.name}</option>
 								{/foreach}
 							</select>
 						</td>
 						<td class="state">
-							{if $user->active}
-								{Html::fa('check',['class'=>'text-success'])}
-							{/if}
-						</td>
-						<td data-order="{Yii::$app->formatter->asTimestamp($user->loginDT)}">{Yii::$app->formatter->asDatetime($user->loginDT)}</td>
-						<td>
-							<button id="btn{$user->id}" class="btn btn-xs user-state btn-{if $user->active}danger{else}success{/if}" {if $user->id == Yii::$app->user->id}disabled="1"{/if} data-id="{$user->id}" data-state="{1 - $user->active}">
-								{if $user->active}{Yii::tr('Disable', [], 'user')}{else}{Yii::tr('Enable', [], 'user')}{/if}
+							<button id="btn{$user['id']}" class="btn btn-sm user-state btn-{if !$user['active']}danger{else}success{/if}" {if $user['id'] == Yii::$app->user->id}disabled="1"{/if} data-id="{$user['id']}" data-state="{1 - $user['active']}" title="{if !$user['active']}{Yii::tr('Enable', [], 'user')}{else}{Yii::tr('Disable', [], 'user')}{/if}">
+								{if $user['active']}
+									{Html::fa('check',['id'=>"btn{$user['id']}",'class'=>'text-default','title'=>Yii::tr('Disable', [], 'user')])}
+								{else}
+									{Html::fa('ban',['id'=>"btn{$user['id']}",'class'=>'text-default','title'=>Yii::tr('Enable', [], 'user')])}
+								{/if}
 							</button>
 						</td>
+						<td data-order="{Yii::$app->formatter->asTimestamp($user['loginDT'])}">{Yii::$app->formatter->asDatetime($user['loginDT'])}</td>
+						<td data-order="{Yii::$app->formatter->asTimestamp($user['activeDT'])}">{Yii::$app->formatter->asDatetime($user['activeDT'])}</td>
+
+						{if Yii::$app->user->can('admin')}
+							<td>
+								{if $user['id'] != Yii::$app->user->id}
+									{Html::a(Html::fa('remove'),Url::toRoute(['user/delete', 'id' => $user['id']]), [ 'class' => 'btn btn-sm btn-danger', 'title' => Yii::tr('Remove user?', [], 'user'), 'data-toggle'=>'confirmation', 'data-btn-ok-class'=>'btn-xs btn-danger', 'data-title'=>Yii::tr('Remove user?', [], 'user'), 'data-btn-ok-label'=>Yii::tr('Yes', [], 'user'), 'data-btn-cancel-label'=>Yii::tr('No', [], 'user') ])}
+								{/if}
+							</td>
+						{/if}
 					</tr>
 				{/foreach}
 			</tbody>
 		</table>
+		{include file='pagination.tpl'}
 	</div>
 	<div role="tabpanel" class="tab-pane container" id="roles">
 		<table class="table table-hover table-striped" id="role-list">
@@ -156,21 +192,26 @@
 			return null;
 		}
 	};
-	$('#user-list').dataTable({
-		processing  : true,
-		serverSide  : false,
-		dom         : 'Bfrtip',
-		select      : {
-			style : 'single'
-		},
-		language    : {
-			url : '/theme/js/datatables.ru.json'
-		},
-		order       : [ 0, 'asc' ],
-		columnDefs  : [
-			{ targets : 'no-sort', searchable : false, orderable : false, visible : true }
-		],
-		"bPaginate" : false
+	$().ready(function () {
+		var originalValue = $('#search-user').val();
+		$('#search-user').val('');
+		$('#search-user').blur().focus().val(originalValue);
+	});
+	var loadTimeout = null;
+	$(document).on('input', '#search-user', function (e) {
+		if (e.keyCode != 9) {
+			if (loadTimeout !== null) {
+				clearTimeout(loadTimeout);
+				loadTimeout = null;
+			}
+			var el      = $(this);
+			loadTimeout = setTimeout(function () {
+				window.location.href = '{Url::toRoute('user/manage')}?search=' + el.val();
+
+				loadTimeout = null;
+			}, 1000);
+		}
+
 	});
 	$('.role-add').click(function (e) {
 		$('#modalLabel').html('{Yii::tr('Adding Role', [], 'user')}');
@@ -229,12 +270,10 @@
 			dataType : "json",
 			success  : function (data) {
 				if (data == 1) {
-					button.html('{Yii::tr('Disable', [], 'user')}').removeClass('btn-success').data('state', 0).addClass('btn-danger');
-					button.parent().parent().find('td.state').html('{Html::fa('check',['class'=>'text-success'])}');
+					button.html('{Html::fa('check',['id'=>"btn{$user['id']}",'class'=>'text-default','title'=>Yii::tr('Disable', [], 'user')])}').attr('title', '{Yii::tr('Disable', [], 'user')}').removeClass('btn-danger').data('state', 0).addClass('btn-success');
 				}
 				else {
-					button.html('{Yii::tr('Enable', [], 'user')}').removeClass('btn-danger').data('state', 1).addClass('btn-success');
-					button.parent().parent().find('td.state').html('');
+					button.html('{Html::fa('ban',['id'=>"btn{$user['id']}",'class'=>'text-default','title'=>Yii::tr('Enable', [], 'user')])}').attr('title', '{Yii::tr('Enable', [], 'user')}').removeClass('btn-success').data('state', 1).addClass('btn-danger');
 				}
 			}
 		});
