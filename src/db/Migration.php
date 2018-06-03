@@ -15,6 +15,28 @@
 	class Migration extends \yii\db\Migration
 	{
 		/**
+		 * Adds value to enum column.
+		 *
+		 * @param string $table Table name.
+		 * @param string $column Column name.
+		 * @param string $value New value in enum.
+		 * @param bool   $default Whether to set new value as default.
+		 */
+		public function addEnumValue ($table, $column, $value, $default = false)
+		{
+			echo "    > add enum value $value to column $column in $table ...\n";
+			$time = microtime(true);
+
+			$columnSchema = $this->db->getTableSchema($table)->columns[ $column ];
+			$values = $columnSchema->enumValues;
+			$values[] = $value;
+			$defaultValue = $default ? $value : $columnSchema->defaultValue;
+			$this->alterColumn($table, $column, $this->enum($values)->defaultValue($defaultValue));
+
+			echo '    > done (time: ' . sprintf('%.3f', microtime(true) - $time) . "s)\n";
+		}
+
+		/**
 		 * @inheritdoc
 		 */
 		public function addForeignKey ($name, $table, $columns, $refTable, $refColumns, $delete = "CASCADE", $update = "CASCADE")
@@ -40,7 +62,7 @@
 			$sql = 'CREATE' . ( $replace ? ' OR REPLACE' : '' ) . ' VIEW ' . $this->db->quoteTableName($name) . ' AS ' . $query->createCommand()->getRawSql();
 			$this->db->createCommand($sql)->execute();
 
-			echo ' done (time: ' . sprintf('%.3f', microtime(true) - $time) . "s)\n";
+			echo '    > done (time: ' . sprintf('%.3f', microtime(true) - $time) . "s)\n";
 		}
 
 		/**
@@ -137,6 +159,32 @@
 		}
 
 		/**
+		 * Deletes value from enum column.
+		 *
+		 * @param string $table Table name.
+		 * @param string $column Column name.
+		 * @param string $value Value to be removed from column.
+		 * @param null   $default New default value. If null the old one will be used.
+		 * @throws \yii\db\Exception
+		 */
+		public function deleteEnumValue ($table, $column, $value, $default = null)
+		{
+			echo "    > delete enum value $value from column $column in $table ...\n";
+			$time = microtime(true);
+
+			$columnSchema = $this->db->getTableSchema($table)->columns[ $column ];
+			$values = $columnSchema->enumValues;
+			$key = array_search($value, $values);
+			if ($key === false)
+				throw new Exception("Cannot find value $value in enum values " . implode(", ", $values) . ".");
+			unset($values[ $key ]);
+			$defaultValue = $default ? $default : $columnSchema->defaultValue;
+			$this->alterColumn($table, $column, $this->enum($values)->defaultValue($defaultValue));
+
+			echo '    > done (time: ' . sprintf('%.3f', microtime(true) - $time) . "s)\n";
+		}
+
+		/**
 		 * Drops view by name.
 		 *
 		 * @param string $name
@@ -148,7 +196,7 @@
 			echo "    > drop view $name ...";
 			$time = microtime(true);
 			$this->db->createCommand('DROP VIEW IF EXISTS ' . $this->db->quoteTableName($name))->execute();
-			echo ' done (time: ' . sprintf('%.3f', microtime(true) - $time) . "s)\n";
+			echo '    > done (time: ' . sprintf('%.3f', microtime(true) - $time) . "s)\n";
 		}
 
 		/**
@@ -205,7 +253,7 @@
 				foreach ($rows as $row)
 					$this->db->createCommand($row)->execute();
 
-				echo ' done (time: ' . sprintf('%.3f', microtime(true) - $time) . "s)\n";
+				echo '    > done (time: ' . sprintf('%.3f', microtime(true) - $time) . "s)\n";
 			}
 			else
 				throw new \Exception ('Cannot open file ' . $path . ' for reading.');
