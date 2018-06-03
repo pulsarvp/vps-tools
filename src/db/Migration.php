@@ -152,6 +152,17 @@
 		}
 
 		/**
+		 * Creates enum column.
+		 *
+		 * @param array $values
+		 * @return \yii\db\ColumnSchemaBuilder the column instance which can be further customized.
+		 */
+		public function enum ($values)
+		{
+			return $this->getDb()->getSchema()->createColumnSchemaBuilder("enum('" . implode("','", $values) . "')");
+		}
+
+		/**
 		 * Find all foreign keys names for specific table and column.
 		 *
 		 * @param string      $table
