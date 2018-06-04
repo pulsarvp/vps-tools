@@ -15,6 +15,7 @@
 	 * @property string  $name
 	 * @property string  $profile
 	 * @property string  $loginDT
+	 * @property string  $activeDT
 	 * @property string  $image
 	 */
 	class User extends \yii\db\ActiveRecord implements UserInterface, IdentityInterface
@@ -106,13 +107,14 @@
 		public function attributeLabels ()
 		{
 			return [
-				'email'   => Yii::tr('Email', [], 'user'),
-				'id'      => Yii::tr('ID', [], 'user'),
-				'active'  => Yii::tr('Active', [], 'user'),
-				'name'    => Yii::tr('Name', [], 'user'),
-				'profile' => Yii::tr('Profile', [], 'user'),
-				'loginDT' => Yii::tr('Login Dt', [], 'user'),
-				'image'   => Yii::tr('Image', [], 'user'),
+				'email'    => Yii::tr('Email', [], 'user'),
+				'id'       => Yii::tr('ID', [], 'user'),
+				'active'   => Yii::tr('Active', [], 'user'),
+				'name'     => Yii::tr('Name', [], 'user'),
+				'profile'  => Yii::tr('Profile', [], 'user'),
+				'loginDT'  => Yii::tr('Login Dt', [], 'user'),
+				'activeDT' => Yii::tr('ActiveDT', [], 'user'),
+				'image'    => Yii::tr('Image', [], 'user'),
 			];
 		}
 
@@ -181,7 +183,7 @@
 				[ [ 'email' ], 'unique' ],
 				[ [ 'image' ], 'string', 'max' => 255 ],
 				[ [ 'profile' ], 'string', 'max' => 45 ],
-				[ [ 'loginDT' ], 'safe' ]
+				[ [ 'loginDT', 'activeDT' ], 'safe' ]
 			];
 		}
 

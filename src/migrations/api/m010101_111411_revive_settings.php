@@ -28,22 +28,30 @@
 			$this->insert('setting', [
 				'name'        => 'banner_use',
 				'value'       => $banner_use,
-				'description' => 'Показывать баннеры.'
+				'description' => 'Показывать баннеры.',
+				'type'        => 'boolean',
+				'group'       => 'banner'
 			]);
 			$this->insert('setting', [
 				'name'        => 'banner_api_url',
 				'value'       => $banner_api_url,
-				'description' => 'Базовая ссылка для доступа к Revive API.'
+				'description' => 'Базовая ссылка для доступа к Revive API.',
+				'type'        => 'url',
+				'group'       => 'banner'
 			]);
 			$this->insert('setting', [
 				'name'        => 'banner_api_login',
 				'value'       => $banner_api_login,
-				'description' => 'Логин для доступа к Revive API.'
+				'description' => 'Логин для доступа к Revive API.',
+				'type'        => 'string',
+				'group'       => 'banner'
 			]);
 			$this->insert('setting', [
 				'name'        => 'banner_api_password',
 				'value'       => $banner_api_password,
-				'description' => 'Пароль для доступа к Revive API.'
+				'description' => 'Пароль для доступа к Revive API.',
+				'type'        => 'string',
+				'group'       => 'banner'
 			]);
 		}
 

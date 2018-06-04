@@ -21,11 +21,11 @@
 				</td>
 				<td class="control nowrap">
 					<div class="edit">
-						{Html::buttonFa('', 'pencil', [ 'class' => 'btn btn-xs btn-primary apiapp-edit', 'title' => Yii::tr('Edit',[],'apiapp') ])}
+						{Html::buttonFa('', 'pencil', [ 'class' => 'btn btn-sm btn-primary apiapp-edit', 'title' => Yii::tr('Edit',[],'apiapp') ])}
 					</div>
 
 					<div class="save" style="display: none">
-						{Html::buttonFa('', 'check', [ 'class' => 'btn btn-xs btn-success apiapp-save', 'title' => Yii::tr('Save',[],'apiapp') ])}
+						{Html::buttonFa('', 'check', [ 'class' => 'btn btn-sm btn-success apiapp-save', 'title' => Yii::tr('Save',[],'apiapp') ])}
 					</div>
 				</td>
 			</tr>
@@ -47,7 +47,6 @@
 				{Form assign='f' id="f-apiapp"}
 					<div class="form-group field-apiapp-name required">
 						<label class="control-label col-md-3" for="apiapp-name">{Yii::tr('Name',[],'apiapp')}</label>
-						<div class="col-md-9">
 							<input type="text" name="name" class="form-control" placeholder="{Yii::tr('Name',[],'apiapp')}" value="">
 							{if count($appnew->errors) > 0}
 								<div class="has-error">
@@ -56,7 +55,6 @@
 									</div>
 								</div>
 							{/if}
-						</div>
 					</div>
 					<input type="hidden" name="id" value="0">
 					<input type="hidden" name="method" value="apiapp">

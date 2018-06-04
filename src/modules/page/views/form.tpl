@@ -11,10 +11,8 @@
 			</div>
 		{/if}
 			<div class="form-group">
-				<div class="col-md-9 col-md-offset-3">
-					{Html::submitButton(Yii::tr('Save', [], 'page'), ['class' => 'btn btn-success'])}
-					{Html::a(Yii::tr('Cancel', [], 'menu'),Yii::$app->request->referrer,['class'=>'btn btn-danger'])}
-				</div>
+				{Html::submitButton(Yii::tr('Save', [], 'page'), ['class' => 'btn btn-success'])}
+				{Html::a(Yii::tr('Cancel', [], 'menu'),Yii::$app->request->referrer,['class'=>'btn btn-danger'])}
 			</div>
 			<input type="hidden" id="{Yii::$app->request->csrfParam}" name="{Yii::$app->request->csrfParam}" value="{Yii::$app->request->csrfToken}">
 		{/Form}
@@ -23,13 +21,14 @@
 <script>
 	$().ready(function () {
 		if ($('#page-menus').val() == null)
-			$('.update_url').addClass('hide');
+			$('.update_url').addClass('d-none');
 		$('#page-menus').on('change', function () {
 			if ($(this).val() != null)
-				$('.update_url').removeClass('hide');
+				$('.update_url').removeClass('d-none');
 			else
-				$('.update_url').addClass('hide');
+				$('.update_url').addClass('d-none');
 		});
+
 		function showError (error) {
 			$('.redactor-box').parent().find('.error-block').remove();
 			$('.field-page-text').addClass('has-error');

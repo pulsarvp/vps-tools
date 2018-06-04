@@ -35,19 +35,17 @@
 							'allow'        => false,
 							'actions'      => [ 'auth', 'login', 'cancel' ],
 							'roles'        => [ '@' ],
-							'denyCallback' => function ($rule, $action)
-							{
+							'denyCallback' => function ($rule, $action) {
 								Yii::$app->notification->errorToSession(Yii::tr('You are already logged in.', [], 'user'));
 								$this->redirect(Url::toRoute([ '/user/index' ]));
 							}
 						],
-						[ 'allow' => true, 'actions' => [ 'index', 'logout' ], 'roles' => [ '@' ] ],
+						[ 'allow' => true, 'actions' => [ 'index', 'logout', 'view' ], 'roles' => [ '@' ] ],
 						[
 							'allow'         => true,
-							'actions'       => [ 'manage' ],
+							'actions'       => [ 'manage', 'delete' ],
 							'roles'         => [ '@' ],
-							'matchCallback' => function ($rule, $action)
-							{
+							'matchCallback' => function ($rule, $action) {
 								if (!Yii::$app->user->identity->active)
 								{
 									Yii::$app->notification->errorToSession(Yii::tr('Your account is not approved yet.', [], 'user'));
@@ -66,6 +64,21 @@
 					],
 				],
 			];
+		}
+
+		public function actionDelete ($id)
+		{
+			if (Yii::$app->user->can(User::R_ADMIN))
+			{
+				$userClass = $this->module->modelUser;
+				if ($id != Yii::$app->user->id)
+				{
+					$user = $userClass::findOne($id);
+					$user->delete();
+				}
+			}
+
+			$this->redirect(Yii::$app->request->referrer);
 		}
 
 		public function actionIndex ()
@@ -123,6 +136,20 @@
 
 			$this->redirect($referrer);
 			Yii::$app->end();
+		}
+
+		public function actionView ($id)
+		{
+			$this->_tpl = '@userViews/index';
+			$userClass = $this->module->modelUser;
+			$user = $userClass::findOne($id);
+			if ($user == null)
+			{
+				Yii::$app->notification->errorToSession(Yii::tr('Given user does not exist.',[],'user'));
+				$this->redirect(Url::toRoute([ 'user/index' ]));
+			}
+			$this->title = $user->name;
+			$this->data('user', $user);
 		}
 
 		/**

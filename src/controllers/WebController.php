@@ -2,6 +2,7 @@
 
 	namespace vps\tools\controllers;
 
+	use vps\tools\helpers\TimeHelper;
 	use vps\tools\helpers\Url;
 	use vps\tools\modules\user\filters\AccessControl;
 	use Yii;
@@ -67,10 +68,7 @@
 		 */
 		public function afterAction ($action, $result)
 		{
-			$result = parent::afterAction($action, $result);
-
-			if ($result)
-				return $result;
+			
 
 			$session = Yii::$app->session;
 			if ($session->isActive)
@@ -96,10 +94,10 @@
 				if (!$session->isActive)
 					$session->open();
 
-
-				if (defined('APP_ENV') and APP_ENV == 'deploy' and $action->controller->id!='env' and $this->checkAccessEnv())
+				if (defined('APP_ENV') and APP_ENV == 'deploy' and $action->controller->id != 'env' and $this->checkAccessEnv())
 				{
-					$this->redirect(Url::toRoute(['/env']));
+					$this->redirect(Url::toRoute([ '/env' ]));
+
 					return true;
 				}
 
@@ -108,6 +106,8 @@
 
 				if (strpos(Yii::$app->urlManager->hostInfo, Yii::$app->getRequest()->referrer) >= 0 and $this->action->controller->id != 'user')
 					Yii::$app->getUser()->setReturnUrl(Yii::$app->getRequest()->referrer);
+
+				$this->on(yii\web\Controller::EVENT_AFTER_ACTION, $this->userActive());
 
 				return true;
 			}
@@ -124,6 +124,16 @@
 		public function data ($key, $value)
 		{
 			$this->_data[ $key ] = $value;
+		}
+
+		public function userActive ()
+		{
+			if (isset(Yii::$app->user->id))
+			{
+				$user = Yii::$app->user->identity;
+				$user->activeDT = TimeHelper::now();
+				$user->save();
+			}
 		}
 
 		/**

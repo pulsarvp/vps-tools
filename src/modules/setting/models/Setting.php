@@ -3,6 +3,7 @@
 	namespace vps\tools\modules\setting\models;
 
 	use vps\tools\helpers\ArrayHelper;
+	use vps\tools\modules\log\components\LogManager;
 	use Yii;
 	use yii\db\ActiveRecord;
 
@@ -10,6 +11,10 @@
 	 * @property string $name
 	 * @property string $value
 	 * @property string $description
+	 * @property string $type
+	 * @property string $rule
+	 * @property string $group
+	 * @property string $fixed
 	 */
 	class Setting extends ActiveRecord
 	{
@@ -20,6 +25,8 @@
 			$rule = json_decode($this->rule, true);
 			if (isset($rule[ 'hidden' ]))
 				return $rule[ 'hidden' ];
+
+			return null;
 		}
 
 		/**
@@ -49,7 +56,21 @@
 				'description' => Yii::tr('Description', [], 'setting'),
 				'type'        => Yii::tr('Type', [], 'setting'),
 				'rule'        => Yii::tr('Rule', [], 'setting'),
+				'group'       => Yii::tr('Group', [], 'setting'),
+				'fixed'       => Yii::tr('Fixed', [], 'setting'),
 			];
+		}
+
+		public function beforeSave ($insert)
+		{
+			if (parent::beforeSave($insert))
+			{
+				LogManager::info(Yii::tr('User has changed setting {name} from {oldValue} to {newValue}.', [ 'name' => $this->name, 'oldValue' => $this->getOldAttribute('value'), 'newValue' => $this->value ]));
+
+				return true;
+			}
+
+			return false;
 		}
 
 		/**
@@ -73,6 +94,9 @@
 					break;
 				case 'time':
 					$rules = [ [ 'value', 'time', 'format' => 'php:H:i:s' ] ];
+					break;
+				case 'path':
+					$rules = [ [ 'value', 'validatePath' ] ];
 					break;
 				case 'url':
 					$rules = [ [ 'value', 'validateUrl' ] ];
@@ -101,7 +125,9 @@
 				[ [ 'name' ], 'required' ],
 				[ [ 'name', 'value', 'description' ], 'trim' ],
 				[ [ 'name' ], 'string', 'max' => 45 ],
-				[ [ 'value', 'description' ], 'string' ],
+				[ [ 'value', 'description', 'rule', 'group', 'type' ], 'string' ],
+				[ [ 'fixed' ], 'integer' ],
+				[ [ 'fixed' ], 'in', 'range' => [ 0, 1 ] ],
 				[ [ 'name' ], 'unique' ] ]);
 		}
 
@@ -145,7 +171,30 @@
 			if (!$this->hasErrors())
 			{
 				if (filter_var($this->$attribute, FILTER_VALIDATE_URL) === false)
-					$this->addError($attribute, Yii::tr('{attribute} is not a valid URL.', [ 'attribute' => $this->name ],'setting'));
+					$this->addError($attribute, Yii::tr('{attribute} is not a valid URL.', [ 'attribute' => $this->name ], 'setting'));
+			}
+		}
+
+		/**
+		 * Path validates.
+		 *
+		 * @param string $attribute the attribute currently being validated
+		 */
+		public function validatePath ($attribute)
+		{
+			if (!$this->hasErrors())
+			{
+				if (!file_exists($this->$attribute))
+					$this->addError($attribute, Yii::tr('{attribute} does not exist.', [ 'attribute' => $attribute ], 'setting'));
+				if ($this->rule != '')
+				{
+					$rule = json_decode($this->rule, true);
+					if (isset($rule[ 'writable' ]) and $rule[ 'writable' ] == true)
+					{
+						if (!is_writable($this->$attribute))
+							$this->addError($attribute, Yii::tr('Path is not writable.', [], 'setting'));
+					}
+				}
 			}
 		}
 
