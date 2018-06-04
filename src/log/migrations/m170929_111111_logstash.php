@@ -12,8 +12,8 @@
 		 */
 		public function up ()
 		{
-			$this->insert('setting', [ 'name' => 'logstash_dsn', 'value' => 'tcp://localhost:3333' ]);
-			$this->insert('setting', [ 'name' => 'logstash_use', 'value' => '0' ]);
+			$this->insert('setting', [ 'name' => 'logstash_dsn', 'value' => 'tcp://localhost:3333', 'description' => 'DSN Logstash.', 'type' => 'url', 'group' => 'logstash' ]);
+			$this->insert('setting', [ 'name' => 'logstash_use', 'value' => '0', 'description' => 'Использовать Logstash.', 'type' => 'boolean', 'group' => 'logstash' ]);
 		}
 
 		/**
