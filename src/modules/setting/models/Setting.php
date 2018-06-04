@@ -24,6 +24,8 @@
 			$rule = json_decode($this->rule, true);
 			if (isset($rule[ 'hidden' ]))
 				return $rule[ 'hidden' ];
+
+			return null;
 		}
 
 		/**
@@ -112,6 +114,7 @@
 				[ [ 'name' ], 'string', 'max' => 45 ],
 				[ [ 'value', 'description', 'rule', 'group', 'type' ], 'string' ],
 				[ [ 'fixed' ], 'integer' ],
+				[ [ 'fixed' ], 'in', 'range' => [ 0, 1 ] ],
 				[ [ 'name' ], 'unique' ] ]);
 		}
 
