@@ -45,9 +45,11 @@
 							<td class="type" data-rule='{$setting->rule}'>{$setting->type}</td>
 							<td class="type">{$setting->rule}</td>
 							<td class="control nowrap">
-								<div class="edit">
-									{Html::buttonFa('', 'pencil', [ 'class' => 'btn btn-sm btn-primary setting-edit', 'title' => Yii::tr('Edit', [], 'setting') ])}
-								</div>
+								{if $setting->fixed == 0}
+									<div class="edit">
+										{Html::buttonFa('', 'pencil', [ 'class' => 'btn btn-sm btn-primary setting-edit', 'title' => Yii::tr('Edit', [], 'setting') ])}
+									</div>
+								{/if}
 								<div class="save" style="display: none">
 									{Html::buttonFa('', 'check', [ 'class' => 'btn btn-sm btn-success setting-save', 'title' => Yii::tr('Save', [], 'setting') ])}
 									{Html::buttonFa('', 'remove', [ 'class' => 'btn btn-xs btn-danger setting-close', 'title' => Yii::tr('Close', [], 'setting') ])}
