@@ -57,8 +57,7 @@
 		{
 			if (parent::beforeSave($insert))
 			{
-				$log = new LogManager();
-				$log->info(Yii::tr('User has changed setting {name} from {oldValue} to {newValue}.', [ 'name' => $this->name, 'oldValue' => $this->getOldAttribute('value'), 'newValue' => $this->value ]));
+				LogManager::info(Yii::tr('User has changed setting {name} from {oldValue} to {newValue}.', [ 'name' => $this->name, 'oldValue' => $this->getOldAttribute('value'), 'newValue' => $this->value ]));
 
 				return true;
 			}
