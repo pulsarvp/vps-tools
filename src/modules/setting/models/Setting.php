@@ -10,6 +10,10 @@
 	 * @property string $name
 	 * @property string $value
 	 * @property string $description
+	 * @property string $type
+	 * @property string $rule
+	 * @property string $group
+	 * @property string $fixed
 	 */
 	class Setting extends ActiveRecord
 	{
@@ -49,6 +53,8 @@
 				'description' => Yii::tr('Description', [], 'setting'),
 				'type'        => Yii::tr('Type', [], 'setting'),
 				'rule'        => Yii::tr('Rule', [], 'setting'),
+				'group'       => Yii::tr('Group', [], 'setting'),
+				'fixed'       => Yii::tr('Fixed', [], 'setting'),
 			];
 		}
 
@@ -104,7 +110,8 @@
 				[ [ 'name' ], 'required' ],
 				[ [ 'name', 'value', 'description' ], 'trim' ],
 				[ [ 'name' ], 'string', 'max' => 45 ],
-				[ [ 'value', 'description' ], 'string' ],
+				[ [ 'value', 'description', 'rule', 'group', 'type' ], 'string' ],
+				[ [ 'fixed' ], 'integer' ],
 				[ [ 'name' ], 'unique' ] ]);
 		}
 

@@ -35,7 +35,7 @@
 			if (Yii::$app->request->isAjax)
 			{
 				$setting = Setting::findOne([ 'name' => Yii::$app->request->post('name') ]);
-				if ($setting !== null)
+				if ($setting !== null and $setting->fixed == 0)
 				{
 					$setting->setAttributes([ 'value' => Yii::$app->request->post('value'), 'description' => Yii::$app->request->post('description') ]);
 					if (!$setting->save())
