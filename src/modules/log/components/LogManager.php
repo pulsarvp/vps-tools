@@ -9,17 +9,14 @@
 	class LogManager extends \yii\base\BaseObject
 	{
 
-		private $_use;
-
 		public function init ()
 		{
 			parent::init();
-			$this->_use = Yii::$app->settings->get('log_use');
 		}
 
-		public function info ($message, $isRaw = false)
+		public static function info ($message, $isRaw = false)
 		{
-			$this->add($message, LogType::INFO, $isRaw);
+			self::add($message, LogType::INFO, $isRaw);
 		}
 
 		public function error ($message, $isRaw = false)
@@ -32,9 +29,9 @@
 			$this->add($message, LogType::WARNING, $isRaw);
 		}
 
-		private function add ($message, $type, $isRaw)
+		private static function add ($message, $type, $isRaw)
 		{
-			if ($this->_use)
+			if (Yii::$app->settings->get('log_use'))
 			{
 				if (!$isRaw)
 					$message = Yii::tr($message);

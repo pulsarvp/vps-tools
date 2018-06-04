@@ -3,6 +3,7 @@
 	namespace vps\tools\modules\setting\models;
 
 	use vps\tools\helpers\ArrayHelper;
+	use vps\tools\modules\log\components\LogManager;
 	use Yii;
 	use yii\db\ActiveRecord;
 
@@ -58,6 +59,18 @@
 				'group'       => Yii::tr('Group', [], 'setting'),
 				'fixed'       => Yii::tr('Fixed', [], 'setting'),
 			];
+		}
+
+		public function beforeSave ($insert)
+		{
+			if (parent::beforeSave($insert))
+			{
+				LogManager::info(Yii::tr('User has changed setting {name} from {oldValue} to {newValue}.', [ 'name' => $this->name, 'oldValue' => $this->getOldAttribute('value'), 'newValue' => $this->value ]));
+
+				return true;
+			}
+
+			return false;
 		}
 
 		/**
