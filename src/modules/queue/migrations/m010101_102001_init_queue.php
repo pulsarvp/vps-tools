@@ -12,7 +12,7 @@
 		 */
 		public function up ()
 		{
-			$this->insert('setting', [ 'name' => 'queue_ui_pagesize', 'value' => '20', 'description' => 'Интерфейс для очередей: количество объектов на одной странице.'
+			$this->insert('setting', [ 'name' => 'queue_ui_pagesize', 'value' => '20', 'description' => 'Интерфейс для очередей: количество объектов на одной странице.', 'type' => 'integer', 'group' => 'queue', 'rule' => '{"min":1}'
 			]);
 		}
 
