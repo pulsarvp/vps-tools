@@ -45,7 +45,7 @@
 		{
 			$userClass = Yii::$app->getModule('users')->modelUser;
 
-			$query = $userClass::find()->select("user.*,(SELECT GROUP_CONCAT(item_name) from `auth_assignment` where `user`.`id`=`auth_assignment`.`user_id`) as rolesNames")->leftJoin('auth_assignment','`auth_assignment`.`user_id` = `user`.`id`');
+			$query = $userClass::find()->select("user.*,(SELECT GROUP_CONCAT(item_name) from `auth_assignment` where `user`.`id`=`auth_assignment`.`user_id`) as rolesNames")->leftJoin('auth_assignment', '`auth_assignment`.`user_id` = `user`.`id`');
 			$get = Yii::$app->request->get();
 			$search = '';
 			$filterRole = '';
@@ -56,7 +56,7 @@
 			}
 			if (isset($get[ 'filterRole' ]))
 			{
-				$query->andWhere(['`auth_assignment`.`item_name`'=>$get[ 'filterRole' ]]);
+				$query->andWhere([ '`auth_assignment`.`item_name`' => $get[ 'filterRole' ] ]);
 				$filterRole = $get[ 'filterRole' ];
 			}
 			$provider = new SqlDataProvider([
@@ -111,7 +111,7 @@
 				'sort'        => $provider->sort,
 				'roles'       => $data,
 				'search'      => $search,
-				'filterRole'      => $filterRole,
+				'filterRole'  => $filterRole,
 				'rules'       => $rules,
 				'permissions' => $permissions,
 				'roleForm'    => $this->addRole()

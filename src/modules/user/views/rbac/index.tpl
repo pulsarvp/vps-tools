@@ -224,7 +224,6 @@
 
 	});
 	$('.select-filter-role').change(function () {
-		console.log($(this).val());
 		window.location.href = '{Url::toRoute('user/manage')}?filterRole=' + $(this).val() + '&search=' + $('#search-user').val();
 	});
 	$('.role-add').click(function (e) {
