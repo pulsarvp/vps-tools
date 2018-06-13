@@ -91,7 +91,7 @@
 			$post = Yii::$app->request->post();
 
 			$dt = date(TimeHelper::$dtFormat, $post[ 'dt' ]);
-			$log = Log::find()->where([ 'type' => $post[ 'type' ], 'dt' => $dt, 'action' => $post[ 'action' ] ])->one();
+			$log = Log::find()->where([ 'type' => $post[ 'type' ], 'dt' => $dt, 'userID' => $post[ 'userID' ] ])->one();
 
 			$result = [];
 			if ($log != null)

@@ -53,7 +53,7 @@
 	<tbody>
 		{foreach $models as $k=>$model}
 			<tr>
-				<td>{$model->userID}</td>
+				<td class="userID">{$model->userID}</td>
 				<td>{$model->email}</td>
 				<td class="type">{$model->type}</td>
 				<td class="action">{$model->action}</td>
@@ -96,13 +96,13 @@
 					</li>
 				</ul>
 				<div class="tab-content">
-					<div role="tabpanel" class="tab-pane container active" id="server">
+					<div role="tabpanel" class="tab-pane active" id="server">
 					</div>
-					<div role="tabpanel" class="tab-pane container" id="session">
+					<div role="tabpanel" class="tab-pane" id="session">
 					</div>
-					<div role="tabpanel" class="tab-pane container" id="cookie">
+					<div role="tabpanel" class="tab-pane" id="cookie">
 					</div>
-					<div role="tabpanel" class="tab-pane container" id="post">
+					<div role="tabpanel" class="tab-pane" id="post">
 					</div>
 				</div>
 			</div>
@@ -116,13 +116,13 @@
 <script>
 	$(document).on('click', 'tr', function () {
 		var type   = $(this).find('.type').text();
-		var action = $(this).find('.action').text();
+		var userID = $(this).find('.userID').text();
 		var dt     = $(this).find('.dt').data('order');
 		$('#viewModal').modal('show');
 		jQuery.ajax({
 			url      : '{Url::toRoute(['log/json'])}',
 			type     : 'POST',
-			data     : { _csrf : '{Yii::$app->request->getCsrfToken()}', type : type, action : action, dt : dt },
+			data     : { _csrf : '{Yii::$app->request->getCsrfToken()}', type : type, userID : userID, dt : dt },
 			dataType : "json",
 			success  : function (data) {
 				$('.modal-title').html(data.action);
