@@ -45,13 +45,19 @@
 		{
 			$userClass = Yii::$app->getModule('users')->modelUser;
 
-			$query = $userClass::find()->select("user.*,(SELECT GROUP_CONCAT(item_name) from `auth_assignment` where `user`.`id`=`auth_assignment`.`user_id`) as rolesNames");
+			$query = $userClass::find()->select("user.*,(SELECT GROUP_CONCAT(item_name) from `auth_assignment` where `user`.`id`=`auth_assignment`.`user_id`) as rolesNames")->leftJoin('auth_assignment', '`auth_assignment`.`user_id` = `user`.`id`');
 			$get = Yii::$app->request->get();
 			$search = '';
+			$filterRole = '';
 			if (isset($get[ 'search' ]))
 			{
 				$query->andWhere([ 'or', [ 'like', 'user.id', $get[ 'search' ] ], [ 'like', 'user.email', $get[ 'search' ] ], [ 'like', 'user.name', $get[ 'search' ] ] ]);
 				$search = $get[ 'search' ];
+			}
+			if (isset($get[ 'filterRole' ]))
+			{
+				$query->andWhere([ '`auth_assignment`.`item_name`' => $get[ 'filterRole' ] ]);
+				$filterRole = $get[ 'filterRole' ];
 			}
 			$provider = new SqlDataProvider([
 				'sql'        => $query->createCommand()->rawSql,
@@ -105,6 +111,7 @@
 				'sort'        => $provider->sort,
 				'roles'       => $data,
 				'search'      => $search,
+				'filterRole'  => $filterRole,
 				'rules'       => $rules,
 				'permissions' => $permissions,
 				'roleForm'    => $this->addRole()

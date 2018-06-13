@@ -14,6 +14,15 @@
 				<label for="search-user">{Yii::tr('Search:', [], 'user')}</label>
 				<input class="form-control" name="search" id="search-user" type="text" value="{if isset($search)}{$search}{/if}">
 			</div>
+			<div class="filter form-group">
+				<label for="select-filter-role">{Yii::tr('Role', [], 'user')}:</label>
+				<select class="selectpicker select-filter-role" id="select-filter-role" title="{Yii::tr('Select role', [], 'user')}...">
+					<option value="">----</option>
+					{foreach $roles as $role}
+						<option value="{$role.name}"{if $role.name==$filterRole} selected="selected"{/if}>{$role.name}</option>
+					{/foreach}
+				</select>
+			</div>
 		</div>
 		<table class="table table-hover table-striped" id="user-list">
 			<thead>
@@ -205,13 +214,17 @@
 				loadTimeout = null;
 			}
 			var el      = $(this);
+			var role    = $('#select-filter-role');
 			loadTimeout = setTimeout(function () {
-				window.location.href = '{Url::toRoute('user/manage')}?search=' + el.val();
+				window.location.href = '{Url::toRoute('user/manage')}?search=' + el.val() + '&filterRole=' + role.val();
 
 				loadTimeout = null;
 			}, 1000);
 		}
 
+	});
+	$('.select-filter-role').change(function () {
+		window.location.href = '{Url::toRoute('user/manage')}?filterRole=' + $(this).val() + '&search=' + $('#search-user').val();
 	});
 	$('.role-add').click(function (e) {
 		$('#modalLabel').html('{Yii::tr('Adding Role', [], 'user')}');
