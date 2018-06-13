@@ -128,11 +128,12 @@
 		 *
 		 * @param    string  $message Message.
 		 * @param    boolean $isRaw Whether given message is raw text or should be translated.
+		 * @param    boolean $canHide viewed button close.
 		 * @return    void
 		 */
-		public function error ($message, $isRaw = false)
+		public function error ($message, $isRaw = false, $canHide = true)
 		{
-			$this->add($message, Notification::ERROR, $isRaw);
+			$this->add($message, Notification::ERROR, $isRaw, $canHide);
 		}
 
 		/**
@@ -140,11 +141,12 @@
 		 *
 		 * @param    string  $message Message.
 		 * @param    boolean $isRaw Whether given message is raw text or should be translated.
+		 * @param    boolean $canHide viewed button close.
 		 * @return  void
 		 */
-		public function errorToSession ($message, $isRaw = false)
+		public function errorToSession ($message, $isRaw = false, $canHide = true)
 		{
-			$this->toSession($message, Notification::ERROR, $isRaw);
+			$this->toSession($message, Notification::ERROR, $isRaw, $canHide);
 		}
 
 		/**
@@ -152,11 +154,12 @@
 		 *
 		 * @param    string  $message Message.
 		 * @param    boolean $isRaw Whether given message is raw text or should be translated.
+		 * @param    boolean $canHide viewed button close.
 		 * @return    void
 		 */
-		public function message ($message, $isRaw = false)
+		public function message ($message, $isRaw = false, $canHide = true)
 		{
-			$this->add($message, Notification::MESSAGE, $isRaw);
+			$this->add($message, Notification::MESSAGE, $isRaw, $canHide);
 		}
 
 		/**
@@ -164,11 +167,12 @@
 		 *
 		 * @param    string  $message Message.
 		 * @param    boolean $isRaw Whether given message is raw text or should be translated.
+		 * @param    boolean $canHide viewed button close.
 		 * @return    void
 		 */
-		public function messageToSession ($message, $isRaw = false)
+		public function messageToSession ($message, $isRaw = false, $canHide = true)
 		{
-			$this->toSession($message, Notification::MESSAGE, $isRaw);
+			$this->toSession($message, Notification::MESSAGE, $isRaw, $canHide);
 		}
 
 		/**
@@ -176,11 +180,12 @@
 		 *
 		 * @param    string  $message Message.
 		 * @param    boolean $isRaw Whether given message is raw text or should be translated.
+		 * @param    boolean $canHide viewed button close.
 		 * @return   void
 		 */
-		public function warning ($message, $isRaw = false)
+		public function warning ($message, $isRaw = false, $canHide = true)
 		{
-			$this->add($message, Notification::WARNING, $isRaw);
+			$this->add($message, Notification::WARNING, $isRaw, $canHide);
 		}
 
 		/**
@@ -188,11 +193,12 @@
 		 *
 		 * @param  string  $message Message.
 		 * @param  boolean $isRaw Whether given message is raw text or should be translated.
+		 * @param    boolean $canHide viewed button close.
 		 * @return void
 		 */
-		public function warningToSession ($message, $isRaw = false)
+		public function warningToSession ($message, $isRaw = false, $canHide = true)
 		{
-			$this->toSession($message, Notification::WARNING, $isRaw);
+			$this->toSession($message, Notification::WARNING, $isRaw, $canHide);
 		}
 
 		/**
@@ -201,11 +207,12 @@
 		 * @param    string  $message Message.
 		 * @param    integer $type Message type.
 		 * @param    boolean $isRaw Whether given message is raw text or should be translated.
+		 * @param    boolean $canHide viewed button close.
 		 * @return    void
 		 */
-		private function add ($message, $type = Notification::ERROR, $isRaw = false)
+		private function add ($message, $type = Notification::ERROR, $isRaw = false, $canHide = true)
 		{
-			$this->_data[] = new Notification ($message, $type, $isRaw);
+			$this->_data[] = new Notification ($message, $type, $isRaw, $canHide);
 		}
 
 		/**
@@ -233,11 +240,12 @@
 		 * @param    string  $message Message.
 		 * @param    integer $type Message type.
 		 * @param    boolean $isRaw Whether given message is raw text or should be translated.
+		 * @param    boolean $canHide viewed button close.
 		 * @return void
 		 */
-		private function toSession ($message, $type = Notification::ERROR, $isRaw = false)
+		private function toSession ($message, $type = Notification::ERROR, $isRaw = false, $canHide = true)
 		{
-			$ntf = new Notification($message, $type, $isRaw);
+			$ntf = new Notification($message, $type, $isRaw, $canHide);
 
 			$notification = isset($_SESSION[ 'notification' ]) ? $_SESSION[ 'notification' ] : [];
 			$notification[ $type ][] = $ntf->message;
