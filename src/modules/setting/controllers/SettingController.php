@@ -2,12 +2,12 @@
 
 	namespace vps\tools\modules\setting\controllers;
 
-	use vps\tools\controllers\WebController;
+	use app\base\Controller;
 	use vps\tools\modules\setting\models\Setting;
 	use Yii;
 	use yii\helpers\Json;
 
-	class SettingController extends WebController
+	class SettingController extends Controller
 	{
 		/**
 		 * @inheritdoc

@@ -1,12 +1,12 @@
 <div class="row user-infos">
-	<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-xs-offset-0 col-sm-offset-0 col-md-offset-1 col-lg-offset-1">
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col">
 		<div class="panel panel-primary">
 			<div class="row">
 				<div class="col-md-3 col-lg-3 hidden-xs hidden-sm">
-					{Html::img($user->image,[ 'class'=>'img-circle','width'=>'200'])}
+					{Html::img($user->image,[ 'class'=>'img-circle tools-user-image'])}
 				</div>
 				<div class=" col-md-9 col-lg-9 hidden-xs hidden-sm">
-					<table class="table table-user-information">
+					<table class="table table-hover table-user-information">
 						<tbody>
 							<tr>
 								<td>{Yii::tr('ID', [], 'user')}</td>
@@ -48,3 +48,7 @@
 		</div>
 	</div>
 </div>
+{if count($models)>0}
+	{include file='@logViews/list.tpl'}
+	{include file='@logViews/filterjs.tpl' url='/user/view'}
+{/if}

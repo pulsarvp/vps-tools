@@ -2,7 +2,7 @@
 
 	namespace vps\tools\modules\apiapp\controllers;
 
-	use vps\tools\controllers\WebController;
+	use app\base\Controller;
 	use Yii;
 
 	/**
@@ -10,7 +10,7 @@
 	 *
 	 * @package vps\tools\modules\apiapp\controllers
 	 */
-	class ApiappController extends WebController
+	class ApiappController extends Controller
 	{
 
 		/**

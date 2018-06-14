@@ -2,6 +2,7 @@
 
 	namespace vps\tools\modules\page\controllers;
 
+	use app\base\Controller;
 	use vps\tools\helpers\ArrayHelper;
 	use vps\tools\helpers\FileHelper;
 	use vps\tools\helpers\HumanHelper;
@@ -17,7 +18,7 @@
 	 * @copyright Copyright (c) 2017
 	 * @date      2017-10-31
 	 */
-	class PageController extends \app\base\Controller
+	class PageController extends Controller
 	{
 		public function behaviors ()
 		{
@@ -34,9 +35,8 @@
 							'allow'         => true,
 							'actions'       => [ 'image', 'view', 'add', 'edit', 'activate', 'delete' ],
 							'roles'         => [ '@' ],
-							'matchCallback' => function ($rule, $action)
-							{
-								if (!Yii::$app->user->identity->active or !(Yii::$app->user->can('admin') or Yii::$app->user->can('admin_page')))
+							'matchCallback' => function ($rule, $action) {
+								if (!Yii::$app->user->identity->active or !( Yii::$app->user->can('admin') or Yii::$app->user->can('admin_page') ))
 								{
 									Yii::$app->notification->errorToSession(Yii::tr('You have no permissions.', [], 'user'));
 									$this->redirect(Url::toRoute([ '/site/index' ]));

@@ -2,16 +2,19 @@
 
 	namespace vps\tools\modules\user\controllers;
 
+	use app\base\Controller;
 	use vps\tools\auth\AuthAction;
-	use vps\tools\controllers\WebController;
 	use vps\tools\helpers\StringHelper;
 	use vps\tools\helpers\TimeHelper;
 	use vps\tools\helpers\Url;
+	use vps\tools\modules\log\dictionaries\LogType;
+	use vps\tools\modules\log\models\Log;
 	use vps\tools\modules\user\models\User;
 	use Yii;
+	use yii\data\ActiveDataProvider;
 	use yii\filters\AccessControl;
 
-	class UserController extends WebController
+	class UserController extends Controller
 	{
 		public function actions ()
 		{
@@ -145,10 +148,70 @@
 			$user = $userClass::findOne($id);
 			if ($user == null)
 			{
-				Yii::$app->notification->errorToSession(Yii::tr('Given user does not exist.',[],'user'));
+				Yii::$app->notification->errorToSession(Yii::tr('Given user does not exist.', [], 'user'));
 				$this->redirect(Url::toRoute([ 'user/index' ]));
 			}
 			$this->title = $user->name;
+			$get = Yii::$app->request->get();
+
+			$query = Log::find();
+			if (isset($get[ 'type' ]))
+			{
+				$query->andWhere([ 'type' => $get[ 'type' ] ]);
+				$this->data('type', $get[ 'type' ]);
+			}
+			else
+				$this->data('type', '');
+
+			if (isset($get[ 'from' ]))
+			{
+				$query->andWhere([ '>=', 'dt', $get[ 'from' ] ]);
+				$this->data('from', $get[ 'from' ]);
+			}
+
+			if (isset($get[ 'to' ]))
+			{
+				$query->andWhere([ '>=', 'dt', $get[ 'to' ] ]);
+				$this->data('to', $get[ 'to' ]);
+			}
+
+			if (isset($get[ 'search' ]))
+			{
+				$query->andWhere([ 'or', [ 'like', 'email', $get[ 'search' ] ], [ 'like', 'action', $get[ 'search' ] ], [ 'like', 'url', $get[ 'search' ] ] ]);
+				$this->data('search', $get[ 'search' ]);
+			}
+			$query->andWhere([ 'userID' => $user->id ]);
+			$provider = new ActiveDataProvider([
+				'query'      => $query,
+				'sort'       => [
+					'attributes'   => [
+						'userID',
+						'email',
+						'type',
+						'action',
+						'url',
+						'dt'
+					],
+					'defaultOrder' => [
+						'dt' => SORT_DESC
+					]
+				],
+				'pagination' => [
+					'pageSize'       => Yii::$app->settings->get('page_size_object', 20),
+					'forcePageParam' => false,
+					'pageSizeParam'  => false,
+					'urlManager'     => new \yii\web\UrlManager([
+						'enablePrettyUrl' => true,
+						'showScriptName'  => false,
+					])
+				]
+			]);
+
+			$this->data('models', $provider->models);
+			$this->data('pagination', $provider->pagination);
+			$this->data('sort', $provider->sort);
+
+			$this->data('types', [ LogType::INFO, LogType::WARNING, LogType::ERROR ]);
 			$this->data('user', $user);
 		}
 

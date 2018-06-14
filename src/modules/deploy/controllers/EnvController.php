@@ -2,7 +2,8 @@
 
 	namespace vps\tools\modules\deploy\controllers;
 
-	use vps\tools\controllers\WebController;
+
+	use app\base\Controller;
 	use Yii;
 	use yii\filters\AccessControl;
 
@@ -11,7 +12,7 @@
 	 * @copyright Copyright (c) 2017
 	 * @date      2017-10-31
 	 */
-	class EnvController extends WebController
+	class EnvController extends Controller
 	{
 
 		public function behaviors ()

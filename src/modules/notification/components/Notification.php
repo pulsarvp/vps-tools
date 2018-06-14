@@ -1,4 +1,5 @@
 <?php
+
 	namespace vps\tools\modules\notification\components;
 
 	use Yii;
@@ -16,6 +17,7 @@
 		const WARNING = 1;
 		const MESSAGE = 2;
 
+		private $_canHide = true;
 		/**
 		 * Category for translation.
 		 *
@@ -39,6 +41,8 @@
 
 		// Getters and setters.
 		public function getMessage () { return $this->_message; }
+
+		public function getCanHide () { return $this->_canHide; }
 
 		public function getType () { return $this->_type; }
 
@@ -64,12 +68,13 @@
 		 * Creating new notification.
 		 *
 		 * @param string  $message Message.
-		 * @param integer $type Message type.
-		 * @param boolean $isRaw Whether given message is raw text or should be translated.
+		 * @param integer $type    Message type.
+		 * @param boolean $isRaw   Whether given message is raw text or should be translated.
 		 */
-		public function __construct ($message, $type = self::ERROR, $isRaw = false)
+		public function __construct ($message, $type = self::ERROR, $isRaw = false, $canHide = true)
 		{
 			$this->_type = $type;
+			$this->_canHide = $canHide;
 
 			if ($isRaw)
 			{

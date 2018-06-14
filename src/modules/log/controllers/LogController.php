@@ -3,6 +3,7 @@
 	namespace vps\tools\modules\log\controllers;
 
 	use app\base\Controller;
+	use common\models\User;
 	use vps\tools\helpers\TimeHelper;
 	use vps\tools\modules\log\dictionaries\LogType;
 	use vps\tools\modules\log\models\Log;
@@ -29,6 +30,14 @@
 			}
 			else
 				$this->data('type', '');
+
+			if (isset($get[ 'userID' ]))
+			{
+				$query->andWhere([ 'userID' => $get[ 'userID' ] ]);
+				$this->data('userID', $get[ 'userID' ]);
+			}
+			else
+				$this->data('userID', '');
 
 			if (isset($get[ 'from' ]))
 			{
@@ -76,7 +85,11 @@
 					])
 				]
 			]);
+			$ids = Log::find()->select('userID')->where('userID IS NOT NULL')->groupBy([ 'userID' ])->column();
 
+			$users = User::find()->where([ 'IN', 'id', $ids ])->all();
+
+			$this->data('users', $users);
 			$this->data('models', $provider->models);
 			$this->data('pagination', $provider->pagination);
 			$this->data('sort', $provider->sort);
@@ -91,7 +104,7 @@
 			$post = Yii::$app->request->post();
 
 			$dt = date(TimeHelper::$dtFormat, $post[ 'dt' ]);
-			$log = Log::find()->where([ 'type' => $post[ 'type' ], 'dt' => $dt, 'action' => $post[ 'action' ] ])->one();
+			$log = Log::find()->where([ 'type' => $post[ 'type' ], 'dt' => $dt, 'userID' => $post[ 'userID' ] ])->one();
 
 			$result = [];
 			if ($log != null)
