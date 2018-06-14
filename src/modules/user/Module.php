@@ -122,6 +122,8 @@
 
 			ConfigurationHelper::addTranslation('user', [ 'user' => 'user.php' ], __DIR__ . '/messages');
 
+			Yii::$app->view->registerCss('.tools-user-image {margin: 15px; max-width: 100%}');
+
 			$this->title = Yii::tr('User manage', [], 'user');
 		}
 
