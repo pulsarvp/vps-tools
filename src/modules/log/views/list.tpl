@@ -65,7 +65,7 @@
 	</thead>
 	<tbody>
 		{foreach $models as $k=>$model}
-			<tr>
+			<tr class="log-info">
 				<td class="userID">{$model->userID}</td>
 				<td>{Html::a($model->email,Url::toRoute(['/user/view','id'=>$model->userID]))}</td>
 				<td class="type">{$model->type}</td>
@@ -127,7 +127,7 @@
 </div>
 
 <script>
-	$(document).on('click', 'tr', function () {
+	$(document).on('click', 'tr.log-info', function () {
 		var type   = $(this).find('.type').text();
 		var userID = $(this).find('.userID').text();
 		var dt     = $(this).find('.dt').data('order');
