@@ -48,3 +48,7 @@
 		</div>
 	</div>
 </div>
+{if count($models)>0}
+	{include file='@logViews/list.tpl'}
+	{include file='@logViews/filterjs.tpl' url='/user/view'}
+{/if}
