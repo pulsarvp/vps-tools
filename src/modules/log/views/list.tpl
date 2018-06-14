@@ -70,7 +70,7 @@
 				<td>{Html::a($model->email,Url::toRoute(['/user/view','id'=>$model->userID]))}</td>
 				<td class="type">{$model->type}</td>
 				<td class="action">{$model->action}</td>
-				<td><a href="{$model->url}" target="_blank">{$model->url}</a></td>
+				<td><a href="{$model->url}" target="_blank">{urldecode($model->url)}</a></td>
 				<td class="dt" data-order="{strtotime($model->dt)}">
 					<small>{Yii::$app->formatter->asDatetime($model->dt)}</small>
 				</td>
