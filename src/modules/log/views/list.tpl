@@ -1,39 +1,41 @@
 <div class="row">
-	<div class="form-group">
-		<label for="search">{Yii::tr('Date end',[],'log')}</label>
-		<input id="filter-to" value="{if isset($to)}{$to}{/if}" type="text">
-	</div>
-	<div class="form-group">
-		<label for="search">{Yii::tr('Date start',[],'log')}</label>
-		<input id="filter-from" value="{if isset($from)}{$from}{/if}" type="text">
-	</div>
-	<div class="form-group">
-		<label for="search">{Yii::tr('Search',[],'log')}</label>
-		<input id="search" value="{if isset($search)}{$search}{/if}" type="text">
-	</div>
-	<div class="form-group">
-		<label for="filter-type">{Yii::tr('Type',[],'log')}</label>
-		<select id="filter-type" class="selectpicker">
-			<option value=""></option>
-			{foreach $types as $item}
-				<option value="{$item}" {if $item == $type}selected{/if}>{$item}</option>
-			{/foreach}
-		</select>
-	</div>
-	{if isset($users)}
-		<div class="form-group">
-			<label for="filter-userID">{Yii::tr('User',[],'user')}</label>
-			<select id="filter-userID" class="selectpicker">
+	<div class="col-sm-12 col">
+		<div class="form-group pull-left">
+			<label for="filter-to">{Yii::tr('Date end',[],'log')}</label>
+			<input id="filter-to" value="{if isset($to)}{$to}{/if}" type="text" class="form-control" placeholder="2017-10-20">
+		</div>
+		<div class="form-group pull-left">
+			<label for="filter-from">{Yii::tr('Date start',[],'log')}</label>
+			<input id="filter-from" value="{if isset($from)}{$from}{/if}" type="text" class="form-control" placeholder="2017-11-25">
+		</div>
+		<div class="form-group pull-left">
+			<label for="search">{Yii::tr('Search',[],'log')}</label>
+			<input id="search" value="{if isset($search)}{$search}{/if}" type="text" class="form-control">
+		</div>
+		<div class="form-group pull-left">
+			<label for="filter-type">{Yii::tr('Type',[],'log')}</label><br>
+			<select id="filter-type" class="selectpicker">
 				<option value=""></option>
-				{foreach $users as $item}
-					<option value="{$item->id}" {if $item->id == $userID}selected{/if}>{$item->name}</option>
+				{foreach $types as $item}
+					<option value="{$item}" {if $item == $type}selected{/if}>{$item}</option>
 				{/foreach}
 			</select>
 		</div>
-	{/if}
-	<div class="form-group">
-		<button type="button" class="btn btn-sm btn-default" id="reset">{Html::fa('ban')}</button>
-		<button type="button" class="btn btn-sm btn-primary" id="filter">{Html::fa('check')}</button>
+		{if isset($users)}
+			<div class="form-group pull-left">
+				<label for="filter-userID">{Yii::tr('User',[],'user')}</label><br>
+				<select id="filter-userID" class="selectpicker">
+					<option value=""></option>
+					{foreach $users as $item}
+						<option value="{$item->id}" {if $item->id == $userID}selected{/if}>{$item->name}</option>
+					{/foreach}
+				</select>
+			</div>
+		{/if}
+		<div class="form-group pull-left">
+			<button type="button" class="btn btn-sm btn-default" id="reset">{Html::fa('ban')}</button>
+			<button type="button" class="btn btn-sm btn-primary" id="filter">{Html::fa('check')}</button>
+		</div>
 	</div>
 </div>
 <table class="table table-bordered table-hover" id="log-list">
@@ -82,10 +84,10 @@
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title modal-text">{Yii::tr('Loading...',[],'log')}</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<button type="button" class="close" data-dismiss="modal">
 					<span aria-hidden="true">&times;</span>
 				</button>
+				<h4 class="modal-title">{Yii::tr('Loading...',[],'log')}</h4>
 			</div>
 			<div class="modal-body">
 				<div><b>{Yii::tr('UserID',[],'log')}:</b> <span class="modal-text" id="modal-userID"></span></div>
@@ -93,8 +95,8 @@
 				<div><b>{Yii::tr('Url',[],'log')}:</b> <span class="modal-text" id="modal-url"></span></div>
 				<div><b>{Yii::tr('Dt',[],'log')}:</b> <span class="modal-text" id="modal-dt"></span></div>
 				<ul class="nav nav-tabs" role="tablist">
-					<li class="nav-item">
-						<a class="nav-link active" href="#server" role="tab" data-toggle="tab">{Yii::tr('Server', [], 'log')}</a>
+					<li class="nav-item active">
+						<a class="nav-link" href="#server" role="tab" data-toggle="tab">{Yii::tr('Server', [], 'log')}</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#session" role="tab" data-toggle="tab">{Yii::tr('Session', [], 'log')}</a>
