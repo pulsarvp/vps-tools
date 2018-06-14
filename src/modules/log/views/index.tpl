@@ -21,6 +21,15 @@
 		</select>
 	</div>
 	<div class="form-group">
+		<label for="filter-userID">{Yii::tr('User',[],'user')}</label>
+		<select id="filter-userID" class="selectpicker">
+			<option value=""></option>
+			{foreach $users as $item}
+				<option value="{$item->id}" {if $item->id == $userID}selected{/if}>{$item->name}</option>
+			{/foreach}
+		</select>
+	</div>
+	<div class="form-group">
 		<button type="button" class="btn btn-sm btn-default" id="reset">{Html::fa('ban')}</button>
 		<button type="button" class="btn btn-sm btn-primary" id="filter">{Html::fa('check')}</button>
 	</div>
@@ -54,7 +63,7 @@
 		{foreach $models as $k=>$model}
 			<tr>
 				<td class="userID">{$model->userID}</td>
-				<td>{$model->email}</td>
+				<td>{Html::a($model->email,Url::toRoute(['/user/view','id'=>$model->userID]))}</td>
 				<td class="type">{$model->type}</td>
 				<td class="action">{$model->action}</td>
 				<td><a href="{$model->url}" target="_blank">{$model->url}</a></td>
@@ -148,6 +157,7 @@
 	$(document).on('click', '#filter', function (e) {
 		var path   = [];
 		var search = $('#search').val();
+		var userID = $('#filter-userID').val();
 		var type   = $('#filter-type').val();
 		var fromDt = $('#filter-from').val();
 		var toDt   = $('#filter-to').val();
@@ -159,6 +169,8 @@
 			path.push('to=' + toDt);
 		if (type != '')
 			path.push('type=' + type);
+		if (userID != '')
+			path.push('userID=' + userID);
 		window.location.href = '{Url::toRoute('log/index')}?' + path.join("&");
 	});
 	$(document).on('click', '#reset', function (e) {
