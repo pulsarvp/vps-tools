@@ -2,8 +2,8 @@
 
 	namespace vps\tools\modules\user\controllers;
 
+	use app\base\Controller;
 	use vps\tools\auth\AuthAction;
-	use vps\tools\controllers\WebController;
 	use vps\tools\helpers\StringHelper;
 	use vps\tools\helpers\TimeHelper;
 	use vps\tools\helpers\Url;
@@ -14,7 +14,7 @@
 	use yii\data\ActiveDataProvider;
 	use yii\filters\AccessControl;
 
-	class UserController extends WebController
+	class UserController extends Controller
 	{
 		public function actions ()
 		{

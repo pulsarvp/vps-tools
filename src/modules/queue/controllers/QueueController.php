@@ -2,10 +2,10 @@
 
 	namespace vps\tools\modules\queue\controllers;
 
-	use vps\tools\controllers\WebController;
+	use app\base\Controller;
 	use Yii;
 
-	class QueueController extends WebController
+	class QueueController extends Controller
 	{
 		public function actionIndex ()
 		{
