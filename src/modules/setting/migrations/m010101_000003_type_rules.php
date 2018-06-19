@@ -4,7 +4,7 @@
 	/**
 	 * Class m171117_124513_type_rules
 	 */
-	class m171117_124513_type_rules extends Migration
+	class m010101_000003_type_rules extends Migration
 	{
 		/** @inheritdoc */
 		public function up ()
