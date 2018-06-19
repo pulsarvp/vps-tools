@@ -1,10 +1,7 @@
 <?php
-	use yii\db\Migration;
+	use vps\tools\db\Migration;
 
-	/**
-	 * Class m171110_133155_admin_setting
-	 */
-	class m010101_000002_admin_setting extends Migration
+	class m010101_100002_admin_setting extends Migration
 	{
 		/** @inheritdoc */
 		public function up ()
