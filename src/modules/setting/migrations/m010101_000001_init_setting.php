@@ -1,11 +1,11 @@
 <?php
 
-	use yii\db\Migration;
+	use vps\tools\db\Migration;
 
 	/**
 	 * Class m010101_100001_init_setting
 	 */
-	class m010101_100001_init_setting extends Migration
+	class m010101_000001_init_setting extends Migration
 	{
 		/**
 		 * Create table `Setting`

@@ -4,7 +4,7 @@
 	/**
 	 * Class m171110_133155_admin_setting
 	 */
-	class m171110_133155_admin_setting extends Migration
+	class m010101_000002_admin_setting extends Migration
 	{
 		/** @inheritdoc */
 		public function up ()
