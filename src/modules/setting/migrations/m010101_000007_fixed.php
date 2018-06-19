@@ -5,7 +5,7 @@
 	/**
 	 * Class m180604_064510_fixed
 	 */
-	class m180604_064510_fixed extends Migration
+	class m010101_000007_fixed extends Migration
 	{
 		/** @inheritdoc */
 		public function up ()
