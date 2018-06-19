@@ -1,11 +1,8 @@
 <?php
 
-	use yii\db\Migration;
+	use vps\tools\db\Migration;
 
-	/**
-	 * Class m180604_064510_fixed
-	 */
-	class m010101_000007_fixed extends Migration
+	class m010101_100007_fixed extends Migration
 	{
 		/** @inheritdoc */
 		public function up ()
