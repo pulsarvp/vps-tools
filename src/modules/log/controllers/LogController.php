@@ -119,7 +119,7 @@
 			}
 
 			echo json_encode($result, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-			Yii::$app->end();
+			exit();
 		}
 
 	}
