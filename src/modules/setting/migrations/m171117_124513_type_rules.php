@@ -1,7 +1,7 @@
 <?php
 	use vps\tools\db\Migration;
 
-	class m010101_100003_type_rules extends Migration
+	class m171117_124513_type_rules extends Migration
 	{
 		/** @inheritdoc */
 		public function up ()
