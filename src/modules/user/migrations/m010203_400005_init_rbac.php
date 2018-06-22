@@ -2,7 +2,7 @@
 
 	use vps\tools\db\Migration;
 	
-	class m010101_000002_init_rbac extends Migration
+	class m010203_400005_init_rbac extends Migration
 	{
 		/** @inheritdoc */
 		public function up ()
