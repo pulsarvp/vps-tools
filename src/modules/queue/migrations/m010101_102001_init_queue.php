@@ -1,10 +1,7 @@
 <?php
 
-	use yii\db\Migration;
+	use vps\tools\db\Migration;
 
-	/**
-	 * Create table queue
-	 */
 	class m010101_102001_init_queue extends Migration
 	{
 		/**
@@ -12,7 +9,10 @@
 		 */
 		public function up ()
 		{
-			$this->insert('setting', [ 'name' => 'queue_ui_pagesize', 'value' => '20', 'description' => 'Интерфейс для очередей: количество объектов на одной странице.', 'type' => 'integer', 'group' => 'queue', 'rule' => '{"min":1}'
+			$this->insert('setting', [
+				'name'        => 'queue_ui_pagesize',
+				'value'       => '20',
+				'description' => 'Интерфейс для очередей: количество объектов на одной странице.'
 			]);
 		}
 
