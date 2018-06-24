@@ -213,4 +213,45 @@
 			return $this->name;
 		}
 
+		public function isPermission ($permission = null, $and = false)
+		{
+			return $this->hasPermission($permission, $and);
+		}
+
+		public function hasPermission ($permission = null, $and = false)
+		{
+			if (Yii::$app->user->can(User::R_ADMIN))
+				return true;
+			elseif ($permission != null and is_string($permission) and Yii::$app->user->can($permission))
+				return true;
+			elseif ($permission != null and is_array($permission))
+			{
+				$flag = true;
+				foreach ($permission as $item)
+				{
+					if (!$and)
+					{
+						$flag = false;
+						if (Yii::$app->user->can($item))
+						{
+							$flag = true;
+							break;
+						}
+					}
+					else
+					{
+						if (!Yii::$app->user->can($item))
+						{
+							$flag = false;
+							break;
+						}
+					}
+				}
+
+				return $flag;
+			}
+
+			return false;
+		}
+
 	}
