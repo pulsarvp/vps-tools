@@ -44,6 +44,7 @@
 					if (isset(Yii::$app->user->identity->email))
 						$log->email = Yii::$app->user->identity->email;
 				}
+				if(isset(Yii::$app->request->url))
 				$log->url = Yii::$app->request->url;
 				$log->server = json_encode($_SERVER);
 				if (isset($_SESSION))

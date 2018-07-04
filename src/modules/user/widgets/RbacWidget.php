@@ -49,16 +49,17 @@
 			$get = Yii::$app->request->get();
 			$search = '';
 			$filterRole = '';
-			if (isset($get[ 'search' ]))
+			if (isset($get[ 'search' ]) and $get[ 'search' ] != '')
 			{
 				$query->andWhere([ 'or', [ 'like', 'user.id', $get[ 'search' ] ], [ 'like', 'user.email', $get[ 'search' ] ], [ 'like', 'user.name', $get[ 'search' ] ] ]);
 				$search = $get[ 'search' ];
 			}
-			if (isset($get[ 'filterRole' ]))
+			if (isset($get[ 'filterRole' ]) and $get[ 'filterRole' ] != '')
 			{
 				$query->andWhere([ '`auth_assignment`.`item_name`' => $get[ 'filterRole' ] ]);
 				$filterRole = $get[ 'filterRole' ];
 			}
+			$query->groupBy('user.id');
 			$provider = new SqlDataProvider([
 				'sql'        => $query->createCommand()->rawSql,
 				'totalCount' => $query->count(),
