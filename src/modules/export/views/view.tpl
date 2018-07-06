@@ -28,6 +28,29 @@
 				<dd>{Yii::$app->formatter->asDateTime($export->dt)}</dd>
 			</dl>
 		</div>
+		{if isset($models) and count($models)>0}
+			<table class="table table-bordered table-hover" id="export-list">
+				<thead>
+					<tr>
+						{foreach  array_keys(current($models)) as $key}
+							<th>
+								{Yii::tr(ucfirst($key))}
+							</th>
+						{/foreach}
+					</tr>
+				</thead>
+				<tbody>
+					{foreach $models as $k=>$model}
+						<tr>
+							{foreach $model as $item}
+							<td>{$item}</td>
+							{/foreach}
+						</tr>
+					{/foreach}
+				</tbody>
+			</table>
+			{include file='pagination.tpl'}
+		{/if}
 	</div>
 {else}
 	<div class="text-danger">{Yii::tr('Попытка взлома detected!')}</div>

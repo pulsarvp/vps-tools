@@ -18,6 +18,7 @@
 	use vps\tools\modules\log\components\LogManager;
 	use Yii;
 	use yii\data\ActiveDataProvider;
+	use yii\data\SqlDataProvider;
 	use yii\db\Exception;
 
 	/**
@@ -162,6 +163,26 @@
 				$this->redirect(Url::toRoute([ 'export/index' ]));
 			}
 			LogManager::info(Yii::tr('The user {user} opened export {id}.', [ 'user' => Html::a(Yii::$app->user->identity->name, Url::toRoute([ 'view/view', 'id' => Yii::$app->user->id ])), 'id' => Html::a($export->title, Url::toRoute([ 'export/view', 'id' => $export->id ])) ], 'export'));
+			if ($export->query != '')
+			{
+				$query = trim($export->query, ';');
+				$provider = new SqlDataProvider([
+					'sql'        => $query,
+					'pagination' => [
+						'pageSize'       => 20,
+						'forcePageParam' => false,
+						'pageSizeParam'  => false,
+						'urlManager'     => new \yii\web\UrlManager([
+							'enablePrettyUrl' => true,
+							'showScriptName'  => false
+						])
+					]
+				]);
+
+				$this->data('models', $provider->models);
+				$this->data('pagination', $provider->pagination);
+				$this->data('sort', $provider->sort);
+			}
 
 			$this->data('export', $export);
 			$this->_tpl = '@exportViews/view';
