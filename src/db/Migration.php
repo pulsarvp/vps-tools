@@ -35,7 +35,7 @@
 
 			echo '    > done (time: ' . sprintf('%.3f', microtime(true) - $time) . "s)\n";
 		}
-		
+
 		/**
 		 * Creates database view.
 		 *
