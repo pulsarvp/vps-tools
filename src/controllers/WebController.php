@@ -68,8 +68,6 @@
 		 */
 		public function afterAction ($action, $result)
 		{
-			
-
 			$session = Yii::$app->session;
 			if ($session->isActive)
 				$session->close();
@@ -119,7 +117,7 @@
 		 * Add data to be used in view.
 		 *
 		 * @param  string $key
-		 * @param  string $value
+		 * @param  mixed  $value
 		 */
 		public function data ($key, $value)
 		{
@@ -140,7 +138,7 @@
 		 * Add user error message.
 		 *
 		 * @param  string  $message Message text.
-		 * @param  boolean $isRaw   Whether given text is raw. If not it will be processed with [[Yii::tr()]].
+		 * @param  boolean $isRaw Whether given text is raw. If not it will be processed with [[Yii::tr()]].
 		 */
 		public function error ($message, $isRaw = false)
 		{
@@ -151,7 +149,7 @@
 		 * Add user message.
 		 *
 		 * @param  string  $message Message text.
-		 * @param  boolean $isRaw   Whether given text is raw. If not it will be processed with [[Yii::tr()]].
+		 * @param  boolean $isRaw Whether given text is raw. If not it will be processed with [[Yii::tr()]].
 		 */
 		public function message ($message, $isRaw = false)
 		{
@@ -173,7 +171,7 @@
 		 * Add user warning.
 		 *
 		 * @param  string  $message Message text.
-		 * @param  boolean $isRaw   Whether given text is raw. If not it will be processed with [[Yii::tr()]].
+		 * @param  boolean $isRaw Whether given text is raw. If not it will be processed with [[Yii::tr()]].
 		 */
 		public function warning ($message, $isRaw = false)
 		{
@@ -205,9 +203,6 @@
 			$this->setTitle(ucfirst(strtolower(Yii::$app->controller->id . ' ' . Yii::$app->controller->action->id)));
 		}
 
-		/**
-		 *
-		 */
 		private function checkAccessEnv ()
 		{
 			$ip = Yii::$app->getRequest()->getUserIP();
