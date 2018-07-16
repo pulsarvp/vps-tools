@@ -112,6 +112,11 @@
 			$this->title = Yii::tr('Login', [], 'user');
 			$this->_tpl = '@userViews/login';
 			$defaultClient = Yii::$app->settings->get('auth_client_default', $this->module->defaultClient);
+			if (!Yii::$app->request->cookies->has('returnUrl'))
+				Yii::$app->response->cookies->add(new \yii\web\Cookie([
+					'name'  => 'returnUrl',
+					'value' => Yii::$app->request->referrer,
+				]));
 			$this->data('defaultClient', $defaultClient);
 		}
 
@@ -277,11 +282,14 @@
 				$user->loginDT = TimeHelper::now();
 				$user->save();
 
+				$cookies = Yii::$app->request->cookies;
+				$url = $cookies->getValue('returnUrl');
+
 				Yii::$app->user->login($user, Yii::$app->user->authTimeout);
-				if ($this->module->redirectAfterLogin)
-					$this->redirect(Yii::$app->getUser()->getReturnUrl());
-				else
-					$this->redirect(Url::toRoute([ '/site/index' ]));
+
+				Yii::$app->response->cookies->remove('returnUrl');
+				$this->redirect($url);
+
 				Yii::$app->end();
 			}
 		}
