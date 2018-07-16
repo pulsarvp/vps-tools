@@ -283,7 +283,7 @@
 				$user->save();
 
 				$cookies = Yii::$app->request->cookies;
-				$url = $cookies->getValue('returnUrl');
+				$url = $cookies->getValue('returnUrl', Url::toRoute([ '/site/index' ]));
 
 				Yii::$app->user->login($user, Yii::$app->user->authTimeout);
 

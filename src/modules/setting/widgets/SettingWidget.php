@@ -27,6 +27,7 @@
 				]
 			]);
 			Yii::$app->view->registerCss('#setting-list .value {font-family: Menlo, monospace; overflow-wrap: break-word; word-wrap: break-word; max-width: 500px} .setting-group{cursor:pointer;border-bottom:1px dashed}');
+			Yii::$app->view->registerCss('#setting-list .btn-group .btn.active:before{content:"\f00c"; display:inline-block; font-family:FontAwesome;}');
 
 			$web = Yii::$app->basePath . '/web';
 			if (is_file($web . '/theme/js/cleave.js'))

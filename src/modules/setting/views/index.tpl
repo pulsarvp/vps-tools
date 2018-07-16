@@ -52,7 +52,7 @@
 								{/if}
 								<div class="save" style="display: none">
 									{Html::buttonFa('', 'check', [ 'class' => 'btn btn-sm btn-success setting-save', 'title' => Yii::tr('Save', [], 'setting') ])}
-									{Html::buttonFa('', 'remove', [ 'class' => 'btn btn-xs btn-danger setting-close', 'title' => Yii::tr('Close', [], 'setting') ])}
+									{Html::buttonFa('', 'remove', [ 'class' => 'btn btn-sm btn-danger setting-close', 'title' => Yii::tr('Close', [], 'setting') ])}
 								</div>
 							</td>
 						{/if}
@@ -328,7 +328,7 @@
 
 			function booleanInput (value, td) {
 				var radio = $('.btn-group').clone();
-				radio.removeClass('hide');
+				radio.removeClass('hide').removeClass('d-none');
 				if (value.trim() != 0) {
 					radio.find('.yes').addClass('active');
 					radio.find('.yes').find('input').attr('checked', 'checked');
@@ -386,18 +386,18 @@
 
 		});
 	</script>
-	<div class="inputs col-md-3 d-none">
+	<div class="inputs col-md-3 d-none hide">
 		<input type="text" name="value" value="" class="input-cleave">
 	</div>
-	<div class="json col-md-3 d-none">
+	<div class="json col-md-3 d-none hide">
 		<textarea name="value" class="textarea"></textarea>
 	</div>
-	<div class="btn-group col-md-3 d-none" data-toggle="buttons">
-		<label class="btn btn-primary yes">
-			<input type="radio" name="value" value="1" checked>{Yii::$app->formatter->asBoolean(1)}
+	<div class="btn-group btn-group-toggle col-md-3 d-none hide" data-toggle="buttons">
+		<label class="btn btn-success yes">
+			<input type="radio" name="value" autocomplete="off" value="1" checked>{Yii::$app->formatter->asBoolean(1)}
 		</label>
-		<label class="btn btn-primary no">
-			<input type="radio" name="value" value="0">{Yii::$app->formatter->asBoolean(0)}
+		<label class="btn btn-danger no">
+			<input type="radio" name="value" autocomplete="off" value="0">{Yii::$app->formatter->asBoolean(0)}
 		</label>
 	</div>
 {/if}
