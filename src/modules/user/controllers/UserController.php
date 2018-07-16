@@ -288,7 +288,10 @@
 				Yii::$app->user->login($user, Yii::$app->user->authTimeout);
 
 				Yii::$app->response->cookies->remove('returnUrl');
-				$this->redirect($url);
+				if ($this->module->redirectAfterLogin)
+					$this->redirect($url);
+				else
+					$this->redirect(Url::toRoute([ '/site/index' ]));
 
 				Yii::$app->end();
 			}
