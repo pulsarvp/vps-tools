@@ -1,1 +1,1 @@
-{Html::a({Yii::tr('Login',[],'user')}, Url::toRoute(['user/auth','authclient'=>$defaultClient]))}
+{Html::a({Yii::tr('Login',[],'user')}, Url::toRoute(['user/auth','authclient'=>$defaultClient]), ['class'=>'btn btn-primary btn-lg'])}
