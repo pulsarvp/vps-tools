@@ -328,7 +328,7 @@
 
 			function booleanInput (value, td) {
 				var radio = $('.btn-group').clone();
-				radio.removeClass('hide');
+				radio.removeClass('hide').removeClass('d-none');
 				if (value.trim() != 0) {
 					radio.find('.yes').addClass('active');
 					radio.find('.yes').find('input').attr('checked', 'checked');
@@ -386,13 +386,13 @@
 
 		});
 	</script>
-	<div class="inputs col-md-3 d-none">
+	<div class="inputs col-md-3 d-none hide">
 		<input type="text" name="value" value="" class="input-cleave">
 	</div>
-	<div class="json col-md-3 d-none">
+	<div class="json col-md-3 d-none hide">
 		<textarea name="value" class="textarea"></textarea>
 	</div>
-	<div class="btn-group col-md-3 d-none" data-toggle="buttons">
+	<div class="btn-group col-md-3 d-none hide" data-toggle="buttons">
 		<label class="btn btn-primary yes">
 			<input type="radio" name="value" value="1" checked>{Yii::$app->formatter->asBoolean(1)}
 		</label>
