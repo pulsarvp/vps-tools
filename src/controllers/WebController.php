@@ -128,6 +128,7 @@
 		{
 			if (isset(Yii::$app->user->id))
 			{
+				/** @var \vps\tools\modules\user\models\User $user */
 				$user = Yii::$app->user->identity;
 				$user->activeDT = TimeHelper::now();
 				$user->save();

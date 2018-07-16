@@ -213,45 +213,63 @@
 			return $this->name;
 		}
 
+		/***
+		 * Alias to [[hasPermission()]] to support legacy code.
+		 *
+		 * @deprecated
+		 */
 		public function isPermission ($permission = null, $and = false)
 		{
 			return $this->hasPermission($permission, $and);
 		}
 
+		/***
+		 * Check if user has given permission.
+		 *
+		 * @param string|array|null $permission
+		 * @param bool              $and Whether to use AND or OR operator.
+		 * @return bool
+		 */
 		public function hasPermission ($permission = null, $and = false)
 		{
 			if (Yii::$app->user->can(User::R_ADMIN))
 				return true;
-			elseif ($permission != null and is_string($permission) and Yii::$app->user->can($permission))
-				return true;
-			elseif ($permission != null and is_array($permission))
+
+			if ($permission == null)
+				return false;
+
+			if (is_string($permission))
 			{
-				$flag = true;
+				return Yii::$app->user->can($permission, [], false);
+			}
+			elseif (is_array($permission))
+			{
 				foreach ($permission as $item)
 				{
-					if (!$and)
+					if ($and)
 					{
-						$flag = false;
-						if (Yii::$app->user->can($item))
-						{
-							$flag = true;
-							break;
-						}
+						if (!Yii::$app->user->can($item, [], false))
+							return false;
 					}
 					else
 					{
-						if (!Yii::$app->user->can($item))
-						{
-							$flag = false;
-							break;
-						}
+						if (Yii::$app->user->can($item, [], false))
+							return true;
 					}
 				}
-
-				return $flag;
 			}
 
 			return false;
 		}
 
+		/***
+		 * Checks if user has given role.
+		 *
+		 * @param string $role
+		 * @return bool
+		 */
+		public function hasRole ($role)
+		{
+			return in_array($role, $this->getRolesNames());
+		}
 	}
