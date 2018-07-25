@@ -1,3 +1,16 @@
+<div class="object-filters form-inline">
+	<div class="filter">
+		<a href="?reset" class="tltp btn btn-default" title="{Yii::tr('Reset filters')}">
+			<i class="fa fa-ban"></i></a>
+	</div>
+	<div class="filter form-group">
+		<select name="filter-channel" class="selectpicker" id="filter-channel" title="{Yii::tr('All channels',[],'queue')}" data-live-search="true">
+			{foreach $channels as $channel}
+				<option value="{$channel}" {if isset($filterChannel) and $filterChannel==$channel}selected{/if}>{$channel}</option>
+			{/foreach}
+		</select>
+	</div>
+</div>
 <table class="table table-striped table-bordered" id="queue-list">
 	<thead>
 		<tr>
@@ -72,5 +85,8 @@
 				$('[data-toggle=confirmation]').confirmation('hide');
 			}
 		});
+	});
+	$('#filter-channel').on('hide.bs.select', function () {
+		window.location.href = '?filterChannel=' + $(this).val();
 	});
 </script>
