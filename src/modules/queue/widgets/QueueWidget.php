@@ -47,7 +47,7 @@
 		public function run ()
 		{
 
-			$fields = [ 'job', 'ttr', 'delay', 'priority', 'pushed_at', 'reserved_at', 'done_at' ];
+			$fields = [ 'id', 'pid', 'channel', 'ttr', 'delay', 'priority', 'pushed_at', 'reserved_at', 'done_at', 'canceled_at' ];
 			$sort = Yii::$app->request->get('sort');
 			$provider = new ActiveDataProvider([
 				'query'      => Queue::find(),
