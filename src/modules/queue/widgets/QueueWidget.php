@@ -47,10 +47,16 @@
 		public function run ()
 		{
 
-			$fields = [ 'job', 'ttr', 'delay', 'priority', 'pushed_at', 'reserved_at', 'done_at' ];
+			$fields = [ 'id', 'pid', 'channel', 'ttr', 'delay', 'priority', 'pushed_at', 'reserved_at', 'done_at', 'canceled_at' ];
 			$sort = Yii::$app->request->get('sort');
+			$filterChannel = Yii::$app->request->get('filterChannel');
+			$query = Queue::find();
+			if (isset($filterChannel) and $filterChannel != '')
+			{
+				$query->andWhere([ 'channel' => $filterChannel ]);
+			}
 			$provider = new ActiveDataProvider([
-				'query'      => Queue::find(),
+				'query'      => $query,
 				'sort'       => [
 					'attributes'   => $fields,
 					'defaultOrder' => [
@@ -69,13 +75,16 @@
 				$json = json_decode($queue->job);
 				$queue->job = str_replace([ "\\\\", "\/" ], [ "\\", "/" ], json_encode($json, JSON_PRETTY_PRINT));
 			}
+			$channels = Queue::find()->select('channel')->distinct()->column();
 
 			return $this->renderFile('@queueViews/index.tpl', [
-				'title'      => Yii::tr('View queue list', [], 'queue'),
-				'fields'     => $fields,
-				'queues'     => $provider->models,
-				'pagination' => $provider->pagination,
-				'sort'       => $provider->sort
+				'title'         => Yii::tr('View queue list', [], 'queue'),
+				'fields'        => $fields,
+				'queues'        => $provider->models,
+				'pagination'    => $provider->pagination,
+				'sort'          => $provider->sort,
+				'channels'      => $channels,
+				'filterChannel' => $filterChannel
 			]);
 		}
 

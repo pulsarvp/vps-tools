@@ -28,6 +28,7 @@
 		 * @var boolean
 		 */
 		public $autoactivate = false;
+
 		/**
 		 * @var string default client oauth
 		 */
@@ -37,6 +38,16 @@
 		 * @var string default role user
 		 */
 		public $defaultRole = 'registered';
+
+		/**
+		 * @var int $duration number of seconds that the user can remain in logged-in status
+		 */
+		public $duration = 648000;
+		
+		/**
+		 * @var string $duration name setting duration seconds
+		 */
+		public $durationSetting = null;
 
 		/**
 		 * Redirect after login

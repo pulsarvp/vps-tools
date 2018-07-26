@@ -285,7 +285,12 @@
 				$cookies = Yii::$app->request->cookies;
 				$url = $cookies->getValue('returnUrl', Url::toRoute([ '/site/index' ]));
 
-				Yii::$app->user->login($user, Yii::$app->user->authTimeout);
+				if (Yii::$app->settings->get($this->module->durationSetting))
+					$duration = Yii::$app->settings->get($this->module->durationSetting);
+				else
+					$duration = $this->module->duration;
+
+				Yii::$app->user->login($user, $duration);
 
 				Yii::$app->response->cookies->remove('returnUrl');
 				if ($this->module->redirectAfterLogin)
