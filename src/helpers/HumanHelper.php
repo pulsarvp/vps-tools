@@ -1,4 +1,5 @@
 <?php
+
 	namespace vps\tools\helpers;
 
 	/**
@@ -33,6 +34,23 @@
 		}
 
 		/**
+		 * Convert value in currency.
+		 * ```php
+		 * $result = HumanHelper::currency(100041621,'p');
+		 * // $result will be: '100 041 621 p'
+		 * ```
+		 * @param integer $value
+		 * @param string  $symbol
+		 * @return string
+		 */
+		public static function currency ($value, $symbol = null)
+		{
+			$value = strrev(implode(' ', str_split(strrev($value), 3)));
+
+			return is_null($symbol) ? $value : $value  . $symbol;
+		}
+
+		/**
 		 * Convert duration in seconds (with ms) to readable format.
 		 * ```php
 		 * $result = HumanHelper::duration(100.123);
@@ -50,9 +68,9 @@
 					$duration = -$duration;
 
 				if (strpos($duration, '.') === false)
-					list( $seconds, $tail ) = [ $duration, 0 ];
+					list($seconds, $tail) = [ $duration, 0 ];
 				else
-					list( $seconds, $tail ) = explode('.', $duration);
+					list($seconds, $tail) = explode('.', $duration);
 
 				$dt = new \DateTime('@0');
 				$dt2 = new \DateTime("@" . $seconds);
@@ -154,9 +172,9 @@
 
 			preg_match('/(\d+)\s?([KMGT]?)/', $string, $match);
 
-			if (isset( $match[ 2 ] ))
+			if (isset($match[ 2 ]))
 			{
-				$digit = (int)$match[ 1 ];
+				$digit = (int) $match[ 1 ];
 				switch ($match[ 2 ])
 				{
 					case 'K':
