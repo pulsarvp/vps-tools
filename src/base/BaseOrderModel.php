@@ -67,11 +67,12 @@
 		{
 			if ($this->hasAttribute('order'))
 			{
-				$object = self::find()->where([ 'order' => $this->order + 1 ])->one();
+				$object = self::find()->where([ '>', 'order', $this->order ])->one();
 				if ($object != null)
 				{
-					$object->order -= 1;
-					$this->order += 1;
+					$order = $object->order;
+					$object->order = $this->order;
+					$this->order = $order;
 					$object->save();
 					$this->save();
 				}
@@ -88,11 +89,12 @@
 		{
 			if ($this->hasAttribute('order'))
 			{
-				$object = self::find()->where([ 'order' => $this->order - 1 ])->one();
+				$object = self::find()->where([ '<', 'order', $this->order ])->one();
 				if ($object != null)
 				{
-					$object->order += 1;
-					$this->order -= 1;
+					$order = $object->order;
+					$object->order = $this->order;
+					$this->order = $order;
 					$object->save();
 					$this->save();
 				}

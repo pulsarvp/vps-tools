@@ -2,7 +2,7 @@
 
 	namespace tests\components;
 
-	class BaseOrderModelTest extends \PHPUnit\Framework\TestCase
+	class BaseModelTest extends \PHPUnit\Framework\TestCase
 	{
 		private $_modelClass = 'tests\models\BaseTest';
 
