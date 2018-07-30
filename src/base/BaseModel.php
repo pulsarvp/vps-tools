@@ -17,6 +17,9 @@
 	class BaseModel extends ActiveRecord
 	{
 
+		/**
+		 * @inheritdoc
+		 */
 		public function beforeSave ($insert)
 		{
 			if ($parent = parent::beforeSave($insert))
@@ -36,6 +39,24 @@
 			}
 
 			return $parent;
+		}
+
+		/**
+		 * @param      $name
+		 * @param bool $save
+		 *
+		 *  ```php
+		 *  $object->toggleAttribute('flag',false);
+		 *  ```
+		 */
+		public function toggleAttribute ($name, $save = true)
+		{
+			if ($this->hasAttribute($name))
+			{
+				$this->$name = 1 - $this->$name;
+				if ($save)
+					$this->save(true, [ $name ]);
+			}
 		}
 
 	}
