@@ -17,21 +17,22 @@
 		const F_ORIGINAL = 'original';
 		const F_SD       = 'sd';
 		const F_HD       = 'hd';
-
-		public $resize = true;
+		public $witdhSD = 150;
+		public $witdhHD = 500;
 
 		/**
 		 * Save all formats image.
 		 *
-		 * @param string $path The path to the image.
-		 * @param UploadedFile $file The path to the source image.
+		 * @param string       $path   The path to the file.
+		 * @param UploadedFile $file   The path to the source file.
+		 * @param bool         $resize resize images.
 		 *
 		 * ```php
 		 * return Yii::$app->image->saveImage('var/www/site/data/img/author', $image);
 		 * ```
 		 * @return bool|string
 		 */
-		public function saveImage ($path, $file)
+		public function saveImage ($path, $file, $resize = false)
 		{
 			$filename = UuidHelper::generate() . '.' . $file->extension;
 			$name = $filename[ 0 ] . DIRECTORY_SEPARATOR . $filename[ 1 ] . DIRECTORY_SEPARATOR . $filename;
@@ -148,8 +149,10 @@
 		 */
 		private function _size ($format)
 		{
+			$name = 'widht' . strtoupper($format);
+
 			return new Box(
-				Yii::$app->settings->get('image_' . $format . '_width', 500),
-				Yii::$app->settings->get('image_' . $format . '_height', 500));
+				Yii::$app->settings->get('image_' . $format . '_width', $$name),
+				Yii::$app->settings->get('image_' . $format . '_height', $$name));
 		}
 	}
