@@ -43,7 +43,7 @@
 		 * @var int $duration number of seconds that the user can remain in logged-in status
 		 */
 		public $duration = 648000;
-		
+
 		/**
 		 * @var string $duration name setting duration seconds
 		 */
@@ -133,7 +133,7 @@
 
 			ConfigurationHelper::addTranslation('user', [ 'user' => 'user.php' ], __DIR__ . '/messages');
 
-			Yii::$app->view->registerCss('.tools-user-image {margin: 15px; max-width: 100%}');
+			Yii::$app->view->registerCss('.nav-user-image img { border-radius: 50%; max-height: 40px } .tools-user-image {margin: 15px; max-width: 100%}');
 
 			$this->title = Yii::tr('User manage', [], 'user');
 		}
