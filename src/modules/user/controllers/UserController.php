@@ -56,7 +56,7 @@
 								}
 								elseif (!( Yii::$app->user->can('admin') or Yii::$app->user->can('admin_user') ))
 								{
-									Yii::$app->notification->errorToSession(Yii::tr('You have no permissions.', [], 'user'));
+									Yii::$app->notification->errorToSession(Yii::$app->settings->get('text_auth_not_allowed', Yii::tr('You have no permissions.', [], 'user')));
 									$action->controller->redirect(Url::toRoute([ '/site/index' ]));
 								}
 
