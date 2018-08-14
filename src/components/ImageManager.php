@@ -6,6 +6,7 @@
 	use Imagine\Image\Box;
 	use Imagine\Image\BoxInterface;
 	use Imagine\Image\ImageInterface;
+	use vps\tools\config\ImageSizeFit;
 	use vps\tools\helpers\FileHelper;
 	use vps\tools\helpers\UuidHelper;
 	use Yii;
@@ -14,18 +15,17 @@
 
 	class ImageManager extends Component
 	{
+
 		const F_ORIGINAL = 'original';
 		const F_SD       = 'sd';
 		const F_HD       = 'hd';
-		public $witdhSD = 150;
-		public $witdhHD = 500;
+		public $configClass = 'vps\tools\config\ImageSizeConfig';
 
 		/**
 		 * Save all formats image.
 		 *
-		 * @param string       $path   The path to the file.
-		 * @param UploadedFile $file   The path to the source file.
-		 * @param bool         $resize resize images.
+		 * @param string       $path The path to the file.
+		 * @param UploadedFile $file The path to the source file.
 		 *
 		 * ```php
 		 * return Yii::$app->image->saveImage('var/www/site/data/img/author', $image);
@@ -37,23 +37,29 @@
 			$filename = UuidHelper::generate() . '.' . $file->extension;
 			$name = $filename[ 0 ] . DIRECTORY_SEPARATOR . $filename[ 1 ] . DIRECTORY_SEPARATOR . $filename;
 			$filepath = $path . DIRECTORY_SEPARATOR . $name;
-			if ($this->resize)
+			if ($resize)
 			{
+				$data = [];
 				foreach ($this->_formats() as $format)
 				{
 					$method = '_save' . ucfirst($format);
 					$this->$method($path, $name, $file->tempName);
+					$data[ $format ] = $path . DIRECTORY_SEPARATOR .$name;
 				}
+				if (file_exists($filepath))
+					return $data;
+				else
+					return false;
 			}
 			else
 			{
 				$this->_saveOriginal($path, $name, $file->tempName);
-			}
 
-			if (file_exists($filepath))
-				return $name;
-			else
-				return false;
+				if (file_exists($filepath))
+					return [ self::F_ORIGINAL => $path . DIRECTORY_SEPARATOR . $name ];
+				else
+					return false;
+			}
 		}
 
 		/**
@@ -94,11 +100,50 @@
 		{
 
 			$image = ( new Imagine() )->open($file);
-
+			$class = $this->configClass . strtoupper($format);
 			$newSize = $this->_size($format);
-			$this->_resize($image, $newSize);
+			if ($class::$fit == ImageSizeFit::WIDTH)
+				$this->resizeToWidth($image, $newSize->getWidth());
+			elseif ($class::$fit == ImageSizeFit::HEIGHT)
+				$this->resizeToHeight($image, $newSize->getHeight());
+			else
+				$this->_resize($image, $newSize);
 			FileHelper::createDirectory(dirname($path));
-			$image->save($path, [ 'jpeg_quality' => 80 ]);
+			$image->save($path, [ 'jpeg_quality' => $class::QUALITY ]);
+		}
+
+		/**
+		 * Resizes image according to the given height (width proportional)
+		 *
+		 * @param integer $height
+		 * @param boolean $allow_enlarge
+		 * @return static
+		 */
+		public function resizeToHeight ($image, $height)
+		{
+			$ratio = $height / $image->getSize()->getHeight();
+			$width = $image->getSize()->getWidth() * $ratio;
+			$this->_resize($image, new Box($width, $height));
+
+			return $this;
+		}
+
+		/**
+		 * Resizes image according to the given width (height proportional)
+		 *
+		 * @param integer $width
+		 * @param boolean $allow_enlarge
+		 * @return static
+		 */
+		public function resizeToWidth ($image, $width)
+		{
+
+
+			$ratio = $width / $image->getSize()->getWidth();
+			$height = $image->getSize()->getHeight() * $ratio;
+			$this->_resize($image, new Box($width, $height));
+
+			return $this;
 		}
 
 		/**
@@ -149,10 +194,11 @@
 		 */
 		private function _size ($format)
 		{
-			$name = 'widht' . strtoupper($format);
+
+			$class = $this->configClass . strtoupper($format);
 
 			return new Box(
-				Yii::$app->settings->get('image_' . $format . '_width', $$name),
-				Yii::$app->settings->get('image_' . $format . '_height', $$name));
+				Yii::$app->settings->get('image_' . $format . '_width', $class::WIDTH),
+				Yii::$app->settings->get('image_' . $format . '_height', $class::HEIGHT));
 		}
 	}
