@@ -54,9 +54,9 @@
 			if ($model == null)
 			{
 				if (is_array($attributes))
-					$model = new self($condition);
-				else
 					$model = new self($attributes);
+				else
+					$model = new self($condition);
 				if (!$model->save())
 					return null;
 			}
