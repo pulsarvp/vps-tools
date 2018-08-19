@@ -38,8 +38,8 @@
 		public $fieldConfig = [
 			'template'             => '{beginLabel}{labelTitle}{endLabel}{beginWrapper}{input}{hint}{error}{endWrapper}',
 			'horizontalCssClasses' => [
-				'label'   => 'col-md-3',
-				'wrapper' => 'col-md-9',
+				'label'   => 'col-sm-3 col-form-label',
+				'wrapper' => 'col-sm-9',
 				'hint'    => '',
 				'error'   => 'error-block'
 			],
