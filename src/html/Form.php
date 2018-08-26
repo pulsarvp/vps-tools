@@ -2,6 +2,7 @@
 	namespace vps\tools\html;
 
 	use Yii;
+	use \vps\tools\db\Model;
 	use \vps\tools\helpers\Html;
 	use \yii\base\InvalidConfigException;
 
@@ -38,8 +39,9 @@
 		public $fieldConfig = [
 			'template'             => '{beginLabel}{labelTitle}{endLabel}{beginWrapper}{input}{hint}{error}{endWrapper}',
 			'horizontalCssClasses' => [
-				'label'   => 'col-md-3',
-				'wrapper' => 'col-md-9',
+				'label'   => 'col-sm-3 col-form-label',
+				'wrapper' => 'col-sm-9',
+				'offset'  => 'offset-sm-3',
 				'hint'    => '',
 				'error'   => 'error-block'
 			],
@@ -90,5 +92,49 @@
 		{
 			if ($upload)
 				$this->options[ 'enctype' ] = 'multipart/form-data';
+		}
+
+		/***
+		 * @param array      $submitOptions Options for the submit button.
+		 * @param array|null $cancelOptions Options for the cancel link. Use 'referrer' to set cancel link.
+		 * @return string
+		 */
+		public function submitBlock ($submitOptions = [], $cancelOptions = null)
+		{
+			$submitOptions = array_merge([
+				'type'  => 'submit',
+				'title' => Yii::tr('Save'),
+				'name'  => 's-save',
+				'class' => 'btn btn-primary'
+			], $submitOptions);
+
+			$submitButton = Html::submitButton($submitOptions[ 'title' ], $submitOptions);
+
+			$cancelLink = '';
+			if (is_array($cancelOptions))
+			{
+				$link = $cancelOptions[ 'referrer' ] ?? Yii::$app->request->referrer ?? Yii::$app->request->baseUrl;
+				unset($cancelOptions[ 'referrer' ]);
+				$cancelOptions = array_merge([
+					'title' => Yii::tr('Cancel'),
+					'class' => 'btn btn-warning ml-1'
+				], $cancelOptions);
+				$cancelLink = Html::a($cancelOptions[ 'title' ], $link, $cancelOptions);
+			}
+
+			/** @var \vps\tools\html\Field $field */
+			$fieldConfig = array_merge([
+				'form'        => $this,
+				'model'       => new Model(),
+				'attribute'   => 'submit',
+				'enableLabel' => false
+			], $this->fieldConfig);
+
+			$field = new $this->fieldClass($fieldConfig);
+			if ($this->layout === 'horizontal')
+				Html::addCssClass($field->wrapperOptions, $fieldConfig[ 'horizontalCssClasses' ][ 'offset' ]);
+			$field->parts[ '{input}' ] = $submitButton . $cancelLink;
+
+			return $field->render();
 		}
 	}
