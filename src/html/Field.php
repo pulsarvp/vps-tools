@@ -11,6 +11,11 @@
 	 */
 	class Field extends \yii\bootstrap\ActiveField
 	{
+		/***
+		 * @inheritdoc
+		 */
+		public $options = [ 'class' => 'form-group row' ];
+
 		/**
 		 * Renders [datetimepicker](https://github.com/Eonasdan/bootstrap-datetimepicker) input.
 		 *
