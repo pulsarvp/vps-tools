@@ -4,6 +4,7 @@
 
 	use vps\tools\helpers\ConfigurationHelper;
 	use yii\base\Widget;
+	use yii\helpers\Json;
 	use yii\web\View;
 	use Yii;
 
@@ -50,6 +51,12 @@
 		public $fluid = false;
 
 		/**
+		 * @var bool
+		 * Whether to show right block with version information.
+		 */
+		public $showVersion;
+
+		/**
 		 * @inheritdoc
 		 */
 		public function init ()
@@ -68,8 +75,17 @@
 			]);
 
 			ConfigurationHelper::addTranslation('widgets', [ 'widgets/footer' => 'footer.php' ], __DIR__ . '/messages');
-
-			Yii::$app->view->registerCss('footer .footer-links {text-align: center} footer .footer-links a{white-space:nowrap} .footer-links a:not(:last-child) { margin-right: 10px } footer .footer-version {text-align: right}');
+			
+			if (empty($this->company[ 'title' ]))
+				$this->company[ 'title' ] = Yii::$app->settings->get('footer_copyright_org_title');
+			if (empty($this->company[ 'url' ]))
+				$this->company[ 'url' ] = Yii::$app->settings->get('footer_copyright_org_url');
+			if (empty($this->copyrightFrom))
+				$this->copyrightFrom = Yii::$app->settings->get('footer_copyright_from');
+			if (empty($this->links))
+				$this->links = Json::decode(Yii::$app->settings->get('footer_links'));
+			if (empty($this->showVersion))
+				$this->showVersion = (bool) Yii::$app->settings->get('footer_show_version', true);
 		}
 
 		/**
@@ -82,6 +98,7 @@
 				'company'       => $this->company,
 				'links'         => $this->links,
 				'fluid'         => $this->fluid,
+				'showVersion'   => $this->showVersion
 			]);
 		}
 	}
