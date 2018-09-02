@@ -2,8 +2,10 @@
 	{use class='vps\tools\widgets\LinkPager' type='block'}
 	<div class="pagination-container">
 		{LinkPager pagination=$pagination}{/LinkPager}
-		<ul class="pagination">
-			<li><span>{Yii::tr('Total')}: {$pagination->totalCount}</span></li>
+		<ul class="pagination d-inline-flex">
+			<li class="page-item">
+				<span class="page-link">{Yii::tr('Total', [], 'widgets/link-pager')}: {$pagination->totalCount}</span>
+			</li>
 		</ul>
 	</div>
 {/if}
