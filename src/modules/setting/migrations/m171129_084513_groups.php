@@ -1,4 +1,5 @@
 <?php
+
 	use vps\tools\db\Migration;
 
 	class m171129_084513_groups extends Migration
@@ -12,6 +13,6 @@
 		/** @inheritdoc */
 		public function down ()
 		{
-			$this->dropColumn('setting', 'group ');
+			$this->dropColumn('setting', 'group');
 		}
 	}
