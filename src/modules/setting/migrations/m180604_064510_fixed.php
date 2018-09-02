@@ -13,6 +13,6 @@
 		/** @inheritdoc */
 		public function down ()
 		{
-			$this->dropColumn('setting', 'fixed ');
+			$this->dropColumn('setting', 'fixed');
 		}
 	}
