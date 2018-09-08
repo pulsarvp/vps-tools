@@ -26,9 +26,9 @@
 			{
 				if ($this->isNewRecord)
 				{
-					if ($this->hasAttribute('createDT'))
+					if ($this->hasAttribute('createDT') and empty($this->createDT))
 						$this->createDT = TimeHelper::now();
-					if ($this->hasAttribute('uuid'))
+					if ($this->hasAttribute('uuid') and empty($this->uuid))
 						$this->uuid = UuidHelper::generate();
 				}
 				else
