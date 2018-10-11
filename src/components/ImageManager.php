@@ -6,6 +6,7 @@
 	use Imagine\Image\Box;
 	use Imagine\Image\BoxInterface;
 	use Imagine\Image\ImageInterface;
+	use vps\tools\config\ImageSizeConfig;
 	use vps\tools\config\ImageSizeFit;
 	use vps\tools\helpers\FileHelper;
 	use vps\tools\helpers\UuidHelper;
@@ -19,7 +20,16 @@
 		const F_ORIGINAL = 'original';
 		const F_SD       = 'sd';
 		const F_HD       = 'hd';
-		public $configClass = 'vps\tools\config\ImageSizeConfig';
+		public $config = null;
+
+		public function init ($config = null)
+		{
+			parent::init();
+			if ($config == null)
+				$this->config = new ImageSizeConfig();
+			else
+				$this->config = $config;
+		}
 
 		/**
 		 * Save all formats image.
@@ -44,7 +54,7 @@
 				{
 					$method = '_save' . ucfirst($format);
 					$this->$method($path, $name, $file->tempName);
-					$data[ $format ] = $path . DIRECTORY_SEPARATOR .$name;
+					$data[ $format ] = $path . DIRECTORY_SEPARATOR . $name;
 				}
 				if (file_exists($filepath))
 					return $data;
@@ -100,7 +110,8 @@
 		{
 
 			$image = ( new Imagine() )->open($file);
-			$class = $this->configClass . strtoupper($format);
+			$class = $this->config;
+			$params = $class::get($format);
 			$newSize = $this->_size($format);
 			if ($class::$fit == ImageSizeFit::WIDTH)
 				$this->resizeToWidth($image, $newSize->getWidth());
@@ -109,7 +120,7 @@
 			else
 				$this->_resize($image, $newSize);
 			FileHelper::createDirectory(dirname($path));
-			$image->save($path, [ 'jpeg_quality' => $class::QUALITY ]);
+			$image->save($path, [ 'jpeg_quality' => $params[ 'quality' ] ]);
 		}
 
 		/**
@@ -194,11 +205,10 @@
 		 */
 		private function _size ($format)
 		{
-
-			$class = $this->configClass . strtoupper($format);
-
+			$class = $this->config;
+			$params = $class::get(strtoupper($format));
 			return new Box(
-				Yii::$app->settings->get('image_' . $format . '_width', $class::WIDTH),
-				Yii::$app->settings->get('image_' . $format . '_height', $class::HEIGHT));
+				Yii::$app->settings->get('image_' . $format . '_width', $params[ 'width' ]),
+				Yii::$app->settings->get('image_' . $format . '_height', $params[ 'height' ]));
 		}
 	}
