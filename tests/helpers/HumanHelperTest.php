@@ -1,4 +1,5 @@
 <?php
+
 	namespace tests\helpers;
 
 	use vps\tools\helpers\HumanHelper;
@@ -17,6 +18,16 @@
 			$this->assertEquals('1 kb/s', HumanHelper::bitrate(1000));
 			$this->assertEquals('5 kb/s', HumanHelper::bitrate(5000));
 			$this->assertEquals('5 mb/s', HumanHelper::bitrate(5000000));
+		}
+
+		public function testCurrency ()
+		{
+
+			$this->assertEquals('100', HumanHelper::currency(100));
+			$this->assertEquals('1 000', HumanHelper::currency(1000));
+			$this->assertEquals('32 562 414', HumanHelper::currency(32562414));
+			$this->assertEquals('12 542p', HumanHelper::currency(12542, 'p'));
+			$this->assertEquals('12 542$', HumanHelper::currency(12542, '$'));
 		}
 
 		public function testDuration ()

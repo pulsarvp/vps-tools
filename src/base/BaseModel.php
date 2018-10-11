@@ -26,9 +26,9 @@
 			{
 				if ($this->isNewRecord)
 				{
-					if ($this->hasAttribute('createDT'))
+					if ($this->hasAttribute('createDT') and empty($this->createDT))
 						$this->createDT = TimeHelper::now();
-					if ($this->hasAttribute('uuid'))
+					if ($this->hasAttribute('uuid') and empty($this->uuid))
 						$this->uuid = UuidHelper::generate();
 				}
 				else
@@ -39,6 +39,29 @@
 			}
 
 			return $parent;
+		}
+
+		/***
+		 * Finds one model by condition or creates it if search result is empty.
+		 *
+		 * @param mixed      $condition Condition that will be passed to `where` statement.
+		 * @param array|null $attributes Array of attributes that will be used to create new model. If empty $condition will be used.
+		 * @return BaseModel|null
+		 */
+		public static function findOrCreate ($condition, $attributes = null)
+		{
+			$model = self::find()->where($condition)->one();
+			if ($model == null)
+			{
+				if (is_array($attributes))
+					$model = new self($attributes);
+				else
+					$model = new self($condition);
+				if (!$model->save())
+					return null;
+			}
+
+			return $model;
 		}
 
 		/**

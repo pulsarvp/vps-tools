@@ -8,6 +8,7 @@
 
 	namespace vps\tools\widgets;
 
+	use vps\tools\helpers\ConfigurationHelper;
 	use Yii;
 	use yii\helpers\Html;
 	use yii\widgets\LinkPager as BaseLinkPager;
@@ -28,10 +29,13 @@
 			// Change the location and size of block
 			// https://v4-alpha.getbootstrap.com/components/pagination/#alignment
 			// https://v4-alpha.getbootstrap.com/components/pagination/#sizing
-			$this->options[ 'class' ] = 'pagination justify-content-center';
+			$this->options[ 'class' ] = 'pagination';
 
 			// Default div for links
 			$this->linkOptions[ 'class' ] = 'page-link';
+			$this->disabledListItemSubTagOptions[ 'class' ] = 'page-link';
+
+			ConfigurationHelper::addTranslation('widgets', [ 'widgets/link-pager' => 'link-pager.php' ], __DIR__ . '/messages');
 		}
 
 		/**
@@ -46,7 +50,7 @@
 
 			if ($this->pagination->getPageCount() > 1)
 			{
-				echo Html::tag('nav', $this->renderPageButtons());
+				echo Html::tag('nav', $this->renderPageButtons(), [ 'class' => 'd-inline-flex' ]);
 			}
 		}
 

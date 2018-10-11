@@ -11,6 +11,11 @@
 	 */
 	class Field extends \yii\bootstrap\ActiveField
 	{
+		/***
+		 * @inheritdoc
+		 */
+		public $options = [ 'class' => 'form-group row' ];
+
 		/**
 		 * Renders [datetimepicker](https://github.com/Eonasdan/bootstrap-datetimepicker) input.
 		 *
@@ -129,7 +134,13 @@
 			foreach ($models as $model)
 				$items[ $model->$value ] = $label ? $model->$label : '';
 
-			$options[ 'options' ] = [];
+//			$options[ 'options' ] = [];
+
+			if (isset($options[ 'selected' ]))
+			{
+				foreach ($options[ 'selected' ] as $id)
+					$options[ 'options' ][ $id ][ 'selected' ] = 'selected';
+			}
 
 			if ($title)
 				foreach ($models as $model)

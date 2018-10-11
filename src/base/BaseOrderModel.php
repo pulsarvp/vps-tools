@@ -25,7 +25,7 @@
 			{
 				if ($this->isNewRecord)
 				{
-					if ($this->hasAttribute('order'))
+					if ($this->hasAttribute('order') and empty($this->order))
 					{
 						$order = self::find()->select('order')->orderBy([ 'order' => SORT_DESC ])->scalar();
 
