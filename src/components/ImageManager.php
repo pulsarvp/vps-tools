@@ -15,7 +15,6 @@
 
 	class ImageManager extends Component
 	{
-
 		const F_ORIGINAL = 'original';
 		const F_SD       = 'sd';
 		const F_HD       = 'hd';
@@ -44,7 +43,7 @@
 				{
 					$method = '_save' . ucfirst($format);
 					$this->$method($path, $name, $file->tempName);
-					$data[ $format ] = $path . DIRECTORY_SEPARATOR .$name;
+					$data[ $format ] = $path . DIRECTORY_SEPARATOR . $name;
 				}
 				if (file_exists($filepath))
 					return $data;
@@ -98,7 +97,6 @@
 		 */
 		private function _save ($path, $file, $format)
 		{
-
 			$image = ( new Imagine() )->open($file);
 			$class = $this->configClass . strtoupper($format);
 			$newSize = $this->_size($format);
@@ -137,8 +135,6 @@
 		 */
 		public function resizeToWidth ($image, $width)
 		{
-
-
 			$ratio = $width / $image->getSize()->getWidth();
 			$height = $image->getSize()->getHeight() * $ratio;
 			$this->_resize($image, new Box($width, $height));
@@ -194,7 +190,6 @@
 		 */
 		private function _size ($format)
 		{
-
 			$class = $this->configClass . strtoupper($format);
 
 			return new Box(
