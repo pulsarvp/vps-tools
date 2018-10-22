@@ -51,6 +51,7 @@
 						Yii::$app->notification->error(current($model->firstErrors));
 				}
 			}
+			$this->setTitle(Yii::tr('Create export', [], 'export'));
 			$this->data('model', $model);
 			$this->_tpl = '@exportViews/form';
 		}
@@ -105,6 +106,7 @@
 						Yii::$app->notification->error(current($object->firstErrors));
 				}
 			}
+			$this->setTitle(Yii::tr('Edit export', [], 'export'));
 			$this->data('model', $object);
 			$this->_tpl = '@exportViews/form';
 		}
@@ -145,6 +147,7 @@
 			]);
 			LogManager::info(Yii::tr('The user {user} opened the list of exports.', [ 'user' => Html::a(Yii::$app->user->identity->name, Url::toRoute([ 'user/view', 'id' => Yii::$app->user->id ])) ], 'export'));
 
+			$this->setTitle(Yii::tr('List exports', [], 'export'));
 			$this->data('models', $provider->models);
 			$this->data('pagination', $provider->pagination);
 			$this->data('sort', $provider->sort);
@@ -184,6 +187,7 @@
 				$this->data('sort', $provider->sort);
 			}
 
+			$this->setTitle($export->title);
 			$this->data('export', $export);
 			$this->_tpl = '@exportViews/view';
 		}
