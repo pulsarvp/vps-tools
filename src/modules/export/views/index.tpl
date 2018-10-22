@@ -54,6 +54,7 @@
 			{/foreach}
 		</tbody>
 	</table>
+	{include file='@vpsViews/pagination.tpl'}
 {else}
 	<div class="text-danger">{Yii::tr('Попытка взлома detected!')}</div>
 {/if}
