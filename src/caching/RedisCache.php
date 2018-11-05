@@ -13,6 +13,7 @@
 
 	/**
 	 * Class RedisCache
+	 *
 	 * @package       common\components
 	 *
 	 *
@@ -38,6 +39,7 @@
 
 		/**
 		 * Set database from DB settings.
+		 *
 		 * @see [[\vps\tools\components\SettingManager]]
 		 *
 		 * @param string $name
@@ -49,6 +51,7 @@
 
 		/**
 		 * Set hostname from DB settings.
+		 *
 		 * @see [[\vps\tools\components\SettingManager]]
 		 *
 		 * @param string $name
@@ -60,6 +63,7 @@
 
 		/**
 		 * Set password DB settings.
+		 *
 		 * @see [[\vps\tools\components\SettingManager]]
 		 *
 		 * @param string $name
@@ -71,6 +75,7 @@
 
 		/**
 		 * Set port from DB settings.
+		 *
 		 * @see [[\vps\tools\components\SettingManager]]
 		 *
 		 * @param string $name
@@ -82,6 +87,7 @@
 
 		/**
 		 * Set keyPrefix from DB settings.
+		 *
 		 * @see [[\vps\tools\components\SettingManager]]
 		 *
 		 * @param string $name
@@ -101,7 +107,7 @@
 				'hostname' => $this->hostname,
 				'database' => $this->database,
 			];
-			if ($this->password != '')
+			if (!empty(trim($this->password)))
 				$params[ 'password' ] = $this->password;
 
 			$this->redis = $params;
