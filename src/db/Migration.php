@@ -37,21 +37,6 @@
 		}
 
 		/**
-		 * If on delete/update not set default value 'SET NULL' is used.
-		 *
-		 * @inheritdoc
-		 */
-		public function addForeignKey ($name, $table, $columns, $refTable, $refColumns, $delete = null, $update = null)
-		{
-			if ($delete === null)
-				$delete = 'SET NULL';
-			if ($update === null)
-				$update = 'SET NULL';
-
-			parent::addForeignKey($name, $table, $columns, $refTable, $refColumns, $delete, $update);
-		}
-
-		/**
 		 * Creates database view.
 		 *
 		 * @param string $name View name.
