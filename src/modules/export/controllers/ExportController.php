@@ -168,23 +168,30 @@
 			LogManager::info(Yii::tr('The user {user} opened export {id}.', [ 'user' => Html::a(Yii::$app->user->identity->name, Url::toRoute([ 'view/view', 'id' => Yii::$app->user->id ])), 'id' => Html::a($export->title, Url::toRoute([ 'export/view', 'id' => $export->id ])) ], 'export'));
 			if ($export->query != '')
 			{
-				$query = trim($export->query, ';');
-				$provider = new SqlDataProvider([
-					'sql'        => $query,
-					'pagination' => [
-						'pageSize'       => 20,
-						'forcePageParam' => false,
-						'pageSizeParam'  => false,
-						'urlManager'     => new \yii\web\UrlManager([
-							'enablePrettyUrl' => true,
-							'showScriptName'  => false
-						])
-					]
-				]);
+				try
+				{
+					$query = trim($export->query, ';');
+					$provider = new SqlDataProvider([
+						'sql'        => $query,
+						'pagination' => [
+							'pageSize'       => 20,
+							'forcePageParam' => false,
+							'pageSizeParam'  => false,
+							'urlManager'     => new \yii\web\UrlManager([
+								'enablePrettyUrl' => true,
+								'showScriptName'  => false
+							])
+						]
+					]);
 
-				$this->data('models', $provider->models);
-				$this->data('pagination', $provider->pagination);
-				$this->data('sort', $provider->sort);
+					$this->data('models', $provider->models);
+					$this->data('pagination', $provider->pagination);
+					$this->data('sort', $provider->sort);
+				}
+				catch (\Exception $e)
+				{
+					Yii::$app->notification->error(Yii::tr('Запрос не может быть выполнен. {error}', [ 'error' => $e->getMessage() ]));
+				}
 			}
 
 			$this->setTitle($export->title);

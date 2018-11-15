@@ -73,7 +73,16 @@
 				$config->setIsAsyn(false);
 				$config->setProduceInterval(500);
 
-				$producer = new Producer(function () use ($data) {
+				$producer = new Producer();
+			/*	$producer->success(function ($result) use ($data) {
+					if (Yii::$app->has('logging'))
+						Yii::$app->logging->info(Yii::tr('Данные для {object} отправленны  в Kafka.', [ 'object' => json_encode($data[ 'id' ]) ]));
+				});
+				$producer->error(function ($errorCode) use ($data) {
+					if (Yii::$app->has('logging'))
+						Yii::$app->logging->error(Yii::tr('Ошибка {error} отправки сообщения в kafka.'.Json::encode($data), [ 'error' => $errorCode ]));
+				});*/
+				$producer->send(function () use ($data) {
 					return [
 						[
 							'topic' => $this->topic,
@@ -82,15 +91,6 @@
 						],
 					];
 				});
-				$producer->success(function ($result) use ($data) {
-					if (Yii::$app->has('logging'))
-						Yii::$app->logging->info(Yii::tr('Данные для {object} отправленны  в Kafka.', [ 'object' => json_encode($data[ 'id' ]) ]));
-				});
-				$producer->error(function ($errorCode) {
-					if (Yii::$app->has('logging'))
-						Yii::$app->logging->error(Yii::tr('Ошибка {error} отправки сообщения в kafka.', [ 'error' => $errorCode ]));
-				});
-				$producer->send(true);
 			}
 		}
 
