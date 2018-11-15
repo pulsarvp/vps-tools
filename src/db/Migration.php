@@ -17,9 +17,9 @@
 		/**
 		 * Adds value to enum column.
 		 *
-		 * @param string $table   Table name.
-		 * @param string $column  Column name.
-		 * @param string $value   New value in enum.
+		 * @param string $table Table name.
+		 * @param string $column Column name.
+		 * @param string $value New value in enum.
 		 * @param bool   $default Whether to set new value as default.
 		 */
 		public function addEnumValue ($table, $column, $value, $default = false)
@@ -37,10 +37,25 @@
 		}
 
 		/**
+		 * If on delete/update not set default value 'SET NULL' is used.
+		 *
+		 * @inheritdoc
+		 */
+		public function addForeignKey ($name, $table, $columns, $refTable, $refColumns, $delete = null, $update = null)
+		{
+			if ($delete === null)
+				$delete = 'SET NULL';
+			if ($update === null)
+				$update = 'SET NULL';
+
+			parent::addForeignKey($name, $table, $columns, $refTable, $refColumns, $delete, $update);
+		}
+
+		/**
 		 * Creates database view.
 		 *
-		 * @param string $name    View name.
-		 * @param Query  $query   Query that is used to create view.
+		 * @param string $name View name.
+		 * @param Query  $query Query that is used to create view.
 		 * @param bool   $replace Whether to replace existing view with the same name.
 		 *
 		 * @throws \yii\db\Exception
@@ -99,8 +114,8 @@
 		/**
 		 * Check if provided engine is supported and enabled.
 		 *
-		 * @param string $name      Engine name.
-		 * @param bool   $default   Whether to check if engine is default.
+		 * @param string $name Engine name.
+		 * @param bool   $default Whether to check if engine is default.
 		 * @param bool   $exception Whether to throw exception on error.
 		 *
 		 * @return bool True in case of engine is enabled and (in case of default is true) default. Otherwise exception is thrown (id exception is true) or false returned.
@@ -153,9 +168,9 @@
 		/**
 		 * Deletes value from enum column.
 		 *
-		 * @param string $table   Table name.
-		 * @param string $column  Column name.
-		 * @param string $value   Value to be removed from column.
+		 * @param string $table Table name.
+		 * @param string $column Column name.
+		 * @param string $value Value to be removed from column.
 		 * @param null   $default New default value. If null the old one will be used.
 		 *
 		 * @throws \yii\db\Exception
