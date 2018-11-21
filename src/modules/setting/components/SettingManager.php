@@ -2,6 +2,7 @@
 	namespace vps\tools\modules\setting\components;
 
 	use vps\tools\modules\setting\models\Setting;
+	use Yii;
 
 	/**
 	 * Class SettingManager
@@ -20,7 +21,7 @@
 		/**
 		 * @var Setting[] Category tree.
 		 */
-		private $_data;
+		private $_data = [];
 
 		/**
 		 * @inheritdoc
@@ -28,8 +29,10 @@
 		 */
 		public function init ()
 		{
+			/** @var yii\db\ActiveRecord $class */
 			$class = $this->_modelClass;
-			$this->_data = $class::find()->all();
+			if (Yii::$app->db->schema->getTableSchema($class::tableName()))
+				$this->_data = $class::find()->all();
 		}
 
 		/**
