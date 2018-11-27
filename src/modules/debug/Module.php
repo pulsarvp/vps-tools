@@ -38,6 +38,6 @@
 
 		public function getViewPath ()
 		{
-			return Yii::getAlias('@vendor') . '/yiisoft/yii2-debug/views';
+			return Yii::getAlias('@vendor') . '/yiisoft/yii2-debug/src/views';
 		}
 	}
