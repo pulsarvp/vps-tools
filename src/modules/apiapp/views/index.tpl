@@ -13,11 +13,7 @@
 				<td class="id">{$apiapp->id}</td>
 				<td class="name">{$apiapp->name}</td>
 				<td class="token">
-					{if $view == $apiapp->id}
 						{$apiapp->token}
-					{else}
-						******
-					{/if}
 				</td>
 				<td class="control nowrap">
 					<div class="edit">
