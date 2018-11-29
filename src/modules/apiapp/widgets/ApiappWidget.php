@@ -2,8 +2,11 @@
 
 	namespace vps\tools\modules\apiapp\widgets;
 
+	use vps\tools\helpers\Html;
 	use vps\tools\helpers\StringHelper;
+	use vps\tools\helpers\Url;
 	use vps\tools\modules\apiapp\models\Apiapp;
+	use vps\tools\modules\log\components\LogManager;
 	use Yii;
 	use yii\base\Widget;
 	use yii\web\View;
@@ -49,6 +52,8 @@
 			$viewID = Yii::$app->session->get('viewID', 0);
 			Yii::$app->session->set('viewID', 0);
 
+			LogManager::info(Yii::tr('User {user} has opened API applications list.', [ 'user' => Html::a(Yii::$app->user->identity->name, Url::toRoute([ 'user/view', 'id' => Yii::$app->user->id ])) ]));
+
 			return $this->renderFile('@appViews/index.tpl', [
 				'title'   => Yii::tr('Manage api application', [], 'apiapp'),
 				'apiapps' => $apiapps,
@@ -79,6 +84,7 @@
 						Yii::$app->session->set('viewID', $appNew->id);
 					$url = Yii::$app->request->referrer . '#' . $appNew->name;
 					$appNew->setAttributes([ 'name' => '', 'token' => '' ]);
+					LogManager::info(Yii::tr('User {user} has created API application {name}.', [ 'user' => Html::a(Yii::$app->user->identity->name, Url::toRoute([ 'user/view', 'id' => Yii::$app->user->id ])), 'name' => $post[ 'name' ] ]));
 
 					Yii::$app->response->redirect($url);
 					Yii::$app->end();

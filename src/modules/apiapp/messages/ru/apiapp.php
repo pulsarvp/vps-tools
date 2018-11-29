@@ -14,4 +14,6 @@
 		'Save'                                              => 'Сохранить',
 		'Token'                                             => 'Токен',
 		'Token should contain only latin letters, numbers.' => 'Токен должен содержать только буквы латинского алфавита, цифры.',
+		'User {user} has created API application {name}.'   => 'Пользователь {user} создал приложение API {name}.',
+		'User {user} has opened API applications list.'     => 'Пользователь {user} открыл список приложений API.'
 	];
