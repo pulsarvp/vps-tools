@@ -74,20 +74,20 @@
 		/***
 		 * Finds one model by condition or creates it if search result is empty.
 		 *
-		 * @param mixed      $condition  Condition that will be passed to `where` statement.
+		 * @param mixed      $condition Condition that will be passed to `where` statement.
 		 * @param array|null $attributes Array of attributes that will be used to create new model. If empty $condition
 		 *                               will be used.
 		 * @return BaseModel|null
 		 */
 		public static function findOrCreate ($condition, $attributes = null)
 		{
-			$model = self::find()->where($condition)->one();
+			$model = static::find()->where($condition)->one();
 			if ($model == null)
 			{
 				if (is_array($attributes))
-					$model = new self($attributes);
+					$model = new static($attributes);
 				else
-					$model = new self($condition);
+					$model = new static($condition);
 				if (!$model->save())
 					return null;
 			}
