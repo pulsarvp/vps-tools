@@ -54,7 +54,7 @@
 			$this->port = Yii::$app->settings->get('kafka_port');
 			$this->user = Yii::$app->settings->get('kafka_user');
 			$this->password = Yii::$app->settings->get('kafka_password');
-			$this->topic = Yii::$app->settings->get('kafka_topic');
+			$this->topic = Yii::$app->settings->get('kafka_source');
 			$this->host = Yii::$app->settings->get('kafka_host');
 		}
 
