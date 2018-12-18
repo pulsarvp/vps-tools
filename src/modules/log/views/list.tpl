@@ -24,10 +24,16 @@
 		{if isset($users)}
 			<div class="form-group pull-left">
 				<label for="filter-userID">{Yii::tr('User',[],'user')}</label><br>
-				<select id="filter-userID" class="selectpicker">
+				<select id="filter-userID" class="selectpicker" data-live-search="true">
 					<option value=""></option>
 					{foreach $users as $item}
-						<option value="{$item->id}" {if $item->id == $userID}selected{/if}>{$item->name}</option>
+						<option value="{$item->id}" {if $item->id == $userID}selected{/if}>
+							{if isset($item->prettyName)}
+								{$item->prettyName}
+							{else}
+								{$item->name}
+							{/if}
+						</option>
 					{/foreach}
 				</select>
 			</div>
