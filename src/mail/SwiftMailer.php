@@ -76,20 +76,25 @@
 		public function setPasswordDb ($passwordDb)
 		{
 			$this->_password = Yii::$app->settings->get($passwordDb);
+			$this->getTransport();
 		}
 
 		/**
 		 * @return array|\Swift_Transport
+		 * @throws \yii\base\InvalidConfigException
 		 */
 		public function getTransport ()
 		{
-			$this->_transport = $this->createTransport([
-				'class'    => 'Swift_SmtpTransport',
-				'host'     => $this->_host,
-				'port'     => $this->_port,
-				'username' => $this->_username,
-				'password' => $this->_password
-			]);
+			if (!is_object($this->_transport))
+			{
+				$this->_transport = $this->createTransport([
+					'class'    => 'Swift_SmtpTransport',
+					'host'     => $this->_host,
+					'port'     => $this->_port,
+					'username' => $this->_username,
+					'password' => $this->_password
+				]);
+			}
 
 			return $this->_transport;
 		}
