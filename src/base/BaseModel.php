@@ -44,7 +44,8 @@
 				}
 				catch (\Exception $e)
 				{
-					Yii::$app->logging->error(Yii::tr('Kafka error: {error}', [ 'error' => $e->getMessage() ]));
+					if (Yii::$app->has('logging'))
+						Yii::$app->logging->error(Yii::tr('Kafka error: {error}', [ 'error' => $e->getMessage() ]));
 				}
 			}
 
@@ -74,7 +75,7 @@
 		/***
 		 * Finds one model by condition or creates it if search result is empty.
 		 *
-		 * @param mixed      $condition Condition that will be passed to `where` statement.
+		 * @param mixed      $condition  Condition that will be passed to `where` statement.
 		 * @param array|null $attributes Array of attributes that will be used to create new model. If empty $condition
 		 *                               will be used.
 		 * @return BaseModel|null
