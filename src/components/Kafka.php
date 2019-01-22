@@ -83,7 +83,7 @@
 					else
 					{
 						if (Yii::$app->has('logging'))
-							Yii::$app->logging->info(Yii::tr('Данные для {object} отправленны  в Kafka.', [ 'object' => $data[ 'id' ] ]));
+							Yii::$app->logging->info(Yii::tr('Данные для {object} отправленны  в Kafka.', [ 'object' => Json::encode($data) ]));
 					}
 				});
 
@@ -95,7 +95,6 @@
 				$topicConfig->set('message.timeout.ms', 1000);
 
 				$kafkaTopic = $rk->newTopic($this->source, $topicConfig);
-
 				try
 				{
 					$kafkaTopic->produce(RD_KAFKA_PARTITION_UA, 0, Json::encode($data));
@@ -103,7 +102,10 @@
 				}
 				catch (\Exception $exception)
 				{
+
 					Yii::error($exception->getMessage());
+					if (Yii::$app->has('logging'))
+						Yii::$app->logging->error(Yii::tr('Ошибка {error} отправки сообщения в kafka.' . Json::encode($data), [ 'error' => $exception->getMessage() ]));
 
 					return false;
 				}
@@ -131,10 +133,10 @@
 					throw new UnprocessableEntityHttpException($e->getMessage());
 
 				Yii::error($e->getMessage());
+				if (Yii::$app->has('logging'))
+					Yii::$app->logging->error(Yii::tr('Ошибка {error} чтении сообщения из kafka.' . Json::encode($data), [ 'error' => $exception->getMessage() ]));
 
 				return null;
 			}
-
-			return $consumer;
 		}
 	}
