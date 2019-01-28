@@ -1,8 +1,8 @@
 <?php
 	return [
-		'host'   => 'http://esb.u2035dev.ru',
+		'host'   => '',
 		'port'   => 8082,
-		'topic'  => 'test_kafka_rest',
-		'source' => 'test_kafka_rest',
+		'topic'  => '',
+		'source' => '',
 		'use'    => 1,
 	];
