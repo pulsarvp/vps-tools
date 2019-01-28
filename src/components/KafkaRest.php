@@ -34,6 +34,12 @@
 		 * @var string|null
 		 */
 		public $topic;
+		/**
+		 * Use kafka.
+		 *
+		 * @var string|null
+		 */
+		public $use;
 
 		/**
 		 * @inheritdoc
@@ -46,6 +52,7 @@
 			$this->port = Yii::$app->settings->get('kafka_rest_port');
 			$this->topic = Yii::$app->settings->get('kafka_topic');
 			$this->source = Yii::$app->settings->get('kafka_source');
+			$this->use = Yii::$app->settings->get('kafka_use');
 		}
 
 		/**
@@ -53,17 +60,17 @@
 		 */
 		public function sendMessage ($data)
 		{
-			if (Yii::$app->settings->get('kafka_use'))
+			if ($this->use)
 			{
 				try
 				{
 					$records[ 'records' ][][ 'value' ] = $data;
+
 					$ch = curl_init();
 					curl_setopt($ch, CURLOPT_URL, $this->host . ':' . $this->port . '/topics/' . $this->source);
 					curl_setopt($ch, CURLOPT_POST, 1);
 					curl_setopt($ch, CURLOPT_POSTFIELDS, Json::encode($records));
 					curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
 					$headers = [
 						'Content-Type:application/vnd.kafka.json.v2+json'
 					];
@@ -74,7 +81,8 @@
 
 					curl_close($ch);
 					$responce = Json::decode($server_output);
-					if (isset($responce[ 'offsets' ]))
+				
+					if (isset($responce[ 'offsets' ][ 0 ][ 'offset' ]) and $responce[ 'offsets' ][ 0 ][ 'offset' ] > 0)
 					{
 						if (Yii::$app->has('logging'))
 							Yii::$app->logging->info(Yii::tr('Данные для {object} отправленны  в Kafka.', [ 'object' => json_encode($data[ 'id' ]) ]));
@@ -84,7 +92,7 @@
 					else
 					{
 						if (Yii::$app->has('logging'))
-							Yii::$app->logging->error(Yii::tr('Ошибка {error} отправки сообщения в kafka.' . Json::encode($data), [ 'error' => $errorCode ]));
+							Yii::$app->logging->error(Yii::tr('Ошибка {error} отправки сообщения в kafka.' . Json::encode($data), [ 'error' => isset($responce[ 'offsets' ][ 0 ][ 'error_code' ]) ? $responce[ 'offsets' ][ 0 ][ 'error_code' ] . ' ' . $responce[ 'offsets' ][ 0 ][ 'error' ] : '' ]));
 
 						return false;
 					}
@@ -92,7 +100,7 @@
 				catch (\Exception $e)
 				{
 					if (YII_DEBUG)
-						throw new UnprocessableEntityHttpException($e->getMessage());
+						throw new UnprocessableEntityHttpException($e->getMessage() . ' ' . $e->getLine() . ' ' . $e->getTraceAsString());
 					Yii::error($e->getMessage());
 
 					return null;
