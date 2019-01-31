@@ -35,7 +35,6 @@
 		"sentry/sentry": "~1.6",
 		"yiisoft/yii2-swiftmailer": "~2.0",
 		"zyx/zyx-phpmailer": "^0.9.4",
-		"nmred/kafka-php": "^0.2",
 		"imagine/imagine": "~0.7"
 	},
 	"require-dev": {
