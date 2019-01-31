@@ -66,6 +66,8 @@
 				{
 					$records[ 'records' ][][ 'value' ] = $data;
 
+					// Не через CurlTransport, потому не даёт выставить заголовок Content-Type:application/vnd.kafka.json.v2+json
+					// Меняет автоматом на стандартные form или json.
 					$ch = curl_init();
 					curl_setopt($ch, CURLOPT_URL, $this->host . ':' . $this->port . '/topics/' . $this->source);
 					curl_setopt($ch, CURLOPT_POST, 1);
@@ -81,7 +83,7 @@
 
 					curl_close($ch);
 					$responce = Json::decode($server_output);
-				
+
 					if (isset($responce[ 'offsets' ][ 0 ][ 'offset' ]) and $responce[ 'offsets' ][ 0 ][ 'offset' ] > 0)
 					{
 						if (Yii::$app->has('logging'))
@@ -106,6 +108,8 @@
 					return null;
 				}
 			}
+
+			return false;
 		}
 
 		public function initConsumer ()
@@ -130,7 +134,7 @@
 				$server_output = curl_exec($ch);
 
 				curl_close($ch);
-				$responce = Json::decode($server_output);
+				$response = Json::decode($server_output);
 
 				$data[ 'topics' ] = [ $this->topic ];
 				$ch = curl_init();
@@ -148,7 +152,7 @@
 				$server_output = curl_exec($ch);
 
 				curl_close($ch);
-				$responce = Json::decode($server_output);
+				$response = Json::decode($server_output);
 			}
 			catch (\Exception $e)
 			{
