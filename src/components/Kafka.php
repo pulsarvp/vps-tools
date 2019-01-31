@@ -2,14 +2,15 @@
 
 	namespace vps\tools\components;
 
-	use Kafka\Consumer;
-	use Kafka\ConsumerConfig;
-	use Kafka\Producer;
-	use Kafka\ProducerConfig;
+	use RdKafka\Conf;
+	use RdKafka\Message;
+	use RdKafka\Producer;
+	use RdKafka\TopicConf;
 	use vps\tools\helpers\Console;
 	use Yii;
 	use yii\base\Component;
 	use yii\helpers\Json;
+	use yii\web\UnprocessableEntityHttpException;
 
 	class Kafka extends Component
 	{
@@ -42,6 +43,12 @@
 		 *
 		 * @var string|null
 		 */
+		public $source;
+		/**
+		 * Name topic.
+		 *
+		 * @var string|null
+		 */
 		public $topic;
 
 		/**
@@ -52,9 +59,8 @@
 			parent::init();
 
 			$this->port = Yii::$app->settings->get('kafka_port');
-			$this->user = Yii::$app->settings->get('kafka_user');
-			$this->password = Yii::$app->settings->get('kafka_password');
-			$this->topic = Yii::$app->settings->get('kafka_source');
+			$this->topic = Yii::$app->settings->get('kafka_topic');
+			$this->source = Yii::$app->settings->get('kafka_source');
 			$this->host = Yii::$app->settings->get('kafka_host');
 		}
 
@@ -65,53 +71,72 @@
 		{
 			if (Yii::$app->settings->get('kafka_use'))
 			{
-				$config = ProducerConfig::getInstance();
-				$config->setMetadataRefreshIntervalMs(1000);
-				$config->setMetadataBrokerList($this->host . ':' . $this->port);
-				$config->setBrokerVersion('2.0.0');
-				$config->setRequiredAck(1);
-				$config->setIsAsyn(false);
-				$config->setProduceInterval(500);
 
-				$producer = new \Kafka\Producer(
-					function () use ($data) {
-						return [
-							[
-								'topic' => $this->topic,
-								'value' => Json::encode($data),
-								'key'   => '',
-							],
-						];
+				$conf = new \RdKafka\Conf();
+
+				$conf->setDrMsgCb(function (Producer $kafka, Message $message) use ($data) {
+					if ($message->err > 0)
+					{
+						if (Yii::$app->has('logging'))
+							Yii::$app->logging->error(Yii::tr('Ошибка {error} отправки сообщения в kafka.' . Json::encode($data), [ 'error' => rd_kafka_err2str($message->err) ]));
 					}
-				);
-				$producer->success(function ($result) use ($data) {
-					if (Yii::$app->has('logging'))
-						Yii::$app->logging->info(Yii::tr('Данные для {object} отправленны  в Kafka.', [ 'object' => json_encode($data[ 'id' ]) ]));
+					else
+					{
+						if (Yii::$app->has('logging'))
+							Yii::$app->logging->info(Yii::tr('Данные для {object} отправленны  в Kafka.', [ 'object' => Json::encode($data) ]));
+					}
 				});
-				$producer->error(function ($errorCode) use ($data) {
+
+				$rk = new \RdKafka\Producer($conf);
+				$rk->setLogLevel(LOG_DEBUG);
+				$rk->addBrokers($this->host . ':' . $this->port);
+
+				$topicConfig = new TopicConf();
+				$topicConfig->set('message.timeout.ms', 1000);
+
+				$kafkaTopic = $rk->newTopic($this->source, $topicConfig);
+				try
+				{
+					$kafkaTopic->produce(RD_KAFKA_PARTITION_UA, 0, Json::encode($data));
+					$rk->poll(-1);
+				}
+				catch (\Exception $exception)
+				{
+
+					Yii::error($exception->getMessage());
 					if (Yii::$app->has('logging'))
-						Yii::$app->logging->error(Yii::tr('Ошибка {error} отправки сообщения в kafka.' . Json::encode($data), [ 'error' => $errorCode ]));
-				});
-				$producer->send(true);
+						Yii::$app->logging->error(Yii::tr('Ошибка {error} отправки сообщения в kafka.' . Json::encode($data), [ 'error' => $exception->getMessage() ]));
+
+					return false;
+				}
 			}
 		}
 
 		/**
 		 * @inheritdoc
 		 */
-		public function getConsumer ()
+		public function getTopic ()
 		{
 
-			$config = ConsumerConfig::getInstance();
-			$config->setMetadataRefreshIntervalMs(1000);
-			$config->setMetadataBrokerList($this->host . ':' . $this->port);
-			$config->setGroupId(Yii::$app->id);
-			$config->setBrokerVersion('2.0.0');
-			$config->setTopics([ $this->topic ]);
+			try
+			{
+				$rk = new \RdKafka\Consumer();
+				$rk->setLogLevel(LOG_DEBUG);
+				$rk->addBrokers($this->host . ':' . $this->port);
+				$topic = $rk->newTopic($this->topic);
 
-			$consumer = new Consumer();
+				return $topic;
+			}
+			catch (\Exception $e)
+			{
+				if (YII_DEBUG)
+					throw new UnprocessableEntityHttpException($e->getMessage());
 
-			return $consumer;
+				Yii::error($e->getMessage());
+				if (Yii::$app->has('logging'))
+					Yii::$app->logging->error(Yii::tr('Ошибка {error} чтении сообщения из kafka.' . Json::encode($data), [ 'error' => $exception->getMessage() ]));
+
+				return null;
+			}
 		}
-
 	}
