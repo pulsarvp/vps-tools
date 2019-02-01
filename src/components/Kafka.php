@@ -51,6 +51,8 @@
 		 */
 		public $topic;
 
+		private $_rk;
+
 		/**
 		 * @inheritdoc
 		 */
@@ -59,7 +61,7 @@
 			parent::init();
 
 			$this->port = Yii::$app->settings->get('kafka_port');
-			$this->topic = Yii::$app->settings->get('kafka_topic');
+			$this->topic = explode(',', Yii::$app->settings->get('kafka_topic'));
 			$this->source = Yii::$app->settings->get('kafka_source');
 			$this->host = Yii::$app->settings->get('kafka_host');
 		}
@@ -111,26 +113,29 @@
 				}
 			}
 		}
-
-		/**
-		 * @inheritdoc
-		 */
+		
 		public function getTopic ()
 		{
 
 			try
 			{
-				$rk = new \RdKafka\Consumer();
-				$rk->setLogLevel(LOG_DEBUG);
-				$rk->addBrokers($this->host . ':' . $this->port);
-				$topic = $rk->newTopic($this->topic);
 
-				return $topic;
+				$this->_rk = new \RdKafka\Consumer();
+				$this->_rk->setLogLevel(LOG_DEBUG);
+				$this->_rk->addBrokers($this->host . ':' . $this->port);
+				$queue = $this->_rk->newQueue();
+				foreach ($this->topic as $item)
+				{
+					$topic = $this->_rk->newTopic($item);
+					$topic->consumeQueueStart(0, -2, $queue);
+				}
+
+				return $queue;
 			}
 			catch (\Exception $e)
 			{
 				if (YII_DEBUG)
-					throw new UnprocessableEntityHttpException($e->getMessage());
+					throw new UnprocessableEntityHttpException($e->getTraceAsString());
 
 				Yii::error($e->getMessage());
 				if (Yii::$app->has('logging'))
@@ -138,5 +143,13 @@
 
 				return null;
 			}
+		}
+
+		/**
+		 * @inheritdoc
+		 */
+		public function getConsumer ()
+		{
+			return $this->_rk;
 		}
 	}
