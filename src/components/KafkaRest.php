@@ -82,9 +82,9 @@
 					$server_output = curl_exec($ch);
 
 					curl_close($ch);
-					$responce = Json::decode($server_output);
+					$response = Json::decode($server_output);
 
-					if (isset($responce[ 'offsets' ][ 0 ][ 'offset' ]) and $responce[ 'offsets' ][ 0 ][ 'offset' ] > 0)
+					if (isset($response[ 'offsets' ][ 0 ][ 'offset' ]) and $response[ 'offsets' ][ 0 ][ 'offset' ] > 0)
 					{
 						if (Yii::$app->has('logging'))
 							Yii::$app->logging->info(Yii::tr('Данные для {object} отправленны  в Kafka.', [ 'object' => json_encode($data[ 'id' ]) ]));
@@ -94,7 +94,9 @@
 					else
 					{
 						if (Yii::$app->has('logging'))
-							Yii::$app->logging->error(Yii::tr('Ошибка {error} отправки сообщения в kafka.' . Json::encode($data), [ 'error' => isset($responce[ 'offsets' ][ 0 ][ 'error_code' ]) ? $responce[ 'offsets' ][ 0 ][ 'error_code' ] . ' ' . $responce[ 'offsets' ][ 0 ][ 'error' ] : '' ]));
+							Yii::$app->logging->error(Yii::tr('Ошибка {error} отправки сообщения в kafka.' . Json::encode($data), [
+								'error' => isset($response[ 'offsets' ][ 0 ][ 'error_code' ]) ? $response[ 'offsets' ][ 0 ][ 'error_code' ] . ' ' . $response[ 'offsets' ][ 0 ][ 'error' ] : ''
+							]));
 
 						return false;
 					}
@@ -216,13 +218,13 @@
 
 				curl_close($ch);
 
-				$responce = Json::decode($server_output);
+				$response = Json::decode($server_output);
 
-				if (is_array($responce) and count($responce) > 0 and !isset($responce[ 'error_code' ]))
+				if (is_array($response) and count($response) > 0 and !isset($response[ 'error_code' ]))
 				{
-					return $responce;
+					return $response;
 				}
-				elseif (!empty($responce[ 'error_code' ]))
+				elseif (!empty($response[ 'error_code' ]))
 				{
 					$this->removeConsumer();
 					$this->initConsumer();
