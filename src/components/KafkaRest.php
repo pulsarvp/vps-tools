@@ -50,7 +50,7 @@
 
 			$this->host = Yii::$app->settings->get('kafka_rest_host');
 			$this->port = Yii::$app->settings->get('kafka_rest_port');
-			$this->topic = Yii::$app->settings->get('kafka_topic');
+			$this->topic = explode(',', Yii::$app->settings->get('kafka_topic'));
 			$this->source = Yii::$app->settings->get('kafka_source');
 			$this->use = Yii::$app->settings->get('kafka_use');
 		}
@@ -112,15 +112,52 @@
 			return false;
 		}
 
+		// Проверка существования потребителя
+		public function hasConsumer ()
+		{
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_URL, $this->host . ':' . $this->port . '/consumers/' . $this->source . '/instances/' . $this->source . '/subscription');
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+			$headers = [
+				'Content-Type:application/vnd.kafka.v2+json'
+			];
+
+			curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+			$server_output = curl_exec($ch);
+			curl_close($ch);
+			$response = Json::decode($server_output);
+
+			if (isset($response[ 'topics' ]) and count($response[ 'topics' ]) > 0)
+				return true;
+			else
+				return false;
+		}
+
+		/** Удаления потребителя */
+		public function removeConsumer ()
+		{
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_URL, $this->host . ':' . $this->port . '/consumers/' . $this->source . '/instances/' . $this->source);
+			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			$headers = [
+				'Content-Type:application/vnd.kafka.v2+json'
+			];
+			curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+			$server_output = curl_exec($ch);
+			curl_close($ch);
+		}
+
+		/** Регистрировании потребителя */
 		public function initConsumer ()
 		{
 			try
 			{
-				$records[ 'name' ] = $this->topic;
+				$records[ 'name' ] = $this->source;
 				$records[ 'format' ] = 'json';
-				$records[ 'auto.offset.reset' ] = 'earliest';
 				$ch = curl_init();
-				curl_setopt($ch, CURLOPT_URL, $this->host . ':' . $this->port . '/consumers/' . $this->topic);
+				curl_setopt($ch, CURLOPT_URL, $this->host . ':' . $this->port . '/consumers/' . $this->source);
 				curl_setopt($ch, CURLOPT_POST, 1);
 				curl_setopt($ch, CURLOPT_POSTFIELDS, Json::encode($records));
 				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -128,17 +165,15 @@
 				$headers = [
 					'Content-Type:application/vnd.kafka.v2+json'
 				];
-
 				curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
 				$server_output = curl_exec($ch);
 
 				curl_close($ch);
-				$response = Json::decode($server_output);
 
-				$data[ 'topics' ] = [ $this->topic ];
+				$data[ 'topics' ] = $this->topic;
 				$ch = curl_init();
-				curl_setopt($ch, CURLOPT_URL, $this->host . ':' . $this->port . '/consumers/' . $this->topic . '/instances/' . $this->topic . '/subscription');
+				curl_setopt($ch, CURLOPT_URL, $this->host . ':' . $this->port . '/consumers/' . $this->source . '/instances/' . $this->source . '/subscription');
 				curl_setopt($ch, CURLOPT_POST, 1);
 				curl_setopt($ch, CURLOPT_POSTFIELDS, Json::encode($data));
 				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -150,14 +185,13 @@
 				curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
 				$server_output = curl_exec($ch);
-
 				curl_close($ch);
-				$response = Json::decode($server_output);
 			}
 			catch (\Exception $e)
 			{
 				if (YII_DEBUG)
 					throw new UnprocessableEntityHttpException($e->getMessage());
+
 				Yii::error($e->getMessage());
 
 				return [];
@@ -168,9 +202,8 @@
 		{
 			try
 			{
-
 				$ch = curl_init();
-				curl_setopt($ch, CURLOPT_URL, $this->host . ':' . $this->port . '/consumers/' . $this->topic . '/instances/' . $this->topic . '/records');
+				curl_setopt($ch, CURLOPT_URL, $this->host . ':' . $this->port . '/consumers/' . $this->source . '/instances/' . $this->source . '/records');
 				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
 				$headers = [
@@ -182,11 +215,17 @@
 				$server_output = curl_exec($ch);
 
 				curl_close($ch);
+
 				$responce = Json::decode($server_output);
 
-				if (is_array($responce) and count($responce) > 0)
+				if (is_array($responce) and count($responce) > 0 and !isset($responce[ 'error_code' ]))
 				{
 					return $responce;
+				}
+				elseif (!empty($responce[ 'error_code' ]))
+				{
+					$this->removeConsumer();
+					$this->initConsumer();
 				}
 				else
 				{
@@ -196,7 +235,7 @@
 			catch (\Exception $e)
 			{
 				if (YII_DEBUG)
-					throw new UnprocessableEntityHttpException($e->getMessage());
+					throw new UnprocessableEntityHttpException($e->getTraceAsString());
 				Yii::error($e->getMessage());
 
 				return [];
