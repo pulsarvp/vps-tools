@@ -7,6 +7,7 @@
 	 * @copyright Copyright (c) 2018
 	 * @date      2018-05-24
 	 */
+
 	use vps\tools\db\Model;
 	use vps\tools\helpers\TimeHelper;
 	use Yii;
@@ -17,6 +18,7 @@
 	 * @property integer $userID
 	 * @property string  $email
 	 * @property string  $type
+	 * @property string  $category
 	 * @property string  $action
 	 * @property string  $url
 	 * @property string  $server
@@ -53,16 +55,17 @@
 		public function attributeLabels ()
 		{
 			return [
-				'userID'  => Yii::tr('UserID', [], 'log'),
-				'email'   => Yii::tr('Email', [], 'log'),
-				'type'    => Yii::tr('Type', [], 'log'),
-				'action'  => Yii::tr('Action', [], 'log'),
-				'url'     => Yii::tr('Url', [], 'log'),
-				'server'  => Yii::tr('Server', [], 'log'),
-				'session' => Yii::tr('Session', [], 'log'),
-				'cookie'  => Yii::tr('Cookie', [], 'log'),
-				'post'    => Yii::tr('Post', [], 'log'),
-				'dt'      => Yii::tr('Dt', [], 'log'),
+				'userID'   => Yii::tr('UserID', [], 'log'),
+				'email'    => Yii::tr('Email', [], 'log'),
+				'type'     => Yii::tr('Type', [], 'log'),
+				'category' => Yii::tr('Category', [], 'log'),
+				'action'   => Yii::tr('Action', [], 'log'),
+				'url'      => Yii::tr('Url', [], 'log'),
+				'server'   => Yii::tr('Server', [], 'log'),
+				'session'  => Yii::tr('Session', [], 'log'),
+				'cookie'   => Yii::tr('Cookie', [], 'log'),
+				'post'     => Yii::tr('Post', [], 'log'),
+				'dt'       => Yii::tr('Dt', [], 'log'),
 			];
 		}
 
@@ -74,7 +77,7 @@
 			return [
 				[ [ 'userID' ], 'integer' ],
 				[ [ 'action', 'url', 'email' ], 'trim' ],
-				[ [ 'email', 'action' ], 'string', 'max' => 255 ],
+				[ [ 'email', 'action', 'category' ], 'string', 'max' => 255 ],
 				[ [ 'url' ], 'string', 'max' => 1000 ],
 				[ [ 'server', 'session', 'cookie', 'post', 'type' ], 'string' ],
 				[ [ 'dt' ], 'datetime', 'format' => 'php:' . TimeHelper::$dtFormat ],

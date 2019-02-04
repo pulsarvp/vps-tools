@@ -1,13 +1,16 @@
 <script>
 	$(document).on('click', '#filter', function (e) {
-		var path   = [];
-		var search = $('#search').val();
-		var userID = $('#filter-userID').val();
-		var type   = $('#filter-type').val();
-		var fromDt = $('#filter-from').val();
-		var toDt   = $('#filter-to').val();
+		var path     = [];
+		var search   = $('#search').val();
+		var category = $('#filter-category').val();
+		var userID   = $('#filter-userID').val();
+		var type     = $('#filter-type').val();
+		var fromDt   = $('#filter-from').val();
+		var toDt     = $('#filter-to').val();
 		if (search != '')
 			path.push('search=' + search);
+		if (category != '')
+			path.push('category=' + category);
 		if (fromDt != '')
 			path.push('from=' + fromDt);
 		if (toDt != '')
@@ -18,7 +21,7 @@
 		if (userID != '')
 			path.push('userID=' + userID);
 		{else}
-			path.push('id={$user->id}');
+		path.push('id={$user->id}');
 		{/if}
 		window.location.href = '{Url::toRoute($url)}?' + path.join("&");
 	});

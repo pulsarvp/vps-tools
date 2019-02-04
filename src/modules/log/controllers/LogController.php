@@ -31,6 +31,14 @@
 			else
 				$this->data('type', '');
 
+			if (isset($get[ 'category' ]))
+			{
+				$query->andWhere([ 'category' => $get[ 'category' ] ]);
+				$this->data('category', $get[ 'category' ]);
+			}
+			else
+				$this->data('category', '');
+
 			if (isset($get[ 'userID' ]))
 			{
 				$query->andWhere([ 'userID' => $get[ 'userID' ] ]);
@@ -95,6 +103,7 @@
 			$this->data('sort', $provider->sort);
 
 			$this->data('types', [ LogType::INFO, LogType::WARNING, LogType::ERROR ]);
+			$this->data('categories', Log::find()->select('category')->distinct()->column());
 			$this->setTitle(Yii::tr('Logs', [], 'log'));
 			$this->_tpl = '@logViews/index';
 		}

@@ -6,12 +6,13 @@
 	 */
 	return [
 		'Action'     => 'Действие',
+		'Category'   => 'Категория',
 		'Cookie'     => 'Cookie',
 		'Date end'   => 'От',
 		'Date start' => 'До',
 		'Dt'         => 'Дата',
 		'Email'      => 'Email',
-		'Loading...'    => 'Загрузка...',
+		'Loading...' => 'Загрузка...',
 		'Logs'       => 'Логи',
 		'Post'       => 'Post',
 		'Save'       => 'Сохранить',
