@@ -61,7 +61,7 @@
 		 */
 		public function actionDelete ($id)
 		{
-			if (Yii::$app->user->identity->isPermission('deleteExport'))
+			if (Yii::$app->user->identity->hasPermission('deleteExport'))
 			{
 				$export = Export::findOne([ 'id' => $id ]);
 				if ($export === null)

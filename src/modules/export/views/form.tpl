@@ -1,4 +1,4 @@
-{if Yii::$app->user->identity->isPermission(['createExport','editExport'])}
+{if Yii::$app->user->identity->hasPermission(['createExport','editExport'])}
 	<div class="content">
 		<div class="col-sm-8">
 			{Form assign="f" id="create-form"}
@@ -11,5 +11,5 @@
 		{/Form}
 	</div>
 {else}
-	<div class="text-danger">{Yii::tr('Попытка взлома detected!')}</div>
+	<div class="text-danger">{Yii::tr('You have no permission to access this page.')}</div>
 {/if}
