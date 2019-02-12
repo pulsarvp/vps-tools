@@ -5,5 +5,5 @@
 	 * @copyright Copyright (c) 2018
 	 */
 	return [
-		'Attributes should be in JSON format.' => 'Атрибуты должно быть в формате JSON.',
+		'{attribute} should be in JSON format.' => 'Значение «{attribute}» должно быть в формате JSON.',
 	];

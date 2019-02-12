@@ -18,7 +18,7 @@
 			{
 				$json = json_decode($model->$attribute);
 				if (json_last_error() !== JSON_ERROR_NONE)
-					$this->addError($model, $attribute, '{attribute} should be in JSON format.', [ 'attribute' => $attribute ]);
+					$this->addError($model, $attribute, Yii::t('tools', '{attribute} should be in JSON format.'));
 			}
 		}
 	}
