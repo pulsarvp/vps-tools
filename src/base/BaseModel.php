@@ -37,39 +37,9 @@
 					if ($this->hasAttribute('dt'))
 						$this->dt = TimeHelper::now();
 				}
-				try
-				{
-					if (Yii::$app->has('kafka'))
-						Yii::$app->kafka->send($this->isNewRecord ? 'create' : 'update', $this);
-				}
-				catch (\Exception $e)
-				{
-					if (Yii::$app->has('logging'))
-						Yii::$app->logging->error(Yii::tr('Kafka error: {error}', [ 'error' => $e->getMessage() ]));
-				}
 			}
 
 			return $parent;
-		}
-
-		public function beforeDelete ()
-		{
-			if (parent::beforeDelete())
-			{
-				try
-				{
-					if (Yii::$app->has('kafka'))
-						Yii::$app->kafka->send('delete', $this);
-				}
-				catch (\Exception $e)
-				{
-					Yii::$app->logging->error(Yii::tr('Kafka error: {error}', [ 'error' => $e->getMessage() ]));
-				}
-
-				return true;
-			}
-
-			return false;
 		}
 
 		/***
