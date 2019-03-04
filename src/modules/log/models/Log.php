@@ -7,6 +7,7 @@
 	 * @copyright Copyright (c) 2018
 	 * @date      2018-05-24
 	 */
+
 	use vps\tools\db\Model;
 	use vps\tools\helpers\TimeHelper;
 	use Yii;
@@ -52,17 +53,22 @@
 		 */
 		public function attributeLabels ()
 		{
+			if (isset(Yii::$app->i18n->translations[ 'log' ]))
+				$category = 'log';
+			else
+				$category = 'app';
+
 			return [
-				'userID'  => Yii::tr('UserID', [], 'log'),
-				'email'   => Yii::tr('Email', [], 'log'),
-				'type'    => Yii::tr('Type', [], 'log'),
-				'action'  => Yii::tr('Action', [], 'log'),
-				'url'     => Yii::tr('Url', [], 'log'),
-				'server'  => Yii::tr('Server', [], 'log'),
-				'session' => Yii::tr('Session', [], 'log'),
-				'cookie'  => Yii::tr('Cookie', [], 'log'),
-				'post'    => Yii::tr('Post', [], 'log'),
-				'dt'      => Yii::tr('Dt', [], 'log'),
+				'userID'  => Yii::tr('UserID', [], $category),
+				'email'   => Yii::tr('Email', [], $category),
+				'type'    => Yii::tr('Type', [], $category),
+				'action'  => Yii::tr('Action', [], $category),
+				'url'     => Yii::tr('Url', [], $category),
+				'server'  => Yii::tr('Server', [], $category),
+				'session' => Yii::tr('Session', [], $category),
+				'cookie'  => Yii::tr('Cookie', [], $category),
+				'post'    => Yii::tr('Post', [], $category),
+				'dt'      => Yii::tr('Dt', [], $category),
 			];
 		}
 
