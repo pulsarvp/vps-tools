@@ -21,13 +21,17 @@
 			$user = $userClass::findOne($post[ 'id' ]);
 			if (!is_null($user))
 			{
+
+				LogManager::info(Yii::tr('Пользователю {user} забрали права {roles}', [ 'user' => Html::a($user->name, Url::toRoute([ 'user/view', 'id' => $user->id ])), 'roles' => implode(',', $user->getRolesNames()) ]));
 				$user->revokeAllRoles();
 				if (is_array($post[ 'roles' ]))
+				{
 					foreach ($post[ 'roles' ] as $item)
 					{
 						$user->assignRole($item);
 					}
-				LogManager::info(Yii::tr('Пользователю {user} сменили права на {roles}', [ 'user' => Html::a($user->name, Url::toRoute([ 'user/view', 'id' => $user->id ])), 'roles' => implode(',', $post[ 'roles' ]) ]));
+					LogManager::info(Yii::tr('Пользователю {user} добавили права {roles}', [ 'user' => Html::a($user->name, Url::toRoute([ 'user/view', 'id' => $user->id ])), 'roles' => implode(',', $post[ 'roles' ]) ]));
+				}
 			}
 			Yii::$app->end();
 		}
