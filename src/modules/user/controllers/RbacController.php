@@ -1,7 +1,11 @@
 <?php
+
 	namespace vps\tools\modules\user\controllers;
 
 	use vps\tools\controllers\WebController;
+	use vps\tools\helpers\Html;
+	use vps\tools\helpers\Url;
+	use vps\tools\modules\log\components\LogManager;
 	use Yii;
 
 	class RbacController extends WebController
@@ -23,6 +27,7 @@
 					{
 						$user->assignRole($item);
 					}
+				LogManager::info(Yii::tr('Пользователю {user} сменили права на {roles}', [ 'user' => Html::a($user->name, Url::toRoute([ 'user/view', 'id' => $user->id ])), 'roles' => implode(',', $post[ 'roles' ]) ]));
 			}
 			Yii::$app->end();
 		}
