@@ -1,10 +1,10 @@
-{if Yii::$app->user->identity->isPermission('viewExport')}
+{if Yii::$app->user->identity->hasPermission('viewExport')}
 	<div class="row">
 		<div class="col-sm-12 margin-bottom">
-			{if Yii::$app->user->identity->isPermission('editExport')}
+			{if Yii::$app->user->identity->hasPermission('editExport')}
 				{Html::a(Html::fa('pencil'),Url::toRoute(['export/edit', 'id' => $export->id]), [ 'class' => 'btn btn-success', 'title' => $export->title ])}
 			{/if}
-			{if Yii::$app->user->identity->isPermission('generateExport')}
+			{if Yii::$app->user->identity->hasPermission('generateExport')}
 				{Html::a(Yii::tr('Generate', [], 'export'),Url::toRoute(['export/generate', 'id' => $export->id]), [ 'class' => 'btn btn-info', 'title' => $export->title ])}
 			{/if}
 		</div>
@@ -53,5 +53,5 @@
 		{/if}
 	</div>
 {else}
-	<div class="text-danger">{Yii::tr('Попытка взлома detected!')}</div>
+	<div class="text-danger">{Yii::tr('You have no permission to access this page.')}</div>
 {/if}

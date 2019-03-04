@@ -37,44 +37,15 @@
 					if ($this->hasAttribute('dt'))
 						$this->dt = TimeHelper::now();
 				}
-				try
-				{
-					if (Yii::$app->has('kafka'))
-						Yii::$app->kafka->send($this->isNewRecord ? 'create' : 'update', $this);
-				}
-				catch (\Exception $e)
-				{
-					Yii::$app->logging->error(Yii::tr('Kafka error: {error}', [ 'error' => $e->getMessage() ]));
-				}
 			}
 
 			return $parent;
 		}
 
-		public function beforeDelete ()
-		{
-			if (parent::beforeDelete())
-			{
-				try
-				{
-					if (Yii::$app->has('kafka'))
-						Yii::$app->kafka->send('delete', $this);
-				}
-				catch (\Exception $e)
-				{
-					Yii::$app->logging->error(Yii::tr('Kafka error: {error}', [ 'error' => $e->getMessage() ]));
-				}
-
-				return true;
-			}
-
-			return false;
-		}
-
 		/***
 		 * Finds one model by condition or creates it if search result is empty.
 		 *
-		 * @param mixed      $condition Condition that will be passed to `where` statement.
+		 * @param mixed      $condition  Condition that will be passed to `where` statement.
 		 * @param array|null $attributes Array of attributes that will be used to create new model. If empty $condition
 		 *                               will be used.
 		 * @return BaseModel|null

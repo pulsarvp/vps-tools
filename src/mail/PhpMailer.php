@@ -2,21 +2,24 @@
 	/**
 	 * @author    Evgenii Kuteiko <kuteiko@mail.ru>
 	 * @copyright Copyright (c) 2017
-	 * @date      2017-07-27
+	 * @date      2019-01-16
 	 * @package   vps\tools\mail
 	 */
 
 	namespace vps\tools\mail;
 
 	use Yii;
-	use yii\swiftmailer\Mailer;
+	use yii\base\Component;
+	use zyx\phpmailer\Mailer;
 
 	/**
-	 * Class SwiftMailer
+	 * Class PhpMailer
 	 * @package vps\tools\mail
 	 */
-	class SwiftMailer extends Mailer
+	class PhpMailer extends Mailer
 	{
+
+		public $transport;
 		/**
 		 * @var string A host for sending emails.
 		 */
@@ -34,9 +37,25 @@
 		 */
 		private $_password;
 		/**
+		 * @var string Stmpsecure for sending emails.
+		 */
+		private $_secure = 'ssl';
+
+		/**
 		 * @var \Swift_Transport|array Swift transport instance or its array configuration.
 		 */
-		private $_transport = [];
+		public function init ()
+		{
+			$this->config = [
+				'mailer'   => 'smtp',
+				'host'     => $this->_host,
+				'port'     => $this->_port,
+				'secure'   => $this->_secure,
+				'username' => $this->_username,
+				'password' => $this->_password
+			];
+			parent::init();
+		}
 
 		/**
 		 * Set client ID.
@@ -76,21 +95,16 @@
 		public function setPasswordDb ($passwordDb)
 		{
 			$this->_password = Yii::$app->settings->get($passwordDb);
-			$this->setTransportDb();
 		}
 
 		/**
-		 * @return array|\Swift_Transport
-		 * @throws \yii\base\InvalidConfigException
+		 * Set SMTPSecure.
+		 *
+		 * @param string $secureDb
 		 */
-		public function setTransportDb ()
+		public function setSecureDb ($passwordDb)
 		{
-			parent::setTransport($this->createTransport([
-				'class'    => 'Swift_SmtpTransport',
-				'host'     => $this->_host,
-				'port'     => $this->_port,
-				'username' => $this->_username,
-				'password' => $this->_password
-			]));
+			$this->_secure = Yii::$app->settings->get($passwordDb);
 		}
+
 	}

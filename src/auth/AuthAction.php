@@ -44,7 +44,8 @@
 		}
 
 		/** @inheritdoc */
-		protected function authOAuth2 ($client, $authUrlParams=[])
+		protected function authOAuth2 ($client, $authUrlParams = [])
+
 		{
 			$get = Yii::$app->request->get();
 			if (isset($get[ 'error' ]))
@@ -90,7 +91,7 @@
 			}
 			else
 			{
-				$url = $client->buildAuthUrl();
+				$url = $client->buildAuthUrl($authUrlParams);
 				Yii::$app->response->redirect($url);
 				Yii::$app->end();
 			}
