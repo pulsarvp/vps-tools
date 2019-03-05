@@ -79,7 +79,7 @@
 					)
 					. Html::tag('div',
 						Html::tag('div',
-							( $fileLoaded ? '' : Html::tag('span', Yii::tr('Select image'), [ 'class' => 'fileinput-new' ]) )
+							Html::tag('span', Yii::tr('Select image'), [ 'class' => 'fileinput-new' ])
 							. Html::tag('span', Yii::tr('Change'), [ 'class' => 'fileinput-exists' ])
 							. Html::activeFileInput($this->model, $this->attribute),
 							[ 'class' => 'btn btn-default btn-file' ]
@@ -92,7 +92,7 @@
 						])
 					),
 					[
-						'class'         => 'fileinput' . ( $fileLoaded ? '' : ' fileinput-new' ),
+						'class'         => 'fileinput' . ( $fileLoaded ? ' fileinput-exists' : ' fileinput-new' ),
 						'data-provides' => 'fileinput'
 					]
 				),
