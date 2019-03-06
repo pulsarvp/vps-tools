@@ -1,4 +1,5 @@
 <?php
+
 	namespace vps\tools\html;
 
 	use Yii;
@@ -58,6 +59,15 @@
 		 */
 		public function image ($path = null, $options = [])
 		{
+			/** @var boolean $fileLoaded - файл уже загружен */
+			$fileLoaded = ArrayHelper::remove($options, 'fileLoaded', false);
+			/** @var text $removeText - текст для кнопки "Remove" */
+			$removeText = ArrayHelper::remove($options, 'removeText', 'Remove');
+			/** @var text $removeKey - текст для кнопки "Remove" */
+			$removeKey = ArrayHelper::remove($options, 'removeKey', 0);
+			/** @var text $removeKey - текст для кнопки "Remove" */
+			$deleteUrl = ArrayHelper::remove($options, 'deleteUrl', '');
+
 			$options = array_merge($this->inputOptions, $options);
 			$this->adjustLabelFor($options);
 
@@ -74,9 +84,17 @@
 							. Html::activeFileInput($this->model, $this->attribute),
 							[ 'class' => 'btn btn-default btn-file' ]
 						)
-						. Html::a(Yii::tr('Remove'), '#', [ 'class' => 'btn btn-default fileinput-exists', 'data-dismiss' => 'fileinput' ])
+						. Html::a(Yii::tr($removeText), '#', [
+							'class'           => 'btn btn-default fileinput-exists delete-loadedfile-ajax',
+							'data-dismiss'    => 'fileinput',
+							'data-delete-key' => $removeKey,
+							'data-delete-url' => $deleteUrl,
+						])
 					),
-					[ 'class' => 'fileinput fileinput-new', 'data-provides' => 'fileinput' ]
+					[
+						'class'         => 'fileinput' . ( $fileLoaded ? ' fileinput-exists' : ' fileinput-new' ),
+						'data-provides' => 'fileinput'
+					]
 				),
 				[ 'class' => 'image' ]
 			);
@@ -114,12 +132,13 @@
 		/**
 		 * Prepares data to be shown as [bootstrap select plugin](https://github.com/silviomoreto/bootstrap-select).
 		 *
-		 * @param array $models Array of models to be inserted in option tag.
+		 * @param array $models      Array of models to be inserted in option tag.
 		 * @param array $listOptions Options for 'option' tag. The following options are
-		 * * value: string, attribute name to use for `<option>` value, default is 'id';
-		 * * label: string, attribute name to put for `<option>` text;
-		 * * data-content: string, attribute name to put in 'data-content' attribute for `<option>`, will overwrite label if set;
-		 * * title: string, attribute name to put for title attribute for `<option>`.
+		 *                           * value: string, attribute name to use for `<option>` value, default is 'id';
+		 *                           * label: string, attribute name to put for `<option>` text;
+		 *                           * data-content: string, attribute name to put in 'data-content' attribute for
+		 *                           `<option>`, will overwrite label if set;
+		 *                           * title: string, attribute name to put for title attribute for `<option>`.
 		 * @param array $options
 		 * @return $this
 		 */
@@ -168,7 +187,7 @@
 		 * Renders [sortable lists](https://github.com/rubaxa/Sortable) for selecting multiple data with order. It
 		 * contains left and right blocks with draggable items between them.
 		 *
-		 * @param array $left Items for left block (selected items).
+		 * @param array $left  Items for left block (selected items).
 		 * @param array $right Items for right block.
 		 * @param array $options
 		 * @return $this
