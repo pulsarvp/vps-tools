@@ -41,7 +41,7 @@
 			'horizontalCssClasses' => [
 				'label'   => 'col-sm-3 col-form-label',
 				'wrapper' => 'col-sm-9',
-				'offset'  => 'offset-sm-3',
+				'offset'  => 'offset-sm-3 col-sm-offset-3',
 				'hint'    => '',
 				'error'   => 'error-block'
 			],
