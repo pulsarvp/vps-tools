@@ -7,6 +7,8 @@
 
 	namespace vps\tools\base;
 
+	use yii\db\ExpressionInterface;
+
 	/**
 	 * @inheritdoc
 	 */
@@ -27,7 +29,15 @@
 				{
 					if ($this->hasAttribute('order') and empty($this->order))
 					{
-						$order = self::find()->select('order')->orderBy([ 'order' => SORT_DESC ])->scalar();
+						$query = self::find()->select('order')->orderBy([ 'order' => SORT_DESC ]);
+
+						$condition = $this->orderCondition();
+						if ($condition !== null)
+						{
+							$query->where($condition);
+						}
+
+						$order = $query->scalar();
 
 						$this->order = !is_null($order) ? $order + 1 : 1;
 					}
@@ -46,7 +56,15 @@
 
 			if ($this->hasAttribute('order'))
 			{
-				$objects = self::find()->where([ '>', 'order', $this->order ])->all();
+				$query = self::find()->where([ '>', 'order', $this->order ]);
+
+				$condition = $this->orderCondition();
+				if ($condition !== null)
+				{
+					$query->andWhere($condition);
+				}
+
+				$objects = $query->all();
 				foreach ($objects as $object)
 				{
 					$object->order -= 1;
@@ -67,7 +85,15 @@
 		{
 			if ($this->hasAttribute('order'))
 			{
-				$object = self::find()->where([ '>', 'order', $this->order ])->one();
+				$query = self::find()->where([ '>', 'order', $this->order ])->orderBy('order ASC');
+
+				$condition = $this->orderCondition();
+				if ($condition !== null)
+				{
+					$query->andWhere($condition);
+				}
+
+				$object = $query->one();
 				if ($object != null)
 				{
 					$order = $object->order;
@@ -80,7 +106,7 @@
 		}
 
 		/**
-		 * Looking for the next descending order order, and changing places with it
+		 * Looking for the next descending order, and changing places with it
 		 *  ```php
 		 *  $object->moveDown();
 		 *  ```
@@ -89,7 +115,15 @@
 		{
 			if ($this->hasAttribute('order'))
 			{
-				$object = self::find()->where([ '<', 'order', $this->order ])->one();
+				$query = self::find()->where([ '<', 'order', $this->order ])->orderBy('order DESC');
+
+				$condition = $this->orderCondition();
+				if ($condition !== null)
+				{
+					$query->andWhere($condition);
+				}
+
+				$object = $query->one();
 				if ($object != null)
 				{
 					$order = $object->order;
@@ -104,13 +138,25 @@
 		/**
 		 * Make a selection of all models and assign the first model order = 1, all subsequent +1 and save
 		 *  ```php
-		 *  Model::toggleAttribute();
+		 *  Model::rebuildOrder();
 		 *  ```
+		 * @param string|array|ExpressionInterface|null $whereCondition
+		 * @param string|array|ExpressionInterface|null $order
 		 */
-		public static function rebuildOrder ()
+		public static function rebuildOrder ($whereCondition = null, $order = null)
 		{
+			if ($order === null)
+			{
+				$order = [ 'order' => SORT_ASC ];
+			}
 
-			$objects = self::find()->orderBy([ 'order' => SORT_ASC ])->all();
+			$query = self::find()->orderBy($order);
+			if ($whereCondition !== null)
+			{
+				$query->where($whereCondition);
+			}
+
+			$objects = $query->all();
 			foreach ($objects as $k => $object)
 			{
 				$object->order = $k + 1;
@@ -118,4 +164,13 @@
 			}
 		}
 
+		/**
+		 * Additional condition to narrow an entity selection during a reorder.
+		 *
+		 * @return string|array|ExpressionInterface|null
+		 */
+		protected function orderCondition ()
+		{
+			return null;
+		}
 	}
