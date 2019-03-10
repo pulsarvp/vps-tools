@@ -224,7 +224,7 @@
 				{
 					foreach ($response as $item)
 					{
-						$kafka->offsets($item);
+						$this->offsets($item);
 					}
 
 					return $response;
@@ -275,7 +275,7 @@
 					curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
 					$server_output = curl_exec($ch);
-					
+
 					curl_close($ch);
 				}
 			}
