@@ -18,6 +18,24 @@
 	class BaseModel extends ActiveRecord
 	{
 
+		public static function batchRelink ($baseColumn, $baseValue, $relationColumn, $relationData)
+		{
+			self::deleteAll([ $baseColumn => $baseValue ]);
+
+			$columns = [ $baseColumn, $relationColumn ];
+
+			$insert = [];
+			foreach ($relationData as $item)
+				$insert[] = [ $baseValue, $item ];
+
+			if ($insert)
+			{
+				return Yii::$app->db->createCommand()->batchInsert(self::tableName(), $columns, $insert)->execute();
+			}
+
+			return true;
+		}
+
 		/**
 		 * @inheritdoc
 		 */
@@ -45,7 +63,7 @@
 		/***
 		 * Finds one model by condition or creates it if search result is empty.
 		 *
-		 * @param mixed      $condition  Condition that will be passed to `where` statement.
+		 * @param mixed      $condition Condition that will be passed to `where` statement.
 		 * @param array|null $attributes Array of attributes that will be used to create new model. If empty $condition
 		 *                               will be used.
 		 * @return BaseModel|null
