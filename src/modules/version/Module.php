@@ -21,6 +21,6 @@
 				  'pattern' => 'version',
 				  'route'   => $this->id . '/version/index'
 				],
-			]);
+			], false);
 		}
 	}
