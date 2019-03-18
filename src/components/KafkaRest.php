@@ -242,6 +242,8 @@
 					Console::printColor('Read error code: ' . $server_output);
 					$this->removeConsumer();
 					$this->initConsumer();
+
+					return [];
 				}
 				else
 				{
