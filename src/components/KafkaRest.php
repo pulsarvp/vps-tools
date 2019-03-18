@@ -127,6 +127,7 @@
 
 			curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 			$server_output = curl_exec($ch);
+			Console::printColor('Has consumer: ' . $server_output);
 			curl_close($ch);
 			$response = json_decode($server_output, true);
 
@@ -148,6 +149,8 @@
 			];
 			curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 			$server_output = curl_exec($ch);
+
+			Console::printColor('Remove consumer: ' . $server_output);
 			curl_close($ch);
 		}
 
@@ -171,6 +174,7 @@
 
 				$server_output = curl_exec($ch);
 
+				Console::printColor('Create consumer: ' . $server_output);
 				curl_close($ch);
 
 				$data[ 'topics' ] = $this->topic;
@@ -187,6 +191,8 @@
 				curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
 				$server_output = curl_exec($ch);
+
+				Console::printColor('Create instances: ' . $server_output);
 				curl_close($ch);
 			}
 			catch (\Exception $e)
@@ -195,6 +201,8 @@
 					throw new UnprocessableEntityHttpException($e->getMessage());
 
 				Yii::error($e->getMessage());
+				if (Yii::$app->has('logging'))
+					Yii::$app->logging->info(Yii::tr('Kafka init consumers {error}.', [ 'error' => $e->getMessage() ]));
 
 				return [];
 			}
@@ -231,8 +239,11 @@
 				}
 				elseif (!empty($response[ 'error_code' ]))
 				{
+					Console::printColor('Read error code: ' . $server_output);
 					$this->removeConsumer();
 					$this->initConsumer();
+
+					return [];
 				}
 				else
 				{
@@ -244,6 +255,8 @@
 				if (YII_DEBUG)
 					throw new UnprocessableEntityHttpException($e->getTraceAsString());
 				Yii::error($e->getMessage());
+				if (Yii::$app->has('logging'))
+					Yii::$app->logging->info(Yii::tr('Kafka read message {error}.', [ 'error' => $e->getMessage() ]));
 
 				return [];
 			}
@@ -285,6 +298,8 @@
 					throw new UnprocessableEntityHttpException($e->getMessage());
 
 				Yii::error($e->getMessage());
+				if (Yii::$app->has('logging'))
+					Yii::$app->logging->info(Yii::tr('Kafka set offsets {error}.', [ 'error' => $e->getMessage() ]));
 
 				return [];
 			}
