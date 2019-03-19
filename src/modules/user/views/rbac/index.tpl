@@ -1,5 +1,5 @@
 <ul class="nav nav-tabs" role="tablist">
-	<li class="nav-item">
+	<li class="nav-item active">
 		<a class="nav-link active" href="#users" role="tab" data-toggle="tab">{Yii::tr('Users', [], 'user')}</a></li>
 	<li class="nav-item">
 		<a class="nav-link" href="#roles" role="tab" data-toggle="tab">{Yii::tr('Roles', [], 'user')}</a></li>
@@ -8,7 +8,7 @@
 	</li>
 </ul>
 <div class="tab-content">
-	<div role="tabpanel" class="tab-pane container active" id="users">
+	<div role="tabpanel" class="tab-pane active" id="users">
 		<div class="object-filters form-inline">
 			<div class="filter form-group">
 				<label for="search-user">{Yii::tr('Search:', [], 'user')}</label>
@@ -58,7 +58,11 @@
 				{foreach $users as $user}
 					<tr>
 						<td>{$user['id']}</td>
-						<td>{Html::img($user['image'],['class'=>'img-thumbnail','width'=>'50'])}</td>
+						<td>
+							{if $user['image']}
+								{Html::img($user['image'],['height'=>'30'])}
+							{/if}
+						</td>
 						<td>{Html::a($user['name'],Url::toRoute(['user/view','id'=>$user['id']]))}</td>
 						<td>{$user['email']}</td>
 						<td>
@@ -93,7 +97,7 @@
 		</table>
 		{include file='pagination.tpl'}
 	</div>
-	<div role="tabpanel" class="tab-pane container" id="roles">
+	<div role="tabpanel" class="tab-pane" id="roles">
 		<table class="table table-hover table-striped" id="role-list">
 			<thead>
 				<tr>
@@ -129,7 +133,7 @@
 		</table>
 		{Html::button({Yii::tr('Add', [], 'user')},['class'=>'btn btn-info role-add'])}
 	</div>
-	<div role="tabpanel" class="tab-pane container" id="permission">
+	<div role="tabpanel" class="tab-pane" id="permission">
 		<table class="table table-hover table-striped" id="rule-list">
 			<thead>
 				<tr>
