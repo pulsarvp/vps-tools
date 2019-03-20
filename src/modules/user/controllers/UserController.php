@@ -39,6 +39,12 @@
 							'actions'      => [ 'auth', 'login', 'cancel' ],
 							'roles'        => [ '@' ],
 							'denyCallback' => function ($rule, $action) {
+								if ($action->id === 'auth' && Yii::$app->request->cookies->has('returnUrl'))
+								{
+									$url = Yii::$app->request->cookies->getValue('returnUrl', Url::toRoute([ '/site/index' ]));
+									Yii::$app->response->cookies->remove('returnUrl');
+									$this->redirect($url);
+								}
 								Yii::$app->notification->errorToSession(Yii::tr('You are already logged in.', [], 'user'));
 								$this->redirect(Url::toRoute([ '/user/index' ]));
 							}
@@ -46,7 +52,7 @@
 						[ 'allow' => true, 'actions' => [ 'index', 'logout', 'view' ], 'roles' => [ '@' ] ],
 						[
 							'allow'         => true,
-							'actions'       => [ 'manage', 'delete' ],
+							'actions'       => [ 'manage', 'delete', 'temp-login' ],
 							'roles'         => [ '@' ],
 							'matchCallback' => function ($rule, $action) {
 								if (!Yii::$app->user->identity->active)
@@ -113,15 +119,49 @@
 			$this->_tpl = '@userViews/login';
 			$defaultClient = Yii::$app->settings->get('auth_client_default', $this->module->defaultClient);
 			if (!Yii::$app->request->cookies->has('returnUrl'))
+			{
+				$url = !empty(Yii::$app->request->referer) ? Yii::$app->request->referrer : Url::toRoute('/site/index');
 				Yii::$app->response->cookies->add(new \yii\web\Cookie([
 					'name'  => 'returnUrl',
-					'value' => Yii::$app->request->referrer,
+					'value' => $url,
 				]));
+			}
+
 			$this->data('defaultClient', $defaultClient);
+		}
+
+		public function actionTempLogin ($id)
+		{
+			$user = User::findOne([ 'id' => $id ]);
+			if ($user !== null)
+			{
+				Yii::$app->session->set('isTempUser', true);
+				Yii::$app->session->set('originalUserID', Yii::$app->user->id);
+				Yii::$app->user->switchIdentity($user);
+			}
+
+			$this->redirect('/');
 		}
 
 		public function actionLogout ()
 		{
+			if (Yii::$app->session->get('isTempUser'))
+			{
+				$originalUserId = Yii::$app->session->get('originalUserID');
+				if ($originalUserId !== null)
+				{
+					$user = User::findOne([ 'id' => $originalUserId ]);
+					if ($user !== null)
+					{
+						Yii::$app->user->switchIdentity($user);
+						Yii::$app->session->remove('isTempUser');
+						Yii::$app->session->remove('originalUserID');
+
+						$this->redirect('/');
+					}
+				}
+			}
+
 			$this->_tpl = '@userViews/logout';
 			$referrer = Yii::$app->getRequest()->getReferrer();
 			Yii::$app->user->logout();

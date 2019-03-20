@@ -51,6 +51,7 @@
 					{/foreach}
 					{if Yii::$app->user->can('admin')}
 						<th class="no-sort"></th>
+						<th class="no-sort"></th>
 					{/if}
 				</tr>
 			</thead>
@@ -87,7 +88,13 @@
 						{if Yii::$app->user->can('admin')}
 							<td>
 								{if $user['id'] != Yii::$app->user->id}
-									{Html::a(Html::fa('remove'),Url::toRoute(['user/delete', 'id' => $user['id']]), [ 'class' => 'btn btn-sm btn-danger', 'title' => Yii::tr('Remove user?', [], 'user'), 'data-toggle'=>'confirmation', 'data-btn-ok-class'=>'btn-xs btn-danger', 'data-title'=>Yii::tr('Remove user?', [], 'user'), 'data-btn-ok-label'=>Yii::tr('Yes', [], 'user'), 'data-btn-cancel-label'=>Yii::tr('No', [], 'user') ])}
+									{$url="/user/temp-login?id=`$user['id']`"}
+									{Html::afa('user-secret', $url, [ 'target' => '_blank', 'title' => Yii::tr('Login as "{user}"', [ 'user' => $user['name'] ]) ])}
+								{/if}
+							</td>
+							<td>
+								{if $user['id'] != Yii::$app->user->id}
+									{Html::a(Html::fa('remove'),Url::toRoute(['user/delete', 'id' => $user['id']]), [ 'class' => 'btn btn-sm btn-xs btn-danger', 'title' => Yii::tr('Remove user?', [], 'user'), 'data-toggle'=>'confirmation', 'data-btn-ok-class'=>'btn-xs btn-danger', 'data-title'=>Yii::tr('Remove user?', [], 'user'), 'data-btn-ok-label'=>Yii::tr('Yes', [], 'user'), 'data-btn-cancel-label'=>Yii::tr('No', [], 'user') ])}
 								{/if}
 							</td>
 						{/if}
@@ -288,8 +295,7 @@
 			success  : function (data) {
 				if (data == 1) {
 					button.html('{Html::fa('check',['id'=>"btn{$user['id']}",'class'=>'text-default','title'=>Yii::tr('Disable', [], 'user')])}').attr('title', '{Yii::tr('Disable', [], 'user')}').removeClass('btn-danger').data('state', 0).addClass('btn-success');
-				}
-				else {
+				} else {
 					button.html('{Html::fa('ban',['id'=>"btn{$user['id']}",'class'=>'text-default','title'=>Yii::tr('Enable', [], 'user')])}').attr('title', '{Yii::tr('Enable', [], 'user')}').removeClass('btn-success').data('state', 1).addClass('btn-danger');
 				}
 			}
