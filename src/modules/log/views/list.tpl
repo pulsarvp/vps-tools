@@ -13,6 +13,15 @@
 			<input id="search" value="{if isset($search)}{$search}{/if}" type="text" class="form-control">
 		</div>
 		<div class="form-group pull-left">
+			<label for="filter-category">{Yii::tr('Category',[],'log')}</label><br>
+			<select id="filter-category" class="selectpicker">
+				<option value=""></option>
+				{foreach $categories as $item}
+					<option value="{$item}" {if $item == $category}selected{/if}>{$item}</option>
+				{/foreach}
+			</select>
+		</div>
+		<div class="form-group pull-left">
 			<label for="filter-type">{Yii::tr('Type',[],'log')}</label><br>
 			<select id="filter-type" class="selectpicker">
 				<option value=""></option>
