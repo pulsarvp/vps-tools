@@ -52,7 +52,7 @@
 						[ 'allow' => true, 'actions' => [ 'index', 'logout', 'view' ], 'roles' => [ '@' ] ],
 						[
 							'allow'         => true,
-							'actions'       => [ 'manage', 'delete' ],
+							'actions'       => [ 'manage', 'delete', 'temp-login' ],
 							'roles'         => [ '@' ],
 							'matchCallback' => function ($rule, $action) {
 								if (!Yii::$app->user->identity->active)
@@ -130,8 +130,38 @@
 			$this->data('defaultClient', $defaultClient);
 		}
 
+		public function actionTempLogin ($id)
+		{
+			$user = User::findOne([ 'id' => $id ]);
+			if ($user !== null)
+			{
+				Yii::$app->session->set('isTempUser', true);
+				Yii::$app->session->set('originalUserID', Yii::$app->user->id);
+				Yii::$app->user->switchIdentity($user);
+			}
+
+			$this->redirect('/');
+		}
+
 		public function actionLogout ()
 		{
+			if (Yii::$app->session->get('isTempUser'))
+			{
+				$originalUserId = Yii::$app->session->get('originalUserID');
+				if ($originalUserId !== null)
+				{
+					$user = User::findOne([ 'id' => $originalUserId ]);
+					if ($user !== null)
+					{
+						Yii::$app->user->switchIdentity($user);
+						Yii::$app->session->remove('isTempUser');
+						Yii::$app->session->remove('originalUserID');
+
+						$this->redirect('/');
+					}
+				}
+			}
+
 			$this->_tpl = '@userViews/logout';
 			$referrer = Yii::$app->getRequest()->getReferrer();
 			Yii::$app->user->logout();

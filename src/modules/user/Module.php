@@ -102,6 +102,10 @@
 				  'route'   => $this->id . '/user/login'
 				],
 				[ 'class'   => 'vps\tools\web\UrlRule',
+				  'pattern' => 'user/temp-login',
+				  'route'   => $this->id . '/user/temp-login'
+				],
+				[ 'class'   => 'vps\tools\web\UrlRule',
 				  'pattern' => 'user/logout',
 				  'route'   => $this->id . '/user/logout'
 				],
@@ -146,5 +150,10 @@
 			parent::init();
 			if (empty($this->defaultRole))
 				$this->defaultRole = User::R_REGISTERED;
+
+			if (Yii::$app->session->get('isTempUser'))
+			{
+				Yii::$app->notification->messageToSession('You are logged in as a temporary user.');
+			}
 		}
 	}
