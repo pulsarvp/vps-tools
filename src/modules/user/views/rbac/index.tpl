@@ -85,12 +85,12 @@
 							<td>
 								{if $user['id'] != Yii::$app->user->id}
 									{$url="/user/temp-login?id=`$user['id']`"}
-									{Html::a(Yii::tr('Login as'), $url, [ 'target' => '_blank' ])}
+									{Html::afa('user-secret', $url, [ 'target' => '_blank', 'title' => Yii::tr('Login as "{user}"', [ 'user' => $user['name'] ]) ])}
 								{/if}
 							</td>
 							<td>
 								{if $user['id'] != Yii::$app->user->id}
-									{Html::a(Html::fa('remove'),Url::toRoute(['user/delete', 'id' => $user['id']]), [ 'class' => 'btn btn-sm btn-danger', 'title' => Yii::tr('Remove user?', [], 'user'), 'data-toggle'=>'confirmation', 'data-btn-ok-class'=>'btn-xs btn-danger', 'data-title'=>Yii::tr('Remove user?', [], 'user'), 'data-btn-ok-label'=>Yii::tr('Yes', [], 'user'), 'data-btn-cancel-label'=>Yii::tr('No', [], 'user') ])}
+									{Html::a(Html::fa('remove'),Url::toRoute(['user/delete', 'id' => $user['id']]), [ 'class' => 'btn btn-sm btn-xs btn-danger', 'title' => Yii::tr('Remove user?', [], 'user'), 'data-toggle'=>'confirmation', 'data-btn-ok-class'=>'btn-xs btn-danger', 'data-title'=>Yii::tr('Remove user?', [], 'user'), 'data-btn-ok-label'=>Yii::tr('Yes', [], 'user'), 'data-btn-cancel-label'=>Yii::tr('No', [], 'user') ])}
 								{/if}
 							</td>
 						{/if}
