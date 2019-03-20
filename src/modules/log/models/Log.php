@@ -18,6 +18,7 @@
 	 * @property integer $userID
 	 * @property string  $email
 	 * @property string  $type
+	 * @property string  $category
 	 * @property string  $action
 	 * @property string  $url
 	 * @property string  $server
@@ -59,16 +60,17 @@
 				$category = 'app';
 
 			return [
-				'userID'  => Yii::tr('UserID', [], $category),
-				'email'   => Yii::tr('Email', [], $category),
-				'type'    => Yii::tr('Type', [], $category),
-				'action'  => Yii::tr('Action', [], $category),
-				'url'     => Yii::tr('Url', [], $category),
-				'server'  => Yii::tr('Server', [], $category),
-				'session' => Yii::tr('Session', [], $category),
-				'cookie'  => Yii::tr('Cookie', [], $category),
-				'post'    => Yii::tr('Post', [], $category),
-				'dt'      => Yii::tr('Dt', [], $category),
+				'userID'   => Yii::tr('UserID', [], $category),
+				'email'    => Yii::tr('Email', [], $category),
+				'type'     => Yii::tr('Type', [], $category),
+				'category' => Yii::tr('Category', [], 'log'),
+				'action'   => Yii::tr('Action', [], $category),
+				'url'      => Yii::tr('Url', [], $category),
+				'server'   => Yii::tr('Server', [], $category),
+				'session'  => Yii::tr('Session', [], $category),
+				'cookie'   => Yii::tr('Cookie', [], $category),
+				'post'     => Yii::tr('Post', [], $category),
+				'dt'       => Yii::tr('Dt', [], $category),
 			];
 		}
 
@@ -80,7 +82,7 @@
 			return [
 				[ [ 'userID' ], 'integer' ],
 				[ [ 'action', 'url', 'email' ], 'trim' ],
-				[ [ 'email', 'action' ], 'string', 'max' => 255 ],
+				[ [ 'email', 'action', 'category' ], 'string', 'max' => 255 ],
 				[ [ 'url' ], 'string', 'max' => 1000 ],
 				[ [ 'server', 'session', 'cookie', 'post', 'type' ], 'string' ],
 				[ [ 'dt' ], 'datetime', 'format' => 'php:' . TimeHelper::$dtFormat ],
