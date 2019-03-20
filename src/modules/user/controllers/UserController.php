@@ -39,6 +39,12 @@
 							'actions'      => [ 'auth', 'login', 'cancel' ],
 							'roles'        => [ '@' ],
 							'denyCallback' => function ($rule, $action) {
+								if ($action->id === 'auth' && Yii::$app->request->cookies->has('returnUrl'))
+								{
+									$url = Yii::$app->request->cookies->getValue('returnUrl', Url::toRoute([ '/site/index' ]));
+									Yii::$app->response->cookies->remove('returnUrl');
+									$this->redirect($url);
+								}
 								Yii::$app->notification->errorToSession(Yii::tr('You are already logged in.', [], 'user'));
 								$this->redirect(Url::toRoute([ '/user/index' ]));
 							}
@@ -113,10 +119,14 @@
 			$this->_tpl = '@userViews/login';
 			$defaultClient = Yii::$app->settings->get('auth_client_default', $this->module->defaultClient);
 			if (!Yii::$app->request->cookies->has('returnUrl'))
+			{
+				$url = !empty(Yii::$app->request->referer) ? Yii::$app->request->referrer : Url::toRoute('/site/index');
 				Yii::$app->response->cookies->add(new \yii\web\Cookie([
 					'name'  => 'returnUrl',
-					'value' => Yii::$app->request->referrer,
+					'value' => $url,
 				]));
+			}
+
 			$this->data('defaultClient', $defaultClient);
 		}
 
