@@ -12,15 +12,17 @@
 			<label for="search">{Yii::tr('Search',[],'log')}</label>
 			<input id="search" value="{if isset($search)}{$search}{/if}" type="text" class="form-control">
 		</div>
-		<div class="form-group pull-left">
-			<label for="filter-category">{Yii::tr('Category',[],'log')}</label><br>
-			<select id="filter-category" class="selectpicker">
-				<option value=""></option>
-				{foreach $categories as $item}
-					<option value="{$item}" {if $item == $category}selected{/if}>{$item}</option>
-				{/foreach}
-			</select>
-		</div>
+		{if !empty($categories)}
+			<div class="form-group pull-left">
+				<label for="filter-category">{Yii::tr('Category',[],'log')}</label><br>
+				<select id="filter-category" class="selectpicker">
+					<option value=""></option>
+					{foreach $categories as $item}
+						<option value="{$item}" {if $item == $category}selected{/if}>{$item}</option>
+					{/foreach}
+				</select>
+			</div>
+		{/if}
 		<div class="form-group pull-left">
 			<label for="filter-type">{Yii::tr('Type',[],'log')}</label><br>
 			<select id="filter-type" class="selectpicker">
@@ -48,8 +50,9 @@
 			</div>
 		{/if}
 		<div class="form-group pull-left">
-			<button type="button" class="btn btn-sm btn-default" id="reset">{Html::fa('ban')}</button>
-			<button type="button" class="btn btn-sm btn-primary" id="filter">{Html::fa('check')}</button>
+			<label>&nbsp;</label><br>
+			<button type="button" class="btn btn-md btn-default" id="reset">{Html::fa('ban')}</button>
+			<button type="button" class="btn btn-md btn-primary" id="filter">{Html::fa('check')}</button>
 		</div>
 	</div>
 </div>
