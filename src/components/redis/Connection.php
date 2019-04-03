@@ -53,7 +53,7 @@
 		public function executeCommand ($name, $params = [])
 		{
 
-			if (!empty(YII_DEBUG) and YII_DEBUG)
+			if (defined(YII_DEBUG) and YII_DEBUG)
 				return parent::executeCommand($name, $params);
 			else
 				try
