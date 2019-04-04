@@ -58,7 +58,7 @@
 			else
 				try
 				{
-					return parent::executeCommand($name);
+					return parent::executeCommand($name, $params);
 				}
 				catch (Exception $e)
 				{
