@@ -43,7 +43,7 @@
 				{
 					if ($model->save())
 					{
-						LogManager::info(Yii::tr('The user {user} created the export {id}.', [ 'user' => Html::a(Yii::$app->user->identity->name, Url::toRoute([ 'user/view', 'id' => Yii::$app->user->id ])), 'id' => Html::a($model->title, Url::toRoute([ 'export/view', 'id' => $model->id ])) ], 'export'));
+						LogManager::info(Yii::tr('The user created the export {id}.', ['id' => Html::a($model->title, Url::toRoute([ 'export/view', 'id' => $model->id ])) ], 'export'));
 
 						$this->redirect(Url::toRoute([ 'export/view', 'id' => $model->id ]));
 					}
@@ -69,7 +69,7 @@
 				elseif ($export->delete())
 				{
 					Yii::$app->notification->messageToSession(Yii::tr('Export has been deleted.', [], 'export'));
-					LogManager::info(Yii::tr('The user {user} has deleted the export of "{id}".', [ 'user' => Html::a(Yii::$app->user->identity->name, Url::toRoute([ 'user/view', 'id' => Yii::$app->user->id ])), 'id' => $export->title ], 'export'));
+					LogManager::info(Yii::tr('The user has deleted the export of "{id}".', [  'id' => $export->title ], 'export'));
 				}
 				else
 					Yii::$app->notification->errorToSession(Yii::tr('Export has not been deleted.', [], 'export'));
@@ -98,7 +98,7 @@
 				{
 					if ($object->save())
 					{
-						LogManager::info(Yii::tr('The user {user} changed the export of {id}.', [ 'user' => Html::a(Yii::$app->user->identity->name, Url::toRoute([ 'user/view', 'id' => Yii::$app->user->id ])), 'id' => Html::a($object->title, Url::toRoute([ 'export/view', 'id' => $object->id ])) ], 'export'));
+						LogManager::info(Yii::tr('The user changed the export of {id}.', [ 'id' => Html::a($object->title, Url::toRoute([ 'export/view', 'id' => $object->id ])) ], 'export'));
 
 						$this->redirect(Url::toRoute([ 'export/view', 'id' => $object->id ]));
 					}
@@ -145,7 +145,7 @@
 					])
 				]
 			]);
-			LogManager::info(Yii::tr('The user {user} opened the list of exports.', [ 'user' => Html::a(Yii::$app->user->identity->name, Url::toRoute([ 'user/view', 'id' => Yii::$app->user->id ])) ], 'export'));
+			LogManager::info(Yii::tr('The user opened the list of exports.', [], 'export'));
 
 			$this->setTitle(Yii::tr('List exports', [], 'export'));
 			$this->data('models', $provider->models);
@@ -165,7 +165,7 @@
 				Yii::$app->notification->errorToSession(Yii::tr('Given export does not exist.', [], 'export'));
 				$this->redirect(Url::toRoute([ 'export/index' ]));
 			}
-			LogManager::info(Yii::tr('The user {user} opened export {id}.', [ 'user' => Html::a(Yii::$app->user->identity->name, Url::toRoute([ 'view/view', 'id' => Yii::$app->user->id ])), 'id' => Html::a($export->title, Url::toRoute([ 'export/view', 'id' => $export->id ])) ], 'export'));
+			LogManager::info(Yii::tr('The user opened export {id}.', [ 'id' => Html::a($export->title, Url::toRoute([ 'export/view', 'id' => $export->id ])) ], 'export'));
 			if ($export->query != '')
 			{
 				try
@@ -234,7 +234,7 @@
 
 			fclose($fp);
 
-			LogManager::info(Yii::tr('The user {user} made the export {id} generation.', [ 'user' => Html::a(Yii::$app->user->identity->name, Url::toRoute([ 'user/view', 'id' => Yii::$app->user->id ])), 'id' => Html::a($export->title, Url::toRoute([ 'export/view', 'id' => $export->id ])) ], 'export'));
+			LogManager::info(Yii::tr('The user made the export {id} generation.', [ 'id' => Html::a($export->title, Url::toRoute([ 'export/view', 'id' => $export->id ])) ], 'export'));
 
 			Yii::$app->notification->messageToSession(Yii::tr('Download <a href="{link}">file</a>.', [ 'link' => Url::toRoute([ '/' . $filename ]) ], 'export'));
 			$this->redirect($_SERVER[ 'HTTP_REFERER' ]);

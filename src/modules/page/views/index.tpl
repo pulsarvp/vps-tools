@@ -1,3 +1,4 @@
+{if Yii::$app->user->identity->isPermission('admin_page')}
 {Html::a(Yii::tr('Add', [], 'page'), Url::toRoute(['/pages/page/add']),[ 'class' => 'btn btn-primary'])}
 <table class="table table-bordered table-hover" id="page-list">
 	<thead>
@@ -46,3 +47,6 @@
 	</tbody>
 </table>
 {include file='@vpsViews/pagination.tpl'}
+{else}
+	<div class="text-danger">{Yii::tr('Попытка взлома detected!')}</div>
+{/if}
