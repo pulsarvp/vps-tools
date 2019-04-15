@@ -52,12 +52,14 @@
 				<td class="text-center">{$queue->delay}</td>
 				<td class="text-center priority">
 					<span class="priority-value">{$queue->priority}</span>
-					<btn class="btn btn-xs btn-success priority-edit"><i class="fa fa-pencil"></i></btn>
-					<div class="priority-edit-buttons">
-						<btn class="btn btn-xs btn-success priority-edit-save"><i class="fa fa-check"></i></btn>
-						<btn class="btn btn-xs btn-danger priority-edit-cancel"><i class="fa fa-ban"></i></btn>
-					</div>
-					<p class="text-danger error" style="display: none;"></p>
+					{if empty($queue->pid)}
+						<btn class="btn btn-xs btn-success priority-edit"><i class="fa fa-pencil"></i></btn>
+						<div class="priority-edit-buttons">
+							<btn class="btn btn-xs btn-success priority-edit-save"><i class="fa fa-check"></i></btn>
+							<btn class="btn btn-xs btn-danger priority-edit-cancel"><i class="fa fa-ban"></i></btn>
+						</div>
+						<p class="text-danger error" style="display: none;"></p>
+					{/if}
 				</td>
 				<td class="text-center">{Yii::$app->formatter->asDatetime($queue->pushed_at)}</td>
 				<td class="text-center">{Yii::$app->formatter->asDatetime($queue->reserved_at)}</td>
