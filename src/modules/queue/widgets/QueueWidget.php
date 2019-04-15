@@ -38,7 +38,7 @@
 				]
 			]);
 
-			Yii::$app->view->registerCss('.job pre{display:block; overflow:hidden; color:#EBEBEB; padding:.5em; border:0px; background:inherit; font-size:11px; min-width:350px; white-space:pre-wrap; word-wrap:break-word;}');
+			Yii::$app->view->registerCss('.job pre{display:block; overflow:hidden; color:#EBEBEB; padding:.5em; border:0px; background:inherit; font-size:11px;min-width:350px; white-space:pre-wrap; word-wrap:break-word;} .priority {width: 7%;} .priority .priority-edit-buttons {display: none; margin-top: 5px; text-align: right;.priority .error {display: none;}');
 		}
 
 		/**

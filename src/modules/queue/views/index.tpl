@@ -50,7 +50,15 @@
 				<td class="text-center">{$queue->channel}</td>
 				<td class="text-center">{$queue->ttr}</td>
 				<td class="text-center">{$queue->delay}</td>
-				<td class="text-center">{$queue->priority}</td>
+				<td class="text-center priority">
+					<span class="priority-value">{$queue->priority}</span>
+					<btn class="btn btn-xs btn-success priority-edit"><i class="fa fa-pencil"></i></btn>
+					<div class="priority-edit-buttons">
+						<btn class="btn btn-xs btn-success priority-edit-save"><i class="fa fa-check"></i></btn>
+						<btn class="btn btn-xs btn-danger priority-edit-cancel"><i class="fa fa-ban"></i></btn>
+					</div>
+					<p class="text-danger error" style="display: none;"></p>
+				</td>
 				<td class="text-center">{Yii::$app->formatter->asDatetime($queue->pushed_at)}</td>
 				<td class="text-center">{Yii::$app->formatter->asDatetime($queue->reserved_at)}</td>
 				<td class="text-center">
@@ -88,5 +96,76 @@
 	});
 	$('#filter-channel').on('hide.bs.select', function () {
 		window.location.href = '?filterChannel=' + $(this).val();
+	});
+
+	function closePriorityEdit (row) {
+		var prioritySpan = row.find('.priority-value'),
+		    buttons      = row.find('.priority-edit-buttons'),
+		    editButton   = row.find('.priority-edit');
+
+		row.removeClass('danger edit');
+		row.find('.error').hide();
+
+		buttons.hide();
+		editButton.show();
+		prioritySpan
+			.removeClass('form-control')
+			.text(prioritySpan.attr('data-original-value'))
+			.attr('contenteditable', false);
+	}
+
+	$('.priority-edit').click(function () {
+		$(this).hide();
+
+		$('tr.edit').each(function (i, item) {
+			closePriorityEdit($(item));
+		});
+
+		var row           = $(this).closest('tr'),
+		    prioritySpan  = row.find('.priority-value'),
+		    priorityValue = prioritySpan.text(),
+		    buttons       = row.find('.priority-edit-buttons');
+
+		buttons.show();
+
+		row.addClass('edit').removeClass('danger').find('.error').hide();
+
+		prioritySpan
+			.attr('data-original-value', priorityValue)
+			.addClass('form-control')
+			.attr('contenteditable', true)
+			.focus();
+	});
+
+	$('.priority-edit-cancel').click(function () {
+		closePriorityEdit($(this).closest('tr'))
+	});
+
+	$('.priority-edit-save').click(function () {
+		var row           = $(this).closest('tr'),
+		    prioritySpan  = row.find('.priority-value'),
+		    priorityValue = prioritySpan.text();
+
+		jQuery.ajax({
+			url      : '{Url::toRoute('queue/change-priority')}',
+			type     : 'POST',
+			data     : {
+				'{Yii::$app->request->csrfParam}' : '{Yii::$app->request->getCsrfToken()}',
+				queueId                           : row.data('id'),
+				priority                          : priorityValue,
+			},
+			dataType : "json",
+			success  : function (data) {
+				if (data.error) {
+					row.addClass('danger').find('.error').html(data.error).show();
+					return;
+				}
+
+				prioritySpan.attr('data-original-value', data);
+				closePriorityEdit(row);
+			}
+		}).fail(function () {
+			closePriorityEdit(row);
+		});
 	});
 </script>
