@@ -115,7 +115,6 @@
 					newValue = editor.getValue();
 				else
 					newValue = tr.find('td.value').text();
-				console.log(newValue);
 				var newDescription = tr.find('td.description').html();
 				tr.find('p.error').remove();
 				jQuery.ajax({
@@ -327,7 +326,7 @@
 			}
 
 			function booleanInput (value, td) {
-				var radio = $('.btn-group').clone();
+				var radio = $('.block-edit-radio').clone();
 				radio.removeClass('hide').removeClass('d-none');
 				if (value.trim() != 0) {
 					radio.find('.yes').addClass('active');
@@ -392,7 +391,7 @@
 	<div class="json col-md-3 d-none hide">
 		<textarea name="value" class="textarea"></textarea>
 	</div>
-	<div class="btn-group btn-group-toggle col-md-3 d-none hide" data-toggle="buttons">
+	<div class="btn-group btn-group-toggle col-md-3 d-none hide block-edit-radio" data-toggle="buttons">
 		<label class="btn btn-success yes">
 			<input type="radio" name="value" autocomplete="off" value="1" checked>{Yii::$app->formatter->asBoolean(1)}
 		</label>
