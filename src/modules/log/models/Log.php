@@ -63,7 +63,7 @@
 				'userID'   => Yii::tr('UserID', [], $category),
 				'email'    => Yii::tr('Email', [], $category),
 				'type'     => Yii::tr('Type', [], $category),
-				'category' => Yii::tr('Category', [], 'log'),
+				'category' => Yii::tr('Category', [], $category),
 				'action'   => Yii::tr('Action', [], $category),
 				'url'      => Yii::tr('Url', [], $category),
 				'server'   => Yii::tr('Server', [], $category),
