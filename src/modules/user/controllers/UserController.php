@@ -296,15 +296,17 @@
 						$user = new $userClass;
 						$user->register($attributes[ 'name' ], $attributes[ 'email' ], $attributes[ 'profile' ], $this->module->autoactivate);
 
-						if ($attributes[ 'roles' ])
+						if (!empty($attributes[ 'roles' ]))
+						{
 							$user->assignRoles($attributes[ 'roles' ]);
+							if (is_array($attributes[ 'roles' ]) and in_array(User::R_ADMIN, $attributes[ 'roles' ]))
+								$user->active = 1;
+						}
 						else
 							$user->assignRole($this->module->defaultRole);
-
-						if (is_array($attributes[ 'roles' ]) and in_array(User::R_ADMIN, $attributes[ 'roles' ]))
-							$user->active = 1;
 					}
-					if ($attributes[ 'image' ] and $user->image != $attributes[ 'image' ])
+
+					if (!empty($attributes[ 'image' ]) and $user->image != $attributes[ 'image' ])
 					{
 						$user->image = $attributes[ 'image' ];
 					}
