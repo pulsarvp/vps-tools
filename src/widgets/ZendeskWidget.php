@@ -10,10 +10,10 @@
 
 	use Yii;
 
-	class GoogleWidget extends AnalyticWidgetAbstract
+	class ZendeskWidget extends AnalyticWidgetAbstract
 	{
-		public $nameSettingAnalyticUseSuffix = 'google_use';
-		public $nameSettingAnalyticKeySuffix = 'google_key';
+		public $nameSettingAnalyticUseSuffix = 'zendesk_use';
+		public $nameSettingAnalyticKeySuffix = 'zendesk_key';
 
 		/**
 		 * @inheritdoc
@@ -21,8 +21,10 @@
 		public function run ()
 		{
 			if (Yii::$app->settings->get($this->getNameUseSetting()))
-				return $this->renderFile(__DIR__ . '/views/analytics/google.tpl', [
+				return $this->renderFile(__DIR__ . '/views/analytics/zendesk.tpl', [
 					'key' => Yii::$app->settings->get($this->getNameKeySetting())
 				]);
 		}
+
+
 	}
