@@ -14,6 +14,7 @@
 	{
 		public $nameSettingAnalyticUseSuffix = 'google_use';
 		public $nameSettingAnalyticKeySuffix = 'google_key';
+		public $userHash;
 
 		/**
 		 * @inheritdoc
@@ -22,7 +23,8 @@
 		{
 			if (Yii::$app->settings->get($this->getNameUseSetting()))
 				return $this->renderFile(__DIR__ . '/views/analytics/google.tpl', [
-					'key' => Yii::$app->settings->get($this->getNameKeySetting())
+					'key'  => Yii::$app->settings->get($this->getNameKeySetting()),
+					'hash' => $this->userHash
 				]);
 		}
 	}

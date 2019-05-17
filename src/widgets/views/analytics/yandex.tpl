@@ -7,7 +7,10 @@
 					clickmap            : true,
 					trackLinks          : true,
 					accurateTrackBounce : true,
-					webvisor            : true
+					webvisor            : true,
+					{if !empty($hash)}
+					userParams          : { UserID : '{$hash}' }
+					{/if}
 				});
 			} catch (e) { }
 		});

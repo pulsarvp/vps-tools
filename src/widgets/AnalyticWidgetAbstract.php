@@ -19,6 +19,7 @@
 		public $nameSettingAnalyticUseSuffix;
 		public $nameSettingAnalyticKeySuffix;
 		public $nameTemplate;
+		public $userHash;
 
 		/**
 		 * @inheritdoc
