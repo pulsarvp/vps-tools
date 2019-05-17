@@ -2,8 +2,12 @@
 <script>
 	window.dataLayer = window.dataLayer || [];
 
-	function gtag (){ldelim}dataLayer.push(arguments);{rdelim}
+	function gtag () {ldelim}dataLayer.push(arguments);{rdelim}
+
 	gtag('js', new Date());
 
 	gtag('config', '{$key}');
+	{if !empty($hash)}
+	gtag('userId', '{$hash}');
+	{/if}
 </script>
