@@ -9,39 +9,22 @@
 	namespace vps\tools\widgets;
 
 	use Yii;
-	use yii\base\Widget;
-	use yii\web\View;
 
-	class GoogleWidget extends Widget
+	class GoogleWidget extends AnalyticWidgetAbstract
 	{
-
-		/**
-		 * @inheritdoc
-		 */
-		public function init ()
-		{
-			parent::init();
-			$this->view = new View([
-				'renderers' => [
-					'tpl' => [
-						'class'   => 'yii\smarty\ViewRenderer',
-						'imports' => [
-							'Html' => '\vps\tools\helpers\Html',
-							'Url'  => '\vps\tools\helpers\Url'
-						]
-					]
-				]
-			]);
-		}
+		public $nameSettingAnalyticUseSuffix = 'google_use';
+		public $nameSettingAnalyticKeySuffix = 'google_key';
+		public $userHash;
 
 		/**
 		 * @inheritdoc
 		 */
 		public function run ()
 		{
-			if (Yii::$app->settings->get('analytics_google_use'))
+			if (Yii::$app->settings->get($this->getNameUseSetting()))
 				return $this->renderFile(__DIR__ . '/views/analytics/google.tpl', [
-					'key' => Yii::$app->settings->get('analytics_google_key')
+					'key'  => Yii::$app->settings->get($this->getNameKeySetting()),
+					'hash' => $this->userHash
 				]);
 		}
 	}

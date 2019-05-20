@@ -9,39 +9,23 @@
 	namespace vps\tools\widgets;
 
 	use Yii;
-	use yii\base\Widget;
-	use yii\web\View;
 
-	class YandexWidget extends Widget
+	class YandexWidget extends AnalyticWidgetAbstract
 	{
-
-		/**
-		 * @inheritdoc
-		 */
-		public function init ()
-		{
-			parent::init();
-			$this->view = new View([
-				'renderers' => [
-					'tpl' => [
-						'class'   => 'yii\smarty\ViewRenderer',
-						'imports' => [
-							'Html' => '\vps\tools\helpers\Html',
-							'Url'  => '\vps\tools\helpers\Url'
-						]
-					]
-				]
-			]);
-		}
+		public $nameSettingAnalyticUseSuffix = 'yandex_use';
+		public $nameSettingAnalyticKeySuffix = 'yandex_key';
+		public $userHash;
 
 		/**
 		 * @inheritdoc
 		 */
 		public function run ()
 		{
-			if (Yii::$app->settings->get('analytics_yandex_use'))
+			if (Yii::$app->settings->get($this->getNameUseSetting()))
 				return $this->renderFile(__DIR__ . '/views/analytics/yandex.tpl', [
-					'key' => Yii::$app->settings->get('analytics_yandex_key')
+					'key'  => Yii::$app->settings->get($this->getNameKeySetting()),
+					'hash' => $this->userHash
 				]);
 		}
+
 	}
