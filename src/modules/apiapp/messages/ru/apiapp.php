@@ -3,7 +3,10 @@
 	 * Message translations.
 	 */
 	return [
+		'Yes'                                               => 'Да',
+		'No'                                                => 'Нет',
 		'Add new application'                               => 'Добавить новое приложение',
+		'Remove application API?'                           => 'Удалить приложение API?',
 		'Approved'                                          => 'Доверенное приложение',
 		'Close'                                             => 'Закрыть',
 		'Create'                                            => 'Создать',
