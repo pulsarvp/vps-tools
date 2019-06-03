@@ -48,6 +48,7 @@
 		public function run ()
 		{
 			$apiapps = Apiapp::find()->orderBy('name')->all();
+			$this->deleteApi();
 			$appnew = $this->addApp();
 			$viewID = Yii::$app->session->get('viewID', 0);
 			Yii::$app->session->set('viewID', 0);
@@ -92,5 +93,22 @@
 			}
 
 			return $appNew;
+		}
+
+		/**
+		 * Удаление приложения API
+		 */
+		private function deleteApi ()
+		{
+			if (Yii::$app->request->get('action', false) === 'delete')
+			{
+				$model = Apiapp::findOne(Yii::$app->request->get('id', 0));
+				if(!empty($model)){
+					$model->delete();
+				}
+
+				Yii::$app->controller->redirect(['appapi/index']);
+				Yii::$app->end();
+			}
 		}
 	}

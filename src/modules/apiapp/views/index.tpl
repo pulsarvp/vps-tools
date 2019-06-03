@@ -5,7 +5,7 @@
 				<th>{Yii::tr('ID',[],'apiapp')}</th>
 				<th>{Yii::tr('Name',[],'apiapp')}</th>
 				<th>{Yii::tr('Token',[],'apiapp')}</th>
-				<th style="width: 1px"></th>
+				<th style="width: 12%"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -16,14 +16,27 @@
 					<td class="token">
 						{$apiapp->token}
 					</td>
-					<td class="control nowrap">
-						<div class="edit">
-							{Html::buttonFa('', 'pencil', [ 'class' => 'btn btn-sm btn-primary apiapp-edit', 'title' => Yii::tr('Edit',[],'apiapp') ])}
-						</div>
+					<td class="control">
+						<span class="edit">
+							{Html::buttonFa('', 'pencil', [ 'class' => 'btn btn-sm btn-info apiapp-edit', 'title' => Yii::tr('Edit',[],'apiapp') ])}
+						</span>
 
-						<div class="save" style="display: none">
+						<span class="save" style="display: none">
 							{Html::buttonFa('', 'check', [ 'class' => 'btn btn-sm btn-success apiapp-save', 'title' => Yii::tr('Save',[],'apiapp') ])}
-						</div>
+						</span>
+						{Html::a(
+							Html::fa('remove'),
+							Url::toRoute(['appapi/index', 'action' => 'delete', 'id' => $apiapp->id]),
+							[
+								'class' => 'btn btn-sm btn-danger',
+								'title' => Yii::tr('Remove application API?',[],'apiapp'),
+								'data-toggle'=>'confirmation',
+								'data-btn-ok-class'=>'btn-xs btn-danger',
+								'data-title'=>Yii::tr('Remove application API?',[],'apiapp'),
+								'data-btn-ok-label'=>Yii::tr('Yes',[],'apiapp'),
+								'data-btn-cancel-label'=>Yii::tr('No',[],'apiapp')
+							]
+						)}
 					</td>
 				</tr>
 			{/foreach}
