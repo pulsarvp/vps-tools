@@ -24,7 +24,6 @@
         public static $statuses = [
             QueueInformation::STATUS_WAITING  => 'Waiting',
             QueueInformation::STATUS_RESERVED => 'Reserved',
-            QueueInformation::STATUS_DONE     => 'Done',
             QueueInformation::STATUS_DELAYED  => 'Delayed',
         ];
 
