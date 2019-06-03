@@ -5,7 +5,8 @@
 				{Html::a(Html::fa('pencil'),Url::toRoute(['export/edit', 'id' => $export->id]), [ 'class' => 'btn btn-success', 'title' => $export->title ])}
 			{/if}
 			{if Yii::$app->user->identity->hasPermission('generateExport')}
-				{Html::a(Yii::tr('Generate', [], 'export'),Url::toRoute(['export/generate', 'id' => $export->id]), [ 'class' => 'btn btn-info', 'title' => $export->title ])}
+				{Html::a(Yii::tr('Generate XLS', [], 'export'),Url::toRoute(['export/generate-xls', 'id' => $export->id]), [ 'class' => 'btn btn-info', 'title' => $export->title ])}
+				{Html::a(Yii::tr('Generate CSV', [], 'export'),Url::toRoute(['export/generate', 'id' => $export->id]), [ 'class' => 'btn btn-info', 'title' => $export->title ])}
 			{/if}
 		</div>
 		<div class="col-sm-12">
@@ -43,7 +44,7 @@
 					{foreach $models as $k=>$model}
 						<tr>
 							{foreach $model as $item}
-							<td>{$item}</td>
+								<td>{$item}</td>
 							{/foreach}
 						</tr>
 					{/foreach}

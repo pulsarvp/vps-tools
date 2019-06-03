@@ -35,7 +35,8 @@
 		"sentry/sentry": "~1.6",
 		"yiisoft/yii2-swiftmailer": "~2.0",
 		"zyx/zyx-phpmailer": "^0.9.4",
-		"imagine/imagine": "~0.7"
+		"imagine/imagine": "~0.7",
+		"phpoffice/phpexcel": "~1.8.2"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~6.1",

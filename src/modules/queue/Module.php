@@ -32,6 +32,11 @@
 					'pattern' => 'queue/<action:[\w\-]+>',
 					'route'   => $this->id . '/queue/<action>'
 				],
+                [
+                    'class'   => 'yii\web\UrlRule',
+                    'pattern' => 'queue-redis/<action:[\w\-]+>',
+                    'route'   => $this->id . '/queue-redis/<action>'
+                ],
 			], false);
 
 			// Add module I18N category.

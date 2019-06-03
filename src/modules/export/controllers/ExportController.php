@@ -10,6 +10,9 @@
 	namespace vps\tools\modules\export\controllers;
 
 	use app\base\Controller;
+	use PHPExcel;
+	use PHPExcel_IOFactory;
+	use PHPExcel_Style_Alignment;
 	use vps\tools\helpers\FileHelper;
 	use vps\tools\helpers\Html;
 	use vps\tools\helpers\StringHelper;
@@ -43,7 +46,7 @@
 				{
 					if ($model->save())
 					{
-						LogManager::info(Yii::tr('The user created the export {id}.', ['id' => Html::a($model->title, Url::toRoute([ 'export/view', 'id' => $model->id ])) ], 'export'));
+						LogManager::info(Yii::tr('The user created the export {id}.', [ 'id' => Html::a($model->title, Url::toRoute([ 'export/view', 'id' => $model->id ])) ], 'export'));
 
 						$this->redirect(Url::toRoute([ 'export/view', 'id' => $model->id ]));
 					}
@@ -69,7 +72,7 @@
 				elseif ($export->delete())
 				{
 					Yii::$app->notification->messageToSession(Yii::tr('Export has been deleted.', [], 'export'));
-					LogManager::info(Yii::tr('The user has deleted the export of "{id}".', [  'id' => $export->title ], 'export'));
+					LogManager::info(Yii::tr('The user has deleted the export of "{id}".', [ 'id' => $export->title ], 'export'));
 				}
 				else
 					Yii::$app->notification->errorToSession(Yii::tr('Export has not been deleted.', [], 'export'));
@@ -233,6 +236,93 @@
 			}
 
 			fclose($fp);
+
+			LogManager::info(Yii::tr('The user made the export {id} generation.', [ 'id' => Html::a($export->title, Url::toRoute([ 'export/view', 'id' => $export->id ])) ], 'export'));
+
+			Yii::$app->notification->messageToSession(Yii::tr('Download <a href="{link}">file</a>.', [ 'link' => Url::toRoute([ '/' . $filename ]) ], 'export'));
+			$this->redirect($_SERVER[ 'HTTP_REFERER' ]);
+		}
+
+		/**
+		 * Information
+		 */
+		public function actionGenerateXls ($id)
+		{
+			$export = Export::find()->where([ 'id' => $id ])->one();
+			if ($export === null)
+			{
+				Yii::$app->notification->errorToSession(Yii::tr('Given export does not exist.', [], 'export'));
+				$this->redirect(Url::toRoute([ 'export/index' ]));
+			}
+			$data = [];
+			try
+			{
+				$data = Yii::$app->db->createCommand($export->query)->queryAll();
+			}
+			catch (Exception $e)
+			{
+				Yii::$app->notification->errorToSession($e->getMessage());
+				$this->redirect(Url::toRoute([ 'export/index' ]));
+			}
+			$dir = 'file/export/';
+
+			FileHelper::createDirectory(Yii::getAlias('@datapath') . '/' . $dir);
+			$filename = $dir . $export->prefix . '-' . date('Y-m-d-H-i-s') . '-' . StringHelper::random() . '.xls';
+
+			$objPHPExcel = new PHPExcel();
+			$objPHPExcel->setActiveSheetIndex(0);
+			$sheet = $objPHPExcel->getActiveSheet();
+
+			$sheet->setTitle("Speaker");
+
+			$str = 0;
+
+			$cel = 0;
+			$sheet->getStyle('A' . $str)->getAlignment()->setHorizontal(
+				PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+			foreach (range('A', 'Z') as $columnID)
+			{
+				$objPHPExcel->getActiveSheet()->getColumnDimension($columnID)
+					->setAutoSize(true);
+			}
+
+			$header = array_keys($data[ 0 ]);
+
+			$str++;
+			$cel = 0;
+			foreach ($header as $row1 => $td)
+			{
+
+				$sheet->setCellValueByColumnAndRow(
+					$cel,
+					$str,
+					$td);
+				$cel = $cel + 1;
+			}
+
+			if (count($data) > 0)
+			{
+
+				foreach ($data as $row => $tr)
+				{
+					$str++;
+					$cel = 0;
+					foreach ($tr as $row1 => $td)
+					{
+						$sheet->setCellValueByColumnAndRow(
+							$cel,
+							$str,
+							$td);
+						$cel = $cel + 1;
+					}
+				}
+			}
+
+			$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+			$objWriter->save(Yii::getAlias('@datapath') . '/' . $filename);
+			unset($objWriter);
+			unset($objPHPExcel);
 
 			LogManager::info(Yii::tr('The user made the export {id} generation.', [ 'id' => Html::a($export->title, Url::toRoute([ 'export/view', 'id' => $export->id ])) ], 'export'));
 
