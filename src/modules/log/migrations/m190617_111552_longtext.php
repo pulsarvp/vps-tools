@@ -14,5 +14,9 @@
 
 		public function safeDown ()
 		{
+			$this->alterColumn('log', 'server', $this->text()->null());
+			$this->alterColumn('log', 'session', $this->text()->null());
+			$this->alterColumn('log', 'cookie', $this->text()->null());
+			$this->alterColumn('log', 'post', $this->text()->null());
 		}
 	}
