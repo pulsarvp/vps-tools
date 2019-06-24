@@ -6,6 +6,8 @@
 
 	class Queue extends \yii\queue\redis\Queue
 	{
+		public $ttr = 86400;
+
 		/**
 		 * Set channel from DB settings.
 		 * @param string $value
