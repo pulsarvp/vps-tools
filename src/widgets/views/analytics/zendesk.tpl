@@ -1,1 +1,22 @@
-<script>/*<![CDATA[*/window.zE||(function(e,t,s) { var n=window.zE=window.zEmbed=function() { n._.push(arguments)}, a=n.s=e.createElement(t),r=e.getElementsByTagName(t)[0];n.set=function(e) { n.set._.push(e) } ,n._=[],n.set._=[],a.async=true,a.setAttribute("charset","utf-8"), a.src="https://static.zdassets.com/ekr/asset_composer.js?key="+s, n.t=+new Date,a.type="text/javascript", r.parentNode.insertBefore(a,r)})(document,"script","{$key}");/*]]>*/ zE(function() { zE.setLocale('ru'); } );</script>
+<script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key={$key}"></script>
+<script>
+	$(document).ready(function () {
+		zE('webWidget', 'setLocale', 'ru');
+		{if isset($user)}
+		zE('webWidget', 'prefill', {
+			{if !empty($user.name)}
+			name  : {
+				value    : '{$user.name}{if !empty($user.untiID)} [U{$user.untiID}]{/if}{if !empty($user.leaderID)} [L{$user.leaderID}]{/if}',
+				readOnly : true
+			},
+			{/if}
+			{if !empty($user.email)}
+			email : {
+				value    : '{$user.email}',
+				readOnly : false
+			}
+			{/if}
+		});
+		{/if}
+	});
+</script>
