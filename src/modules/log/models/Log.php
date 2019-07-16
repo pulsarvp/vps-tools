@@ -82,9 +82,9 @@
 			return [
 				[ [ 'userID' ], 'integer' ],
 				[ [ 'action', 'url', 'email' ], 'trim' ],
-				[ [ 'email', 'action', 'category' ], 'string', 'max' => 255 ],
+				[ [ 'email', 'category' ], 'string', 'max' => 255 ],
 				[ [ 'url' ], 'string', 'max' => 1000 ],
-				[ [ 'server', 'session', 'cookie', 'post', 'type' ], 'string' ],
+				[ [ 'server', 'session', 'cookie', 'post', 'action', 'type' ], 'string' ],
 				[ [ 'dt' ], 'datetime', 'format' => 'php:' . TimeHelper::$dtFormat ],
 			];
 		}
