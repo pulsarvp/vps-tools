@@ -2,53 +2,55 @@
 	<div class="col-sm-12 col">
 		<div class="form-group pull-left">
 			<label for="filter-to">{Yii::tr('Date end',[],'log')}</label>
-			<input id="filter-to" value="{if isset($to)}{$to}{/if}" type="text" class="form-control" placeholder="2017-10-20">
+			<input id="filter-to" value="{if isset($to)}{$to}{/if}" type="date" class="form-control" placeholder="2017-10-20">
 		</div>
 		<div class="form-group pull-left">
 			<label for="filter-from">{Yii::tr('Date start',[],'log')}</label>
-			<input id="filter-from" value="{if isset($from)}{$from}{/if}" type="text" class="form-control" placeholder="2017-11-25">
+			<input id="filter-from" value="{if isset($from)}{$from}{/if}" type="date" class="form-control" placeholder="2017-11-25">
 		</div>
 		<div class="form-group pull-left">
 			<label for="search">{Yii::tr('Search',[],'log')}</label>
 			<input id="search" value="{if isset($search)}{$search}{/if}" type="text" class="form-control">
 		</div>
-		{if !empty($categories)}
+        {if !empty($categories)}
 			<div class="form-group pull-left">
 				<label for="filter-category">{Yii::tr('Category',[],'log')}</label><br>
 				<select id="filter-category" class="selectpicker">
 					<option value=""></option>
-					{foreach $categories as $item}
-						<option value="{$item}" {if $item == $category}selected{/if}>{$item}</option>
-					{/foreach}
+                    {foreach $categories as $item}
+                        {if $item!=''}
+							<option value="{$item}" {if $item == $category}selected{/if}>{$item}</option>
+                        {/if}
+                    {/foreach}
 				</select>
 			</div>
-		{/if}
+        {/if}
 		<div class="form-group pull-left">
 			<label for="filter-type">{Yii::tr('Type',[],'log')}</label><br>
 			<select id="filter-type" class="selectpicker">
 				<option value=""></option>
-				{foreach $types as $item}
+                {foreach $types as $item}
 					<option value="{$item}" {if $item == $type}selected{/if}>{$item}</option>
-				{/foreach}
+                {/foreach}
 			</select>
 		</div>
-		{if isset($users)}
+        {if isset($users)}
 			<div class="form-group pull-left">
 				<label for="filter-userID">{Yii::tr('User',[],'user')}</label><br>
 				<select id="filter-userID" class="selectpicker" data-live-search="true">
 					<option value=""></option>
-					{foreach $users as $item}
+                    {foreach $users as $item}
 						<option value="{$item->id}" {if $item->id == $userID}selected{/if}>
-							{if isset($item->prettyName)}
-								{$item->prettyName}
-							{else}
-								{$item->name}
-							{/if}
+                            {if isset($item->prettyName)}
+                                {$item->prettyName}
+                            {else}
+                                {$item->name}
+                            {/if}
 						</option>
-					{/foreach}
+                    {/foreach}
 				</select>
 			</div>
-		{/if}
+        {/if}
 		<div class="form-group pull-left">
 			<label>&nbsp;</label><br>
 			<button type="button" class="btn btn-md btn-default" id="reset">{Html::fa('ban')}</button>
@@ -59,30 +61,30 @@
 <table class="table table-bordered table-hover" id="log-list">
 	<thead>
 		<tr>
-			{foreach [ 'userID', 'email', 'type', 'action', 'url', 'dt']  as $key}
+            {foreach [ 'userID', 'email', 'type', 'action', 'url', 'dt']  as $key}
 				<th>
-					{Yii::tr(ucfirst($key),[],'log')}
-					{if isset($sort)}
-						{if array_key_exists($key, $sort->attributeOrders)}
-							{if $sort->attributeOrders[$key] == SORT_ASC}
+                    {Yii::tr(ucfirst($key),[],'log')}
+                    {if isset($sort)}
+                        {if array_key_exists($key, $sort->attributeOrders)}
+                            {if $sort->attributeOrders[$key] == SORT_ASC}
 								<a href="{Url::current([ 'sort' => "-`$key`",'page' => "" ])}">
 									<i class="fa fa-sort-numeric-asc"></i>
 								</a>
-							{else}
+                            {else}
 								<a href="{Url::current([ 'sort' => $key,'page' => "" ])}">
 									<i class="fa fa-sort-numeric-desc"></i></a>
-							{/if}
-						{elseif array_key_exists($key, $sort->attributes)}
+                            {/if}
+                        {elseif array_key_exists($key, $sort->attributes)}
 							<a href="{Url::current([ 'sort' => $key,'page' => "" ])}"><i class="fa fa-sort"></i>
 							</a>
-						{/if}
-					{/if}
+                        {/if}
+                    {/if}
 				</th>
-			{/foreach}
+            {/foreach}
 		</tr>
 	</thead>
 	<tbody>
-		{foreach $models as $k=>$model}
+        {foreach $models as $k=>$model}
 			<tr class="log-info">
 				<td class="userID">{$model->userID}</td>
 				<td>{Html::a($model->email,Url::toRoute(['/user/view','id'=>$model->userID]))}</td>
@@ -93,7 +95,7 @@
 					<small>{Yii::$app->formatter->asDatetime($model->dt)}</small>
 				</td>
 			</tr>
-		{/foreach}
+        {/foreach}
 	</tbody>
 </table>
 {include file='@vpsViews/pagination.tpl'}
@@ -145,29 +147,32 @@
 </div>
 
 <script>
-	$(document).on('click', 'tr.log-info', function () {
-		var type   = $(this).find('.type').text();
-		var userID = $(this).find('.userID').text();
-		var dt     = $(this).find('.dt').data('order');
-		$('#viewModal').modal('show');
-		jQuery.ajax({
-			url      : '{Url::toRoute(['/log/json'])}',
-			type     : 'POST',
-			data     : { _csrf : '{Yii::$app->request->getCsrfToken()}', type : type, userID : userID, dt : dt },
-			dataType : "json",
-			success  : function (data) {
-				$('.modal-title').html(data.action);
-				$('#modal-userID').html(data.userID);
-				$('#modal-url').html(data.url);
-				$('#modal-email').html(data.email);
-				$('#modal-dt').html(data.dt);
-				$('#server').html('<pre>' + JSON.stringify(data.server, null, ' ') + '</pre>');
-				$('#session').html('<pre>' + JSON.stringify(data.session, null, ' ') + '</pre>');
-				$('#cookie').html('<pre>' + JSON.stringify(data.cookie, null, ' ') + '</pre>');
-				$('#post').html('<pre>' + JSON.stringify(data.post, null, ' ') + '</pre>');
+	$(document).on('click', 'tr.log-info', function (e) {
 
-			}
-		});
+		if (e.toElement.tagName == 'TD') {
+			var type   = $(this).find('.type').text();
+			var userID = $(this).find('.userID').text();
+			var dt     = $(this).find('.dt').data('order');
+			$('#viewModal').modal('show');
+			jQuery.ajax({
+				url      : '{Url::toRoute(['/log/json'])}',
+				type     : 'POST',
+				data     : { _csrf : '{Yii::$app->request->getCsrfToken()}', type : type, userID : userID, dt : dt },
+				dataType : "json",
+				success  : function (data) {
+					$('.modal-title').html(data.action);
+					$('#modal-userID').html(data.userID);
+					$('#modal-url').html(data.url);
+					$('#modal-email').html(data.email);
+					$('#modal-dt').html(data.dt);
+					$('#server').html('<pre>' + JSON.stringify(data.server, null, ' ') + '</pre>');
+					$('#session').html('<pre>' + JSON.stringify(data.session, null, ' ') + '</pre>');
+					$('#cookie').html('<pre>' + JSON.stringify(data.cookie, null, ' ') + '</pre>');
+					$('#post').html('<pre>' + JSON.stringify(data.post, null, ' ') + '</pre>');
+
+				}
+			});
+		}
 	});
 	$('#viewModal').on('hidden.bs.modal', function () {
 		$('.modal-text').html('{Yii::tr('Loading...',[],'log')}');
