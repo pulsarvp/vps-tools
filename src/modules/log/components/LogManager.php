@@ -3,8 +3,10 @@
 	namespace vps\tools\modules\log\components;
 
 	use vps\tools\modules\log\dictionaries\LogType;
+	use vps\tools\modules\log\jobs\LogJob;
 	use vps\tools\modules\log\models\Log;
 	use Yii;
+	use yii\queue\redis\Queue;
 
 	class LogManager extends \yii\base\BaseObject
 	{
@@ -58,7 +60,6 @@
 							'@timestamp' => time(),
 							'site'       => Yii::$app->id
 						];
-
 					if (isset(Yii::$app->user->id))
 					{
 						$result[ 'user' ][ 'userID' ] = Yii::$app->user->id;
@@ -66,48 +67,27 @@
 							$result[ 'user' ][ 'email' ] = Yii::$app->user->identity->email;
 						if (isset(Yii::$app->user->identity->info->untiID))
 							$result[ 'user' ][ 'untiID' ] = Yii::$app->user->identity->info->untiID;
+					}
+					if (isset(Yii::$app->request->url))
+						$result[ 'url' ] = Yii::$app->request->url;
 
-						if (isset(Yii::$app->request->url))
-							$result[ 'url' ] = Yii::$app->request->url;
-
-						$result[ 'server' ] = $_SERVER;
-						if (isset($_SESSION))
-							$result[ 'session' ] = $_SESSION;
-						$result[ 'cookie' ] = $_COOKIE;
-						$result[ 'post' ] = $_POST;
-
-						if (Yii::$app->settings->get('log_ssl_use'))
-						{
-							$context = stream_context_create(
-								[ 'ssl' =>
-									  [
-										  'local_cert'        => Yii::$app->settings->get('log_elk_cert'),
-										  'verify_peer'       => false,
-										  'verify_peer_name'  => false,
-										  'allow_self_signed' => true,
-									  ]
-								]
-							);
-							$socket =
-								stream_socket_client(
-									Yii::$app->settings->get('log_elk_dns'),
-									$errorNumber,
-									$error,
-									30,
-									STREAM_CLIENT_CONNECT,
-									$context);
-						}
+					$result[ 'server' ] = $_SERVER;
+					if (isset($_SESSION))
+						$result[ 'session' ] = $_SESSION;
+					$result[ 'cookie' ] = $_COOKIE;
+					$result[ 'post' ] = $_POST;
+					$job = new LogJob();
+					$job->results = $result;
+					if (isset(Yii::$app->queueLog) or isset(Yii::$app->queue))
+					{
+						if (isset(Yii::$app->queueLog))
+							Yii::$app->queueLog->push($job);
 						else
-						{
-							$socket = stream_socket_client(Yii::$app->settings->get('log_elk_dns'), $errorNumber, $error, 30);
-						}
-
-						if ($socket)
-						{
-							var_dump(fwrite($socket, json_encode($result) . "\r\n"));
-
-							fclose($socket);
-						}
+							Yii::$app->queue->push($job);
+					}
+					else
+					{
+						$job->execute(new Queue());
 					}
 				}
 				else
@@ -133,5 +113,4 @@
 				}
 			}
 		}
-
 	}
