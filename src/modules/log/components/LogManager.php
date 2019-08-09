@@ -45,7 +45,6 @@
 		{
 			if (Yii::$app->settings->get('log_use'))
 			{
-
 				if (!$isRaw)
 					$message = Yii::tr($message);
 
