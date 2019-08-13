@@ -59,9 +59,9 @@
 		public function attributeLabels ()
 		{
 			return [
-				'id'    => 'ID',
-				'name'  => 'Name',
-				'token' => 'Token',
+				'id'    => Yii::tr('ID'),
+				'name'  => Yii::tr('Name'),
+				'token' => Yii::tr('Token'),
 			];
 		}
 
