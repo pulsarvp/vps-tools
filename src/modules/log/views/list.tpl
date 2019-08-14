@@ -1,42 +1,39 @@
 <div class="row">
-	<div class="col-sm-12 col">
-		<div class="form-group pull-left">
-			<label for="filter-to">{Yii::tr('Date end',[],'log')}</label>
+	<div class="col-12 form-inline mb-4">
+		<div class="form-group pull-left mr-2 mb-2">
+			<label for="filter-to" class="mr-2">{Yii::tr('Date end',[],'log')}</label>
 			<input id="filter-to" value="{if isset($to)}{$to}{/if}" type="text" class="form-control" placeholder="2017-10-20">
 		</div>
-		<div class="form-group pull-left">
-			<label for="filter-from">{Yii::tr('Date start',[],'log')}</label>
+		<div class="form-group pull-left mr-2 mb-2">
+			<label for="filter-from" class="mr-2">{Yii::tr('Date start',[],'log')}</label>
 			<input id="filter-from" value="{if isset($from)}{$from}{/if}" type="text" class="form-control" placeholder="2017-11-25">
 		</div>
-		<div class="form-group pull-left">
-			<label for="search">{Yii::tr('Search',[],'log')}</label>
-			<input id="search" value="{if isset($search)}{$search}{/if}" type="text" class="form-control">
+		<div class="form-group pull-left mr-2 mb-2">
+			<label for="search" class="mr-2">{Yii::tr('Search',[],'log')}</label>
+			<input id="search" placeholder="Найти" value="{if isset($search)}{$search}{/if}" type="text" class="form-control">
 		</div>
 		{if !empty($categories)}
-			<div class="form-group pull-left">
-				<label for="filter-category">{Yii::tr('Category',[],'log')}</label><br>
+			<div class="form-group pull-left mr-2 mb-2">
+				<label for="filter-category" class="mr-2">{Yii::tr('Category',[],'log')}</label><br>
 				<select id="filter-category" class="selectpicker">
-					<option value=""></option>
 					{foreach $categories as $item}
 						<option value="{$item}" {if $item == $category}selected{/if}>{$item}</option>
 					{/foreach}
 				</select>
 			</div>
 		{/if}
-		<div class="form-group pull-left">
-			<label for="filter-type">{Yii::tr('Type',[],'log')}</label><br>
+		<div class="form-group pull-left mr-2 mb-2">
+			<label for="filter-type" class="mr-2">{Yii::tr('Type',[],'log')}</label><br>
 			<select id="filter-type" class="selectpicker">
-				<option value=""></option>
 				{foreach $types as $item}
 					<option value="{$item}" {if $item == $type}selected{/if}>{$item}</option>
 				{/foreach}
 			</select>
 		</div>
 		{if isset($users)}
-			<div class="form-group pull-left">
-				<label for="filter-userID">{Yii::tr('User',[],'user')}</label><br>
+			<div class="form-group pull-left mr-2 mb-2">
+				<label for="filter-userID" class="mr-2">{Yii::tr('User',[],'user')}</label><br>
 				<select id="filter-userID" class="selectpicker" data-live-search="true">
-					<option value=""></option>
 					{foreach $users as $item}
 						<option value="{$item->id}" {if $item->id == $userID}selected{/if}>
 							{if isset($item->prettyName)}
@@ -49,63 +46,64 @@
 				</select>
 			</div>
 		{/if}
-		<div class="form-group pull-left">
-			<label>&nbsp;</label><br>
-			<button type="button" class="btn btn-md btn-default" id="reset">{Html::fa('ban')}</button>
+		<div class="form-group pull-left mb-2">
 			<button type="button" class="btn btn-md btn-primary" id="filter">{Html::fa('check')}</button>
+			<button type="button" class="btn btn-md btn-default" id="reset">{Html::fa('ban')}</button>
 		</div>
 	</div>
 </div>
-<table class="table table-bordered table-hover" id="log-list">
-	<thead>
-		<tr>
-			{foreach [ 'userID', 'email', 'type', 'action', 'url', 'dt']  as $key}
-				<th>
-					{Yii::tr(ucfirst($key),[],'log')}
-					{if isset($sort)}
-						{if array_key_exists($key, $sort->attributeOrders)}
-							{if $sort->attributeOrders[$key] == SORT_ASC}
-								<a href="{Url::current([ 'sort' => "-`$key`",'page' => "" ])}">
-									<i class="fa fa-sort-numeric-asc"></i>
+<div class="overflow-scroll mb-4">
+	<table class="table table-bordered table-hover" id="log-list">
+		<thead>
+			<tr>
+				{foreach [ 'userID', 'email', 'type', 'action', 'url', 'dt']  as $key}
+					<th>
+						{Yii::tr(ucfirst($key),[],'log')}
+						{if isset($sort)}
+							{if array_key_exists($key, $sort->attributeOrders)}
+								{if $sort->attributeOrders[$key] == SORT_ASC}
+									<a href="{Url::current([ 'sort' => "-`$key`",'page' => "" ])}">
+										<i class="fa fa-sort-numeric-asc"></i>
+									</a>
+								{else}
+									<a href="{Url::current([ 'sort' => $key,'page' => "" ])}">
+										<i class="fa fa-sort-numeric-desc"></i></a>
+								{/if}
+							{elseif array_key_exists($key, $sort->attributes)}
+								<a href="{Url::current([ 'sort' => $key,'page' => "" ])}"><i class="fa fa-sort"></i>
 								</a>
-							{else}
-								<a href="{Url::current([ 'sort' => $key,'page' => "" ])}">
-									<i class="fa fa-sort-numeric-desc"></i></a>
 							{/if}
-						{elseif array_key_exists($key, $sort->attributes)}
-							<a href="{Url::current([ 'sort' => $key,'page' => "" ])}"><i class="fa fa-sort"></i>
-							</a>
 						{/if}
-					{/if}
-				</th>
-			{/foreach}
-		</tr>
-	</thead>
-	<tbody>
-		{foreach $models as $k=>$model}
-			<tr class="log-info">
-				<td class="userID">{$model->userID}</td>
-				<td>{Html::a($model->email,Url::toRoute(['/user/view','id'=>$model->userID]))}</td>
-				<td class="type">{$model->type}</td>
-				<td class="action">{$model->action}</td>
-				<td><a href="{$model->url}" target="_blank">{urldecode($model->url)}</a></td>
-				<td class="dt" data-order="{strtotime($model->dt)}">
-					<small>{Yii::$app->formatter->asDatetime($model->dt)}</small>
-				</td>
+					</th>
+				{/foreach}
 			</tr>
-		{/foreach}
-	</tbody>
-</table>
+		</thead>
+		<tbody>
+			{foreach $models as $k=>$model}
+				<tr class="log-info">
+					<td class="userID">{$model->userID}</td>
+					<td>{Html::a($model->email,Url::toRoute(['/user/view','id'=>$model->userID]))}</td>
+					<td class="type">{$model->type}</td>
+					<td class="action">{$model->action}</td>
+					<td><a href="{$model->url}" target="_blank">{urldecode($model->url)}</a></td>
+					<td class="dt" data-order="{strtotime($model->dt)}">
+						<small>{Yii::$app->formatter->asDatetime($model->dt)}</small>
+					</td>
+				</tr>
+			{/foreach}
+		</tbody>
+	</table>
+</div>
 {include file='@vpsViews/pagination.tpl'}
 
 <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
+				<h4 class="modal-title">{Yii::tr('Loading...',[],'log')}</h4>
 				<button type="button" class="close" data-dismiss="modal">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title">{Yii::tr('Loading...',[],'log')}</h4>
 			</div>
 			<div class="modal-body">
 				<div><b>{Yii::tr('UserID',[],'log')}:</b> <span class="modal-text" id="modal-userID"></span></div>
