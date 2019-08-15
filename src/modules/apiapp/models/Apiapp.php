@@ -71,6 +71,7 @@
 		public function rules ()
 		{
 			return [
+				[ [ 'name' ], 'filter', 'filter' => 'strip_tags' ],
 				[ [ 'name' ], 'required' ],
 				[ [ 'name', 'token' ], 'unique' ],
 				[ [ 'name' ], 'string', 'max' => 45 ],
