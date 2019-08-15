@@ -7,61 +7,65 @@
 	</div>
 {/if}
 {if $canView}
-	{Html::button(Yii::tr('Expand all', [], 'setting'),['class'=>'btn btn-primary btn-sm collapse-all-show'])}
-	{Html::button(Yii::tr('Collapse all', [], 'setting'),['class'=>'btn btn-primary btn-sm collapse-all-hide'])}
-	<table class="table table-striped table-bordered table-hover" id="setting-list">
-		<thead>
-			<tr>
-				<th>{Yii::tr('Name', [], 'setting')}</th>
-				<th>{Yii::tr('Value', [], 'setting')}</th>
-				<th>{Yii::tr('Description', [], 'setting')}</th>
-				{if $canEdit}
-					<th>{Yii::tr('Type', [], 'setting')}</th>
-					<th>{Yii::tr('Rules', [], 'setting')}</th>
-					<th></th>
-				{/if}
-			</tr>
-		</thead>
-		{assign var="in" value=true}
-		{foreach $settings as $key=>$groups}
+	<div class="mb-4">
+		{Html::button(Yii::tr('Expand all', [], 'setting'),['class'=>'btn btn-primary btn-sm collapse-all-show mr-2'])}
+		{Html::button(Yii::tr('Collapse all', [], 'setting'),['class'=>'btn btn-primary btn-sm collapse-all-hide'])}
+	</div>
+	<div class="overflow-scroll">
+		<table class="table table-striped table-bordered table-hover" id="setting-list">
 			<thead>
-				<tr data-toggle="collapse" data-target="#{$key}" aria-controls="{$key}">
-					<th colspan="6" class="info"><span class="setting-group">{$key}</span></th>
+				<tr>
+					<th>{Yii::tr('Name', [], 'setting')}</th>
+					<th>{Yii::tr('Value', [], 'setting')}</th>
+					<th>{Yii::tr('Description', [], 'setting')}</th>
+					{if $canEdit}
+						<th>{Yii::tr('Type', [], 'setting')}</th>
+						<th>{Yii::tr('Rules', [], 'setting')}</th>
+						<th></th>
+					{/if}
 				</tr>
 			</thead>
-			<tbody id="{$key}" class="collapse {if $in}in{/if}">
-				{foreach $groups as $setting}
-					<tr id="{$setting->name}" data-name="{$setting->name}">
-						<td class="name">{$setting->name}</td>
-						<td class="value" data-hidden="{$setting->hidden}">
-							{if $setting->hidden}
-								***
-							{else}
-								{$setting->value}
-							{/if}
-						</td>
-						<td class="description">{$setting->description}</td>
-						{if $canEdit}
-							<td class="type" data-rule='{$setting->rule}'>{$setting->type}</td>
-							<td class="type">{$setting->rule}</td>
-							<td class="control nowrap">
-								{if $setting->fixed == 0}
-									<div class="edit">
-										{Html::buttonFa('', 'pencil', [ 'class' => 'btn btn-sm btn-primary setting-edit', 'title' => Yii::tr('Edit', [], 'setting') ])}
-									</div>
-								{/if}
-								<div class="save" style="display: none">
-									{Html::buttonFa('', 'check', [ 'class' => 'btn btn-sm btn-success setting-save', 'title' => Yii::tr('Save', [], 'setting') ])}
-									{Html::buttonFa('', 'remove', [ 'class' => 'btn btn-sm btn-danger setting-close', 'title' => Yii::tr('Close', [], 'setting') ])}
-								</div>
-							</td>
-						{/if}
+			{assign var="in" value=true}
+			{foreach $settings as $key=>$groups}
+				<thead>
+					<tr data-toggle="collapse" data-target="#{$key}" aria-controls="{$key}">
+						<th colspan="6" class="info"><span class="setting-group">{$key}</span></th>
 					</tr>
-				{/foreach}
-			</tbody>
-			{assign var="in" value=false}
-		{/foreach}
-	</table>
+				</thead>
+				<tbody id="{$key}" class="collapse {if $in}in{/if}">
+					{foreach $groups as $setting}
+						<tr id="{$setting->name}" data-name="{$setting->name}">
+							<td class="name">{$setting->name}</td>
+							<td class="value" data-hidden="{$setting->hidden}">
+								{if $setting->hidden}
+									***
+								{else}
+									{$setting->value}
+								{/if}
+							</td>
+							<td class="description">{$setting->description}</td>
+							{if $canEdit}
+								<td class="type" data-rule='{$setting->rule}'>{$setting->type}</td>
+								<td class="type">{$setting->rule}</td>
+								<td class="control nowrap">
+									{if $setting->fixed == 0}
+										<div class="edit">
+											{Html::buttonFa('', 'pencil', [ 'class' => 'btn btn-sm btn-primary setting-edit', 'title' => Yii::tr('Edit', [], 'setting') ])}
+										</div>
+									{/if}
+									<div class="save text-center" style="display: none">
+										{Html::buttonFa('', 'check', [ 'class' => 'btn btn-sm btn-success setting-save', 'title' => Yii::tr('Save', [], 'setting') ])}
+										{Html::buttonFa('', 'remove', [ 'class' => 'btn btn-sm btn-danger setting-close', 'title' => Yii::tr('Close', [], 'setting') ])}
+									</div>
+								</td>
+							{/if}
+						</tr>
+					{/foreach}
+				</tbody>
+				{assign var="in" value=false}
+			{/foreach}
+		</table>
+	</div>
 	<script>
 		$(document).ready(function () {
 			$('.collapse-all-show').on('click', function () {
