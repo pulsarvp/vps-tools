@@ -13,7 +13,7 @@
 			{/if}
 				<div class="form-group">
 					{Html::submitButton(Yii::tr('Save', [], 'page'), ['class' => 'btn btn-success'])}
-					{Html::a(Yii::tr('Cancel', [], 'menu'),Yii::$app->request->referrer,['class'=>'btn btn-danger'])}
+					{Html::a(Yii::tr('Cancel', [], 'menu'), ['/page/index'], ['class'=>'btn btn-danger'])}
 				</div>
 				<input type="hidden" id="{Yii::$app->request->csrfParam}" name="{Yii::$app->request->csrfParam}" value="{Yii::$app->request->csrfToken}">
 			{/Form}
