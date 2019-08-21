@@ -8,8 +8,8 @@
 {/if}
 {if $canView}
 	<div class="mb-4">
-		{Html::button(Yii::tr('Expand all', [], 'setting'),['class'=>'btn btn-primary btn-sm collapse-all-show mr-2'])}
-		{Html::button(Yii::tr('Collapse all', [], 'setting'),['class'=>'btn btn-primary btn-sm collapse-all-hide'])}
+		{Html::button(Yii::tr('Expand all', [], 'setting'),['class'=>'btn btn-primary mr-1 collapse-all-show'])}
+		{Html::button(Yii::tr('Collapse all', [], 'setting'),['class'=>'btn btn-primary collapse-all-hide'])}
 	</div>
 	<div class="overflow-scroll">
 		<table class="table table-striped table-bordered table-hover" id="setting-list">
