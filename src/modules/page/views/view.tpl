@@ -1,27 +1,27 @@
 {if isset($page)}
-	<div class="container">
-	<h1>
-		{$page->title}
-	</h1>
-	<span class="text-center">
-			{if !$page->active}
-				{Html::button(Yii::tr('Activate', [], 'page'), [ 'data-id'=>$page->id, 'class' => 'btn btn-success page-active'])}
-			{else}
-				{Html::button(Yii::tr('Deactivate', [], 'page'), [ 'data-id'=>$page->id, 'class' => 'btn btn-danger page-active'])}
+	<div class="row">
+		<div class="col-12 mb-5">
+			<h2 class="mb-2">
+				{$page->title}
+			</h2>
+			<div class="mb-2">
+				{if !$page->active}
+					{Html::button(Yii::tr('Activate', [], 'page'), [ 'data-id'=>$page->id, 'class' => 'btn btn-success page-active mr-2'])}
+				{else}
+					{Html::button(Yii::tr('Deactivate', [], 'page'), [ 'data-id'=>$page->id, 'class' => 'btn btn-danger page-active mr-2'])}
+				{/if}
+				{Html::a(Yii::tr('Edit', [], 'page'), Url::toRoute(['/pages/page/edit', 'id' => $page->id]),[ 'class' => 'btn btn-primary'])}
+			</div>
+			<div class="guid">{$page->guid}</div>
+			<div class="date">{Yii::$app->formatter->asDatetime($page->dt)}</div>
+			<div class="text">{$page->text}</div>
+			{if useMenu and count($page->menu) > 0}
+				<p>{Yii::tr('Menu',[],'page')}</p>
+				{foreach $page->menu as $menu}
+					<a href="{$menu->url}" target="_blank">{Yii::tr($menu->title)}</a>
+				{/foreach}
 			{/if}
-		</span>
-	{Html::a(Yii::tr('Edit', [], 'page'), Url::toRoute(['/pages/page/edit', 'id' => $page->id]),[ 'class' => 'btn btn-primary'])}
-	<div class="guid">{$page->guid}</div>
-	<div class="date">{Yii::$app->formatter->asDatetime($page->dt)}</div>
-	<div class="text">{$page->text}</div>
-	{if useMenu and count($page->menu) > 0}
-		<p>{Yii::tr('Menu',[],'page')}</p>
-		{foreach $page->menu as $menu}
-			<a href="{$menu->url}" target="_blank">{Yii::tr($menu->title)}</a>
-		{/foreach}
 		</div>
-		</div>
-	{/if}
 	</div>
 {/if}
 <script>

@@ -1,5 +1,6 @@
 {if Yii::$app->user->identity->isPermission('admin_page')}
-{Html::a(Yii::tr('Add', [], 'page'), Url::toRoute(['/pages/page/add']),[ 'class' => 'btn btn-primary'])}
+{Html::a(Yii::tr('Add', [], 'page'), Url::toRoute(['/pages/page/add']),[ 'class' => 'btn btn-primary mb-4'])}
+<div class="overflow-scroll mb-4">
 <table class="table table-bordered table-hover" id="page-list">
 	<thead>
 		<tr>
@@ -46,7 +47,10 @@
 		{/foreach}
 	</tbody>
 </table>
+</div>
+<div class="mb-5">
 {include file='@vpsViews/pagination.tpl'}
+</div>
 {else}
 	<div class="text-danger">{Yii::tr('Попытка взлома detected!')}</div>
 {/if}

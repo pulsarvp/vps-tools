@@ -1,6 +1,6 @@
 {if Yii::$app->user->identity->hasPermission(['admin_page'])}
-	<div class="content">
-		<div class="col-md-12">
+	<div class="row">
+		<div class="col-12">
 			{Form assign="f" id="create-form" upload=true}
 			{$f->field($model,'guid')->textInput()}
 			{$f->field($model,'title')->textInput()}
@@ -12,7 +12,7 @@
 				</div>
 			{/if}
 				<div class="form-group">
-					{Html::submitButton(Yii::tr('Save', [], 'page'), ['class' => 'btn btn-success'])}
+					{Html::submitButton(Yii::tr('Save', [], 'page'), ['class' => 'btn btn-success mr-2'])}
 					{Html::a(Yii::tr('Cancel', [], 'menu'),Yii::$app->request->referrer,['class'=>'btn btn-danger'])}
 				</div>
 				<input type="hidden" id="{Yii::$app->request->csrfParam}" name="{Yii::$app->request->csrfParam}" value="{Yii::$app->request->csrfToken}">
