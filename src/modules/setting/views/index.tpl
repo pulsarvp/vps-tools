@@ -142,8 +142,12 @@
 					},
 					error    : function (data) {
 						if (data != 0) {
-							tr.addClass('danger');
-							tr.find('td.value').append('<p class="text-danger error">' + data.statusText + '</p>');
+							if (data.status === 302) {
+								document.location.reload();
+							} else {
+								tr.addClass('danger');
+								tr.find('td.value').append('<p class="text-danger error">' + data.statusText + '</p>');
+							}
 						}
 					}
 				});
