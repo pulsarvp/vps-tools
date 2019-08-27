@@ -1,7 +1,10 @@
 <?php
+
 	namespace vps\tools\modules\user\forms;
 
 	use Yii;
+	use vps\tools\helpers\ArrayHelper;
+	use yii\rbac\Role;
 
 	/**
 	 * @author    Evgenii Kuteiko <kuteiko@mail.ru>
@@ -70,5 +73,66 @@
 		{
 			if (!is_null(Yii::$app->authManager->getRole($this->$attribute)))
 				$this->addError($attribute, Yii::tr('{attribute} "{value}" has already been taken.', [ 'attribute' => $attribute, 'value' => $this->$attribute ], 'yii'));
+		}
+
+		/**
+		 * Загрузка свойств по имени
+		 * @param $name
+		 */
+		public function loadByName ($name)
+		{
+			$role = Yii::$app->authManager->getRole($name);
+			if ($role === null)
+			{
+				return;
+			}
+
+			$this->name = $role->name;
+			$this->description = $role->description;
+			$this->ruleName = $role->ruleName;
+			$this->data = $role->data;
+			$this->childRoles = ArrayHelper::objectsAttribute(Yii::$app->authManager->getChildren($role->name), 'name');
+			$this->childPermissions = ArrayHelper::objectsAttribute(Yii::$app->authManager->getChildren($role->name), 'name');
+		}
+
+		/**
+		 * Сохранение
+		 */
+		public function save ()
+		{
+			$auth = Yii::$app->getAuthManager();
+			$role = $auth->createRole($this->name);
+			$role->type = Role::TYPE_ROLE;
+			$role->description = $this->description;
+			if (!empty($this->ruleName))
+			{
+				$role->ruleName = $this->ruleName;
+			}
+
+			$role->data = $this->data;
+
+			if ($this->method == 'rbac-add')
+			{
+				$auth->add($role);
+			}
+			else
+			{
+				$auth->update($this->name, $role);
+				$auth->removeChildren($role);
+			}
+
+			if (is_array($this->childRoles) and count($this->childRoles) > 0)
+				foreach ($this->childRoles as $childRole)
+				{
+					$child = $auth->getRole($childRole);
+					$auth->addChild($role, $child);
+				}
+
+			if (is_array($this->childPermissions) and count($this->childPermissions) > 0)
+				foreach ($this->childPermissions as $childPermission)
+				{
+					$child = $auth->getPermission($childPermission);
+					$auth->addChild($role, $child);
+				}
 		}
 	}
