@@ -77,7 +77,7 @@
 					$result[ 'cookie' ] = $log->cookie;
 					$result[ 'post' ] = $log->post;
 					fwrite($socket, json_encode($result) . "\r\n");
-					Log::deleteAll([ 'dt' => $log->dt, 'action' => $log->action ]);
+//					Log::deleteAll([ 'dt' => $log->dt, 'action' => $log->action ]);
 				}
 			}
 			fclose($socket);
