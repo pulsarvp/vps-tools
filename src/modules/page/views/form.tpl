@@ -51,6 +51,7 @@
 				imageResizable    : true,
 				fileUploadFields  : '#{Yii::$app->request->csrfParam}',
 				imageUploadFields : '#{Yii::$app->request->csrfParam}',
+				lang			  : 'ru',
 				callbacks         : {
 					change           : function () {
 						hideError();
