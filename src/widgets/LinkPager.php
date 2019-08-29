@@ -8,6 +8,7 @@
 
 	namespace vps\tools\widgets;
 
+	use vps\tools\helpers\ArrayHelper;
 	use vps\tools\helpers\ConfigurationHelper;
 	use Yii;
 	use yii\helpers\Html;
@@ -16,11 +17,39 @@
 	class LinkPager extends BaseLinkPager
 	{
 		/**
+		 * Надо ли оборачивать в контейнер
+		 * Если $this->isCountAllPages true, то будет автоматически присвоено true
+		 *
+		 * @var bool
+		 */
+		public $isWrapper = false;
+
+		/**
+		 * Тег и опции для wrapper
+		 * @var array
+		 */
+		public $wrapperOptions = [
+			'tag'   => 'div',
+			'class' => 'pagination-container',
+		];
+
+		/**
+		 * Надо ли отображать ссылку "Всего"
+		 * @var bool
+		 */
+		public $isCountAllPages = true;
+
+		/**
 		 * @inheritdoc
 		 */
 		public function init ()
 		{
 			parent::init();
+
+			if ($this->isCountAllPages)
+			{
+				$this->isWrapper = true;
+			}
 
 			// In Bootstrap 4 no div's "next" and "prev", so you need to overwrite the default values
 			$this->prevPageCssClass = 'page-item';
@@ -50,7 +79,19 @@
 
 			if ($this->pagination->getPageCount() > 1)
 			{
-				echo Html::tag('nav', $this->renderPageButtons(), [ 'class' => 'd-inline-flex' ]);
+				if ($this->isWrapper)
+				{
+					$tagWrapper = ArrayHelper::remove($this->wrapperOptions, 'tag', 'div');
+
+					return Html::tag(
+						$tagWrapper,
+						Html::tag('nav', $this->renderPageButtons(), [ 'class' => 'd-inline-flex' ])
+						. ( $this->isCountAllPages ? $this->renderCountAllPages() : '' ),
+						$this->wrapperOptions
+					);
+				}
+
+				return Html::tag('nav', $this->renderPageButtons(), [ 'class' => 'd-inline-flex' ]);
 			}
 		}
 
@@ -74,5 +115,15 @@
 			}
 
 			return Html::tag('li', Html::a($label, $this->pagination->createUrl($page), $linkOptions), $options);
+		}
+
+		/**
+		 * @return string
+		 */
+		protected function renderCountAllPages ()
+		{
+			return $this->render('count-all-pages', [
+				'totalCount' => $this->pagination->totalCount,
+			]);
 		}
 	}

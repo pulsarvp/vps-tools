@@ -59,9 +59,9 @@
 		public function attributeLabels ()
 		{
 			return [
-				'id'    => 'ID',
-				'name'  => 'Name',
-				'token' => 'Token',
+				'id'    => Yii::tr('ID'),
+				'name'  => Yii::tr('Name'),
+				'token' => Yii::tr('Token'),
 			];
 		}
 
@@ -71,6 +71,7 @@
 		public function rules ()
 		{
 			return [
+				[ [ 'name' ], 'filter', 'filter' => 'strip_tags' ],
 				[ [ 'name' ], 'required' ],
 				[ [ 'name', 'token' ], 'unique' ],
 				[ [ 'name' ], 'string', 'max' => 45 ],
