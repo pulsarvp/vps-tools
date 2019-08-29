@@ -67,6 +67,7 @@
 		public function rules ()
 		{
 			return [
+				[ [ 'title' ], 'filter', 'filter' => 'strip_tags' ],
 				[ [ 'description', 'query' ], 'string' ],
 				[ [ 'title', 'query', 'prefix' ], 'trim' ],
 				[ [ 'title', 'query', 'prefix' ], 'required' ],
