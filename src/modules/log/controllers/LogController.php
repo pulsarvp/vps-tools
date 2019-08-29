@@ -4,6 +4,7 @@
 
 	use app\base\Controller;
 	use common\models\User;
+	use common\models\UserInfo;
 	use vps\tools\helpers\TimeHelper;
 	use vps\tools\modules\log\dictionaries\LogType;
 	use vps\tools\modules\log\models\Log;
@@ -47,9 +48,17 @@
 			else
 				$this->data('userID', '');
 
+			if (isset($get[ 'from' ]) && isset($get[ 'to' ]))
+			{
+				if ($get[ 'from' ] < $get[ 'to' ])
+				{
+					Yii::$app->notification->warning('Дата начала должна быть меньше даты окончания.');
+					unset($get[ 'from' ]);
+				}
+			}
 			if (isset($get[ 'from' ]))
 			{
-				$query->andWhere([ '>=', 'dt', $get[ 'from' ] ]);
+				$query->andWhere([ '<=', 'dt', $get[ 'from' ] ]);
 				$this->data('from', $get[ 'from' ]);
 			}
 
@@ -95,7 +104,10 @@
 			]);
 			$ids = Log::find()->select('userID')->where('userID IS NOT NULL')->groupBy([ 'userID' ])->column();
 
-			$users = User::find()->where([ 'IN', 'id', $ids ])->all();
+			if (class_exists(UserInfo::class))
+				$users = User::find()->leftJoin(UserInfo::tableName(), 'user.id=user_info.userID')->where([ 'IN', 'user.id', $ids ])->orderBy([ 'firstname' => SORT_ASC ])->all();
+			else
+				$users = User::find()->where([ 'IN', 'id', $ids ])->orderBy([ 'name' => SORT_ASC ])->all();
 
 			$this->data('users', $users);
 			$this->data('models', $provider->models);
