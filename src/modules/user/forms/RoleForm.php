@@ -44,6 +44,7 @@
 			return [
 				[ [ 'name' ], 'required' ],
 				[ [ 'name', 'method' ], 'string', 'length' => [ 1, 64 ] ],
+				[ [ 'name' ], 'match', 'pattern' => '/^[a-z]\w*$/i' ],
 				[ 'name', 'uniqueName', 'on' => [ self::SCENARIO_ADD ] ],
 				[ [ 'description', 'ruleName', 'data' ], 'string' ],
 				[ [ 'childPermissions' ],
