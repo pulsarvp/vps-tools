@@ -169,10 +169,10 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
+				<h5 class="modal-title" id="modalLabel"></h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h3 class="modal-title" id="modalLabel"></h3>
 			</div>
 			<div class="modal-body">
 				{Form assign='f' id="role-form" action="#roles" options=['data-pjax' => true]}
