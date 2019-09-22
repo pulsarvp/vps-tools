@@ -10,7 +10,7 @@
 					{$company['title']}
 				{/if}
 			</div>
-			<div class="col-sm-6 footer-links text-center">
+			<div class="col-sm-6 footer-links text-sm-center">
 				{if !empty($links)}
 					{foreach $links as $link}
 						{Html::a( $link['title'], $link['url'], [ 'class' => 'text-nowrap ml-2 mr-2' ])}
@@ -18,7 +18,7 @@
 				{/if}
 			</div>
 			{if $showVersion}
-				<div class="col-sm-3 footer-version text-right">
+				<div class="col-sm-3 footer-version text-sm-right">
 					{Yii::tr('Version {version}', ['version' => Yii::$app->version], 'widgets/footer')}
 				</div>
 			{/if}
