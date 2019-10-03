@@ -48,7 +48,7 @@
 				if (!$isRaw)
 					$message = Yii::tr($message);
 
-				if (Yii::$app->settings->get('log_elk_use'))
+				if (( isset(Yii::$app->queueLog) or isset(Yii::$app->queue) ) and Yii::$app->settings->get('log_elk_use'))
 				{
 					$result =
 						[
@@ -75,18 +75,15 @@
 						$result[ 'session' ] = $_SESSION;
 					$result[ 'cookie' ] = $_COOKIE;
 					$result[ 'post' ] = $_POST;
-					$job = new LogJob();
-					$job->results = $result;
+
 					if (isset(Yii::$app->queueLog) or isset(Yii::$app->queue))
 					{
+						$job = new LogJob();
+						$job->results = $result;
 						if (isset(Yii::$app->queueLog))
 							Yii::$app->queueLog->push($job);
 						else
 							Yii::$app->queue->push($job);
-					}
-					else
-					{
-						$job->execute(new Queue());
 					}
 				}
 				else
