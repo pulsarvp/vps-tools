@@ -147,6 +147,8 @@
 </div>
 
 <script>
+	$.fn.selectpicker.Constructor.DEFAULTS.noneSelectedText = "{Yii::tr("Nothing selected")}";
+
 	$(document).on('click', 'tr.log-info', function (e) {
 
 		if (e.toElement.tagName == 'TD') {
