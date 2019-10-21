@@ -106,15 +106,20 @@
 		 */
 		public function attributeLabels ()
 		{
+			if (isset(Yii::$app->i18n->translations[ 'user' ]))
+				$category = 'user';
+			else
+				$category = 'app';
+
 			return [
-				'email'    => Yii::tr('Email', [], 'user'),
-				'id'       => Yii::tr('ID', [], 'user'),
-				'active'   => Yii::tr('Active', [], 'user'),
-				'name'     => Yii::tr('Name', [], 'user'),
-				'profile'  => Yii::tr('Profile', [], 'user'),
-				'loginDT'  => Yii::tr('Login Dt', [], 'user'),
-				'activeDT' => Yii::tr('ActiveDT', [], 'user'),
-				'image'    => Yii::tr('Image', [], 'user'),
+				'email'    => Yii::tr('Email', [], $category),
+				'id'       => Yii::tr('ID', [], $category),
+				'active'   => Yii::tr('Active', [], $category),
+				'name'     => Yii::tr('Name', [], $category),
+				'profile'  => Yii::tr('Profile', [], $category),
+				'loginDT'  => Yii::tr('Login Dt', [], $category),
+				'activeDT' => Yii::tr('ActiveDT', [], $category),
+				'image'    => Yii::tr('Image', [], $category),
 			];
 		}
 

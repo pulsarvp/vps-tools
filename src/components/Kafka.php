@@ -76,11 +76,16 @@
 
 				$conf = new \RdKafka\Conf();
 
+				$conf->set('socket.blocking.max.ms', 1);
+				$conf->set('queue.buffering.max.ms', 1);
+				$conf->set('queue.buffering.max.messages', 10);
+				$conf->set('socket.timeout.ms', 1000);
+
 				$conf->setDrMsgCb(function (Producer $kafka, Message $message) use ($data) {
-					if ($message->err > 0)
+					if ($message->err)
 					{
 						if (Yii::$app->has('logging'))
-							Yii::$app->logging->error(Yii::tr('Ошибка {error} отправки сообщения в kafka.' . Json::encode($data), [ 'error' => rd_kafka_err2str($message->err) ]));
+							Yii::$app->logging->error(Yii::tr('Ошибка {error} отправки сообщения в kafka.' . Json::encode($data), [ 'error' => rd_kafka_err2str($message->err) . ' ' . $message->err ]));
 					}
 					else
 					{
@@ -100,7 +105,7 @@
 				try
 				{
 					$kafkaTopic->produce(RD_KAFKA_PARTITION_UA, 0, Json::encode($data));
-					$rk->poll(-1);
+					$rk->poll(0);
 				}
 				catch (\Exception $exception)
 				{
@@ -113,7 +118,7 @@
 				}
 			}
 		}
-		
+
 		public function getTopic ()
 		{
 
@@ -139,7 +144,7 @@
 
 				Yii::error($e->getMessage());
 				if (Yii::$app->has('logging'))
-					Yii::$app->logging->error(Yii::tr('Ошибка {error} чтении сообщения из kafka.' . Json::encode($data), [ 'error' => $exception->getMessage() ]));
+					Yii::$app->logging->error(Yii::tr('Ошибка {error} чтении сообщения из kafka.', [ 'error' => $e->getMessage() ]));
 
 				return null;
 			}
