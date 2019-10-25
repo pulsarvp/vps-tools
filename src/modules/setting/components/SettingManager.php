@@ -1,4 +1,5 @@
 <?php
+
 	namespace vps\tools\modules\setting\components;
 
 	use vps\tools\modules\setting\models\Setting;
@@ -74,5 +75,10 @@
 			if (!class_exists($class))
 				throw new \yii\base\InvalidConfigException('Given model class not found.');
 			$this->_modelClass = $class;
+		}
+
+		public function getTableName ()
+		{
+			return $this->_modelClass::tableName();
 		}
 	}
