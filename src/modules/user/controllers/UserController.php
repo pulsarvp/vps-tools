@@ -315,17 +315,15 @@
 			}
 			if ($user == null or !isset($user->id))
 				throw new \Exception(Yii::tr('Authorization failed.', [], 'user'));
-			elseif ($user->active == false)
+			elseif ($user->active === 0)
 			{
+
 				Yii::$app->notification->errorToSession(Yii::tr('Your account is not approved yet.', [], 'user'));
 			}
 			else
 			{
 				$user->loginDT = TimeHelper::now();
 				$user->save();
-
-				$cookies = Yii::$app->request->cookies;
-				$url = $cookies->getValue('returnUrl', Url::toRoute([ '/site/index' ]));
 
 				if (Yii::$app->settings->get($this->module->durationSetting))
 					$duration = Yii::$app->settings->get($this->module->durationSetting);
@@ -334,13 +332,16 @@
 
 				Yii::$app->user->login($user, $duration);
 
-				Yii::$app->response->cookies->remove('returnUrl');
-				if ($this->module->redirectAfterLogin)
-					$this->redirect($url);
-				else
-					$this->redirect(Url::toRoute([ '/site/index' ]));
-
-				Yii::$app->end();
 			}
+			$cookies = Yii::$app->request->cookies;
+			$url = $cookies->getValue('returnUrl', Url::toRoute([ '/site/index' ]));
+			Yii::$app->response->cookies->remove('returnUrl');
+
+			if ($this->module->redirectAfterLogin)
+				$this->redirect($url);
+			else
+				$this->redirect(Url::toRoute([ '/site/index' ]));
+
+			Yii::$app->end();
 		}
 	}
