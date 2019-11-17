@@ -22,9 +22,10 @@
 		 *    ],
 		 * ```
 		 */
-		
+
 		/**
 		 * Set keyPrefix from DB settings.
+		 *
 		 * @param string $name
 		 */
 		public function setKeyPrefixDb ($name)
@@ -34,14 +35,11 @@
 
 		/**
 		 * Set forceClusterMode from DB settings.
+		 *
 		 * @param string $name
 		 */
 		public function setForceClusterModeDb ($name)
 		{
-			$item = Yii::$app->settings->get($name);
-			if ($item === 1 or $item === true)
-				$this->forceClusterMode = true;
-			else
-				$this->forceClusterMode = false;
+			$this->forceClusterMode = (boolean) Yii::$app->settings->get($name);
 		}
 	}
