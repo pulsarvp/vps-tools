@@ -5,7 +5,7 @@
 	/**
 	 * Class m170929_111111_logstash
 	 */
-	class m170929_111111_logstash extends Migration
+	class m171130_084514_logstash extends Migration
 	{
 		/**
 		 * @inheritdoc
