@@ -67,12 +67,12 @@
 			]);
 		}
 
-		private function canView ()
+		protected function canView ()
 		{
 			return Yii::$app->user->can('admin') or Yii::$app->user->can('setting_view') or Yii::$app->user->can('setting_edit');
 		}
 
-		private function canEdit ()
+		protected function canEdit ()
 		{
 			return Yii::$app->user->can('admin') or Yii::$app->user->can('setting_edit');
 		}
