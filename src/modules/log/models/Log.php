@@ -44,14 +44,6 @@
 		/**
 		 * @inheritdoc
 		 */
-		public static function tableName ()
-		{
-			return 'log';
-		}
-
-		/**
-		 * @inheritdoc
-		 */
 		public function attributeLabels ()
 		{
 			if (isset(Yii::$app->i18n->translations[ 'log' ]))
@@ -99,4 +91,16 @@
 			else
 				return Yii::$app->db;
 		}
+
+		/**
+		 * @inheritdoc
+		 */
+		public static function tableName ()
+		{
+			if (!empty(Yii::$app->settings->get('log_db_use')))
+				return Yii::$app->settings->get('log_db_table', 'log');
+			else
+				return 'log';
+		}
+
 	}

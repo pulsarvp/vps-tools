@@ -19,14 +19,21 @@
 			]);
 			$this->insert($settingModel, [
 				'name'        => 'log_db_name',
-				'value'       => '0',
-				'description' => 'Хост для подключения к базе',
+				'value'       => '',
+				'description' => 'Название базы для подключения к базе',
+				'type'        => 'string',
+				'group'       => 'log'
+			]);
+			$this->insert($settingModel, [
+				'name'        => 'log_db_table',
+				'value'       => '',
+				'description' => 'Название таблицы для подключения к базе',
 				'type'        => 'string',
 				'group'       => 'log'
 			]);
 			$this->insert($settingModel, [
 				'name'        => 'log_db_user',
-				'value'       => '0',
+				'value'       => '',
 				'description' => 'Пользователь для подключения к базе',
 				'type'        => 'string',
 				'group'       => 'log'
@@ -59,6 +66,6 @@
 			$settingModel = 'setting';
 			if (Yii::$app->has('settings') and Yii::$app->settings->hasMethod('getTableName'))
 				$settingModel = Yii::$app->settings->getTableName();
-			$this->delete($settingModel, [ 'name' => [ 'log_db_use', 'log_db_port', 'log_db_host', 'log_db_password', 'log_db_user', 'log_db_name' ] ]);
+			$this->delete($settingModel, [ 'name' => [ 'log_db_use', 'log_db_port', 'log_db_host', 'log_db_password', 'log_db_user', 'log_db_name', 'log_db_table' ] ]);
 		}
 	}
