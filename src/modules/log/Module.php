@@ -7,7 +7,9 @@
 	 * @copyright Copyright (c) 2018
 	 * @date      2018-05-24
 	 */
+
 	use vps\tools\helpers\ConfigurationHelper;
+	use Yii;
 	use yii\base\BootstrapInterface;
 
 	/**
@@ -47,6 +49,16 @@
 				  'route'   => $this->id . '/log/json'
 				]
 			], false);
+			$app->setComponents([
+					'logDB' => [
+						'class'    => 'yii\db\Connection',
+						'dsn'      => 'mysql:host=' . Yii::$app->settings->get('log_db_host') . ';port=' . Yii::$app->settings->get('log_db_port') . ';dbname=' . Yii::$app->settings->get('log_db_name'),
+						'username' => Yii::$app->settings->get('log_db_user'),
+						'password' => Yii::$app->settings->get('log_db_password'),
+						'charset'  => 'utf8'
+					]
+				]
+			);
 			ConfigurationHelper::addTranslation('log', [ 'log' => 'log.php' ], __DIR__ . '/messages');
 		}
 	}

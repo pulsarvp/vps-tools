@@ -89,4 +89,14 @@
 			];
 		}
 
+		/**
+		 * @inheritdoc
+		 */
+		public static function getDb ()
+		{
+			if (!empty(Yii::$app->settings->get('log_db_use')))
+				return Yii::$app->logDB;
+			else
+				return Yii::$app->db;
+		}
 	}
