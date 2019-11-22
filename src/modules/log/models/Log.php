@@ -44,14 +44,6 @@
 		/**
 		 * @inheritdoc
 		 */
-		public static function tableName ()
-		{
-			return 'log';
-		}
-
-		/**
-		 * @inheritdoc
-		 */
 		public function attributeLabels ()
 		{
 			if (isset(Yii::$app->i18n->translations[ 'log' ]))
@@ -87,6 +79,28 @@
 				[ [ 'server', 'session', 'cookie', 'post', 'action', 'type' ], 'string' ],
 				[ [ 'dt' ], 'datetime', 'format' => 'php:' . TimeHelper::$dtFormat ],
 			];
+		}
+
+		/**
+		 * @inheritdoc
+		 */
+		public static function getDb ()
+		{
+			if (!empty(Yii::$app->settings->get('log_db_use')))
+				return Yii::$app->logDB;
+			else
+				return Yii::$app->db;
+		}
+
+		/**
+		 * @inheritdoc
+		 */
+		public static function tableName ()
+		{
+			if (!empty(Yii::$app->settings->get('log_db_use')))
+				return Yii::$app->settings->get('log_db_table', 'log');
+			else
+				return 'log';
 		}
 
 	}
