@@ -48,15 +48,18 @@
 			$filepath = $path . DIRECTORY_SEPARATOR . $name;
 			if ($resize)
 			{
-				$data = [];
-				foreach ($this->_formats() as $format)
-				{
-					$method = '_save' . ucfirst($format);
-					$this->$method($path, $name, $file->tempName);
-					$data[ $format ] = $path . DIRECTORY_SEPARATOR . $name;
-				}
+				$paths = [
+					self::F_ORIGINAL => $path . DIRECTORY_SEPARATOR . $name,
+					self::F_SD => $path . DIRECTORY_SEPARATOR . self::F_SD . DIRECTORY_SEPARATOR . $name,
+					self::F_HD => $path . DIRECTORY_SEPARATOR . self::F_HD . DIRECTORY_SEPARATOR . $name,
+				];
+
+				$this->_saveOriginal($path, $name, $file->tempName);
+				$this->_save($paths[self::F_SD], $file->tempName, self::F_SD);
+				$this->_save($paths[self::F_HD], $file->tempName, self::F_HD);
+
 				if (file_exists($filepath))
-					return $data;
+					return $paths;
 				else
 					return false;
 			}
@@ -69,18 +72,6 @@
 				else
 					return false;
 			}
-		}
-
-		/**
-		 * @return string[] Names of allowed formats. _save{Format} method must exist.
-		 */
-		private function _formats ()
-		{
-			return [
-				self::F_ORIGINAL,
-				self::F_HD,
-				self::F_SD
-			];
 		}
 
 		/**
@@ -154,18 +145,6 @@
 		}
 
 		/**
-		 * Saves a image to the HD format.
-		 *
-		 * @param string $path
-		 * @param string $dest
-		 * @param string $type
-		 */
-		private function _saveHd ($path, $name, $file)
-		{
-			$this->_save($path . DIRECTORY_SEPARATOR . self::F_HD . DIRECTORY_SEPARATOR . $name, $file, self::F_HD);
-		}
-
-		/**
 		 * Saves a image to the original format.
 		 *
 		 * @param string $path
@@ -180,18 +159,6 @@
 				FileHelper::createDirectory(dirname($filepath));
 				copy($file, $filepath);
 			}
-		}
-
-		/**
-		 * Saves a image to the SD format.
-		 *
-		 * @param string $path
-		 * @param string $dest
-		 * @param string $type
-		 */
-		private function _saveSd ($path, $name, $file)
-		{
-			$this->_save($path . DIRECTORY_SEPARATOR . self::F_SD . DIRECTORY_SEPARATOR . $name, $file, self::F_SD);
 		}
 
 		/**
