@@ -30,10 +30,14 @@
 		 */
 		public function init ()
 		{
+            $this->initFromEnv();
+
 			/** @var yii\db\ActiveRecord $class */
 			$class = $this->_modelClass;
-			if (Yii::$app->db->schema->getTableSchema($class::tableName()))
-				$this->_data = $class::find()->all();
+			if (Yii::$app->db->schema->getTableSchema($class::tableName())) {
+                $setting = $class::find()->all();
+                $this->_data = array_merge($this->_data, $setting);
+            }
 		}
 
 		/**
@@ -81,4 +85,16 @@
 		{
 			return $this->_modelClass::tableName();
 		}
+
+        private function initFromEnv()
+        {
+            foreach ($_ENV as $env => $val) {
+                if (strpos($env, 'SETTING_') !== false) {
+                    $item = new Setting();
+                    $item->name = strtolower(str_replace('SETTING_', '', $env));
+                    $item->value = $val;
+                    $this->_data[] = $item;
+                }
+            }
+        }
 	}
