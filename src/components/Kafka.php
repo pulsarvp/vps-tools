@@ -78,7 +78,9 @@
 
 				$conf->set('queue.buffering.max.ms', 1);
 				$conf->set('queue.buffering.max.messages', 10);
-				$conf->set('socket.timeout.ms', 1000);
+				$conf->set('socket.timeout.ms', 10000);
+				$conf->set('retry.backoff.ms', 1000);
+				$conf->set('message.send.max.retries', 3);
 
 				$conf->setDrMsgCb(function (Producer $kafka, Message $message) use ($data) {
 					if ($message->err)
@@ -94,27 +96,52 @@
 				});
 
 				$rk = new \RdKafka\Producer($conf);
-				$rk->setLogLevel(LOG_DEBUG);
 				$rk->addBrokers($this->host . ':' . $this->port);
 
 				$topicConfig = new TopicConf();
-				$topicConfig->set('message.timeout.ms', 1000);
+				$topicConfig->set('message.timeout.ms', 2000);
 
 				$kafkaTopic = $rk->newTopic($this->source, $topicConfig);
 				try
 				{
 					$kafkaTopic->produce(RD_KAFKA_PARTITION_UA, 0, Json::encode($data));
 					$rk->poll(0);
-                    $rk->flush(-1);
+					if(method_exists($rk,'flush'))
+                    {
+                        for ($flushRetries = 0; $flushRetries < 10; $flushRetries++) {
+                            $result = $rk->flush(10000);
+                            if (RD_KAFKA_RESP_ERR_NO_ERROR === $result) {
+                                break;
+                            }
+                        }
+                    }
 				}
 				catch (\Exception $exception)
 				{
 
-					Yii::error($exception->getMessage());
-					if (Yii::$app->has('logging'))
-						Yii::$app->logging->error(Yii::tr('Ошибка {error} отправки сообщения в kafka.' . Json::encode($data), [ 'error' => $exception->getMessage() ]));
+                    try
+                    {
+                        $kafkaTopic->produce(RD_KAFKA_PARTITION_UA, 0, Json::encode($data));
+                        $rk->poll(0);
+                        if(method_exists($rk,'flush'))
+                        {
+                            for ($flushRetries = 0; $flushRetries < 10; $flushRetries++) {
+                                $result = $rk->flush(10000);
+                                if (RD_KAFKA_RESP_ERR_NO_ERROR === $result) {
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    catch (\Exception $exception)
+                    {
 
-					return false;
+                        Yii::error($exception->getMessage());
+                        if (Yii::$app->has('logging'))
+                            Yii::$app->logging->error(Yii::tr('Ошибка {error} отправки сообщения в kafka.' . Json::encode($data), [ 'error' => $exception->getMessage() ]));
+
+                        return false;
+                    }
 				}
 			}
 		}
