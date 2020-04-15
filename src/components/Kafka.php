@@ -76,7 +76,6 @@
 
 				$conf = new \RdKafka\Conf();
 
-				$conf->set('socket.blocking.max.ms', 1);
 				$conf->set('queue.buffering.max.ms', 1);
 				$conf->set('queue.buffering.max.messages', 10);
 				$conf->set('socket.timeout.ms', 1000);
@@ -106,6 +105,7 @@
 				{
 					$kafkaTopic->produce(RD_KAFKA_PARTITION_UA, 0, Json::encode($data));
 					$rk->poll(0);
+                    $rk->flush(-1);
 				}
 				catch (\Exception $exception)
 				{
