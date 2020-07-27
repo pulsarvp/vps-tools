@@ -62,9 +62,6 @@
 				}
 				catch (Exception $e)
 				{
-
-					Yii::error($e->getMessage());
-
 					return null;
 				}
 		}
