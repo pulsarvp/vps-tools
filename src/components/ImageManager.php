@@ -109,7 +109,8 @@
 			else
 				$this->_resize($image, $newSize);
 			FileHelper::createDirectory(dirname($path));
-			$image->save($path, [ 'jpeg_quality' => $params[ 'quality' ] ]);
+
+			$image->save($path, [ 'jpeg_quality' => $params[ 'quality' ] ?? 1 ]);
 		}
 
 		/**

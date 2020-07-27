@@ -69,7 +69,7 @@
 		 */
 		public function init ()
 		{
-			if (session_status() == PHP_SESSION_NONE)
+			if (session_status() == PHP_SESSION_DISABLED)
 				session_start();
 
 			if (isset($_SESSION[ 'notification' ]))
