@@ -60,7 +60,7 @@
 				  'pattern' => 'export/generate',
 				  'route'   => $this->id . '/export/generate'
 				]
-			], false);
+			], true);
 			ConfigurationHelper::addTranslation('export', [ 'export' => 'export.php' ], __DIR__ . '/messages');
 		}
 	}
