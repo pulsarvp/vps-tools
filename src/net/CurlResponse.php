@@ -106,6 +106,14 @@
 						$this->_status = (int) $match[ 1 ];
 						break;
 					}
+					else {
+                        preg_match("/HTTP\/2 (\d{3})/", $header, $match);
+                        if (isset($match[ 1 ]))
+                        {
+                            $this->_status = (int) $match[ 1 ];
+                            break;
+                        }
+                    }
 				}
 			}
 
