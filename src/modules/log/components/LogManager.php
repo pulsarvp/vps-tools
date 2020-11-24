@@ -45,6 +45,10 @@
 		{
 			if (Yii::$app->settings->get('log_use'))
 			{
+                if (Yii::$app->settings->get('log_clean_mb4_chars')) {
+                    $message = preg_replace('/[\x{10000}-\x{10FFFF}]/u', "\xEF\xBF\xBD", $message);
+                }
+
 				if (!$isRaw)
 					$message = Yii::tr($message);
 
