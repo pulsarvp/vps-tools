@@ -47,7 +47,9 @@
 				},
 				'profile'      => function ($attributes)
 				{
-					return $attributes[ 'user_id' ] . '@' . $this->name;
+                    $name = isset($attributes[ 'user_id' ]) ? $attributes[ 'user_id' ] : $attributes[ 'username' ];
+
+                    return $name . '@' . $this->name;
 				},
 				'roles'        => function ($attributes)
 				{
