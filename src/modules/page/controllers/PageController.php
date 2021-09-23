@@ -128,6 +128,10 @@
 			{
 				throw new \yii\web\HttpException(404);
 			}
+			if ($page->active==0)
+			{
+				throw new \yii\web\HttpException(404);
+			}
 			$this->setTitle($page->title);
 			$this->data('page', $page);
 			$this->_tpl = '@pageViews/page';

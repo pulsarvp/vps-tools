@@ -10,6 +10,8 @@
 		public $allowedIPsDb   = 'debug_allowed_ips';
 		public $allowedHostsDb = 'debug_allowed_hosts';
 
+        public $disableCallbackRestrictionWarning = true;
+        public $disableIpRestrictionWarning = true;
 		/**
 		 * @inheritdoc
 		 */
