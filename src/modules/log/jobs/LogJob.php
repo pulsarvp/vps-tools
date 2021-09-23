@@ -35,11 +35,17 @@
 			{
 				$socket = stream_socket_client(Yii::$app->settings->get('log_elk_dns'), $errorNumber, $error, 5, STREAM_CLIENT_ASYNC_CONNECT);
 			}
-			
+
 			if ($socket)
 			{
-				fwrite($socket, json_encode($this->results) . "\r\n");
-				fclose($socket);
+                try {
+                    fwrite($socket, json_encode($this->results) . "\r\n");
+                    fclose($socket);
+                }catch (yii\base\ErrorException $e)
+                {
+                    fclose($socket);
+                }
+
 			}
 		}
 
