@@ -124,16 +124,17 @@
 			$this->_data[ $key ] = $value;
 		}
 
-		public function userActive ()
-		{
-			if (isset(Yii::$app->user->id))
-			{
-				/** @var \vps\tools\modules\user\models\User $user */
-				$user = Yii::$app->user->identity;
-				$user->activeDT = TimeHelper::now();
-				$user->save();
-			}
-		}
+        public function userActive()
+        {
+            if (isset(Yii::$app->user->id)) {
+                /** @var \vps\tools\modules\user\models\User $user */
+                $user = Yii::$app->user->identity;
+                if ((time() - strtotime($user->activeDT)) > 180) {
+                    $user->activeDT = TimeHelper::now();
+                    $user->save();
+                }
+            }
+        }
 
 		/**
 		 * Add user error message.

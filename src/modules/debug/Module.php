@@ -3,15 +3,16 @@
 	namespace vps\tools\modules\debug;
 
 	use Yii;
+    use yii\helpers\IpHelper;
 
-	class Module extends \yii\debug\Module
+    class Module extends \yii\debug\Module
 	{
 
 		public $allowedIPsDb   = 'debug_allowed_ips';
 		public $allowedHostsDb = 'debug_allowed_hosts';
 
-        public $disableCallbackRestrictionWarning = true;
-        public $disableIpRestrictionWarning = true;
+        public $disableCallbackRestrictionWarning = false;
+        public $disableIpRestrictionWarning = false;
 		/**
 		 * @inheritdoc
 		 */
@@ -42,4 +43,5 @@
 		{
 			return Yii::getAlias('@vendor') . '/yiisoft/yii2-debug/src/views';
 		}
+
 	}

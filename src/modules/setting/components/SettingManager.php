@@ -33,7 +33,7 @@
 			/** @var yii\db\ActiveRecord $class */
 			$class = $this->_modelClass;
 			if (Yii::$app->db->schema->getTableSchema($class::tableName()))
-				$this->_data = $class::find()->all();
+				$this->_data = $class::find()->cache(60)->all();
 		}
 
 		/**
